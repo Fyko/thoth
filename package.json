@@ -1,0 +1,56 @@
+{
+    "name": "thoth",
+    "version": "2.0.0",
+    "description": "A Discord Bot to aid in essay-writing and all-things grammar and English related.",
+    "private": true,
+    "license": "UNLICENSED",
+    "author": {
+        "name": "Fyko",
+        "email": "fyko@sycer.dev"
+    },
+    "main": "build/index.js",
+    "dependencies": {
+        "common-tags": "^1.8.0",
+        "discord-akairo": "^8.0.0-beta.8",
+        "discord.js": "github:discordjs/discord.js",
+        "moment": "^2.24.0",
+        "moment-duration-format": "^2.3.2",
+        "mongoose": "^5.5.11",
+        "node-superfetch": "^0.1.9",
+        "winston": "^3.2.1"
+    },
+    "devDependencies": {
+        "@types/common-tags": "^1.8.0",
+        "@types/dotenv": "^6.1.1",
+        "@types/moment": "^2.13.0",
+        "@types/moment-duration-format": "^2.2.2",
+        "@types/node": "^12.0.8",
+        "@types/node-fetch": "^2.5.0",
+        "@types/ws": "^6.0.1",
+        "@typescript-eslint/eslint-plugin": "^1.9.0",
+        "@typescript-eslint/parser": "^1.9.0",
+        "dotenv": "^8.0.0",
+        "eslint": "^5.16.0",
+        "eslint-config-marine": "^3.0.2",
+        "rimraf": "^2.6.3",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.4.5"
+    },
+    "scripts": {
+        "lint": "eslint src --fix --ext .ts",
+        "cleardir": "rimraf build/*",
+        "compile": "tsc",
+        "build": "npm run cleardir && npm run compile",
+        "start": "npm run build && node ."
+    },
+    "keywords": [],
+    "eslintConfig": {
+        "extends": "marine/node",
+        "rules": {
+            "comma-dangle": [
+                "error",
+                "always-multiline"
+            ]
+        }
+    }
+}
