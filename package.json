@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "description": "A Discord Bot to aid in essay-writing and all-things grammar and English related.",
     "private": true,
-    "license": "UNLICENSED",
+    "license": "Apache 2.0",
     "author": {
         "name": "Fyko",
         "email": "fyko@sycer.dev"
