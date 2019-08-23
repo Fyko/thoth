@@ -18,3 +18,5 @@ You can join our support server with [this link](https://discord.sycer.dev/)!
 4. Commit! - `git commit -am 'I did something!'`
 5. Push it! - `git push origin name-me`
 6. [Pull it](https://github.com/Fyk0/thoth/compare)!
+
+> Props to [`discord.js`](https://github.com/discord.js) for the github templates
