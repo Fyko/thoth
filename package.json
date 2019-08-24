@@ -20,6 +20,7 @@
         "winston": "^3.2.1"
     },
     "devDependencies": {
+        "@sentry/node": "^5.6.2",
         "@types/common-tags": "^1.8.0",
         "@types/dotenv": "^6.1.1",
         "@types/moment": "^2.13.0",
@@ -41,7 +42,8 @@
         "cleardir": "rimraf build/*",
         "compile": "tsc",
         "build": "npm run cleardir && npm run compile",
-        "start": "npm run build && node ."
+        "start": "npm run build && node .",
+        "version": "node src/bot/util/_version.js"
     },
     "keywords": [],
     "eslintConfig": {

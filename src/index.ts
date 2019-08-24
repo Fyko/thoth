@@ -12,7 +12,5 @@ import ThothClient from './bot/client/ThothClient';
 		prefix: process.env.PREFIX!,
 	});
 
-	process.on('unhandledRejection', (err: any) => parent.logger.error(`[UNHANDLED REJECTION] ${err}\n${err.stack}`));
-
 	return parent.launch();
 })();

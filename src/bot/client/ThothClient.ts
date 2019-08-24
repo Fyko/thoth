@@ -1,8 +1,10 @@
-import { join } from 'path';
+import { init } from '@sentry/node';
 import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } from 'discord-akairo';
 import { Message } from 'discord.js';
-import { Logger, createLogger, transports, format } from 'winston';
+import { join } from 'path';
+import { createLogger, format, Logger, transports } from 'winston';
 import { LoggerConfig } from '../util/LoggerConfig';
+import { VERSION } from '../util/version';
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
@@ -33,8 +35,19 @@ export default class ThothClient extends AkairoClient {
 
 		this.cache = new Set();
 
+		if (process.env.SENTRY) {
+			init({
+				dsn: process.env.SENTRY,
+				environment: process.env.NODE_ENV,
+				release: VERSION,
+				serverName: 'thoth',
+			});
+		} else {
+			process.on('unhandledRejection', (err: any) => this.logger.error(`[UNHANDLED REJECTION]: ${err}\n${err.stack}`));
+		}
+
 		this.listenerHandler
-			.on('load', i => this.logger.debug(`[LISTENER HANDLER] [${i.category.id.toUpperCase()}] Loaded ${i.id} listener!`));
+			.on('load', i => this.logger.debug(`[LISTENER HANDLER]: [${i.category.id.toUpperCase()}] Loaded ${i.id} listener!`));
 	}
 
 	public logger: Logger = createLogger({
