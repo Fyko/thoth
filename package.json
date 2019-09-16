@@ -32,7 +32,7 @@
         "@typescript-eslint/parser": "^1.9.0",
         "dotenv": "^8.0.0",
         "eslint": "^5.16.0",
-        "eslint-config-marine": "^3.0.2",
+        "eslint-config-marine": "^5.0.0",
         "rimraf": "^3.0.0",
         "ts-node": "^8.3.0",
         "typescript": "^3.6.2"
