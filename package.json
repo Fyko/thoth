@@ -16,7 +16,7 @@
         "moment": "^2.24.0",
         "moment-duration-format": "^2.3.2",
         "mongoose": "^5.7.6",
-        "node-superfetch": "^0.1.9",
+        "node-superfetch": "^0.1.10",
         "winston": "^3.2.1"
     },
     "devDependencies": {
