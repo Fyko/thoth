@@ -1,6 +1,5 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
-import { stripIndents } from 'common-tags';
 
 export default class VoteCommand extends Command {
 	public constructor() {
@@ -14,11 +13,13 @@ export default class VoteCommand extends Command {
 	}
 
 	public async exec(msg: Message): Promise<Message | Message[] | undefined> {
-		const embed = this.client.util.embed()
+		const embed = this.client.util
+			.embed()
 			.setColor(this.client.config.color)
-			.setDescription(`Vote for ${this.client.user!.username} on [\`DiscordBots.org\`](https://discordbots.org/bot/${this.client.user!.id}/vote)!`);
+			.setDescription(
+				`Vote for ${this.client.user!.username} on [Top.gg](https://top.gg/bot/${this.client.user!.id}/vote)!`,
+			);
 
 		return msg.util!.send({ embed });
 	}
 }
-

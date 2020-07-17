@@ -13,6 +13,8 @@ export default class PrefixCommand extends Command {
 	}
 
 	public async exec(msg: Message): Promise<Message | Message[]> {
-		return msg.util!.send(`The current prefixes are ${(this.handler.prefix as string[]).map(p => `\`${p}\``).join(' **|** ')}`);
+		return msg.util!.send(
+			`The current prefixes are ${(this.handler.prefix as string[]).map((p) => `\`${p}\``).join(' **|** ')}`,
+		);
 	}
 }

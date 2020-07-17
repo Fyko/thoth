@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import request from 'node-fetch';
-import { trimArray, firstUpperCase } from '../../util/Util';
+import { trimArray, firstUpperCase } from '../../util';
 import { stripIndents } from 'common-tags';
 
 export default class SimilarMeaningCommand extends Command {
@@ -12,11 +12,7 @@ export default class SimilarMeaningCommand extends Command {
 			description: {
 				content: `Responds with words that have a symilar meaning to your query.\nFlags: \`starts-with:\` and \`ends-with:\``,
 				usage: '<word/phrase> [flag]',
-				examples: [
-					'immobile',
-					'smells like flowers ends-with:s',
-					'unable to view starts-with:b',
-				],
+				examples: ['immobile', 'smells like flowers ends-with:s', 'unable to view starts-with:b'],
 			},
 			ratelimit: 3,
 			clientPermissions: ['EMBED_LINKS'],
@@ -32,20 +28,20 @@ export default class SimilarMeaningCommand extends Command {
 					id: 'starts',
 					match: 'option',
 					flag: 'starts-with:',
-
-
 				},
 				{
 					id: 'ends',
 					match: 'option',
 					flag: 'ends-with:',
-
 				},
 			],
 		});
 	}
 
-	public async exec(msg: Message, { word, starts, ends }: { word: string; starts: string | null; ends: string | null }): Promise<Message | Message[]> {
+	public async exec(
+		msg: Message,
+		{ word, starts, ends }: { word: string; starts: string | null; ends: string | null },
+	): Promise<Message | Message[]> {
 		if (ends && starts) return msg.util!.reply(`you can only use one option! Command canceled.`);
 		let URL = `https://api.datamuse.com/words?ml=${word}`;
 
@@ -62,10 +58,8 @@ export default class SimilarMeaningCommand extends Command {
 		const response = await body.json();
 		const words = response.map((i: any) => i.word);
 
-		if (!words.length) return msg.util!.reply('couldn\'t find any results for your query!');
-		const embed = this.client.util.embed()
-			.setColor(this.client.config.color)
-			.setDescription(stripIndents`
+		if (!words.length) return msg.util!.reply("couldn't find any results for your query!");
+		const embed = this.client.util.embed().setColor(this.client.config.color).setDescription(stripIndents`
                 **Found ${words.length} words that rhyme with ${firstUpperCase(word)} ${other}**.
 
                 ${trimArray(words, 40).join(', ')}

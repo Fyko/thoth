@@ -1,7 +1,7 @@
+import { stripIndents } from 'common-tags';
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import request from 'node-superfetch';
-import { stripIndents } from 'common-tags';
 
 const { WORDNIK_KEY } = process.env;
 
@@ -33,24 +33,25 @@ export default class DefineCommand extends Command {
 		word = encodeURIComponent(word);
 		const url = `http://api.wordnik.com/v4/word.json/${word}/definitions`;
 		try {
-			const { body } = await request
-				.get(url)
-				.query({
-					limit: '1',
-					includeRelated: 'false',
-					useCanonical: 'true',
-					api_key: WORDNIK_KEY!,
-				});
+			const { body } = await request.get(url).query({
+				limit: '1',
+				includeRelated: 'false',
+				useCanonical: 'true',
+				api_key: WORDNIK_KEY!,
+			});
 			// @ts-ignore
-			if (!body.length) return msg.util!.reply('couldn\'t find any results for your query!');
+			if (!body.length) return msg.util!.reply("couldn't find any results for your query!");
 			// @ts-ignore
 			const data = body[0];
-			const embed = this.client.util.embed()
+			const embed = this.client.util
+				.embed()
 				.setColor('#FF6713')
 				.setAuthor(data.word, 'https://www.wordnik.com/img/wordnik_heart_48.png')
-				.setDescription(stripIndents`
+				.setDescription(
+					stripIndents`
                     (${data.partOfSpeech || '???'}) - ${data.text}
-                `)
+                `,
+				)
 				.setFooter('Powered by Wordnik');
 			return msg.util!.send(embed);
 		} catch (err) {

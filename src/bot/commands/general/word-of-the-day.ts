@@ -1,7 +1,7 @@
+import { stripIndents } from 'common-tags';
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import request from 'node-superfetch';
-import { stripIndents } from 'common-tags';
 const { WORDNIK_KEY } = process.env;
 
 export default class WordOfTheDayCommand extends Command {
@@ -10,7 +10,7 @@ export default class WordOfTheDayCommand extends Command {
 			category: 'general',
 			aliases: ['word-of-the-day', 'wotd'],
 			description: {
-				content: 'Fetches today\'s word of the day.',
+				content: "Fetches today's word of the day.",
 			},
 			ratelimit: 3,
 			clientPermissions: ['EMBED_LINKS'],
@@ -22,12 +22,15 @@ export default class WordOfTheDayCommand extends Command {
 			const { body }: { body: any } = await request
 				.get('http://api.wordnik.com/v4/words.json/wordOfTheDay')
 				.query({ api_key: WORDNIK_KEY! });
-			const embed = this.client.util.embed()
+			const embed = this.client.util
+				.embed()
 				.setColor('#FF6713')
 				.setAuthor(body.word, 'https://www.wordnik.com/img/wordnik_heart_48.png')
-				.setDescription(stripIndents`
+				.setDescription(
+					stripIndents`
 				    (${body.definitions[0].partOfSpeech || '???'}) ${body.definitions[0].text}
-                `)
+                `,
+				)
 				.setFooter('Powered by WordNik');
 			return msg.util!.send({ embed });
 		} catch (err) {

@@ -1,70 +1,37 @@
-import { init } from '@sentry/node';
 import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } from 'discord-akairo';
-import { Message } from 'discord.js';
+import { ColorResolvable, Intents, Message } from 'discord.js';
 import { join } from 'path';
-import { createLogger, format, Logger, transports } from 'winston';
-import { LoggerConfig } from '../util/LoggerConfig';
-import { VERSION } from '../util/version';
+import { Logger } from 'winston';
+import { logger } from '../util/logger';
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
 		logger: Logger;
 		commandHandler: CommandHandler;
+		listenerHandler: ListenerHandler;
 		config: ThothConfig;
-		cache: Set<string>;
 	}
 }
 
 export interface ThothConfig {
 	token: string;
 	owners: string | string[];
-	color: string;
+	color: ColorResolvable;
 	prefix: string;
 }
 
 export default class ThothClient extends AkairoClient {
-	public constructor(config: ThothConfig) {
+	public constructor(public readonly config: ThothConfig) {
 		super({
-			messageCacheMaxSize: 150,
+			messageCacheMaxSize: 15,
 			ownerID: config.owners,
-			disabledEvents: ['TYPING_START'],
-			partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'USER'],
+			ws: {
+				intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+			},
 		});
-
-		this.config = config;
-
-		this.cache = new Set();
-
-		if (process.env.SENTRY) {
-			init({
-				dsn: process.env.SENTRY,
-				environment: process.env.NODE_ENV,
-				release: VERSION,
-				serverName: 'thoth',
-			});
-		} else {
-			process.on('unhandledRejection', (err: any) => this.logger.error(`[UNHANDLED REJECTION]: ${err}\n${err.stack}`));
-		}
-
-		this.listenerHandler
-			.on('load', i => this.logger.debug(`[LISTENER HANDLER]: [${i.category.id.toUpperCase()}] Loaded ${i.id} listener!`));
 	}
 
-	public logger: Logger = createLogger({
-		levels: LoggerConfig.levels,
-		format: format.combine(
-			format.colorize({ level: true }),
-			format.errors({ stack: true }),
-			format.splat(),
-			format.timestamp({ format: 'MM/DD/YYYY HH:mm:ss' }),
-			format.printf((data: any) => {
-				const { timestamp, level, message, ...rest } = data;
-				return `[${timestamp}] ${level}: ${message}${Object.keys(rest).length ? `\n${JSON.stringify(rest, null, 2)}` : ''}`;
-			}),
-		),
-		transports: new transports.Console(),
-		level: 'custom',
-	});;
+	public logger: Logger = logger;
 
 	public commandHandler: CommandHandler = new CommandHandler(this, {
 		directory: join(__dirname, '..', 'commands'),
@@ -78,8 +45,10 @@ export default class ThothClient extends AkairoClient {
 		ignorePermissions: this.ownerID,
 		argumentDefaults: {
 			prompt: {
-				modifyStart: (msg: Message, str: string) => `${msg.author}, ${str}\n...or type \`cancel\` to cancel this command.`,
-				modifyRetry: (msg: Message, str: string) => `${msg.author}, ${str}\n... or type \`cancel\` to cancel this command.`,
+				modifyStart: (msg: Message, str: string) =>
+					`${msg.author.toString()}, ${str}\n...or type \`cancel\` to cancel this command.`,
+				modifyRetry: (msg: Message, str: string) =>
+					`${msg.author.toString()}, ${str}\n... or type \`cancel\` to cancel this command.`,
 				timeout: 'You took too long! Command cancelled.',
 				ended: 'Jeez, 3 tries? Command cancelled.',
 				cancel: 'Got it. Command cancelled.',
@@ -90,11 +59,15 @@ export default class ThothClient extends AkairoClient {
 		},
 	});
 
-	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, { directory: join(__dirname, '..', 'inhibitors') });
+	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
+		directory: join(__dirname, '..', 'inhibitors'),
+	});
 
-	public listenerHandler: ListenerHandler = new ListenerHandler(this, { directory: join(__dirname, '..', 'listeners') });
+	public listenerHandler: ListenerHandler = new ListenerHandler(this, {
+		directory: join(__dirname, '..', 'listeners'),
+	});
 
-	private async load(): Promise<void> {
+	private load(): void {
 		this.listenerHandler.setEmitters({
 			commandHandler: this.commandHandler,
 			inhibitorHandler: this.inhibitorHandler,
@@ -110,7 +83,7 @@ export default class ThothClient extends AkairoClient {
 	}
 
 	public async launch(): Promise<string> {
-		await this.load();
+		this.load();
 		return this.login(this.config.token);
 	}
 }

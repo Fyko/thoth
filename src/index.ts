@@ -1,10 +1,6 @@
-import { config } from 'dotenv';
-import { resolve } from 'path';
-config({ path: resolve(__dirname, '..', '.env') });
-
 import ThothClient from './bot/client/ThothClient';
 
-(async () => {
+void (async () => {
 	const parent = new ThothClient({
 		token: process.env.TOKEN!,
 		color: process.env.COLOR!,

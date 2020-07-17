@@ -1,8 +1,8 @@
+import { stripIndents } from 'common-tags';
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import request from 'node-fetch';
-import { trimArray, firstUpperCase } from '../../util/Util';
-import { stripIndents } from 'common-tags';
+import { firstUpperCase, trimArray } from '../../util';
 
 export default class MissingLettersCommand extends Command {
 	public constructor() {
@@ -33,10 +33,8 @@ export default class MissingLettersCommand extends Command {
 		const response = await body.json();
 		const words = response.map((i: any) => i.word);
 
-		if (!words.length) return msg.util!.reply('couldn\'t find any results for your query!');
-		const embed = this.client.util.embed()
-			.setColor(this.client.config.color)
-			.setDescription(stripIndents`
+		if (!words.length) return msg.util!.reply("couldn't find any results for your query!");
+		const embed = this.client.util.embed().setColor(this.client.config.color).setDescription(stripIndents`
                 **Found ${words.length} possible words that may be ${firstUpperCase(word)}**.
 
                 ${trimArray(words, 40).join(', ')}
