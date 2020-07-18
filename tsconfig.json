@@ -15,19 +15,20 @@
 		"moduleResolution": "node",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
-		"outDir": "build",
+		"outDir": "dist",
 		"removeComments": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"target": "esnext"
+		"target": "es2019",
 	},
 	"exclude": [
-		"node_modules", "_plans/otto", "_plans/Otto.ts"
+		"node_modules",
+		"tests"
 	],
 	"include": [
 		"src",
-		"typings", 
+		"typings"
 	]
 }
