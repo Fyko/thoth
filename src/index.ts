@@ -5,7 +5,6 @@ void (async () => {
 		token: process.env.TOKEN!,
 		color: process.env.COLOR!,
 		owners: process.env.OWNERS!.split(','),
-		prefix: process.env.PREFIX!,
 	});
 
 	return parent.launch();

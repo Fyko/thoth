@@ -21,8 +21,7 @@ ENV ID= \
 	DISCORD_TOKEN= \
 	COLOR= \
 	OWNERS= \
-	PREFIX= \
-	MONGO= 
+	PREFIX= 
 RUN pnpm run build
 CMD ["node", "."]
 

@@ -17,7 +17,6 @@ export interface ThothConfig {
 	token: string;
 	owners: string | string[];
 	color: ColorResolvable;
-	prefix: string;
 }
 
 export default class ThothClient extends AkairoClient {
