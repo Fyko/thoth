@@ -8,6 +8,7 @@ dependencies:
   node-superfetch: 0.1.10
   perf_hooks: 0.0.1
   pretty-ms: 7.0.0
+  tslib: 2.0.0
   winston: 3.3.3
 devDependencies:
   '@types/common-tags': 1.8.0
@@ -1337,6 +1338,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
+  /tslib/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-lTqkx847PI7xEDYJntxZH89L2/aXInsyF2luSafe/+0fHOMjlBNXdH6th7f70qxLDhul7KZK0zC8V5ZIyHl0/g==
   /tsutils/3.17.1_typescript@3.9.7:
     dependencies:
       tslib: 1.13.0
@@ -1513,6 +1518,7 @@ specifiers:
   pretty-ms: ^7.0.0
   rimraf: ^3.0.2
   ts-node: ^8.10.2
+  tslib: ^2.0.0
   typescript: ^3.9.7
   utf-8-validate: ^5.0.2
   winston: ^3.3.3
