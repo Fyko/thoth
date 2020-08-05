@@ -4,22 +4,12 @@ services:
   gateway:
     image: spectacles/gateway
     restart: unless-stopped
-    environment: 
-      - DISCORD_TOKEN=NzA3OTk1NjY1NjYxMTY1NTY4.XrQ6WA.yvNvmTZOMiPUza8plo1uJsLt96I
-      - DISCORD_EVENTS=MESSAGE_CREATE,READY
-      - DISCORD_INTENTS=GUILDS,GUILD_MESSAGES
-      - BROKER_TYPE=amqp
-      - AMQP_URL=amqp://fyko:doctordoctor@rabbit//
+    env_file: ./docker/gateway/.env
     
   proxy:
     image: spectacles/proxy
     restart: unless-stopped
-    environment: 
-      - RUST_LOG=debug
-      - REDIS_URL=redis://redis/
-      - AMQP_URL=amqp://fyko:doctordoctor@rabbit//
-      - AMQP_GROUP=rest
-      - AMQP_EVENT=REQUEST
+    env_file: ./docker/proxy/.env
 
   rabbit:
     image: rabbitmq:alpine

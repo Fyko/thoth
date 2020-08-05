@@ -12,3 +12,6 @@ Cargo.lock
 
 # editor configurations
 .vscode/
+
+# env variables
+docker/gateway/.env

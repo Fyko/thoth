@@ -1,0 +1,8 @@
+# fill in DISCORD_TOKEN below and
+# rename to ".env"
+
+DISCORD_TOKEN=
+DISCORD_EVENTS=MESSAGE_CREATE,READY
+DISCORD_INTENTS=GUILDS,GUILD_MESSAGES
+BROKER_TYPE=amqp
+AMQP_URL=amqp://fyko:doctordoctor@rabbit//
