@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  gateway:
+    image: spectacles/gateway
+    restart: unless-stopped
+    environment: 
+      - DISCORD_TOKEN=NzA3OTk1NjY1NjYxMTY1NTY4.XrQ6WA.yvNvmTZOMiPUza8plo1uJsLt96I
+      - DISCORD_EVENTS=MESSAGE_CREATE,READY
+      - DISCORD_INTENTS=GUILDS,GUILD_MESSAGES
+      - BROKER_TYPE=amqp
+      - AMQP_URL=amqp://fyko:doctordoctor@rabbit//
+    
+  proxy:
+    image: spectacles/proxy
+    restart: unless-stopped
+    environment: 
+      - RUST_LOG=debug
+      - REDIS_URL=redis://redis/
+      - AMQP_URL=amqp://fyko:doctordoctor@rabbit//
+      - AMQP_GROUP=rest
+      - AMQP_EVENT=REQUEST
+
+  rabbit:
+    image: rabbitmq:alpine
+    restart: unless-stopped
+    environment:
+      - RABBITMQ_DEFAULT_USER=fyko
+      - RABBITMQ_DEFAULT_PASS=doctordoctor
+    ports:
+      - 5672:5672
+    expose:
+      - 5672
+
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+    expose: 
+      - 6379
+    volumes:
+      - "redis_data:/data"
+
+volumes:
+  redis_data:
