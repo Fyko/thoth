@@ -2,7 +2,7 @@ use crate::config::CONFIG;
 use anyhow::Result;
 use proxy::models::*;
 use rustacles_brokers::amqp::AmqpBroker;
-use serde_json::{from_slice, json, to_vec};
+use serde_json::{from_slice, to_vec};
 use std::collections::HashMap;
 use tokio::time::{delay_for, timeout, Duration};
 
@@ -49,12 +49,10 @@ impl Rest {
 
     pub async fn me(&self) -> Result<RequestResponse<SerializableHttpResponse>> {
         let payload = SerializableHttpRequest {
-            method: "POST".into(),
-            path: "/channels/581635926757998613/messages".into(),
+            method: "GET".into(),
+            path: "/users/@me".into(),
             query: None,
-            body: Some(json!({
-                "content": "hello world!"
-            })),
+            body: None,
             headers: self.default_headers.clone(),
             timeout: None,
         };
