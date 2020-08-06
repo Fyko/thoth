@@ -13,9 +13,10 @@ env_logger = "0.7"
 envy = "0.4"
 lazy_static = "1.4"
 log = "0.4" 
-#proxy = { git = "https://github.com/spec-tacles/proxy", package = "spectacles-proxy-bin" }
-proxy = { git = "https://github.com/Fyko/proxy", branch = "patch-2", package = "spectacles-proxy", features = ["redis-ratelimiter"] }
+proxy = { git = "https://github.com/spec-tacles/proxy", package = "spectacles-proxy" }
 rustacles-brokers = { git = "https://github.com/spec-tacles/rustacles", branch = "feat/rpc" }
+rustacles-model = { git = "https://github.com/spec-tacles/rustacles" }
 serde = "1.0"
 serde_json = "1.0"
+serde_repr = "0.1.6"
 tokio = { version = "0.2", features = ["full"] }
