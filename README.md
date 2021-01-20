@@ -1,7 +1,7 @@
 # Thoth 📚
 [![Discord Server](https://discordapp.com/api/guilds/581633886828625930/embed.png)](https://discord.sycer.dev/)
 [![Travis](https://api.travis-ci.org/sycer-dev/thoth.svg?branch=master)](https://travis-ci.org/sycer-dev/thoth)
-[![Dependencies](https://img.shields.io/david/sycer-dev/thoth.svg?maxAge=3600)](https://david-dm.org/sycer-dev/thoth)
+[![Dependencies](https://status.david-dm.org/gh/sycer-dev/thoth.svg)](https://david-dm.org/sycer-dev/thoth)
 [![GitHub issues](https://img.shields.io/github/issues/sycer-dev/thoth)](https://github.com/sycer-dev/thoth/issues)
 [![GitHub stars](https://img.shields.io/github/stars/sycer-dev/thoth)](https://github.com/sycer-dev/thoth/stargazers)
 
