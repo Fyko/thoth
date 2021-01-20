@@ -1,5 +1,5 @@
 import { Argument, Command, Listener } from 'discord-akairo';
-import { Message } from 'discord.js';
+import type { Message } from 'discord.js';
 
 export default class ReloadCommand extends Command {
 	public constructor() {
@@ -9,7 +9,7 @@ export default class ReloadCommand extends Command {
 			ownerOnly: true,
 			description: {
 				content: 'Reloads a module.',
-				usage: '<module> [type:]',
+				usage: '<module>',
 			},
 			args: [
 				{
@@ -42,7 +42,6 @@ export default class ReloadCommand extends Command {
 					`successfully reloaded \`${this.handler.modules.size}\` command and \`${this.client.listenerHandler.modules.size}\` listeners.`,
 				);
 			} catch (err) {
-				// eslint-disable-next-line
 				return msg.util?.reply(`failed to reload all with error: \`${err}\`.`);
 			}
 		}
@@ -58,7 +57,6 @@ export default class ReloadCommand extends Command {
 			);
 		} catch (err) {
 			return msg.util?.reply(
-				// eslint-disable-next-line
 				`failed to reload ${mod instanceof Command ? 'command' : 'listener'} ${mod.id}: \`${err}\``,
 			);
 		}

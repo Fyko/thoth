@@ -1,8 +1,39 @@
 import { stripIndents } from 'common-tags';
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
-import request from 'node-superfetch';
+import fetch from 'node-fetch';
 const { WORDNIK_KEY } = process.env;
+
+export interface IWordOfTheDayResponse {
+	_id: string;
+	word: string;
+	contentProvider: IContentProvider;
+	definitions: IDefinition[];
+	publishDate: Date;
+	examples: IExample[];
+	pdd: Date;
+	note: string;
+	htmlExtra: null;
+}
+
+export interface IContentProvider {
+	name: string;
+	id: number;
+}
+
+export interface IDefinition {
+	source: string;
+	text: string;
+	note: null;
+	partOfSpeech: string;
+}
+
+export interface IExample {
+	url: string;
+	title: string;
+	text: string;
+	id: number;
+}
 
 export default class WordOfTheDayCommand extends Command {
 	public constructor() {
@@ -19,9 +50,12 @@ export default class WordOfTheDayCommand extends Command {
 
 	public async exec(msg: Message): Promise<Message | Message[]> {
 		try {
-			const { body }: { body: any } = await request
-				.get('http://api.wordnik.com/v4/words.json/wordOfTheDay')
-				.query({ api_key: WORDNIK_KEY! });
+			const url = new URL('http://api.wordnik.com/v4/words.json/wordOfTheDay');
+			url.searchParams.append('api_key', WORDNIK_KEY!);
+
+			const res = await fetch(url);
+			const body: IWordOfTheDayResponse = await res.json();
+
 			const embed = this.client.util
 				.embed()
 				.setColor('#FF6713')

@@ -20,7 +20,6 @@
         "moment": "^2.27.0",
         "moment-duration-format": "^2.3.2",
         "node-fetch": "^2.6.0",
-        "node-superfetch": "^0.1.10",
         "perf_hooks": "^0.0.1",
         "pretty-ms": "^7.0.0",
         "tslib": "^2.0.0",

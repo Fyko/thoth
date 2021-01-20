@@ -1,10 +1,29 @@
 import { stripIndents } from 'common-tags';
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
-import request from 'node-superfetch';
-
+import fetch from 'node-fetch';
 const { WORDNIK_KEY } = process.env;
 
+interface IWordDefinition {
+	id: string;
+	partOfSpeech: string;
+	attributionText: string;
+	sourceDictionary: string;
+	text: string;
+	sequence: string;
+	score: number;
+	labels: unknown[];
+	citations: unknown[];
+	word: string;
+	relatedWords: any[];
+	exampleUses: { text: string }[];
+	textProns: unknown[];
+	notes: unknown[];
+	attributionUrl: string;
+	wordnikUrl: string;
+}
+
+type IWordDefinitionResponse = IWordDefinition[];
 export default class DefineCommand extends Command {
 	public constructor() {
 		super('define', {
@@ -31,17 +50,15 @@ export default class DefineCommand extends Command {
 
 	public async exec(msg: Message, { word }: { word: string }): Promise<Message | Message[]> {
 		word = encodeURIComponent(word);
-		const url = `http://api.wordnik.com/v4/word.json/${word}/definitions`;
+		const url = new URL(`http://api.wordnik.com/v4/word.json/${word}/definitions`);
 		try {
-			const { body } = await request.get(url).query({
-				limit: '1',
-				includeRelated: 'false',
-				useCanonical: 'true',
-				api_key: WORDNIK_KEY!,
-			});
-			// @ts-ignore
+			url.searchParams.append('limit', '1');
+			url.searchParams.append('includeRelated', 'false');
+			url.searchParams.append('useCanonical', 'true');
+			url.searchParams.append('api_key', WORDNIK_KEY!);
+			const res = await fetch(url);
+			const body: IWordDefinitionResponse = await res.json();
 			if (!body.length) return msg.util!.reply("couldn't find any results for your query!");
-			// @ts-ignore
 			const data = body[0];
 			const embed = this.client.util
 				.embed()
