@@ -1,27 +1,18 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 LABEL name "Thoth"
-LABEL version "2.1.0"
 LABEL maintainer "Carter Himmel <fyko@sycer.dev>"
 
 WORKDIR /usr/thoth
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json yarn.lock .yarnclean ./
 
-RUN apk add --update \
-&& apk add --no-cache ca-certificates \
-&& apk add --no-cache --virtual .build-deps git curl build-base python g++ make \
-&& curl -L https://unpkg.com/@pnpm/self-installer | node \
-&& pnpm i \
-&& apk del .build-deps
+RUN apk add --update
+RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache --virtual .build-deps git curl build-base python g++ make libtool autoconf automake
+RUN yarn install
 
 COPY . .
 
-ENV ID= \
-	DISCORD_TOKEN= \
-	COLOR= \
-	OWNERS= \
-	PREFIX= 
-RUN pnpm run build
+RUN yarn run build
 CMD ["node", "."]
-
