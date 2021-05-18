@@ -491,17 +491,17 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-aqua@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-aqua/-/eslint-config-aqua-8.0.0.tgz#6cea9224d82e4cf1beb440af7e5cbd0a6f85255d"
-  integrity sha512-TKvuVmjsb9b31dAWDptI9vY2DlUGidhL2slX20GZtnWALRdoH8cjSOeLpDF2H+yU+wSVDL/Ni0oFWPaG8L8lWA==
+eslint-config-aqua@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-aqua/-/eslint-config-aqua-9.0.2.tgz#bc26093dd2292b0dfe9aa9ed6bac5247994d0a22"
+  integrity sha512-WqV4EYX3pXoL0TkUBH9VVHoWjR3eJ0ud1p5OmSfbRoyjDbUJURs78fpeU4H8t88pO8mFB4SHTZM95DJEwKG/MQ==
 
-eslint-config-marine@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-marine/-/eslint-config-marine-8.1.0.tgz#71c7002c34a8c2d4df038831f68615d32b18739e"
-  integrity sha512-BSYZe12AZoOi83Up2KhfmvVRzaqgMIgTC8q73/M8AvL/bsLxi3cz0hNKPx+NL9KHFeopGaaGiE3h0o/fXBdFCQ==
+eslint-config-marine@^9.0.6:
+  version "9.0.6"
+  resolved "https://registry.yarnpkg.com/eslint-config-marine/-/eslint-config-marine-9.0.6.tgz#86fbbac5ec1db4bba4b309d46a9d76cf02f00bc6"
+  integrity sha512-PPx84UDPQrLM5kyGG4kaDCQ2EAfzh3bcFjS9Sqg322z2vzERg8di3D4YSjUHWgXNqgooOUor8qjzM2NnPL0AKw==
   dependencies:
-    eslint-config-aqua "^8.0.0"
+    eslint-config-aqua "^9.0.2"
 
 eslint-config-prettier@^7.2.0:
   version "7.2.0"
@@ -1040,11 +1040,6 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
-
-perf_hooks@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/perf_hooks/-/perf_hooks-0.0.1.tgz#253e7e18b71fcc0390fd3afb2cd7cf1685df040c"
-  integrity sha512-qG/D9iA4KDme+KF4vCObJy6Bouu3BlQnmJ8jPydVPm32NJBD9ZK1ZNgXSYaZKHkVC1sKSqUiLgFvAZPUiIEnBw==
 
 picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
