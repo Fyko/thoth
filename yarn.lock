@@ -93,10 +93,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
   integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
 
-"@types/node-fetch@^2.5.7":
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.8.tgz#e199c835d234c7eb0846f6618012e558544ee2fb"
-  integrity sha512-fbjI6ja0N5ZA8TV53RUqzsKNkl9fv8Oj3T7zxW7FGv1GSH7gwJaNF8dzCjrqKaxKeUpTz4yT1DaJFq/omNpGfw==
+"@types/node-fetch@^2.5.11":
+  version "2.5.11"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.11.tgz#ce22a2e65fc8999f4dbdb7ddbbcf187d755169e4"
+  integrity sha512-2upCKaqVZETDRb8A2VTaRymqFBEgH8u6yr96b/u3+1uQEPDRo3mJLEiPk7vdXBHRtjwkjqzFYMJXrt0Z9QsYjQ==
   dependencies:
     "@types/node" "*"
     form-data "^3.0.0"
@@ -1040,11 +1040,6 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
-
-perf_hooks@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/perf_hooks/-/perf_hooks-0.0.1.tgz#253e7e18b71fcc0390fd3afb2cd7cf1685df040c"
-  integrity sha512-qG/D9iA4KDme+KF4vCObJy6Bouu3BlQnmJ8jPydVPm32NJBD9ZK1ZNgXSYaZKHkVC1sKSqUiLgFvAZPUiIEnBw==
 
 picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
