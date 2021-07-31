@@ -19,7 +19,7 @@
         "discord.js": "^12.5.1",
         "node-fetch": "^2.6.0",
         "pretty-ms": "^7.0.0",
-        "tslib": "^2.0.0",
+        "tslib": "^2.3.0",
         "winston": "^3.3.3"
     },
     "devDependencies": {
