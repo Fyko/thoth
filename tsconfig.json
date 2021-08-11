@@ -1,0 +1,30 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"baseUrl": ".",
+		"alwaysStrict": true,
+		"lib": ["esnext"],
+		"module": "commonjs",
+		"noUnusedParameters": true,
+		"sourceMap": true,
+		"moduleResolution": "node",
+		"noUnusedLocals": true,
+		"removeComments": false,
+		"target": "ES2020",
+		"importsNotUsedAsValues": "error",
+		"strictNullChecks": true,
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true,
+		"paths": {
+			"#util/*": ["src/util/*"],
+			"#structures": ["src/structures/index.ts"],
+			"#constants": ["src/util/constants.ts"],
+			"#logger": ["src/util/logger.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tests"],
+	"include": ["src", "typings"]
+}
