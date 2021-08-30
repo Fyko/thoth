@@ -63,7 +63,7 @@
 		"rimraf": "^3.0.2",
 		"ts-node-dev": "^1.1.8",
 		"tslib": "^2.1.0",
-		"typescript": "^4.1.5"
+		"typescript": "^4.4.2"
 	},
 	"lint-staged": {
 		"*.{mjs,js,ts}": "eslint --fix --ext mjs,js,ts",
