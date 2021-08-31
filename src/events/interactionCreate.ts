@@ -35,7 +35,7 @@ export default class implements Listener {
 				await command.exec(interaction, transformArguments(interaction.options.data));
 				logger.info(`Successfully executed ${info}`);
 			} catch (err) {
-				logger.error(`Failed to execute ${info}`, err);
+				logger.error({ msg: `Failed to execute ${info}`, err });
 			}
 		}
 	};
