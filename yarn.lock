@@ -1867,6 +1867,11 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+mw-collegiate@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mw-collegiate/-/mw-collegiate-1.0.1.tgz#6f44b2114f70535a6b619e7e399d5eeaf07fd8ae"
+  integrity sha512-vY61dcTNapjsQEEc7j3pqp7ckgeIi9rYOrGPWKYTZ6CB6cPF+zrFxTWjT4XJHpSrFaVvIIVbLHqCuXYgZjL3Pg==
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"

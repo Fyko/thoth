@@ -7,6 +7,7 @@ export enum Colors {
 
 export enum Emojis {
 	Wordnik = '<:wordnik:874901511577174026>',
+	MerriamWebster = '<:mw:882044142333620235>',
 }
 
 export const enum Characters {
