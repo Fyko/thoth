@@ -20,6 +20,8 @@
 		"skipLibCheck": true,
 		"paths": {
 			"#util/*": ["src/util/*"],
+			"#mw/*": ["src/util/mw/*"],
+			"#mw": ["src/util/mw/index.ts"],
 			"#structures": ["src/structures/index.ts"],
 			"#constants": ["src/util/constants.ts"],
 			"#logger": ["src/util/logger.ts"]

@@ -1,35 +1,19 @@
+/* eslint-disable @typescript-eslint/indent */
 import type { Command } from '#structures';
-import { Emojis } from '#util/constants';
+import { Characters, Emojis } from '#util/constants';
 import type { ArgumentsOf } from '#util/types';
-import { hyperlink, inlineCode, italic } from '@discordjs/builders';
+import { hyperlink, inlineCode, underscore, hideLinkEmbed } from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
 import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
-import fetch from 'node-fetch';
-import { URL } from 'url';
-
-interface IWordDefinition {
-	id: string;
-	partOfSpeech: string;
-	attributionText: string;
-	sourceDictionary: string;
-	text: string;
-	sequence: string;
-	score: number;
-	labels: unknown[];
-	citations: unknown[];
-	word: string;
-	relatedWords: any[];
-	exampleUses: { text: string }[];
-	textProns: unknown[];
-	notes: unknown[];
-	attributionUrl: string;
-	wordnikUrl: string;
-}
+import type { Sense } from 'mw-collegiate';
+import { list } from '#util/index';
+import { fetchDefinition } from '#mw';
+import { formatText } from '#mw/format';
 
 const data = {
 	name: 'definition',
-	description: 'Response with definition of your query.',
+	description: 'Response with definition of your query from Merriam Webster.',
 	options: [
 		{
 			name: 'word',
@@ -40,28 +24,58 @@ const data = {
 	],
 } as const;
 
+function createPronunciationURL(audio?: string): string {
+	if (!audio) return '';
+
+	const first = audio[0];
+
+	let subdir = first;
+	if (audio.startsWith('bix')) {
+		subdir = 'bix';
+	} else if (audio.startsWith('gg')) {
+		subdir = 'gg';
+	} else if (!isNaN(parseInt(first, 10)) || audio.startsWith('_')) {
+		subdir = 'number';
+	}
+
+	return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdir}/${audio}.mp3`;
+}
+
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, args: ArgumentsOf<typeof data>): Promise<void> => {
-		const encodedWord = encodeURIComponent(args.word);
-		const url = new URL(`http://api.wordnik.com/v4/word.json/${encodedWord}/definitions`);
-		url.searchParams.append('limit', '1');
-		url.searchParams.append('includeRelated', 'false');
-		url.searchParams.append('useCanonical', 'true');
-		url.searchParams.append('api_key', process.env.WORDNIK_KEY!);
+	public exec = async (interaction: CommandInteraction, { word }: ArgumentsOf<typeof data>): Promise<void> => {
+		const { meta, hwi, def } = await fetchDefinition(word);
 
-		const response = await fetch(url);
-		if (!response.ok)
-			return interaction.reply({
-				content: "I'm sorry, I couldn't find any results for your query!",
-				ephemeral: true,
-			});
-		const [word] = (await response.json()) as IWordDefinition[];
+		const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
 
-		return interaction.reply(stripIndents`
-			${Emojis.Wordnik} ${hyperlink(inlineCode(word.word), word.wordnikUrl)} (${italic(word.partOfSpeech)})
-			${word.text}
-		`);
+		const url = `https://www.merriam-webster.com/dictionary/${word}`;
+		const pronunciation = hwi.prs?.[0].mw ? `(${hwi.prs[0].mw})` : '';
+		const defs = def?.[0].sseq
+			.flat(1)
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			.map(([_, data]: Sense) => data.dt)
+			.flat(1)
+			.filter(([type]) => type === 'text')
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			.map(([_, def]) => def);
+		const parsedDefs = defs?.map(formatText);
+		return interaction.reply({
+			files: [
+				{
+					name: `${meta.id}.mp3`,
+					attachment,
+				},
+			],
+			content: stripIndents`
+				${Emojis.MerriamWebster} ${hyperlink(inlineCode(meta.id), hideLinkEmbed(url))} ${
+				Characters.Bullet
+			} (${hwi.hw.replaceAll('*', Characters.Bullet)}) ${Characters.Bullet} ${pronunciation}
+				${Characters.Bullet} Stems: ${list(meta.stems.map(inlineCode))}
+
+				${underscore('Definitions')}
+				${parsedDefs?.join('\n')}
+			`,
+		});
 	};
 }
