@@ -53,6 +53,8 @@ export default class implements Command {
 		const pronunciation = hwi.prs?.[0].mw ? `(${hwi.prs[0].mw})` : '';
 		const defs = def?.[0].sseq
 			.flat(1)
+			// @ts-expect-error
+			.filter(([type]) => type === 'sense')
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			.map(([_, data]: Sense) => data.dt)
 			.flat(1)
