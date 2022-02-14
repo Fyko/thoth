@@ -1,42 +1,14 @@
 /* eslint-disable @typescript-eslint/indent */
 import type { Command } from '#structures';
-import { Emojis, superscriptNumbers } from '#util/constants';
-import { bold, hyperlink, inlineCode, italic, underscore } from '@discordjs/builders';
+import { Characters, Emojis } from '#util/constants';
+import { list } from '#util/index';
+import { hideLinkEmbed, hyperlink, inlineCode, underscore } from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
 import type { CommandInteraction } from 'discord.js';
-import fetch from 'node-fetch';
-import { URL } from 'url';
-
-export interface IWordOfTheDayResponse {
-	_id: string;
-	word: string;
-	contentProvider: IContentProvider;
-	definitions: IDefinition[];
-	publishDate: Date;
-	examples: IExample[];
-	pdd: Date;
-	note: string;
-	htmlExtra: null;
-}
-
-export interface IContentProvider {
-	name: string;
-	id: number;
-}
-
-export interface IDefinition {
-	source: string;
-	text: string;
-	note: null;
-	partOfSpeech: string;
-}
-
-export interface IExample {
-	url: string;
-	title: string;
-	text: string;
-	id: number;
-}
+import type { Sense } from 'mw-collegiate';
+import { createPronunciationURL, fetchDefinition } from '#mw';
+import { formatText } from '#mw/format';
+import { fetchWordOfTheDay } from '#mw/wotd';
 
 const data = {
 	name: 'word-of-the-day',
@@ -47,28 +19,41 @@ export default class implements Command {
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction): Promise<void> => {
-		const url = new URL('http://api.wordnik.com/v4/words.json/wordOfTheDay');
-		url.searchParams.append('api_key', process.env.WORDNIK_KEY!);
+		await interaction.deferReply();
+		const word = await fetchWordOfTheDay();
+		const { meta, hwi, def } = await fetchDefinition(word);
 
-		const response = await fetch(url);
-		if (!response.ok)
-			return interaction.reply({
-				content: "I'm sorry, I couldn't find any results for your query!",
-				ephemeral: true,
-			});
-		const { word, definitions, examples } = (await response.json()) as IWordOfTheDayResponse;
+		const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
 
-		return interaction.reply(stripIndents`
-			${Emojis.Wordnik} ${bold('Word of the day:')} ${inlineCode(word)} (${italic(definitions[0]?.partOfSpeech)})
-			${definitions[0]?.text}
+		const url = `https://www.merriam-webster.com/dictionary/${word}`;
+		const pronunciation = hwi.prs?.[0].mw ? `(${hwi.prs[0].mw})` : '';
+		const defs = def?.[0].sseq
+			.flat(1)
+			// @ts-ignore
+			.filter(([type]) => type === 'sense')
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			.map(([_, data]: Sense) => data.dt)
+			.flat(1)
+			.filter(([type]) => type === 'text')
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			.map(([_, def]) => def);
+		const parsedDefs = defs?.map(formatText);
+		return void interaction.editReply({
+			files: [
+				{
+					name: `${meta.id}.mp3`,
+					attachment,
+				},
+			],
+			content: stripIndents`
+				${Emojis.MerriamWebster} ${hyperlink(inlineCode(meta.id), hideLinkEmbed(url))} ${
+				Characters.Bullet
+			} (${hwi.hw.replaceAll('*', Characters.Bullet)}) ${Characters.Bullet} ${pronunciation}
+				${Characters.Bullet} Stems: ${list(meta.stems.map(inlineCode))}
 
-			${bold(underscore('Examples'))}
-			${examples
-				.slice(0, 3)
-				.map(
-					(e, i) => `${hyperlink(Reflect.get(superscriptNumbers, i + 1), e.url)} ${e.text.replace(word, bold(word))}`,
-				)
-				.join('\n')}
-		`);
+				${underscore('Definitions')}
+				${parsedDefs?.join('\n')}
+			`,
+		});
 	};
 }

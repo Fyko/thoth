@@ -8,7 +8,7 @@ import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
 import type { Sense } from 'mw-collegiate';
 import { list } from '#util/index';
-import { fetchDefinition } from '#mw';
+import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format';
 
 const data = {
@@ -24,23 +24,6 @@ const data = {
 	],
 } as const;
 
-function createPronunciationURL(audio?: string): string {
-	if (!audio) return '';
-
-	const first = audio[0];
-
-	let subdir = first;
-	if (audio.startsWith('bix')) {
-		subdir = 'bix';
-	} else if (audio.startsWith('gg')) {
-		subdir = 'gg';
-	} else if (!isNaN(parseInt(first, 10)) || audio.startsWith('_')) {
-		subdir = 'number';
-	}
-
-	return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdir}/${audio}.mp3`;
-}
-
 export default class implements Command {
 	public readonly data = data;
 
@@ -53,7 +36,7 @@ export default class implements Command {
 		const pronunciation = hwi.prs?.[0].mw ? `(${hwi.prs[0].mw})` : '';
 		const defs = def?.[0].sseq
 			.flat(1)
-			// @ts-expect-error
+			// @ts-ignore
 			.filter(([type]) => type === 'sense')
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			.map(([_, data]: Sense) => data.dt)
