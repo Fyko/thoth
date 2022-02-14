@@ -27,3 +27,20 @@ export async function fetchDefinition(word: string, apiKey = process.env.MW_API_
 
 	return body[0];
 }
+
+export function createPronunciationURL(audio?: string): string {
+	if (!audio) return '';
+
+	const first = audio[0];
+
+	let subdir = first;
+	if (audio.startsWith('bix')) {
+		subdir = 'bix';
+	} else if (audio.startsWith('gg')) {
+		subdir = 'gg';
+	} else if (!isNaN(parseInt(first, 10)) || audio.startsWith('_')) {
+		subdir = 'number';
+	}
+
+	return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdir}/${audio}.mp3`;
+}
