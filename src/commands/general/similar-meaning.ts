@@ -52,7 +52,7 @@ export default class implements Command {
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction, _args: Arguments): Promise<void> => {
-		const args = mergeDefault(_args, argumentDefaults);
+		const args = mergeDefault(_args, Object.create(argumentDefaults));
 		if (args['starts-with'] && args['ends-with'])
 			return interaction.reply({
 				content: `The ${inlineCode('starts-with')} and ${inlineCode(

@@ -1,5 +1,4 @@
 import type { Command } from '#structures';
-import { logger } from '#util/logger';
 import { inlineCode } from '@discordjs/builders';
 import { mergeDefault } from '@sapphire/utilities';
 import { stripIndents } from 'common-tags';
@@ -41,18 +40,11 @@ export default class implements Command {
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction, _args: Arguments): Promise<void> => {
-		const args = mergeDefault(_args, argumentDefaults);
+		const args = mergeDefault(_args, Object.create(argumentDefaults));
 
 		const sendNotFound = () =>
 			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
-		const url = `https://api.datamuse.com/words?sp=${args.word}`;
-		logger.info(`Fetching ${url}`);
-		const response = await fetch(url, {
-			headers: {
-				'Content-Type': 'application/json',
-				'Cache-Control': 'no-cache',
-			},
-		});
+		const response = await fetch(`https://api.datamuse.com/words?sp=${args.word}`);
 		if (!response.ok) return sendNotFound();
 
 		const body = (await response.json()) as WordHit[];
