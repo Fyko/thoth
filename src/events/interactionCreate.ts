@@ -30,7 +30,7 @@ export default class implements Listener {
 			const user = interaction.user;
 			const info = `command "${name}"; triggered by ${user.username}#${user.discriminator} (${user.id})`;
 			logger.info(`Executing ${info}`);
-			logger.debug(interaction.options);
+			logger.info(interaction.options);
 
 			try {
 				await command.exec(interaction, transformArguments(interaction.options.data));

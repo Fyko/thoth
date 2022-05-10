@@ -1,4 +1,5 @@
 import type { Command } from '#structures';
+import { logger } from '#util/logger';
 import { inlineCode } from '@discordjs/builders';
 import { mergeDefault } from '@sapphire/utilities';
 import { stripIndents } from 'common-tags';
@@ -44,8 +45,10 @@ export default class implements Command {
 
 		const sendNotFound = () =>
 			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
-		const response = await fetch(`https://api.datamuse.com/words?sp=${args.word}`);
-		if (!response.ok) sendNotFound();
+		const url = `https://api.datamuse.com/words?sp=${args.word}`;
+		logger.info(`Fetching ${url}`);
+		const response = await fetch(url);
+		if (!response.ok) return sendNotFound();
 
 		const body = (await response.json()) as WordHit[];
 		const words = body.map((h) => h.word);
