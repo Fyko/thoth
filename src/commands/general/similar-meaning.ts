@@ -62,7 +62,7 @@ export default class implements Command {
 			});
 
 		const url = new URL('https://api.datamuse.com/words');
-		url.searchParams.append('rel_rhy', args.word);
+		url.searchParams.append('ml', args.word);
 
 		const other: string[] = [];
 		if (args['starts-with']) {
