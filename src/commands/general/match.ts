@@ -47,7 +47,12 @@ export default class implements Command {
 			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
 		const url = `https://api.datamuse.com/words?sp=${args.word}`;
 		logger.info(`Fetching ${url}`);
-		const response = await fetch(url);
+		const response = await fetch(url, {
+			headers: {
+				'Content-Type': 'application/json',
+				'Cache-Control': 'no-cache',
+			},
+		});
 		if (!response.ok) return sendNotFound();
 
 		const body = (await response.json()) as WordHit[];
