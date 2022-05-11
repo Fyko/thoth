@@ -40,7 +40,7 @@ export default class implements Command {
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction, _args: Arguments): Promise<void> => {
-		const args = mergeDefault(_args, Object.create(argumentDefaults));
+		const args = mergeDefault(_args, Object.assign({}, argumentDefaults));
 
 		const sendNotFound = () =>
 			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
