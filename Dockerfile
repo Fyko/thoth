@@ -17,15 +17,13 @@ VOLUME /usr/local/yarn-cache
 
 WORKDIR /usr/thoth
 
-COPY package.json yarn.lock ./
+COPY . .
 
 RUN apk add --update
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache --virtual .build-deps git curl build-base python3 g++ make libtool autoconf automake
 RUN curl https://get.volta.sh | bash
 RUN yarn --immutable
-
-COPY . .
 
 RUN yarn build
 CMD ["node", "."]
