@@ -3,7 +3,7 @@ import { bold, hyperlink, italic, hideLinkEmbed } from '@discordjs/builders';
 import { smallCapitals, subscript, superscript } from './builders';
 
 const directionalCrossReferenceTarget = {
-	regex: /{dxt\|(.*?)\|(.*?)\|(.*?)}/,
+	regex: /{dxt\|(.*?)\|(.*?)\|(.*?)}/g,
 	format: (_: unknown, text: string, id?: string, sense?: string | number) => {
 		let url = '';
 		if (sense === 'illustration') {
@@ -28,17 +28,17 @@ const directionalCrossReferenceTarget = {
 
 const crossReferenceTokenRegexes = {
 	alink: {
-		regex: /{a_link\|(.*?)}/,
+		regex: /{a_link\|(.*?)}/g,
 		format: (_: unknown, id: string) =>
 			hyperlink(id, hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id)}`)),
 	},
 	dlink: {
-		regex: /{d_link\|(.*?)\|(.*?)}/,
+		regex: /{d_link\|(.*?)\|(.*?)}/g,
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(text, hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`)),
 	},
 	ilink: {
-		regex: /{i_link\|(.*?)\|(.*?)}/,
+		regex: /{i_link\|(.*?)\|(.*?)}/g,
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				italic(text),
@@ -46,12 +46,12 @@ const crossReferenceTokenRegexes = {
 			),
 	},
 	etlink: {
-		regex: /{et_link\|(.*?)\|(.*?)}/,
+		regex: /{et_link\|(.*?)\|(.*?)}/g,
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(text, hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`)),
 	},
 	mat: {
-		regex: /{mat\|(.*?)\|(.*?)}/,
+		regex: /{mat\|(.*?)\|(.*?)}/g,
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				text.toUpperCase(),
@@ -59,7 +59,7 @@ const crossReferenceTokenRegexes = {
 			),
 	},
 	sx: {
-		regex: /{sx\|(.*?)\|(.*?)\|(.*?)}/,
+		regex: /{sx\|(.*?)\|(.*?)\|(.*?)}/g,
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				text.toUpperCase(),
@@ -67,7 +67,7 @@ const crossReferenceTokenRegexes = {
 			),
 	},
 	dxdef: {
-		regex: /{dx_def}(.*?){\/dx_def}/,
+		regex: /{dx_def}(.*?){\/dx_def}/g,
 		format: (_: unknown, data: string) =>
 			`(${data.replace(directionalCrossReferenceTarget.regex, directionalCrossReferenceTarget.format)})`,
 	},
@@ -75,27 +75,31 @@ const crossReferenceTokenRegexes = {
 
 const formatTokenOpenCloseRegexes = {
 	bold: {
-		regex: /{b}(.*?){\/b}/,
+		regex: /{b}(.*?){\/b}/g,
 		format: (_: unknown, content: string) => bold(content),
 	},
 	subscript: {
-		regex: /{inf}(.*?){\/inf}/,
+		regex: /{inf}(.*?){\/inf}/g,
 		format: (_: unknown, content: string) => subscript(content),
 	},
 	italics: {
-		regex: /{it}(.*?){\/it}/,
+		regex: /{it}(.*?){\/it}/g,
+		format: (_: unknown, content: string) => italic(content),
+	},
+	wi: {
+		regex: /{wi}(.*?){\/wi}/g,
 		format: (_: unknown, content: string) => italic(content),
 	},
 	smallCapitals: {
-		regex: /{sc}(.*?){\/sc}/,
+		regex: /{sc}(.*?){\/sc}/g,
 		format: (_: unknown, content: string) => smallCapitals(content),
 	},
 	superscript: {
-		regex: /{sup}(.*?){\/sup}/,
+		regex: /{sup}(.*?){\/sup}/g,
 		format: (_: unknown, content: string) => superscript(content),
 	},
 	moreAt: {
-		regex: /{ma}(.*?){\/ma}/,
+		regex: /{ma}(.*?){\/ma}/g,
 		format: (_: unknown, content: string) => `— more at ${content}`,
 	},
 } as const;

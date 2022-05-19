@@ -3,6 +3,7 @@ import { URL } from 'url';
 import type { Entry } from 'mw-collegiate';
 
 const baseURL = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
+const thesaurusBaseURL = 'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/';
 
 function requestFailed(response: Response): boolean {
 	const contentType = response.headers.get('content-type');
@@ -26,6 +27,22 @@ export async function fetchDefinition(word: string, apiKey = process.env.MW_API_
 	const body: Entry[] = await response.json();
 
 	return body[0];
+}
+
+export async function fetchSynonyms(word: string, apiKey = process.env.MW_API_KEY): Promise<Record<string, unknown>> {
+	if (!apiKey) throw Error('No API key!');
+
+	const base = new URL(thesaurusBaseURL + encodeURIComponent(word));
+	base.searchParams.append('key', apiKey);
+
+	const response = await fetch(base);
+	if (requestFailed(response)) {
+		const error = new Error(`Uh oh! Shit hit the fan.`);
+		error.message = await response.text();
+		throw error;
+	}
+
+	return response.json();
 }
 
 export function createPronunciationURL(audio?: string): string {
