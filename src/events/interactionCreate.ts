@@ -2,8 +2,7 @@ import { logger } from '#logger';
 import type { Command, Listener } from '#structures';
 import { kCommands } from '#util/symbols';
 import { transformArguments } from '#util/types';
-import { Client, Collection, CommandInteraction, Constants, Interaction } from 'discord.js';
-import { on } from 'events';
+import { Client, Collection, CommandInteraction, Constants, Interaction, SelectMenuInteraction } from 'discord.js';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
@@ -15,12 +14,11 @@ export default class implements Listener {
 		@inject(kCommands) public readonly commands: Collection<string, Command>,
 	) {}
 
-	public exec = async (): Promise<void> => {
-		for await (const [interaction] of on(this.client, this.event) as AsyncIterableIterator<[Interaction]>) {
+	public exec = (): void => {
+		this.client.on(this.event, (interaction: Interaction) => {
 			if (interaction.isCommand()) void this.handleCommand(interaction);
-
-			continue;
-		}
+			if (interaction.isSelectMenu()) void this.handleSelectMenu(interaction);
+		});
 	};
 
 	private readonly handleCommand = async (interaction: CommandInteraction): Promise<void> => {
@@ -40,4 +38,6 @@ export default class implements Listener {
 			}
 		}
 	};
+
+	private readonly handleSelectMenu = (interaction: SelectMenuInteraction) => console.dir(interaction);
 }

@@ -13,12 +13,12 @@ interface SynonymHit {
 }
 
 const data = {
-	name: 'adjective',
-	description: 'Response with adjectives for your query.',
+	name: 'noun',
+	description: 'Response with nouns that are often described by your query.',
 	options: [
 		{
 			name: 'word',
-			description: 'The word to search adjectives for.',
+			description: 'The adjective to search relevant nouns for (eg: yellow).',
 			type: ApplicationCommandOptionType.String,
 			required: true,
 		},
@@ -40,11 +40,11 @@ export default class implements Command {
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction, _args: Arguments): Promise<void> => {
-		const args = mergeDefault(_args, argumentDefaults);
+		const args = mergeDefault(_args, Object.assign({}, argumentDefaults));
 
 		const sendNotFound = () =>
 			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
-		const response = await fetch(`https://api.datamuse.com/words?rel_jjb=${args.word}`);
+		const response = await fetch(`https://api.datamuse.com/words?rel_jja=${args.word}`);
 		if (!response.ok) return sendNotFound();
 
 		const body = (await response.json()) as SynonymHit[];
@@ -54,7 +54,7 @@ export default class implements Command {
 
 		return interaction.reply(
 			stripIndents`
-			I found ${inlineCode(words.length.toString())} adjectives to describe ${inlineCode(firstUpperCase(args.word))}:
+			I found ${inlineCode(words.length.toString())} nouns for ${inlineCode(firstUpperCase(args.word))}:
 
 			${trimArray(words, args.limit).join(', ')}
 		`.substring(0, 2000),

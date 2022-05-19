@@ -3,9 +3,9 @@ import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format';
 import type { Command } from '#structures';
 import { Characters, Emojis } from '#util/constants';
-import { list } from '#util/index';
+import { trimArray } from '#util/index';
 import type { ArgumentsOf } from '#util/types';
-import { hideLinkEmbed, hyperlink, inlineCode, underscore, quote } from '@discordjs/builders';
+import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
 import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
@@ -27,15 +27,9 @@ export default class implements Command {
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction, { word }: ArgumentsOf<typeof data>): Promise<void> => {
-		const { meta, hwi, def } = await fetchDefinition(word);
-		console.dir(
-			def![0].sseq
-				.flat(1)
-				// @ts-ignore
-				.filter(([type]) => type === 'sense')
-				.map(([, data]) => data),
-			{ depth: null },
-		);
+		const res = await fetchDefinition(word);
+		console.dir(res, { depth: null });
+		const { hwi, def, meta, fl } = res;
 
 		const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
 
@@ -47,11 +41,9 @@ export default class implements Command {
 			// @ts-ignore
 			.filter(([type]) => type === 'sense')
 			.map(([, data]) => data);
-		console.dir(senses, { depth: null });
-		const ds = senses
-			.map(({ dt }, _, arr) => {
-				console.dir(arr);
-				console.dir(dt);
+
+		const defs = senses
+			.map(({ dt }) => {
 				const def = dt.find(([type]) => type === 'text');
 				if (!def) return;
 
@@ -60,44 +52,29 @@ export default class implements Command {
 				if (vis) {
 					const [, [{ t, aq }]] = vis;
 					if (aq) {
-						return `${text}\n${quote(`${t} -${aq.auth}`)}\n`;
+						return `${text}\n${quote(`"${t}" -${aq.auth}`)}`;
 					}
-					return `${text}\n${quote(t)}\n`;
+					return `${text}\n${quote(`"${t}"`)}`;
 				}
 
 				return text;
 			})
 			.filter(Boolean)
 			.map(formatText);
-		console.dir(ds);
 
-		// const definingText = def![0].sseq
-		// 	.flat(1)
-		// 	// @ts-ignore
-		// 	.filter(([type]) => type === 'sense')
-		// 	.map(([, data]: Sense) => data.dt)
-		// 	.flat(1);
-		// console.dir(definingText, { depth: null });
-
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		// const defs = definingText
-		// 	.filter(([type]) => type === 'text')
-		// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		// 	.map(([_, def]) => def);
-		// const parsedDefs = defs.map(formatText);
-
-		// const examples = definingText.filter(([type]) => type === 'vis') as VerbalIllustrations[];
-		// const parsedExamples = (examples.flat(Infinity) as ('vis' | VerbalIllustrationObject)[])
-		// 	.filter((m) => typeof m === 'object')
-		// 	.map(({ t, aq }: VerbalIllustrationObject) => {
-		// 		if (aq) {
-		// 			return `"${t}" -${aq.auth}`;
-		// 		}
-		// 		return `"${t}"`;
-		// 	})
-		// 	.map(formatText);
-		// console.log('examples:');
-		// console.dir(parsedExamples, { depth: null });
+		// const row = new MessageActionRow().addComponents(
+		// 	new MessageSelectMenu()
+		// 		.setCustomId('foo')
+		// 		.setPlaceholder('Additional Options')
+		// 		.addOptions([
+		// 			{
+		// 				label: 'Synonyms',
+		// 				description: 'Search for synonyms of this word.',
+		// 				value: 'synonyms',
+		// 				emoji: '🤔',
+		// 			},
+		// 		]),
+		// );
 
 		return interaction.reply({
 			files: [
@@ -107,13 +84,13 @@ export default class implements Command {
 				},
 			],
 			content: stripIndents`
-				${Emojis.MerriamWebster} ${hyperlink(inlineCode(meta.id), hideLinkEmbed(url))} ${
+				${Emojis.MerriamWebster} ${hyperlink(inlineCode(meta.id), hideLinkEmbed(url))} (${fl}) ${
 				Characters.Bullet
 			} (${hwi.hw.replaceAll('*', Characters.Bullet)}) ${Characters.Bullet} ${pronunciation}
-				${Characters.Bullet} Stems: ${list(meta.stems.map(inlineCode))}
+				${Characters.Bullet} Stems: ${trimArray(meta.stems.map(inlineCode), 15).join(', ')}
 
 				${underscore('Definitions')}
-				${ds.join('\n')}
+				${defs.join('\n')}
 			`,
 		});
 	};

@@ -1,7 +1,7 @@
 import { logger } from '#logger';
 import type { Command, Listener } from '#structures';
 import type Collection from '@discordjs/collection';
-import type { APIPartialEmoji } from 'discord-api-types';
+import type { APIPartialEmoji } from 'discord-api-types/v9';
 import { scan } from 'fs-nextra';
 import { extname, join } from 'path';
 import { container } from 'tsyringe';
