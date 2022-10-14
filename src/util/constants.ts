@@ -1,8 +1,8 @@
 import { italic } from '@discordjs/builders';
 
 export enum Colors {
-	Primary = 7506394,
-	GiveawayOver = 3553599,
+	Primary = 7_506_394,
+	GiveawayOver = 3_553_599,
 }
 
 export enum Emojis {
@@ -14,16 +14,16 @@ export const enum Characters {
 }
 
 export const enum SuperscriptNumbers {
-	Zero = '\u2070',
-	One = '\u00b9',
-	Two = '\u00b2',
-	Three = '\u00b3',
-	Four = '\u2074',
-	Five = '\u2075',
-	Six = '\u2076',
-	Seven = '\u2077',
 	Eight = '\u2078',
+	Five = '\u2075',
+	Four = '\u2074',
 	Nine = '\u2079',
+	One = '\u00B9',
+	Seven = '\u2077',
+	Six = '\u2076',
+	Three = '\u00B3',
+	Two = '\u00B2',
+	Zero = '\u2070'
 }
 
 export const superscriptNumbers = {

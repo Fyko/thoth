@@ -1,13 +1,14 @@
 import { REST as DjsRest } from '@discordjs/rest';
-import {
+import type {
 	RESTGetAPIChannelMessageResult,
 	RESTGetAPIUserResult,
 	RESTPatchAPIChannelMessageJSONBody,
 	RESTPatchAPIChannelMessageResult,
 	RESTPostAPIChannelMessageJSONBody,
-	RESTPostAPIChannelMessageResult,
+	RESTPostAPIChannelMessageResult} from 'discord-api-types/v10';
+import {
 	Routes,
-} from 'discord-api-types/v9';
+} from 'discord-api-types/v10';
 
 export class REST extends DjsRest {
 	public async fetchGuildMessage(channelId: string, messageId: string) {

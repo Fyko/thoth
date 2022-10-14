@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { bold, hyperlink, italic, hideLinkEmbed } from '@discordjs/builders';
-import { smallCapitals, subscript, superscript } from './builders';
+import { smallCapitals, subscript, superscript } from './builders.js';
 
 const directionalCrossReferenceTarget = {
 	regex: /{dxt\|(.*?)\|(.*?)\|(.*?)}/g,
-	format: (_: unknown, text: string, id?: string, sense?: string | number) => {
+	format: (_: unknown, text: string, id?: string, sense?: number | string) => {
 		let url = '';
 		if (sense === 'illustration') {
 			url = `https://www.merriam-webster.com/assets/mw/static/art/dict/${encodeURIComponent(id as string)}.gif`;
@@ -16,13 +16,14 @@ const directionalCrossReferenceTarget = {
 			url = `https://www.merriam-webster.com/dictionary/${encodeURIComponent(text)}`;
 		}
 
+		let newText = text;
 		if (sense) {
 			const [word, entry] = text.split(':');
-			text = `${word.toUpperCase()} entry ${entry} sense ${sense}`;
+			newText = `${word.toUpperCase()} entry ${entry} sense ${sense}`;
 			url = `https://www.merriam-webster.com/dictionary/${encodeURIComponent(word)}`;
 		}
 
-		return hyperlink(text.trim(), hideLinkEmbed(url));
+		return hyperlink(newText.trim(), hideLinkEmbed(url));
 	},
 };
 
@@ -119,7 +120,8 @@ const formatTokenRegexes = {
 	},
 } as const;
 
-export function formatText(text: string): string {
+export function formatText(_text: string): string {
+	let text = _text;
 	// run on tokens that encase text
 	for (const { regex, format } of Object.values(formatTokenOpenCloseRegexes)) {
 		text = text.replace(regex, format);

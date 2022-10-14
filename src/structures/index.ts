@@ -1,3 +1,4 @@
-export * from './Command';
-export * from './Listener';
-export * from './REST';
+export * from './Command.js';
+export * from './Listener.js';
+export * from './Metrics.js';
+export * from './REST.js';

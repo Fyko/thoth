@@ -1,7 +1,7 @@
 import type { CommandInteraction } from 'discord.js';
 
-export interface Command {
-	readonly data: { name: string } & Record<string, unknown>;
+export type Command = {
+	readonly data: Record<string, unknown> & { name: string };
 
-	exec(interaction: CommandInteraction, args: unknown): unknown | Promise<unknown>;
+	exec(interaction: CommandInteraction, args: unknown): Promise<unknown> | unknown;
 }

@@ -1,13 +1,16 @@
-import type { Command } from '#structures';
 import { inlineCode } from '@discordjs/builders';
 import { mergeDefault } from '@sapphire/utilities';
 import { stripIndents } from 'common-tags';
 import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
 import fetch from 'node-fetch';
-import { ArgumentsOf, firstUpperCase, trimArray } from '../../util';
+import { inject, injectable } from 'tsyringe';
+import type { ArgumentsOf} from '../../util';
+import { firstUpperCase, kMetrics, trimArray } from '../../util';
+import type { Command } from '#structures';
+import { MetricsHandler } from '#structures';
 
-interface SynonymHit {
+type SynonymHit = {
 	score: number;
 	word: string;
 }
@@ -36,13 +39,18 @@ const argumentDefaults: Partial<Arguments> = {
 	limit: 50,
 };
 
+@injectable()
 export default class implements Command {
+	public constructor(
+		@inject(kMetrics) protected readonly metrics: MetricsHandler,
+	) {}
+
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, _args: Arguments): Promise<void> => {
-		const args = mergeDefault(_args, Object.assign({}, argumentDefaults));
+	public exec = async (interaction: CommandInteraction, _args: Arguments) => {
+		const args = mergeDefault(_args, { ...argumentDefaults});
 
-		const sendNotFound = () =>
+		const sendNotFound = async () =>
 			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
 		const response = await fetch(`https://api.datamuse.com/words?rel_jjb=${args.word}`);
 		if (!response.ok) return sendNotFound();
@@ -57,7 +65,7 @@ export default class implements Command {
 			I found ${inlineCode(words.length.toString())} adjectives to describe ${inlineCode(firstUpperCase(args.word))}:
 
 			${trimArray(words, args.limit).join(', ')}
-		`.substring(0, 2000),
+		`.slice(0, 2_000),
 		);
 	};
 }

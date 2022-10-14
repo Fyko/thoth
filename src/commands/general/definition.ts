@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/indent */
+import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
+import { stripIndents } from 'common-tags';
+import { ApplicationCommandOptionType } from 'discord-api-types/v9';
+import type { CommandInteraction } from 'discord.js';
 import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format';
 import type { Command } from '#structures';
 import { Characters, Emojis } from '#util/constants';
 import { trimArray } from '#util/index';
 import type { ArgumentsOf } from '#util/types';
-import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
-import { stripIndents } from 'common-tags';
-import { ApplicationCommandOptionType } from 'discord-api-types/v9';
-import type { CommandInteraction } from 'discord.js';
 
 const data = {
 	name: 'definition',
@@ -26,7 +26,7 @@ const data = {
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, { word }: ArgumentsOf<typeof data>): Promise<void> => {
+	public exec = async (interaction: CommandInteraction, { word }: ArgumentsOf<typeof data>) => {
 		const res = await fetchDefinition(word);
 		console.dir(res, { depth: null });
 		const { hwi, def, meta, fl } = res;
@@ -38,7 +38,7 @@ export default class implements Command {
 
 		const senses = def![0].sseq
 			.flat(1)
-			// @ts-ignore
+			// @ts-expect-error
 			.filter(([type]) => type === 'sense')
 			.map(([, data]) => data);
 
@@ -54,6 +54,7 @@ export default class implements Command {
 					if (aq) {
 						return `${text}\n${quote(`"${t}" -${aq.auth}`)}`;
 					}
+
 					return `${text}\n${quote(`"${t}"`)}`;
 				}
 
@@ -62,6 +63,7 @@ export default class implements Command {
 			.filter(Boolean)
 			.map(formatText);
 
+		// FUTURE: add buttons for link to synonyms and antonyms
 		// const row = new MessageActionRow().addComponents(
 		// 	new MessageSelectMenu()
 		// 		.setCustomId('foo')

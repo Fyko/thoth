@@ -1,8 +1,8 @@
 FROM node:16-alpine
 
 LABEL name "Thoth"
-LABEL version "3.0.0"
-LABEL maintainer "Carter Himmel <fyko@sycer.dev>"
+LABEL version "3.1.0"
+LABEL maintainer "Carter Himmel <me@fyko.net>"
 
 # since we're starting non-interactive shell, 
 # we wil need to tell bash to load .bashrc manually

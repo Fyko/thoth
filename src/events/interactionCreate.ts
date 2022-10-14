@@ -1,13 +1,15 @@
-import { logger } from '#logger';
-import type { Command, Listener } from '#structures';
-import { kCommands } from '#util/symbols';
-import { transformArguments } from '#util/types';
-import { Client, Collection, CommandInteraction, Constants, Interaction, SelectMenuInteraction } from 'discord.js';
+import type { CommandInteraction, Interaction, SelectMenuInteraction } from 'discord.js';
+import { Client, Collection, Events } from 'discord.js';
 import { inject, injectable } from 'tsyringe';
+import { logger } from '#logger';
+import type { Command, Listener} from '#structures';
+import { Metrics, MetricsHandler } from '#structures';
+import { kCommands, kMetrics } from '#util/symbols';
+import { transformArguments } from '#util/types';
 
 @injectable()
 export default class implements Listener {
-	public readonly event = Constants.Events.INTERACTION_CREATE;
+	public readonly event = Events.InteractionCreate;
 
 	public constructor(
 		public readonly client: Client<true>,
@@ -17,7 +19,7 @@ export default class implements Listener {
 	public exec = (): void => {
 		this.client.on(this.event, (interaction: Interaction) => {
 			if (interaction.isCommand()) void this.handleCommand(interaction);
-			if (interaction.isSelectMenu()) void this.handleSelectMenu(interaction);
+			if (interaction.isSelectMenu()) this.handleSelectMenu(interaction);
 		});
 	};
 
@@ -28,13 +30,13 @@ export default class implements Listener {
 			const user = interaction.user;
 			const info = `command "${name}"; triggered by ${user.username}#${user.discriminator} (${user.id})`;
 			logger.info(`Executing ${info}`);
-			logger.info(interaction.options.data);
+			const args = transformArguments(interaction.options.data);
 
 			try {
-				await command.exec(interaction, transformArguments(interaction.options.data));
+				await command.exec(interaction, args);
 				logger.info(`Successfully executed ${info}`);
-			} catch (err) {
-				logger.error({ msg: `Failed to execute ${info}`, err });
+			} catch (error) {
+				logger.error({ msg: `Failed to execute ${info}`, err: error });
 			}
 		}
 	};

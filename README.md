@@ -1,5 +1,7 @@
 # Thoth 📖
-A Discord Bot to aid in essay-writing and all-things grammar and English related.
+> A Discord Bot to aid in essay-writing and all-things grammar and English related.
+
+[Invite Thoth to your server!](https://discord.com/oauth2/authorize?client_id=552734173803184128&scope=bot+applications.commands)  
 
 
 ## Terms of Service
