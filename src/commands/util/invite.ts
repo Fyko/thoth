@@ -1,3 +1,4 @@
+import process from 'node:process';
 import { URL } from 'node:url';
 import { hideLinkEmbed, hyperlink } from '@discordjs/builders';
 import type { CommandInteraction } from 'discord.js';

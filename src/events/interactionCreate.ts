@@ -3,9 +3,8 @@ import { Client, Collection, Events } from 'discord.js';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command, Listener} from '#structures';
-import { Metrics, MetricsHandler } from '#structures';
-import { kCommands, kMetrics } from '#util/symbols';
-import { transformArguments } from '#util/types';
+import { kCommands } from '#util/symbols.js';
+import { transformArguments } from '#util/types/index.js';
 
 @injectable()
 export default class implements Listener {
@@ -33,7 +32,7 @@ export default class implements Listener {
 			const args = transformArguments(interaction.options.data);
 
 			try {
-				await command.exec(interaction, args);
+				await command.exec(interaction, args, interaction.locale);
 				logger.info(`Successfully executed ${info}`);
 			} catch (error) {
 				logger.error({ msg: `Failed to execute ${info}`, err: error });

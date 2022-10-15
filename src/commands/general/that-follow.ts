@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/indent */
 import { URL } from 'node:url';
-import { inlineCode } from '@discordjs/builders';
 import { mergeDefault } from '@sapphire/utilities';
-import { stripIndents } from 'common-tags';
 import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
+import i18n from 'i18next';
 import fetch from 'node-fetch';
-import type { ArgumentsOf} from '../../util';
-import { firstUpperCase, trimArray } from '../../util';
 import type { Command } from '#structures';
+import { firstUpperCase, trimArray } from '#util/index.js';
+import type { ArgumentsOf } from '#util/types/index.js';
 
 type SynonymHit = {
 	score: number;
@@ -52,13 +50,11 @@ const argumentDefaults: Partial<Arguments> = {
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, _args: Arguments) => {
+	public exec = async (interaction: CommandInteraction, _args: Arguments, locale: string) => {
 		const args = mergeDefault(_args, { ...argumentDefaults});
 		if (args['starts-with'] && args['ends-with'])
 			return interaction.reply({
-				content: `The ${inlineCode('starts-with')} and ${inlineCode(
-					'ends-with',
-				)} options are mutually exclusive -- you can't use them both at the same time.`,
+				content: i18n.t('common.errors.with_clause_exclusivity'),
 				ephemeral: true,
 			});
 
@@ -68,14 +64,14 @@ export default class implements Command {
 		const other: string[] = [];
 		if (args['starts-with']) {
 			url.searchParams.append('sp', `${args['starts-with']}*`);
-			other.push(` that starts with ${inlineCode(args['starts-with'])}`);
+			other.push(i18n.t('common.commands.starts_with_blurb', { lng: locale, word: args['starts-with']}))
 		} else if (args['ends-with']) {
-			url.searchParams.append('sp', `*${args['starts-with']}`);
-			other.push(` that ends with ${inlineCode(args['ends-with'])}`);
+			url.searchParams.append('sp', `*${args['ends-with']}`);
+			other.push(i18n.t('common.commands.starts_with_blurb', { lng: locale, word: args['ends-with']}))
 		}
 
 		const sendNotFound = async () =>
-			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
+			interaction.reply({ content: i18n.t('common.errors.not_found', { lng: locale }), ephemeral: true });
 		const response = await fetch(url);
 		if (!response.ok) return sendNotFound();
 
@@ -85,13 +81,13 @@ export default class implements Command {
 		if (!words.length) return sendNotFound();
 
 		return interaction.reply(
-			stripIndents`
-			I found ${inlineCode(words.length.toString())} words that could logically follow ${inlineCode(
-				firstUpperCase(args.word),
-			)}${other.join(' ')}:
-
-			${trimArray(words, args.limit).join(', ')}
-		`.slice(0, 2_000),
+			i18n.t('commands.that-follow.success', {
+				found_count: words.length.toString(),
+				word: firstUpperCase(args.word),
+				words: trimArray(words, args.limit).join(', '),
+				rest: other.join(' '),
+				lng: locale,
+			}).slice(0, 2_000),
 		);
 	};
 }

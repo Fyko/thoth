@@ -1,6 +1,6 @@
 import type { CommandInteraction } from 'discord.js';
 import type { Command } from '#structures';
-import { pingResponses } from '#util/constants';
+import { pingResponses } from '#util/constants.js';
 
 const data = {
 	name: 'ping',

@@ -1,13 +1,13 @@
+import process from 'node:process';
 import type { CloudWatchClientConfig} from '@aws-sdk/client-cloudwatch';
 import { CloudWatchClient, PutMetricDataCommand } from '@aws-sdk/client-cloudwatch';
 import { logger } from '#util/logger.js';
-import process from 'node:process';
 
 export const enum Metrics {
     CommandsExecuted = 'commands_executed',
 }
 
-const config = {
+export const config = {
     [Metrics.CommandsExecuted]: ['command', 'guild', 'user', 'shard', 'arg:word', 'arg:limit', 'arg:starts-with', 'arg:ends-with'],
 } as const;
 

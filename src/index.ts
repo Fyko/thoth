@@ -1,13 +1,17 @@
 import 'reflect-metadata';
 
+import process from 'node:process';
+import { fileURLToPath, URL } from 'node:url';
 import { Collection } from '@discordjs/collection';
 import type { Events } from 'discord.js';
 import { IntentsBitField, Options, Client } from 'discord.js';
+import i18next from 'i18next';
+import Backend from 'i18next-fs-backend';
 import { container } from 'tsyringe';
 import type { Command, Listener} from '#structures';
 import { REST, MetricsHandler } from '#structures';
-import { loadCommands, loadListeners } from '#util/index';
-import { kCommands, kListeners, kREST, kMetrics } from '#util/symbols';
+import { loadCommands, loadListeners } from '#util/index.js';
+import { kCommands, kListeners, kREST, kMetrics } from '#util/symbols.js';
 
 process.env.NODE_ENV ??= 'development';
 
@@ -30,6 +34,17 @@ container.register(kREST, { useValue: rest });
 container.register(kMetrics, { useValue: metrics });
 
 async function start() {
+	await i18next.use(Backend).init({
+		backend: {
+			loadPath: fileURLToPath(new URL('locales/{{lng}}/{{ns}}.json', import.meta.url)),
+		},
+		cleanCode: true,
+		fallbackLng: ['en-US'],
+		defaultNS: 'translation',
+		lng: 'en-US',
+		ns: ['translation'],
+	});
+
 	await loadCommands(commands);
 	await loadListeners(listeners);
 

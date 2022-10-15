@@ -4,8 +4,8 @@ import type { CommandInteraction} from 'discord.js';
 import { EmbedBuilder } from 'discord.js';
 import ms from 'pretty-ms';
 import type { Command } from '#structures';
-import { Colors } from '#util/constants';
-import { localize } from '#util/index';
+import { Colors } from '#util/constants.js';
+import { localize } from '#util/index.js';
 
 const data = {
 	name: 'stats',

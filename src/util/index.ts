@@ -7,7 +7,7 @@ import { logger } from '#logger';
 import type { Command, Listener } from '#structures';
 
 export * from './symbols.js';
-export * from './types.js';
+export * from './types/index.js';
 
 export function transformEmojiString(emoji: string): APIPartialEmoji | null {
 	const regex = /<?(?<animated>a)?:?(?<name>\w{2,32}):(?<id>\d{17,19})>?/;
@@ -42,14 +42,16 @@ export function localize(number: number, locale = 'en-US'): string {
 	return new Intl.NumberFormat('en-US').format(number);
 }
 
-export function trimArray(arr: any[], maxLen = 10): any[] {
-	if (arr.length > maxLen) {
-		const len = arr.length - maxLen;
-		arr = arr.slice(0, maxLen);
-		arr.push(`${len} more...`);
+export function trimArray<T = string>(array: T[], maxLen = 10): any[] {
+	if (array.length > maxLen) {
+		const len = array.length - maxLen;
+		const newArray = array.slice(0, maxLen);
+	 	newArray.push(`${len} more...` as T);
+
+		return newArray;
 	}
 
-	return arr;
+	return array;
 }
 
 export function list(arr: string[], conj = 'and'): string {

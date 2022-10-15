@@ -1,14 +1,13 @@
-import { inlineCode } from '@discordjs/builders';
 import { mergeDefault } from '@sapphire/utilities';
-import { stripIndents } from 'common-tags';
 import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
+import i18n from 'i18next';
 import fetch from 'node-fetch';
 import { inject, injectable } from 'tsyringe';
-import type { ArgumentsOf} from '../../util';
-import { firstUpperCase, kMetrics, trimArray } from '../../util';
 import type { Command } from '#structures';
 import { MetricsHandler } from '#structures';
+import { firstUpperCase, kMetrics, trimArray } from '#util/index.js';
+import type { ArgumentsOf } from '#util/types/index.js';
 
 type SynonymHit = {
 	score: number;
@@ -47,11 +46,11 @@ export default class implements Command {
 
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, _args: Arguments) => {
+	public exec = async (interaction: CommandInteraction, _args: Arguments, locale: string) => {
 		const args = mergeDefault(_args, { ...argumentDefaults});
 
 		const sendNotFound = async () =>
-			interaction.reply({ content: "I'm sorry, I couldn't find any results for your query!", ephemeral: true });
+			interaction.reply({ content: i18n.t('common.errors.not_found', { lng: locale }), ephemeral: true });
 		const response = await fetch(`https://api.datamuse.com/words?rel_jjb=${args.word}`);
 		if (!response.ok) return sendNotFound();
 
@@ -61,11 +60,12 @@ export default class implements Command {
 		if (!words.length) return sendNotFound();
 
 		return interaction.reply(
-			stripIndents`
-			I found ${inlineCode(words.length.toString())} adjectives to describe ${inlineCode(firstUpperCase(args.word))}:
-
-			${trimArray(words, args.limit).join(', ')}
-		`.slice(0, 2_000),
+			i18n.t('commands.adjective.success', {
+				found_count: words.length.toString(),
+				word: firstUpperCase(args.word),
+				words: trimArray(words, args.limit).join(', '),
+				lng: locale,
+			}),
 		);
 	};
 }
