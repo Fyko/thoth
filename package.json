@@ -18,14 +18,12 @@
 		"postinstall": "husky install .github/.husky",
 		"clean": "rimraf dist/*",
 		"watch": "tsc --watch",
-		"build": "tsc",
+		"build": "tsc && yarn run copy-locales",
 		"lint": "eslint src --ext .ts",
 		"lint:fix": "eslint src --fix --ext .ts --debug",
-		"pre-commit": "yarn run lint && yarn run build",
 		"prestart": "yarn run clean && yarn run build",
 		"start": "node -r ts-node/register -r tsconfig-paths/register .",
 		"dev": "ts-node-dev src/index.ts --watch src",
-		"postbuild": "npm run copy-locales",
 		"copy-locales": "cpy locales/**/*.* dist/ --parents"
 	},
 	"author": "Carter Himmel <me@fyko.net>",
@@ -78,7 +76,7 @@
 		"typescript": "^4.8.4"
 	},
 	"lint-staged": {
-		"*": "prettier --write",
+		"*": "prettier --ignore-unknown --write",
 		"*.{mjs,js,ts}": "eslint --fix --ext mjs,js,ts"
 	},
 	"commitlint": {
