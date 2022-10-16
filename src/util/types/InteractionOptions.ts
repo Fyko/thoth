@@ -17,13 +17,18 @@
  */
 
 import { type CommandInteractionOption, ApplicationCommandOptionType } from 'discord.js';
-import type { ArgumentsOf, Command } from './ArgumentsOf';
+import type { ArgumentsOf, Command } from './ArgumentsOf.js';
 
-export function transformArguments<T extends Command>(options: readonly CommandInteractionOption<'cached'>[]): ArgumentsOf<T> {
+export function transformArguments<T extends Command>(
+	options: readonly CommandInteractionOption<'cached'>[],
+): ArgumentsOf<T> {
 	const opts: any = {};
 
 	for (const top of options) {
-		if (top.type === ApplicationCommandOptionType.Subcommand || top.type === ApplicationCommandOptionType.SubcommandGroup) {
+		if (
+			top.type === ApplicationCommandOptionType.Subcommand ||
+			top.type === ApplicationCommandOptionType.SubcommandGroup
+		) {
 			opts[top.name] = transformArguments(top.options ? [...top.options] : []);
 		} else if (top.type === ApplicationCommandOptionType.User) {
 			opts[top.name] = { user: top.user, member: top.member };

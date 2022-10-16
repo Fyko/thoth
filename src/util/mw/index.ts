@@ -18,14 +18,14 @@ export async function fetchDefinition(word: string, apiKey = process.env.MW_API_
 	const base = new URL(baseURL + encodeURIComponent(word));
 	base.searchParams.append('key', apiKey);
 
-	const response = await fetch(base);
+	const response = await fetch(base.toString());
 	if (requestFailed(response)) {
 		const error = new Error(`Uh oh! Shit hit the fan.`);
 		error.message = await response.text();
 		throw error;
 	}
 
-	const body: Entry[] = await response.json();
+	const body = (await response.json()) as Entry[];
 
 	return body[0];
 }
@@ -36,14 +36,14 @@ export async function fetchSynonyms(word: string, apiKey = process.env.MW_API_KE
 	const base = new URL(thesaurusBaseURL + encodeURIComponent(word));
 	base.searchParams.append('key', apiKey);
 
-	const response = await fetch(base);
+	const response = await fetch(base.toString());
 	if (requestFailed(response)) {
 		const error = new Error(`Uh oh! Shit hit the fan.`);
 		error.message = await response.text();
 		throw error;
 	}
 
-	return response.json();
+	return (await response.json()) as Record<string, unknown>;
 }
 
 export function createPronunciationURL(audio?: string): string {

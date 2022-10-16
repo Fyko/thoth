@@ -8,7 +8,7 @@ import { formatText } from '#mw/format.js';
 import type { Command } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { trimArray } from '#util/index.js';
-import type { ArgumentsOf } from '#util/types';
+import type { ArgumentsOf } from '#util/types/index.js';
 
 const data = {
 	name: 'definition',
@@ -36,7 +36,7 @@ export default class implements Command {
 		const url = `https://www.merriam-webster.com/dictionary/${word}`;
 		const pronunciation = hwi.prs?.[0].mw ? `(${hwi.prs[0].mw})` : '';
 
-		const senses = (def![0].sseq)
+		const senses = def![0].sseq
 			.flat(1)
 			.filter(([type]: Senses) => type === 'sense')
 			.map(([, data]: Sense) => data);
@@ -47,7 +47,7 @@ export default class implements Command {
 				if (!def) return false;
 
 				const [, text] = def;
-				const vis = dt.find(([type]) => type === 'vis')  as ['vis', VerbalIllustration];
+				const vis = dt.find(([type]) => type === 'vis') as ['vis', VerbalIllustration];
 
 				if (vis) {
 					const [, [{ t, aq }]] = vis;

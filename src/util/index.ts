@@ -1,4 +1,5 @@
-import { extname, join } from 'node:path';
+import { extname } from 'node:path';
+import { fileURLToPath, URL } from 'node:url';
 import type { Collection } from '@discordjs/collection';
 import type { APIPartialEmoji } from 'discord-api-types/v9';
 import { scan } from 'fs-nextra';
@@ -46,7 +47,7 @@ export function trimArray<T = string>(array: T[], maxLen = 10): any[] {
 	if (array.length > maxLen) {
 		const len = array.length - maxLen;
 		const newArray = array.slice(0, maxLen);
-	 	newArray.push(`${len} more...` as T);
+		newArray.push(`${len} more...` as T);
 
 		return newArray;
 	}
@@ -71,7 +72,7 @@ async function walk(path: string) {
 }
 
 export async function loadCommands(commandStore: Collection<string, Command>) {
-	const files = await walk(join(__dirname, '..', 'commands'));
+	const files = await walk(fileURLToPath(new URL('../commands', import.meta.url)));
 
 	for (const file of files) {
 		const command = container.resolve<Command>((await import(file)).default);
@@ -81,7 +82,7 @@ export async function loadCommands(commandStore: Collection<string, Command>) {
 }
 
 export async function loadListeners(listenerStore: Collection<string, Listener>) {
-	const files = await walk(join(__dirname, '..', 'events'));
+	const files = await walk(fileURLToPath(new URL('../events', import.meta.url)));
 
 	for (const file of files) {
 		const listener = container.resolve<Listener>((await import(file)).default);
