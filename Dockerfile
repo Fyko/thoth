@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:18-alpine
 
 LABEL name "Thoth"
 LABEL version "3.1.0"

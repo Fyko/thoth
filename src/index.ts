@@ -1,6 +1,7 @@
 /* eslint-disable promise/prefer-await-to-callbacks */
 import 'reflect-metadata';
 
+import * as crypto from 'node:crypto';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import { createServer } from 'node:http';
 import process from 'node:process';
@@ -8,7 +9,7 @@ import { fileURLToPath, URL } from 'node:url';
 import { Collection } from '@discordjs/collection';
 import { InteractionType } from 'discord-api-types/v10';
 import type { APIInteraction, RESTGetAPIUserResult } from 'discord-api-types/v10';
-import { verifyKey } from 'discord-interactions';
+import { verify as verifyKey } from 'discord-verify/node';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import i18next from 'i18next';
@@ -34,18 +35,21 @@ const server = createServer((_, res) => {
 });
 server.listen(8_080);
 
-function verify(req: FastifyRequest, reply: FastifyReply, done: () => void) {
+async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void) {
 	const signature = req.headers['x-signature-ed25519'];
 	const timestamp = req.headers['x-signature-timestamp'];
+	const rawBody = JSON.stringify(req.body);
 
 	if (!signature || !timestamp) return reply.status(401).send();
 
-	const isValid = verifyKey(
-		JSON.stringify(req.body),
+	const isValid = await verifyKey(
+		rawBody,
 		signature as string,
 		timestamp as string,
 		process.env.DISCORD_PUBKEY!,
+		crypto.webcrypto.subtle,
 	);
+
 	if (!isValid) return reply.status(401).send();
 
 	done();

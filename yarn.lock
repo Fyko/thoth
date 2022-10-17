@@ -2001,6 +2001,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discord-verify@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "discord-verify@npm:1.0.0"
+  checksum: ad93add9532a1ca91b8d7efe545d608fd56f03e96df45ca220de8e9e6b2f72840a2c893c6e6c4e9c2e3b137b19442b999c25f7caadc778d16da9c561fda07206
+  languageName: node
+  linkType: hard
+
 "doctrine@npm:^2.1.0":
   version: 2.1.0
   resolution: "doctrine@npm:2.1.0"
@@ -5713,6 +5720,7 @@ __metadata:
     cpy-cli: ^4.2.0
     discord-api-types: ^0.37.14
     discord-interactions: ^3.2.0
+    discord-verify: ^1.0.0
     dotenv: ^16.0.3
     eslint: ^8.25.0
     eslint-config-neon: ^0.1.38
