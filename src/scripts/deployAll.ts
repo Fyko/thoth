@@ -14,9 +14,8 @@ config({ path: fileURLToPath(new URL('../../.env', import.meta.url)) });
 async function main() {
 	const commands = new Collection<string, Command>();
 	await loadCommands(commands);
+
 	const mapped = commands.filter((c) => !c.data.dev).map((c) => c.data);
-	console.dir(mapped.map((x) => x.name));
-	process.exit();
 
 	void deploy(mapped);
 }
