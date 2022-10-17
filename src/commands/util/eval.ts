@@ -10,6 +10,7 @@ import type { ArgumentsOf } from '#util/types/index.js';
 const data = {
 	name: 'eval',
 	description: 'Evaluate JavaScript code.',
+	dev: true,
 	options: [
 		{
 			name: 'code',
