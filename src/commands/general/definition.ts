@@ -38,7 +38,6 @@ export default class implements Command {
 		) as Arguments;
 
 		const defRes = await fetchDefinition(word);
-		console.dir(res, { depth: null });
 		const { hwi, def, meta, fl } = defRes;
 
 		// const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
