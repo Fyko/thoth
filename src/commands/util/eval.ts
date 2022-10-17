@@ -1,8 +1,10 @@
 import process from 'node:process';
 import { inspect } from 'node:util';
-import { ApplicationCommandOptionType } from 'discord-api-types/v9';
-import type { CommandInteraction } from 'discord.js';
+import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
+import { ApplicationCommandOptionType } from 'discord-api-types/v10';
+import type { FastifyReply } from 'fastify';
 import type { Command } from '#structures';
+import { sendFollowup, defer, createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
 const data = {
@@ -50,9 +52,16 @@ export default class implements Command {
 		return replacedText.replace(new RegExp(process.env.DISCORD_TOKEN!, 'gi'), SENSITIVE_PATTERN_REPLACEMENT);
 	}
 
-	public exec = async (interaction: CommandInteraction, args: Arguments) => {
-		if (interaction.user.id !== process.env.OWNER_ID) return interaction.reply('Unauthorized.');
-		await interaction.deferReply();
+	public exec = async (res: FastifyReply, interaction: APIInteraction, _locale: string) => {
+		const { data } = interaction as { data: APIApplicationCommandInteractionData };
+		const args = Object.fromEntries(
+			// @ts-expect-error pain
+			data.options.map(({ name, value }: { name: string; value: any }) => [name, value]),
+		) as Arguments;
+
+		if (![interaction.user?.id, interaction.member?.user.id].includes(process.env.OWNER_ID!))
+			return createResponse(res, 'Unauthorized.', true);
+		await defer(res);
 
 		let evaled: any;
 		try {
@@ -70,14 +79,22 @@ export default class implements Command {
 			response += ` • time taken: \`${(hrStop[0] * 1e9 + hrStop[1]) / 1e6}ms\``;
 
 			if (response.length > 2_000) {
-				return await interaction.editReply(MESSAGES.COMMANDS.EVAL.ERRORS.TOO_LONG);
+				return await sendFollowup(
+					process.env.DISCORD_CLIENT_ID!,
+					interaction.token,
+					MESSAGES.COMMANDS.EVAL.ERRORS.TOO_LONG,
+				);
 			}
 
 			if (response.length > 0) {
-				await interaction.editReply(response);
+				return await sendFollowup(process.env.DISCORD_CLIENT_ID!, interaction.token, response);
 			}
 		} catch (error) {
-			return interaction.editReply(MESSAGES.COMMANDS.EVAL.ERRORS.CODE_BLOCK(this._clean(error)));
+			return await sendFollowup(
+				process.env.DISCORD_CLIENT_ID!,
+				interaction.token,
+				MESSAGES.COMMANDS.EVAL.ERRORS.CODE_BLOCK(this._clean(error)),
+			);
 		}
 	};
 }

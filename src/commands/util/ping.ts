@@ -1,6 +1,7 @@
-import type { CommandInteraction } from 'discord.js';
+import type { FastifyReply } from 'fastify';
 import type { Command } from '#structures';
 import { pingResponses } from '#util/constants.js';
+import { createResponse } from '#util/respond.js';
 
 const data = {
 	name: 'ping',
@@ -10,8 +11,8 @@ const data = {
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction) => {
+	public exec = async (res: FastifyReply) => {
 		const content = pingResponses[Math.floor(Math.random() * pingResponses.length)];
-		return interaction.reply({ content, ephemeral: true });
+		return createResponse(res, content, true);
 	};
 }

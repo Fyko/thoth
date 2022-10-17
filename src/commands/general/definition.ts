@@ -1,13 +1,15 @@
 import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
-import { ApplicationCommandOptionType } from 'discord-api-types/v9';
-import type { CommandInteraction } from 'discord.js';
+import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
+import { ApplicationCommandOptionType } from 'discord-api-types/v10';
+import type { FastifyReply } from 'fastify';
 import type { Sense, Senses, VerbalIllustration } from 'mw-collegiate';
-import { createPronunciationURL, fetchDefinition } from '#mw';
+import { fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
 import type { Command } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { trimArray } from '#util/index.js';
+import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
 const data = {
@@ -23,15 +25,23 @@ const data = {
 	],
 } as const;
 
+type Arguments = ArgumentsOf<typeof data>;
+
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, { word }: ArgumentsOf<typeof data>) => {
-		const res = await fetchDefinition(word);
-		console.dir(res, { depth: null });
-		const { hwi, def, meta, fl } = res;
+	public exec = async (res: FastifyReply, interaction: APIInteraction, _locale: string) => {
+		const { data } = interaction as { data: APIApplicationCommandInteractionData };
+		const { word } = Object.fromEntries(
+			// @ts-expect-error pain
+			data.options.map(({ name, value }: { name: string; value: any }) => [name, value]),
+		) as Arguments;
 
-		const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
+		const defRes = await fetchDefinition(word);
+		console.dir(res, { depth: null });
+		const { hwi, def, meta, fl } = defRes;
+
+		// const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
 
 		const url = `https://www.merriam-webster.com/dictionary/${word}`;
 		const pronunciation = hwi.prs?.[0].mw ? `(${hwi.prs[0].mw})` : '';
@@ -63,14 +73,9 @@ export default class implements Command {
 			.filter(Boolean)
 			.map(formatText);
 
-		return interaction.reply({
-			files: [
-				{
-					name: `${meta.id}.mp3`,
-					attachment,
-				},
-			],
-			content: stripIndents`
+		return createResponse(
+			res,
+			stripIndents`
 				${Emojis.MerriamWebster} ${hyperlink(inlineCode(meta.id), hideLinkEmbed(url))} (${fl}) ${
 				Characters.Bullet
 			} (${hwi.hw.replaceAll('*', Characters.Bullet)}) ${Characters.Bullet} ${pronunciation}
@@ -79,6 +84,15 @@ export default class implements Command {
 				${underscore('Definitions')}
 				${defs.join('\n')}
 			`,
-		});
+			false,
+			// {
+			// 	files: [
+			// 		{
+			// 			name: `${meta.id}.mp3`,
+			// 			attachment,
+			// 		},
+			// 	]
+			// }
+		);
 	};
 }

@@ -1,11 +1,11 @@
 import { extname } from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 import type { Collection } from '@discordjs/collection';
-import type { APIPartialEmoji } from 'discord-api-types/v9';
+import type { APIPartialEmoji } from 'discord-api-types/v10';
 import { scan } from 'fs-nextra';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
-import type { Command, Listener } from '#structures';
+import type { Command } from '#structures';
 
 export * from './symbols.js';
 export * from './types/index.js';
@@ -78,17 +78,6 @@ export async function loadCommands(commandStore: Collection<string, Command>) {
 		const command = container.resolve<Command>((await import(file)).default);
 		commandStore.set(command.data.name, command);
 		logger.info(`Successfully loaded command "${command.data.name}"!`);
-	}
-}
-
-export async function loadListeners(listenerStore: Collection<string, Listener>) {
-	const files = await walk(fileURLToPath(new URL('../events', import.meta.url)));
-
-	for (const file of files) {
-		const listener = container.resolve<Listener>((await import(file)).default);
-		listenerStore.set(listener.event, listener);
-		listener.exec();
-		logger.info(`Successfully loaded listener "${listener.event}"!`);
 	}
 }
 

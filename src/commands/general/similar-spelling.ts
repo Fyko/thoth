@@ -1,16 +1,18 @@
 import { mergeDefault } from '@sapphire/utilities';
-import { ApplicationCommandOptionType } from 'discord-api-types/v9';
-import type { CommandInteraction } from 'discord.js';
+import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
+import { ApplicationCommandOptionType } from 'discord-api-types/v10';
+import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
 import fetch from 'node-fetch';
 import type { Command } from '#structures';
 import { firstUpperCase, trimArray } from '#util/index.js';
+import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
 type SynonymHit = {
 	score: number;
 	word: string;
-}
+};
 
 const data = {
 	name: 'similar-spelling',
@@ -39,11 +41,17 @@ const argumentDefaults: Partial<Arguments> = {
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (interaction: CommandInteraction, _args: Arguments, locale: string) => {
-		const args = mergeDefault(_args, { ...argumentDefaults});
+	public exec = async (res: FastifyReply, interaction: APIInteraction, locale: string) => {
+		const { data } = interaction as { data: APIApplicationCommandInteractionData };
+		const args = mergeDefault(
+			argumentDefaults,
+			Object.fromEntries(
+				// @ts-expect-error pain
+				data.options.map(({ name, value }: { name: string; value: any }) => [name, value]),
+			) as Arguments,
+		);
 
-		const sendNotFound = async () =>
-			interaction.reply({ content: i18n.t('common.errors.not_found', { lng: locale }), ephemeral: true });
+		const sendNotFound = async () => createResponse(res, i18n.t('common.errors.not_found', { lng: locale }), true);
 		const response = await fetch(`https://api.datamuse.com/words?sp=${args.word}`);
 		if (!response.ok) return sendNotFound();
 
@@ -52,13 +60,16 @@ export default class implements Command {
 
 		if (!words.length) return sendNotFound();
 
-		return interaction.reply(
-			i18n.t('commands.similar-spelling.success', {
-				found_count: words.length.toString(),
-				word: firstUpperCase(args.word),
-				words: trimArray(words, args.limit).join(', '),
-				lng: locale,
-			}).slice(0, 2_000),
+		return createResponse(
+			res,
+			i18n
+				.t('commands.similar-spelling.success', {
+					found_count: words.length.toString(),
+					word: firstUpperCase(args.word),
+					words: trimArray(words, args.limit).join(', '),
+					lng: locale,
+				})
+				.slice(0, 2_000),
 		);
 	};
 }
