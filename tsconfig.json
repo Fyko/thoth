@@ -28,5 +28,5 @@
 		}
 	},
 	"exclude": ["node_modules", "tests"],
-	"include": ["src", "typings"]
+	"include": ["src", "typings", "lib"]
 }

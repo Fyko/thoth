@@ -21,7 +21,7 @@ COPY . .
 
 RUN apk add --update
 RUN apk add --no-cache ca-certificates
-RUN apk add --no-cache --virtual .build-deps git curl build-base python3 g++ make libtool autoconf automake
+RUN apk add --no-cache --virtual .build-deps git curl build-base python3 g++ make libtool autoconf automake bash
 RUN curl https://get.volta.sh | bash
 RUN yarn --immutable
 
