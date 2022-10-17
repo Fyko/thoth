@@ -3,9 +3,9 @@ import 'reflect-metadata';
 
 import * as crypto from 'node:crypto';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
-import { createServer } from 'node:http';
 import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
+import { CloudWatchClient, PutMetricDataCommand } from '@aws-sdk/client-cloudwatch';
 import { Collection } from '@discordjs/collection';
 import { InteractionType } from 'discord-api-types/v10';
 import type { APIInteraction, RESTGetAPIUserResult } from 'discord-api-types/v10';
@@ -14,7 +14,6 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
-import { collectDefaultMetrics, register, Registry, Counter } from 'prom-client';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command } from '#structures';
@@ -22,28 +21,14 @@ import { REST } from '#structures';
 import { loadCommands } from '#util/index.js';
 import { kCommands, kREST } from '#util/symbols.js';
 
-const commandMetric = new Counter({
-	name: 'commands',
-	help: 'commands executed',
-	labelNames: ['command', 'success'],
-});
-
 process.env.NODE_ENV ??= 'development';
-
-const registry = new Registry();
-collectDefaultMetrics({ register, prefix: 'thoth_' });
 
 const commands = new Collection<string, Command>();
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
+const metrics = new CloudWatchClient({ region: 'us-west-2' });
 
 container.register(kCommands, { useValue: commands });
 container.register(kREST, { useValue: rest });
-
-const server = createServer((_, res) => {
-	res.writeHead(200, { 'Content-Type': 'text/plain' });
-	res.end('Hello World');
-});
-server.listen(8_080);
 
 async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void) {
 	const signature = req.headers['x-signature-ed25519'];
@@ -65,6 +50,32 @@ async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void
 	done();
 }
 
+const publishDataPoint = async (metric: string, command: string, success: boolean) => {
+	const cmd = new PutMetricDataCommand({
+		MetricData: [
+			{
+				MetricName: metric,
+				Dimensions: [
+					{
+						Name: 'command',
+						Value: command,
+					},
+					{
+						Name: 'success',
+						Value: success ? 'true' : 'false',
+					},
+				],
+				Unit: 'None',
+				Timestamp: new Date(),
+				Value: 1,
+			},
+		],
+		Namespace: 'thoth',
+	});
+
+	return metrics.send(cmd);
+};
+
 async function start() {
 	await i18next.use(Backend).init({
 		backend: {
@@ -80,11 +91,6 @@ async function start() {
 	await loadCommands(commands);
 
 	const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
-
-	server.get('/metrics', async (_, res) => {
-		res.header('content-type', registry.contentType);
-		res.send(await registry.metrics());
-	});
 
 	server.post('/interactions', { preHandler: verify }, async (req, res) => {
 		try {
@@ -105,10 +111,10 @@ async function start() {
 					try {
 						await command.exec(res, message, message.locale);
 						logger.info(`Successfully executed ${info}`);
-						commandMetric.inc({ command: name, success: 'true' });
+						void publishDataPoint('commands', name, true);
 					} catch (error) {
 						logger.error(`Failed to execute ${info}`, error);
-						commandMetric.inc({ command: name, success: 'false' });
+						void publishDataPoint('commands', name, false);
 					}
 				}
 			}
