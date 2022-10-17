@@ -1,8 +1,8 @@
 FROM node:16-alpine
 
 LABEL name "Thoth"
-LABEL version "3.0.0"
-LABEL maintainer "Carter Himmel <fyko@sycer.dev>"
+LABEL version "3.1.0"
+LABEL maintainer "Carter Himmel <me@fyko.net>"
 
 # since we're starting non-interactive shell, 
 # we wil need to tell bash to load .bashrc manually
@@ -21,7 +21,7 @@ COPY . .
 
 RUN apk add --update
 RUN apk add --no-cache ca-certificates
-RUN apk add --no-cache --virtual .build-deps git curl build-base python3 g++ make libtool autoconf automake
+RUN apk add --no-cache --virtual .build-deps git curl build-base python3 g++ make libtool autoconf automake bash
 RUN curl https://get.volta.sh | bash
 RUN yarn --immutable
 

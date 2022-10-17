@@ -1,4 +1,4 @@
-import { subscriptCharacters, superscriptCharacters } from './constants';
+import { subscriptCharacters, superscriptCharacters } from './constants.js';
 
 export function subscript<C extends string>(content: C): string {
 	const chars: string[] = [];

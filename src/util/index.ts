@@ -1,13 +1,14 @@
-import { logger } from '#logger';
-import type { Command, Listener } from '#structures';
-import type Collection from '@discordjs/collection';
+import { extname } from 'node:path';
+import { fileURLToPath, URL } from 'node:url';
+import type { Collection } from '@discordjs/collection';
 import type { APIPartialEmoji } from 'discord-api-types/v9';
 import { scan } from 'fs-nextra';
-import { extname, join } from 'path';
 import { container } from 'tsyringe';
+import { logger } from '#logger';
+import type { Command, Listener } from '#structures';
 
-export * from './symbols';
-export * from './types';
+export * from './symbols.js';
+export * from './types/index.js';
 
 export function transformEmojiString(emoji: string): APIPartialEmoji | null {
 	const regex = /<?(?<animated>a)?:?(?<name>\w{2,32}):(?<id>\d{17,19})>?/;
@@ -16,12 +17,12 @@ export function transformEmojiString(emoji: string): APIPartialEmoji | null {
 
 	const {
 		groups: { name, id, animated },
-	} = exec as RegExpExecArray & { groups: Record<'name' | 'id', string> & { animated?: string } };
+	} = exec as RegExpExecArray & { groups: Record<'id' | 'name', string> & { animated?: string } };
 
 	return {
 		name,
 		id,
-		animated: animated ? true : false,
+		animated: Boolean(animated),
 	};
 }
 
@@ -38,16 +39,20 @@ export function localize(number: number, locale = 'en-US'): string {
 	try {
 		return new Intl.NumberFormat(locale).format(number);
 	} catch {}
+
 	return new Intl.NumberFormat('en-US').format(number);
 }
 
-export function trimArray(arr: any[], maxLen = 10): any[] {
-	if (arr.length > maxLen) {
-		const len = arr.length - maxLen;
-		arr = arr.slice(0, maxLen);
-		arr.push(`${len} more...`);
+export function trimArray<T = string>(array: T[], maxLen = 10): any[] {
+	if (array.length > maxLen) {
+		const len = array.length - maxLen;
+		const newArray = array.slice(0, maxLen);
+		newArray.push(`${len} more...` as T);
+
+		return newArray;
 	}
-	return arr;
+
+	return array;
 }
 
 export function list(arr: string[], conj = 'and'): string {
@@ -67,7 +72,7 @@ async function walk(path: string) {
 }
 
 export async function loadCommands(commandStore: Collection<string, Command>) {
-	const files = await walk(join(__dirname, '..', 'commands'));
+	const files = await walk(fileURLToPath(new URL('../commands', import.meta.url)));
 
 	for (const file of files) {
 		const command = container.resolve<Command>((await import(file)).default);
@@ -77,7 +82,7 @@ export async function loadCommands(commandStore: Collection<string, Command>) {
 }
 
 export async function loadListeners(listenerStore: Collection<string, Listener>) {
-	const files = await walk(join(__dirname, '..', 'events'));
+	const files = await walk(fileURLToPath(new URL('../events', import.meta.url)));
 
 	for (const file of files) {
 		const listener = container.resolve<Listener>((await import(file)).default);

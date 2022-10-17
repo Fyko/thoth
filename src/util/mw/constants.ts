@@ -1,3 +1,5 @@
+/* eslint-disable id-length */
+
 export const enum Characters {
 	Bullet = '',
 }
