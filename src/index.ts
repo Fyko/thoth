@@ -14,6 +14,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
+import { collectDefaultMetrics, register, Registry, Counter } from 'prom-client';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command } from '#structures';
@@ -21,7 +22,16 @@ import { REST } from '#structures';
 import { loadCommands } from '#util/index.js';
 import { kCommands, kREST } from '#util/symbols.js';
 
+const commandMetric = new Counter({
+	name: 'commands',
+	help: 'commands executed',
+	labelNames: ['command', 'success'],
+});
+
 process.env.NODE_ENV ??= 'development';
+
+const registry = new Registry();
+collectDefaultMetrics({ register, prefix: 'thoth_' });
 
 const commands = new Collection<string, Command>();
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
@@ -70,7 +80,11 @@ async function start() {
 	await loadCommands(commands);
 
 	const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
-	server.get('/interactions', { preHandler: verify }, async (_, res) => res.send(200));
+
+	server.get('/metrics', async (_, res) => {
+		res.header('content-type', registry.contentType);
+		res.send(await registry.metrics());
+	});
 
 	server.post('/interactions', { preHandler: verify }, async (req, res) => {
 		try {
@@ -91,8 +105,10 @@ async function start() {
 					try {
 						await command.exec(res, message, message.locale);
 						logger.info(`Successfully executed ${info}`);
+						commandMetric.inc({ command: name, success: 'true' });
 					} catch (error) {
 						logger.error(`Failed to execute ${info}`, error);
+						commandMetric.inc({ command: name, success: 'false' });
 					}
 				}
 			}
