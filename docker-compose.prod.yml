@@ -4,6 +4,8 @@ services:
   bot:
     image: ghcr.io/fyko/thoth:latest
     restart: unless-stopped
+    ports:
+      - '2399:2399'
     env_file:
       - ./.env
 

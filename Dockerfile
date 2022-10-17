@@ -4,25 +4,19 @@ LABEL name "Thoth"
 LABEL version "3.1.0"
 LABEL maintainer "Carter Himmel <me@fyko.net>"
 
-# since we're starting non-interactive shell, 
-# we wil need to tell bash to load .bashrc manually
-ENV BASH_ENV ~/.bashrc
-# needed by volta() function
-ENV VOLTA_HOME /root/.volta
-# make sure packages managed by volta will be in PATH
-ENV PATH $VOLTA_HOME/bin:$PATH
+EXPOSE 2399
+
+WORKDIR /usr/thoth
 
 ENV YARN_CACHE_FOLDER=/usr/local/yarn-cache
 VOLUME /usr/local/yarn-cache
-
-WORKDIR /usr/thoth
 
 COPY . .
 
 RUN apk add --update
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache --virtual .build-deps git curl build-base python3 g++ make libtool autoconf automake bash
-RUN curl https://get.volta.sh | bash
+RUN yarn --version
 RUN yarn --immutable
 
 RUN yarn build
