@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import type { ApplicationCommandOptionType } from 'discord-api-types/v9';
-import type { GuildChannel, GuildMember, Role, User } from 'discord.js';
+import type { ApplicationCommandOptionType } from 'discord-api-types/v10';
 
 export type Command = Readonly<{
 	description: string;
@@ -31,18 +30,25 @@ type Option = Readonly<
 		name: string;
 		required?: boolean;
 	} & (
-		{
+		| {
 				choices?: readonly Readonly<{ name: string; value: number }>[];
 				type: ApplicationCommandOptionType.Integer | /* ApplicationCommandOptionType.Number */ 10;
-		  } | {
+		  }
+		| {
 				choices?: readonly Readonly<{ name: string; value: string }>[];
 				type: ApplicationCommandOptionType.String;
-		  } | {
+		  }
+		| {
 				options?: readonly Option[];
 				type: ApplicationCommandOptionType.Subcommand | ApplicationCommandOptionType.SubcommandGroup;
-		  } | {
+		  }
+		| {
 				type:
-					ApplicationCommandOptionType.Boolean | ApplicationCommandOptionType.Channel | ApplicationCommandOptionType.Mentionable | ApplicationCommandOptionType.Role | ApplicationCommandOptionType.User;
+					| ApplicationCommandOptionType.Boolean
+					| ApplicationCommandOptionType.Channel
+					| ApplicationCommandOptionType.Mentionable
+					| ApplicationCommandOptionType.Role
+					| ApplicationCommandOptionType.User;
 		  }
 	)
 >;
@@ -63,15 +69,6 @@ type TypeIdToType<T, O, C> = T extends ApplicationCommandOptionType.Subcommand
 		: number
 	: T extends ApplicationCommandOptionType.Boolean
 	? boolean
-	: T extends ApplicationCommandOptionType.User
-	? { member?: GuildMember, user: User;  }
-	: T extends ApplicationCommandOptionType.Channel
-	? GuildChannel 
-	: T extends ApplicationCommandOptionType.Role
-	? Role 
-	: T extends ApplicationCommandOptionType.Mentionable
-	?
-			GuildChannel | Role | { member?: GuildMember, user: User; } 
 	: never;
 
 type OptionToObject<O> = O extends {
