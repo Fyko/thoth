@@ -18,7 +18,7 @@ process.env.NODE_ENV ??= 'development';
 
 const client = new Client({
 	intents: [IntentsBitField.Flags.Guilds],
-	shards: 'auto',
+	shardCount: 16,
 	makeCache: Options.cacheWithLimits({
 		MessageManager: 5,
 	}),
