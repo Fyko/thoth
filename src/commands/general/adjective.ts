@@ -3,16 +3,15 @@ import { ApplicationCommandOptionType } from 'discord-api-types/v9';
 import type { CommandInteraction } from 'discord.js';
 import i18n from 'i18next';
 import fetch from 'node-fetch';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import type { Command } from '#structures';
-import { MetricsHandler } from '#structures';
-import { firstUpperCase, kMetrics, trimArray } from '#util/index.js';
+import { firstUpperCase, trimArray } from '#util/index.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
 type SynonymHit = {
 	score: number;
 	word: string;
-}
+};
 
 const data = {
 	name: 'adjective',
@@ -40,14 +39,10 @@ const argumentDefaults: Partial<Arguments> = {
 
 @injectable()
 export default class implements Command {
-	public constructor(
-		@inject(kMetrics) protected readonly metrics: MetricsHandler,
-	) {}
-
 	public readonly data = data;
 
 	public exec = async (interaction: CommandInteraction, _args: Arguments, locale: string) => {
-		const args = mergeDefault(_args, { ...argumentDefaults});
+		const args = mergeDefault(_args, { ...argumentDefaults });
 
 		const sendNotFound = async () =>
 			interaction.reply({ content: i18n.t('common.errors.not_found', { lng: locale }), ephemeral: true });

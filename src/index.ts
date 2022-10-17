@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import { createServer } from 'node:http';
 import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
 import { Collection } from '@discordjs/collection';
@@ -8,10 +9,10 @@ import { IntentsBitField, Options, Client } from 'discord.js';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
 import { container } from 'tsyringe';
-import type { Command, Listener} from '#structures';
-import { REST, MetricsHandler } from '#structures';
+import type { Command, Listener } from '#structures';
+import { REST } from '#structures';
 import { loadCommands, loadListeners } from '#util/index.js';
-import { kCommands, kListeners, kREST, kMetrics } from '#util/symbols.js';
+import { kCommands, kListeners, kREST } from '#util/symbols.js';
 
 process.env.NODE_ENV ??= 'development';
 
@@ -25,13 +26,17 @@ const client = new Client({
 const commands = new Collection<string, Command>();
 const listeners = new Collection<Events, Listener>();
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
-const metrics = new MetricsHandler();
 
 container.register(Client, { useValue: client });
 container.register(kCommands, { useValue: commands });
 container.register(kListeners, { useValue: listeners });
 container.register(kREST, { useValue: rest });
-container.register(kMetrics, { useValue: metrics });
+
+const server = createServer((_, res) => {
+	res.writeHead(200, { 'Content-Type': 'text/plain' });
+	res.end('Hello World');
+});
+server.listen(8_080);
 
 async function start() {
 	await i18next.use(Backend).init({
