@@ -84,14 +84,6 @@ export default class implements Command {
 				${defs.join('\n')}
 			`,
 			false,
-			// {
-			// 	files: [
-			// 		{
-			// 			name: `${meta.id}.mp3`,
-			// 			attachment,
-			// 		},
-			// 	]
-			// }
 		);
 	};
 }
