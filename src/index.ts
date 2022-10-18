@@ -98,7 +98,8 @@ async function start() {
 						logger.info(`Successfully executed ${info}`);
 						commandsMetrics.inc({ command: name, success: 'true' });
 					} catch (error) {
-						logger.error(`Failed to execute ${info}`, error);
+						logger.error(`Failed to execute ${info}`);
+						logger.error(error);
 						commandsMetrics.inc({ command: name, success: 'false' });
 					}
 				}
