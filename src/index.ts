@@ -5,7 +5,6 @@ import * as crypto from 'node:crypto';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
-import { CloudWatchClient, PutMetricDataCommand } from '@aws-sdk/client-cloudwatch';
 import { Collection } from '@discordjs/collection';
 import { InteractionType } from 'discord-api-types/v10';
 import type { APIInteraction, RESTGetAPIUserResult } from 'discord-api-types/v10';
@@ -14,6 +13,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
+import { Counter, register, collectDefaultMetrics } from 'prom-client';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command } from '#structures';
@@ -25,7 +25,6 @@ process.env.NODE_ENV ??= 'development';
 
 const commands = new Collection<string, Command>();
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
-const metrics = new CloudWatchClient({ region: 'us-west-2' });
 
 container.register(kCommands, { useValue: commands });
 container.register(kREST, { useValue: rest });
@@ -50,31 +49,12 @@ async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void
 	done();
 }
 
-const publishDataPoint = async (metric: string, command: string, success: boolean) => {
-	const cmd = new PutMetricDataCommand({
-		MetricData: [
-			{
-				MetricName: metric,
-				Dimensions: [
-					{
-						Name: 'command',
-						Value: command,
-					},
-					{
-						Name: 'success',
-						Value: success ? 'true' : 'false',
-					},
-				],
-				Unit: 'None',
-				Timestamp: new Date(),
-				Value: 1,
-			},
-		],
-		Namespace: 'thoth',
-	});
-
-	return metrics.send(cmd);
-};
+collectDefaultMetrics({ register, prefix: 'thoth_' });
+const commandsMetrics = new Counter({
+	name: 'thoth_commands',
+	help: 'Number of commands executed',
+	labelNames: ['command', 'success'],
+});
 
 async function start() {
 	await i18next.use(Backend).init({
@@ -91,6 +71,11 @@ async function start() {
 	await loadCommands(commands);
 
 	const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
+
+	server.get('/metrics', async (_, res) => {
+		res.header('Content-Type', register.contentType);
+		res.send(await register.metrics());
+	});
 
 	server.post('/interactions', { preHandler: verify }, async (req, res) => {
 		try {
@@ -111,10 +96,10 @@ async function start() {
 					try {
 						await command.exec(res, message, message.locale);
 						logger.info(`Successfully executed ${info}`);
-						void publishDataPoint('commands', name, true);
+						commandsMetrics.inc({ command: name, success: 'true' });
 					} catch (error) {
 						logger.error(`Failed to execute ${info}`, error);
-						void publishDataPoint('commands', name, false);
+						commandsMetrics.inc({ command: name, success: 'false' });
 					}
 				}
 			}

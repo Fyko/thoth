@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  bot:
+  thoth:
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,3 +10,41 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
+
+  prometheus:
+    build:
+      context: ./docker/prometheus
+    restart: unless-stopped
+    command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
+    ports:
+      - 9090:9090
+    volumes:
+      - prometheus-storage:/prometheus
+
+  grafana:
+    build:
+      context: ./docker/grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_AUTH_ANONYMOUS_ENABLED: true
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+
+volumes:
+  prometheus-storage:
+  grafana-storage:
