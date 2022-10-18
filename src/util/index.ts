@@ -4,11 +4,20 @@ import type { Collection } from '@discordjs/collection';
 import type { APIPartialEmoji } from 'discord-api-types/v10';
 import { scan } from 'fs-nextra';
 import { container } from 'tsyringe';
+import { fetch } from 'undici';
 import { logger } from '#logger';
 import type { Command } from '#structures';
 
 export * from './symbols.js';
 export * from './types/index.js';
+
+export async function datamuse(url: string) {
+	return fetch(url, {
+		headers: {
+			'user-agent': 'Thoth (github.com/Fyko/Thoth)',
+		},
+	});
+}
 
 export function transformEmojiString(emoji: string): APIPartialEmoji | null {
 	const regex = /<?(?<animated>a)?:?(?<name>\w{2,32}):(?<id>\d{17,19})>?/;

@@ -4,9 +4,8 @@ import type { APIApplicationCommandInteractionData, APIInteraction } from 'disco
 import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
-import fetch from 'node-fetch';
 import type { Command } from '#structures';
-import { firstUpperCase, trimArray } from '#util/index.js';
+import { datamuse, firstUpperCase, trimArray } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
@@ -78,7 +77,7 @@ export default class implements Command {
 		}
 
 		const sendNotFound = async () => createResponse(res, i18n.t('common.errors.not_found', { lng: locale }), true);
-		const response = await fetch(url.toString());
+		const response = await datamuse(url.toString());
 		if (!response.ok) return sendNotFound();
 
 		const body = (await response.json()) as SynonymHit[];

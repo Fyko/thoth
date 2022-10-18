@@ -42,19 +42,18 @@
 		"fs-nextra": "^0.5.1",
 		"i18next": "^21.10.0",
 		"i18next-fs-backend": "^1.1.5",
-		"node-fetch": "^3",
 		"pino": "^7.11.0",
 		"prom-client": "^14.1.0",
 		"reflect-metadata": "^0.1.13",
 		"rss-parser": "^3.12.0",
-		"tsyringe": "^4.7.0"
+		"tsyringe": "^4.7.0",
+		"undici": "^5.11.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.1.2",
 		"@commitlint/config-angular": "^17.1.0",
 		"@types/common-tags": "^1.8.1",
 		"@types/node": "^16",
-		"@types/node-fetch": "3",
 		"cpy-cli": "^4.2.0",
 		"eslint": "^8.25.0",
 		"eslint-config-neon": "^0.1.38",

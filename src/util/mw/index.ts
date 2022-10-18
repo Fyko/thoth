@@ -1,8 +1,7 @@
 import process from 'node:process';
 import { URL } from 'node:url';
 import type { Entry } from 'mw-collegiate';
-import type { Response } from 'node-fetch';
-import fetch from 'node-fetch';
+import { fetch, type Response } from 'undici';
 
 const baseURL = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
 const thesaurusBaseURL = 'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/';
