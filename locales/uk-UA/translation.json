@@ -4,7 +4,7 @@
 			"args": {
 				"limit": {
 					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"description": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 				},
 				"starts-with": {
 					"name": "starts-with",
@@ -19,7 +19,7 @@
 			"ends_with_blurb": " яке закінчується з {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
+			"with_clause_exclusivity": "Опції `починається з` та `закінчується з` є взаємно заперечними - ви не можете використовувати їх обидві одночасно.",
 			"not_found": "Перепрошую, я не міг знайти жодних результатів за ваш запит!",
 			"unauthorized": "Unauthorized."
 		},
@@ -31,11 +31,11 @@
 		"adjective": {
 			"meta": {
 				"name": "adjective",
-				"description": "Responds with adjectives that describe your query.",
+				"description": "Відповідь прикметниками, які описують Ваш запит.",
 				"args": {
 					"word": {
 						"name": "word",
-						"description": "The noun to search relavent adjectives for (eg: ocean)."
+						"description": "Іменник для пошуку відповідних прикметників (наприклад: ocean)."
 					}
 				}
 			},
