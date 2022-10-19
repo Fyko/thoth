@@ -3,113 +3,113 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "begrænsning",
+					"description": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
-					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
+					"name": "starter med",
+					"description": "Returnér kun ord, der starter med denne værdi (gensidigt eksklusiv med endelsen)."
 				},
 				"ends-with": {
-					"name": "ends-with",
-					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
+					"name": "ender med",
+					"description": "Returnér kun ord, der slutter med denne værdi (gensidigt eksklusiv med start-with)."
 				}
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " der starter med {{word}}",
+			"ends_with_blurb": " der slutter med {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!",
-			"unauthorized": "Unauthorized."
+			"with_clause_exclusivity": "Valgmulighederne `starts-with` og `ends-with` er gensidigt eksklusive -- du kan ikke bruge dem begge på samme tid.",
+			"not_found": "Beklager, jeg kunne ikke finde nogen resultater til din forespørgsel!",
+			"unauthorized": "Uautoriseret."
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Definitioner"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"name": "adjective",
-				"description": "Responds with adjectives that describe your query.",
+				"name": "tillægsord",
+				"description": "Svar med adjektiver, der beskriver din forespørgsel.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The noun to search relavent adjectives for (eg: ocean)."
+						"name": "ord",
+						"description": "Det navneord at søge relevante adjektiver for (fx: havet)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "Jeg fandt `{{found_count}}` adjektiver til at beskrive `{{word}}`: \n\n{{words}}"
 		},
 		"definition": {
 			"meta": {
 				"name": "definition",
-				"description": "Responds with the definition of your query from Merriam Webster.",
+				"description": "Svar med definitionen af din forespørgsel fra Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search a definition for (eg: ocean)."
+						"name": "ord",
+						"description": "Ordet der skal søges efter (fx: hav)."
 					}
 				}
 			}
 		},
 		"invite": {
 			"meta": {
-				"name": "invite",
-				"description": "Returns an invite link to add Thoth to your server."
+				"name": "invitér",
+				"description": "Returnerer et invitationslink til at tilføje Thoth til din server."
 			},
-			"success": "Want to add Thoth to your server? [Click here]({{link}})!"
+			"success": "Vil du tilføje Thoth til din server? [Klik her]({{link}})!"
 		},
 		"match-word": {
 			"meta": {
-				"name": "match-word",
-				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+				"name": "match-ord",
+				"description": "Svarer med ord, der matcher det ord du angiver (fx: æ?le -> æble, d??? -> dato).",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to find matches for (example: a??le)."
+						"name": "ord",
+						"description": "Ordet til at matche (eksempel: æ?le)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "Jeg fandt `{{found_count}}` ord til at beskrive `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
 			"meta": {
-				"name": "noun",
-				"description": "Responds with nouns that are often described by your query.",
+				"name": "navneord",
+				"description": "Svarer med navneord, der ofte beskrives af din forespørgsel.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
+						"name": "ord",
+						"description": "Tillægsordet for at søge relevante navneord for (fx: gul)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "Jeg fandt `{{found_count}}` ord til at beskrive `{{word}}`: \n\n{{words}}"
 		},
 		"ping": {
 			"meta": {
 				"name": "ping",
-				"description": "Ensures the bot is responding to commands."
+				"description": "Sikrer, at botten reagerer på kommandoer."
 			},
 			"pongs": [
-				"Uhh, hello?",
-				"What can I do ya' for?",
-				"Why are you bothering me?",
+				"Uhh, hej?",
+				"Hvad kan jeg gøre?",
+				"Hvorfor generer De mig?",
 				"Mhm?",
-				"Yea?",
-				"What's with you puny humans and the constant desire to bother me?",
-				"Out of everyone here, you chose to bother me?",
-				"So *this* is the meaning of life?",
-				"Can we just get this over with?? I have stuff to do.",
-				"That's all?",
+				"Ja?",
+				"Hvad er der med jer mennesker og den konstante lyst til at genere mig?",
+				"Ud af alle her, valgte du at genere mig?",
+				"Så *dette* er meningen med livet?",
+				"Kan vi bare få det over med?? Jeg har ting at gøre.",
+				"Det var alt?",
 				"Pong!",
-				"Do it again. I dare you."
+				"Gør det igen. Jeg vover dig."
 			]
 		},
 		"rhyme": {
 			"meta": {
-				"name": "rhyme",
-				"description": "Responds with words that rhyme with your query.",
+				"name": "rime",
+				"description": "Svarer med ord, der rimer med din forespørgsel.",
 				"args": {
 					"word": {
 						"name": "word",
