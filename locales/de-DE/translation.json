@@ -4,8 +4,8 @@
 			"arguments": {
 				"limit": "Maximale Anzahl angezeigter Ergebnisse (maximal & Standard: 50)."
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " das mit {{word}} beginnt",
+			"ends_with_blurb": " das auf {{word}} endet"
 		},
 		"errors": {
 			"with_clause_exclusivity": "Die Optionen `starts-with` und `ends-with` schließen sich gegenseitig aus -- du kannst nicht beide auf einmal benutzen.",
@@ -17,7 +17,7 @@
 			"meta": {
 				"description": "Antwortet mit Adjektiven, die deine Suche beschreiben.",
 				"args": {
-					"word": "The noun to search relavent adjectives for (eg: ocean)."
+					"word": "Die Hauptwortsuche um relevante Adjektive zu suchen (z. B.: Ozean)."
 				}
 			},
 			"success": "Ich habe `{{found_count}}` Adjektive gefunden, um `{{word}}` zu beschreiben: \n\n{{words}}"
@@ -41,7 +41,7 @@
 			"success": "Ich habe `{{found_count}}` Wörter gefunden, die klingen wie `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
-			"success": "I found `{{found_count}}` words that sound similar to `{{word}}`{{rest}}: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Wörter gefunden, die ähnlich klingen wie `{{word}}`{{rest}}: \n\n{{words}}"
 		}
 	}
 }
