@@ -1,5 +1,3 @@
-import { italic } from '@discordjs/builders';
-
 export enum Colors {
 	Primary = 7_506_394,
 	GiveawayOver = 3_553_599,
@@ -23,7 +21,7 @@ export const enum SuperscriptNumbers {
 	Six = '\u2076',
 	Three = '\u00B3',
 	Two = '\u00B2',
-	Zero = '\u2070'
+	Zero = '\u2070',
 }
 
 export const superscriptNumbers = {
@@ -38,18 +36,3 @@ export const superscriptNumbers = {
 	8: SuperscriptNumbers.Eight,
 	9: SuperscriptNumbers.Nine,
 } as const;
-
-export const pingResponses = [
-	'Uhh, hello?',
-	"What can I do ya' for?",
-	'Why are you bothering me?',
-	'Mhm?',
-	'Yea?',
-	"What's with you puny humans and the constant desire to bother me?",
-	'Out of everyone here, you chose to bother me?',
-	`So ${italic('this')} is the meaning of life?`,
-	'Can we just get this over with?? I have stuff to do.',
-	"That's all?",
-	'Pong!',
-	'Do it again. I dare you.',
-];

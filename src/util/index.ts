@@ -3,6 +3,8 @@ import { fileURLToPath, URL } from 'node:url';
 import type { Collection } from '@discordjs/collection';
 import type { APIPartialEmoji } from 'discord-api-types/v10';
 import { scan } from 'fs-nextra';
+import i18next from 'i18next';
+import Backend from 'i18next-fs-backend';
 import { container } from 'tsyringe';
 import { fetch } from 'undici';
 import { logger } from '#logger';
@@ -80,14 +82,38 @@ async function walk(path: string) {
 	).keys();
 }
 
+export function fetchDataLocalizations(key: string): Record<string, string> {
+	// @ts-expect-error
+	return (i18next.languages as string[]).reduce((acc, lng) => {
+		Reflect.set(acc, lng, i18next.t(key, { lng }));
+		return acc;
+	}, {});
+}
+
 export async function loadCommands(commandStore: Collection<string, Command>) {
 	const files = await walk(fileURLToPath(new URL('../commands', import.meta.url)));
 
 	for (const file of files) {
 		const command = container.resolve<Command>((await import(file)).default);
-		commandStore.set(command.data.name, command);
-		logger.info(`Successfully loaded command "${command.data.name}"!`);
+		const data = command.data;
+		commandStore.set(data.name, command);
+		logger.info(`Successfully loaded command "${data.name}"!`);
 	}
+
+	return commandStore;
+}
+
+export async function loadTranslations() {
+	return i18next.use(Backend).init({
+		backend: {
+			loadPath: fileURLToPath(new URL('../locales/{{lng}}/{{ns}}.json', import.meta.url)),
+		},
+		cleanCode: true,
+		fallbackLng: ['en-US'],
+		defaultNS: 'translation',
+		lng: 'en-US',
+		ns: ['translation'],
+	});
 }
 
 export function firstUpperCase(text: string, split = ' '): string {

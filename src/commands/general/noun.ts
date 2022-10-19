@@ -4,7 +4,7 @@ import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
 import type { Command } from '#structures';
-import { datamuse, firstUpperCase, trimArray } from '#util/index.js';
+import { datamuse, fetchDataLocalizations, firstUpperCase, trimArray } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
@@ -14,18 +14,24 @@ type SynonymHit = {
 };
 
 const data = {
-	name: 'noun',
-	description: 'Response with nouns that are often described by your query.',
+	name: i18n.t('commands.noun.meta.name'),
+	name_localizations: fetchDataLocalizations('commands.noun.meta.name'),
+	description: i18n.t('commands.noun.meta.description'),
+	description_localizations: fetchDataLocalizations('commands.noun.meta.description'),
 	options: [
 		{
 			name: 'word',
-			description: 'The adjective to search relevant nouns for (eg: yellow).',
+			name_localizations: fetchDataLocalizations('commands.noun.meta.args.word.name'),
+			description: i18n.t('commands.noun.meta.args.word.description'),
+			description_localizations: fetchDataLocalizations('commands.noun.meta.args.word.description'),
 			type: ApplicationCommandOptionType.String,
 			required: true,
 		},
 		{
 			name: 'limit',
-			description: 'The maximum amount of results to return (max & default: 50).',
+			name_localizations: fetchDataLocalizations('common.commands.args.limit.name'),
+			description: i18n.t('common.commands.args.limit.description'),
+			description_localizations: fetchDataLocalizations('common.commands.args.limit.description'),
 			type: ApplicationCommandOptionType.Integer,
 		},
 	],
@@ -40,7 +46,7 @@ const argumentDefaults: Partial<Arguments> = {
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (res: FastifyReply, interaction: APIInteraction, locale: string) => {
+	public exec = async (res: FastifyReply, interaction: APIInteraction, lng: string) => {
 		const { data } = interaction as { data: APIApplicationCommandInteractionData };
 		const args = mergeDefault(
 			argumentDefaults,
@@ -50,7 +56,7 @@ export default class implements Command {
 			) as Arguments,
 		);
 
-		const sendNotFound = async () => createResponse(res, i18n.t('common.errors.not_found', { lng: locale }), true);
+		const sendNotFound = async () => createResponse(res, i18n.t('common.errors.not_found', { lng }), true);
 		const response = await datamuse(`https://api.datamuse.com/words?rel_jja=${args.word}`);
 		if (!response.ok) return sendNotFound();
 
@@ -66,7 +72,7 @@ export default class implements Command {
 					found_count: words.length.toString(),
 					word: firstUpperCase(args.word),
 					words: trimArray(words, args.limit).join(', '),
-					lng: locale,
+					lng,
 				})
 				.slice(0, 2_000),
 		);

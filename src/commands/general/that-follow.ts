@@ -5,7 +5,7 @@ import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
 import type { Command } from '#structures';
-import { datamuse, firstUpperCase, trimArray } from '#util/index.js';
+import { datamuse, fetchDataLocalizations, firstUpperCase, trimArray } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
@@ -15,28 +15,38 @@ type SynonymHit = {
 };
 
 const data = {
-	name: 'that-follow',
-	description: 'Response with words that could logically follow query.',
+	name: i18n.t('commands.that-follow.meta.name'),
+	name_localizations: fetchDataLocalizations('commands.that-follow.meta.name'),
+	description: i18n.t('commands.that-follow.meta.description'),
+	description_localizations: fetchDataLocalizations('commands.that-follow.meta.description'),
 	options: [
 		{
 			name: 'word',
-			description: 'The word to search following words for.',
+			name_localizations: fetchDataLocalizations('commands.that-follow.meta.args.word.name'),
+			description: i18n.t('commands.that-follow.meta.args.word.description'),
+			description_localizations: fetchDataLocalizations('commands.that-follow.meta.args.word.description'),
 			type: ApplicationCommandOptionType.String,
 			required: true,
 		},
 		{
 			name: 'starts-with',
-			description: 'Only return words that start with this value (mutually exclusive with ends-with).',
+			name_localizations: fetchDataLocalizations('common.commands.args.starts-with.name'),
+			description: i18n.t('common.commands.args.starts-with.description'),
+			description_localizations: fetchDataLocalizations('common.commands.args.starts-with.description'),
 			type: ApplicationCommandOptionType.String,
 		},
 		{
 			name: 'ends-with',
-			description: 'Only return words that end with this value (mutually exclusive with starts-with).',
+			name_localizations: fetchDataLocalizations('common.commands.args.ends-with.name'),
+			description: i18n.t('common.commands.args.ends-with.description'),
+			description_localizations: fetchDataLocalizations('common.commands.args.ends-with.description'),
 			type: ApplicationCommandOptionType.String,
 		},
 		{
 			name: 'limit',
-			description: 'The maximum amount of results to return (max & default: 50).',
+			name_localizations: fetchDataLocalizations('common.commands.args.limit.name'),
+			description: i18n.t('common.commands.args.limit.description'),
+			description_localizations: fetchDataLocalizations('common.commands.args.limit.description'),
 			type: ApplicationCommandOptionType.Integer,
 		},
 	],
@@ -51,7 +61,7 @@ const argumentDefaults: Partial<Arguments> = {
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (res: FastifyReply, interaction: APIInteraction, locale: string) => {
+	public exec = async (res: FastifyReply, interaction: APIInteraction, lng: string) => {
 		const { data } = interaction as { data: APIApplicationCommandInteractionData };
 		const args = mergeDefault(
 			argumentDefaults,
@@ -61,22 +71,22 @@ export default class implements Command {
 			) as Arguments,
 		);
 
-		if (args['starts-with'] && args['ends-with'])
-			return createResponse(res, i18n.t('common.errors.with_clause_exclusivity'), true);
+		const startsWith = args['starts-with'];
+		const endsWith = args['ends-with'];
+
+		if (startsWith && endsWith)
+			return createResponse(res, i18n.t('common.errors.with_clause_exclusivity', { lng }), true);
 
 		const url = new URL('https://api.datamuse.com/words');
 		url.searchParams.append('lc', args.word);
 
-		const other: string[] = [];
-		if (args['starts-with']) {
-			url.searchParams.append('sp', `${args['starts-with']}*`);
-			other.push(i18n.t('common.commands.starts_with_blurb', { lng: locale, word: args['starts-with'] }));
-		} else if (args['ends-with']) {
-			url.searchParams.append('sp', `*${args['ends-with']}`);
-			other.push(i18n.t('common.commands.starts_with_blurb', { lng: locale, word: args['ends-with'] }));
+		if (startsWith) {
+			url.searchParams.append('sp', `${startsWith}*`);
+		} else if (endsWith) {
+			url.searchParams.append('sp', `*${endsWith}`);
 		}
 
-		const sendNotFound = async () => createResponse(res, i18n.t('common.errors.not_found', { lng: locale }), true);
+		const sendNotFound = async () => createResponse(res, i18n.t('common.errors.not_found', { lng }), true);
 		const response = await datamuse(url.toString());
 		if (!response.ok) return sendNotFound();
 
@@ -85,17 +95,29 @@ export default class implements Command {
 
 		if (!words.length) return sendNotFound();
 
-		return createResponse(
-			res,
-			i18n
-				.t('commands.that-follow.success', {
+		const content = startsWith
+			? i18n.t('commands.that-follow.starts_with_success', {
+					lng,
 					found_count: words.length.toString(),
 					word: firstUpperCase(args.word),
 					words: trimArray(words, args.limit).join(', '),
-					rest: other.join(' '),
-					lng: locale,
-				})
-				.slice(0, 2_000),
-		);
+					starts_with: startsWith,
+			  })
+			: endsWith
+			? i18n.t('commands.that-follow.ends_with_success', {
+					lng,
+					found_count: words.length.toString(),
+					word: firstUpperCase(args.word),
+					words: trimArray(words, args.limit).join(', '),
+					ends_with: endsWith,
+			  })
+			: i18n.t('commands.that-follow.generic_success', {
+					lng,
+					found_count: words.length.toString(),
+					word: firstUpperCase(args.word),
+					words: trimArray(words, args.limit).join(', '),
+			  });
+
+		return createResponse(res, content.slice(0, 2_000));
 	};
 }
