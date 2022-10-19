@@ -6,7 +6,7 @@ use prometheus::{Encoder, IntCounter, TextEncoder};
 
 use futures::StreamExt;
 use hyper::Uri;
-use std::{env, future::Future, net::IpAddr, pin::Pin, str::FromStr, sync::Arc};
+use std::{env, future::Future, pin::Pin, sync::Arc};
 use twilight_gateway::{queue::Queue, Cluster, Event, EventTypeFlags, Intents};
 
 lazy_static! {
