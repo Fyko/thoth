@@ -2,43 +2,43 @@
 	"common": {
 		"commands": {
 			"arguments": {
-				"limit": "The maximum amount of results to return (max & default: 50)."
+				"limit": "Maximale Anzahl angezeigter Ergebnisse (maximal & Standard: 50)."
 			},
 			"starts_with_blurb": " that starts with {{word}}",
 			"ends_with_blurb": " that ends with {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` adn `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!"
+			"with_clause_exclusivity": "Die Optionen `starts-with` und `ends-with` schließen sich gegenseitig aus -- du kannst nicht beide auf einmal benutzen.",
+			"not_found": "Es tut mir leid, ich konnte keine Ergebnisse für deine Suche finden!"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"description": "Response with adjectives that describe your query.",
+				"description": "Antwortet mit Adjektiven, die deine Suche beschreiben.",
 				"args": {
 					"word": "The noun to search relavent adjectives for (eg: ocean)."
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Adjektive gefunden, um `{{word}}` zu beschreiben: \n\n{{words}}"
 		},
 		"match-word": {
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Wörter die mit `{{word}}` übereinstimmen: \n\n{{words}}"
 		},
 		"noun": {
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Nennworte für `{{word}}` gefunden: \n\n{{words}}"
 		},
 		"rhyme": {
-			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Wörter gefunden, die sich mit `{{word}}` reimen: \n\n{{words}}"
 		},
 		"similar-meaning": {
-			"success": "I found `{{found_count}}` words that sound similar to `{{word}}`{{rest}}: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Wörter gefunden, die ähnlich klingen wie `{{word}}`{{rest}}: \n\n{{words}}"
 		},
 		"similar-spelling": {
-			"success": "I found `{{found_count}}` words that're similarly spelled to `{{word}}`: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Wörter gefunden, die ähnlich geschrieben werden wie `{{word}}`: \n\n{{words}}"
 		},
 		"sounds-like": {
-			"success": "I found `{{found_count}}` words that sound like `{{word}}`: \n\n{{words}}"
+			"success": "Ich habe `{{found_count}}` Wörter gefunden, die klingen wie `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
 			"success": "I found `{{found_count}}` words that sound similar to `{{word}}`{{rest}}: \n\n{{words}}"
