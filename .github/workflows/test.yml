@@ -1,0 +1,36 @@
+name: Testing
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Volta
+        uses: volta-cli/action@v3
+
+      - name: Install Dependencies
+        run: yarn --immutable
+
+      - name: Run ESLint
+        run: yarn lint
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Volta
+        uses: volta-cli/action@v3
+
+      - name: Install Dependencies
+        run: yarn --immutable
+
+      - name: Compile code
+        run: yarn build
