@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
+    labels:
+      - 'com.centurylinklabs.watchtower.enable=true'
 
   gateway:
     image: twilightrs/gateway-queue
@@ -30,6 +32,8 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
+    labels:
+      - 'com.centurylinklabs.watchtower.enable=true'
 
   prometheus:
     build:
