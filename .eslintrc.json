@@ -5,12 +5,13 @@
 	},
 	"rules": {
 		"comma-dangle": ["error", "always-multiline"],
-		"@typescript-eslint/no-base-to-string": "off",
-		"@typescript-eslint/no-floating-promises": "off",
-		"@typescript-eslint/restrict-template-expressions": "off",
-		"@typescript-eslint/naming-convention": "off",
-		"prefer-named-capture-group": "off",
+		"@typescript-eslint/no-base-to-string": 0,
+		"@typescript-eslint/no-floating-promises": 0,
+		"@typescript-eslint/restrict-template-expressions": 0,
+		"@typescript-eslint/naming-convention": 0,
+		"prefer-named-capture-group": 0,
 		"id-length": 0,
-		"tsdoc/syntax": 0
+		"tsdoc/syntax": 0,
+		"@typescript-eslint/ban-ts-comment": 0
 	}
 }

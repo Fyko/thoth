@@ -3,6 +3,7 @@ import { inspect } from 'node:util';
 import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
 import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
+import i18n from 'i18next';
 import type { Command } from '#structures';
 import { sendFollowup, defer, createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
@@ -53,7 +54,7 @@ export default class implements Command {
 		return replacedText.replace(new RegExp(process.env.DISCORD_TOKEN!, 'gi'), SENSITIVE_PATTERN_REPLACEMENT);
 	}
 
-	public exec = async (res: FastifyReply, interaction: APIInteraction, _locale: string) => {
+	public exec = async (res: FastifyReply, interaction: APIInteraction, lng: string) => {
 		const { data } = interaction as { data: APIApplicationCommandInteractionData };
 		const args = Object.fromEntries(
 			// @ts-expect-error pain
@@ -61,7 +62,7 @@ export default class implements Command {
 		) as Arguments;
 
 		if (![interaction.user?.id, interaction.member?.user.id].includes(process.env.OWNER_ID!))
-			return createResponse(res, 'Unauthorized.', true);
+			return createResponse(res, i18n.t('common.errors.unauthorized', { lng }), true);
 		await defer(res);
 
 		let evaled: any;

@@ -1,24 +1,28 @@
 import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
+import type { APIInteraction } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
+import i18n from 'i18next';
 import type { Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
 import { fetchWordOfTheDay } from '#mw/wotd.js';
 import type { Command } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
-import { trimArray } from '#util/index.js';
+import { fetchDataLocalizations, trimArray } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 
 const data = {
-	name: 'word-of-the-day',
-	description: 'Response with the word of the day.',
+	name: i18n.t('commands.word-of-the-day.meta.name'),
+	name_localizations: fetchDataLocalizations('commands.word-of-the-day.meta.name'),
+	description: i18n.t('commands.word-of-the-day.meta.description'),
+	description_localizations: fetchDataLocalizations('commands.word-of-the-day.meta.description'),
 } as const;
 
 export default class implements Command {
 	public readonly data = data;
 
-	public exec = async (res: FastifyReply) => {
+	public exec = async (res: FastifyReply, _: APIInteraction, lng: string) => {
 		const word = await fetchWordOfTheDay();
 		const { meta, hwi, def, fl } = await fetchDefinition(word);
 
@@ -61,7 +65,7 @@ export default class implements Command {
 			} (${hwi.hw.replaceAll('*', Characters.Bullet)}) ${Characters.Bullet} ${pronunciation}
 				${Characters.Bullet} Stems: ${trimArray(meta.stems.map(inlineCode), 15).join(', ')}
 
-				${underscore('Definitions')}
+				${underscore(i18n.t('common.titles.definitions', { lng }))}
 				${defs.join('\n')}
 			`,
 			false,

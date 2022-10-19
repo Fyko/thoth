@@ -4,7 +4,6 @@ import 'reflect-metadata';
 import * as crypto from 'node:crypto';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import process from 'node:process';
-import { fileURLToPath, URL } from 'node:url';
 import { Collection } from '@discordjs/collection';
 import { InteractionType } from 'discord-api-types/v10';
 import type { APIInteraction, RESTGetAPIUserResult } from 'discord-api-types/v10';
@@ -12,14 +11,12 @@ import { verify as verifyKey } from 'discord-verify/node';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import fastifyMetrics, { type IMetricsPluginOptions } from 'fastify-metrics';
-import i18next from 'i18next';
-import Backend from 'i18next-fs-backend';
 import { Counter } from 'prom-client';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command } from '#structures';
 import { REST } from '#structures';
-import { loadCommands } from '#util/index.js';
+import { loadCommands, loadTranslations } from '#util/index.js';
 import { kCommands, kREST } from '#util/symbols.js';
 
 process.env.NODE_ENV ??= 'development';
@@ -57,16 +54,7 @@ const commandsMetrics = new Counter({
 });
 
 async function start() {
-	await i18next.use(Backend).init({
-		backend: {
-			loadPath: fileURLToPath(new URL('locales/{{lng}}/{{ns}}.json', import.meta.url)),
-		},
-		cleanCode: true,
-		fallbackLng: ['en-US'],
-		defaultNS: 'translation',
-		lng: 'en-US',
-		ns: ['translation'],
-	});
+	await loadTranslations();
 
 	await loadCommands(commands);
 
