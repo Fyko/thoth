@@ -2,12 +2,36 @@ version: '3.7'
 
 services:
   thoth:
-    image: ghcr.io/fyko/thoth:latest
-    restart: unless-stopped
-    labels:
-      - 'com.centurylinklabs.watchtower.enable=true'
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - '2399:2399'
+    restart: unless-stopped
+    env_file:
+      - ./.env
+
+  gateway:
+    image: twilightrs/gateway-queue
+    environment:
+      HOST: '0.0.0.0'
+      PORT: '2398'
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+    env_file:
+      - ./.env
+    ports:
+      - '2398:2398'
+
+  thothd:
+    build:
+      context: ./thothd
+      dockerfile: Dockerfile
+    environment:
+      GATEWAY_HOST: 'gateway'
+      GATEWAY_PORT: '2398'
+    ports:
+      - '2397:2397'
+    restart: unless-stopped
     env_file:
       - ./.env
 

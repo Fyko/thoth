@@ -40,3 +40,6 @@ LICENSE
 .git
 .gitattributes
 .gitignore
+
+target
+**/target

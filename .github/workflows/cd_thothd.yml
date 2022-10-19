@@ -1,14 +1,9 @@
-name: Continuous Deployment (thoth)
+name: Continuous Deployment (thothd)
 
 on:
   push:
     branches: [main]
-    paths:
-      - '**.ts'
-      - 'package.json'
-      - 'yarn.lock'
-      - 'Dockerfile'
-      - 'locales/**'
+    paths: ['thothd/**']
 
 jobs:
   docker:
@@ -16,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Build
         id: build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: fyko/thoth
+          image: fyko/thothd
           tags: latest ${{ github.sha }} # important!
           dockerfiles: |
-            ./Dockerfile
+            ./thothd/Dockerfile
           build-args: |
             CREATED_AT=${{ env.datetime }}
             GITHUB_SHA=${{ github.sha }}
