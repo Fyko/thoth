@@ -11,9 +11,10 @@ import type { APIInteraction, RESTGetAPIUserResult } from 'discord-api-types/v10
 import { verify as verifyKey } from 'discord-verify/node';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
+import fastifyMetrics, { type IMetricsPluginOptions } from 'fastify-metrics';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
-import { Counter, register, collectDefaultMetrics } from 'prom-client';
+import { Counter } from 'prom-client';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command } from '#structures';
@@ -49,7 +50,6 @@ async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void
 	done();
 }
 
-collectDefaultMetrics({ register, prefix: 'thoth_' });
 const commandsMetrics = new Counter({
 	name: 'thoth_commands',
 	help: 'Number of commands executed',
@@ -72,10 +72,17 @@ async function start() {
 
 	const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
 
-	server.get('/metrics', async (_, res) => {
-		res.header('Content-Type', register.contentType);
-		res.send(await register.metrics());
-	});
+	// @ts-expect-error ik it works
+	await server.register(fastifyMetrics, {
+		endpoint: '/metrics',
+		defaultMetrics: { prefix: 'thoth_' },
+		routeMetrics: {
+			overrides: {
+				histogram: { name: 'thoth_webserver_request_duration_seconds' },
+				summary: { name: 'thoth_webserver_request_summary_seconds' },
+			},
+		},
+	} as IMetricsPluginOptions);
 
 	server.post('/interactions', { preHandler: verify }, async (req, res) => {
 		try {
