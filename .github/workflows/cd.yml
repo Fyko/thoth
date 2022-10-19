@@ -3,6 +3,12 @@ name: Continuous Deployment
 on:
   push:
     branches: [main]
+    paths:
+      - '**.ts'
+      - 'package.json'
+      - 'yarn.lock'
+      - 'Dockerfile'
+      - 'locales/**'
 
 jobs:
   docker:
