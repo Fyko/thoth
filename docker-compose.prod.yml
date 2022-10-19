@@ -2,9 +2,7 @@ version: '3.7'
 
 services:
   thoth:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/fyko/thoth:latest
     ports:
       - '2399:2399'
     restart: unless-stopped
@@ -23,9 +21,7 @@ services:
       - '2398:2398'
 
   thothd:
-    build:
-      context: ./thothd
-      dockerfile: Dockerfile
+    image: ghcr.io/fyko/thothd:latest
     environment:
       GATEWAY_HOST: 'gateway'
       GATEWAY_PORT: '2398'
