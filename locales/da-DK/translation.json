@@ -7,11 +7,11 @@
 					"description": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
 				},
 				"starts-with": {
-					"name": "starter med",
+					"name": "starter-med",
 					"description": "Returnér kun ord, der starter med denne værdi (gensidigt eksklusiv med endelsen)."
 				},
 				"ends-with": {
-					"name": "ender med",
+					"name": "ender-med",
 					"description": "Returnér kun ord, der slutter med denne værdi (gensidigt eksklusiv med start-with)."
 				}
 			},
@@ -19,7 +19,7 @@
 			"ends_with_blurb": " der slutter med {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "Valgmulighederne `starts-with` og `ends-with` er gensidigt eksklusive -- du kan ikke bruge dem begge på samme tid.",
+			"with_clause_exclusivity": "Valgmulighederne `starter-med` og `ender-med` er gensidigt eksklusive -- du kan ikke bruge dem begge på samme tid.",
 			"not_found": "Beklager, jeg kunne ikke finde nogen resultater til din forespørgsel!",
 			"unauthorized": "Uautoriseret."
 		},
@@ -35,7 +35,7 @@
 				"args": {
 					"word": {
 						"name": "ord",
-						"description": "Det navneord at søge relevante adjektiver for (fx: havet)."
+						"description": "Det navneord at søge relevante adjektiver for (fx: ocean)."
 					}
 				}
 			},
@@ -48,7 +48,7 @@
 				"args": {
 					"word": {
 						"name": "ord",
-						"description": "Ordet der skal søges efter (fx: hav)."
+						"description": "Ordet der skal søges efter (fx: ocean)."
 					}
 				}
 			}
@@ -63,11 +63,11 @@
 		"match-word": {
 			"meta": {
 				"name": "match-ord",
-				"description": "Svarer med ord, der matcher det ord du angiver (fx: æ?le -> æble, d??? -> dato).",
+				"description": "Svarer med ord, der matcher det ord du angiver (fx: a??le -> apple, d???? -> date).",
 				"args": {
 					"word": {
 						"name": "ord",
-						"description": "Ordet til at matche (eksempel: æ?le)."
+						"description": "Ordet til at matche (eksempel: a??le)."
 					}
 				}
 			},
@@ -80,7 +80,7 @@
 				"args": {
 					"word": {
 						"name": "ord",
-						"description": "Tillægsordet for at søge relevante navneord for (fx: gul)."
+						"description": "Tillægsordet for at søge relevante navneord for (fx: yellow)."
 					}
 				}
 			},
