@@ -2,14 +2,14 @@
 	"common": {
 		"commands": {
 			"arguments": {
-				"limit": "The maximum amount of results to return (max & default: 50)."
+				"limit": "La cantidad máxima de resultados a devolver (máx. y por defecto: 50)."
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " que comienza con {{word}}",
+			"ends_with_blurb": " que termina con {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` adn `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!"
+			"with_clause_exclusivity": "Las opciones `starts-with` y `ends-with` son mutuamente exclusivas -- no puedes usarlas ambas al mismo tiempo.",
+			"not_found": "¡Lo sentimos, no podemos encontrar nada por tu consulta!"
 		}
 	},
 	"commands": {
@@ -20,16 +20,16 @@
 					"word": "The noun to search relavent adjectives for (eg: ocean)."
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "Encontré `{{found_count}}` adjetivos para describir `{{word}}`: \n\n{{words}}"
 		},
 		"match-word": {
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "Encontré `{{found_count}}` palabras que coinciden con `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "Encontré `{{found_count}}` sustantivos para `{{word}}`: \n\n{{words}}"
 		},
 		"rhyme": {
-			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
+			"success": "Encontré `{{found_count}}` palabras que rima con `{{word}}`: \n\n{{words}}"
 		},
 		"similar-meaning": {
 			"success": "I found `{{found_count}}` words that sound similar to `{{word}}`{{rest}}: \n\n{{words}}"
