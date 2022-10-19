@@ -2,46 +2,46 @@
 	"common": {
 		"commands": {
 			"arguments": {
-				"limit": "The maximum amount of results to return (max & default: 50)."
+				"limit": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " яке починається з {{word}}",
+			"ends_with_blurb": " яке закінчується з {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` adn `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!"
+			"with_clause_exclusivity": "Опції \"починається з\" та \"закінчується з\" є взаємно заперечними - ви не можете використовувати їх обидві одночасно.",
+			"not_found": "Перепрошую, я не міг знайти жодних результатів за ваш запит!"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"description": "Response with adjectives that describe your query.",
+				"description": "Відповідь прикметниками, які описують Ваш запит.",
 				"args": {
-					"word": "The noun to search relavent adjectives for (eg: ocean)."
+					"word": "Іменник для пошуку відповідних прикметників (наприклад: океан)."
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` прикметники для опису `{{word}}`: \n\n{{words}}"
 		},
 		"match-word": {
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` слів, які відповідають `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` іменників для `{{word}}`: \n\n{{words}}"
 		},
 		"rhyme": {
-			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` слів, які містять `{{word}}`: \n\n{{words}}"
 		},
 		"similar-meaning": {
-			"success": "I found `{{found_count}}` words that sound similar to `{{word}}`{{rest}}: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` слів, схожих на `{{word}}`{{rest}}: \n\n{{words}}"
 		},
 		"similar-spelling": {
-			"success": "I found `{{found_count}}` words that're similarly spelled to `{{word}}`: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` слова, які аналогічно написані в `{{word}}`: \n\n{{words}}"
 		},
 		"sounds-like": {
-			"success": "I found `{{found_count}}` words that sound like `{{word}}`: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` слів, схожих на `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
-			"success": "I found `{{found_count}}` words that sound similar to `{{word}}`{{rest}}: \n\n{{words}}"
+			"success": "Я знайшов `{{found_count}}` слів, схожих на `{{word}}`{{rest}}: \n\n{{words}}"
 		}
 	}
 }
