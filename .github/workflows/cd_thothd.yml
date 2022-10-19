@@ -19,6 +19,7 @@ jobs:
         with:
           image: fyko/thothd
           tags: latest ${{ github.sha }} # important!
+          context: ./thothd
           dockerfiles: |
             ./thothd/Dockerfile
           build-args: |
