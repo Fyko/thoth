@@ -88,15 +88,15 @@
 		},
 		"ping": {
 			"meta": {
-				"name": "ping",
+				"name": "пінг",
 				"description": "Ensures the bot is responding to commands."
 			},
 			"pongs": [
-				"Uhh, hello?",
-				"What can I do ya' for?",
-				"Why are you bothering me?",
+				"Хм, привіт?",
+				"Чим я можу вам допомогти?",
+				"Чому ви мене турбуєте?",
 				"Mhm?",
-				"Yea?",
+				"Ага?",
 				"What's with you puny humans and the constant desire to bother me?",
 				"Out of everyone here, you chose to bother me?",
 				"So *this* is the meaning of life?",
