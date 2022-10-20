@@ -113,7 +113,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para procurar ritmos (ex: moeda)."
+						"description": "A palavra para procurar ritmos (ex: dime)."
 					}
 				}
 			},
@@ -126,7 +126,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras semelhantes (ex: transgressões)."
+						"description": "A palavra para pesquisar palavras semelhantes (ex: transgressions)."
 					}
 				}
 			},
@@ -141,7 +141,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras semelhantes para (ex: ágil)."
+						"description": "A palavra para pesquisar palavras semelhantes para (ex: agile)."
 					}
 				}
 			},
@@ -154,7 +154,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: ágil)."
+						"description": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: agile)."
 					}
 				}
 			},
@@ -167,7 +167,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras que seguem (ex: abra)."
+						"description": "A palavra para pesquisar palavras que seguem (ex: open)."
 					}
 				}
 			},
