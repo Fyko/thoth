@@ -21,7 +21,7 @@
 		"errors": {
 			"with_clause_exclusivity": "Опції `починається з` та `закінчується з` є взаємно заперечними - ви не можете використовувати їх обидві одночасно.",
 			"not_found": "Перепрошую, я не міг знайти жодних результатів за ваш запит!",
-			"unauthorized": "Неавторизовано."
+			"unauthorized": "Помилка Авторизації."
 		},
 		"titles": {
 			"definitions": "Визначення"
@@ -44,11 +44,11 @@
 		"definition": {
 			"meta": {
 				"name": "визначення",
-				"description": "Responds with the definition of your query from Merriam Webster.",
+				"description": "Надає відповідь з визначенням вашого запиту від Merriam Webster.",
 				"args": {
 					"word": {
 						"name": "слово",
-						"description": "The word to search a definition for (eg: ocean)."
+						"description": "Слово для пошуку визначення (наприклад: океан)."
 					}
 				}
 			}
@@ -99,9 +99,9 @@
 				"Ага?",
 				"What's with you puny humans and the constant desire to bother me?",
 				"Out of everyone here, you chose to bother me?",
-				"So *this* is the meaning of life?",
+				"То *це* і є сенс життя?",
 				"Can we just get this over with?? I have stuff to do.",
-				"That's all?",
+				"Це все?",
 				"Pong!",
 				"Do it again. I dare you."
 			]
