@@ -3,162 +3,162 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "limite",
+					"description": "A quantidade máxima de resultados para retornar (max & padrão: 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
-					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
+					"name": "inicia-com",
+					"description": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com)."
 				},
 				"ends-with": {
-					"name": "ends-with",
-					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
+					"name": "termina-com",
+					"description": "Somente retorne palavras que terminem com esse valor (mutuamente exclusivo com começa-com)."
 				}
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " isso começa com {{word}}",
+			"ends_with_blurb": " isso termina com {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!",
-			"unauthorized": "Unauthorized."
+			"with_clause_exclusivity": "As opções `começa-com` e `termina-com` são mutuamente exclusivas -- você não pode usá-las ao mesmo tempo.",
+			"not_found": "Desculpe, não consegui encontrar resultados para a sua pesquisa!",
+			"unauthorized": "Não autorizado."
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Definições"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"name": "adjective",
-				"description": "Responds with adjectives that describe your query.",
+				"name": "adjetivo",
+				"description": "Responde com adjetivos que descrevem sua pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The noun to search relavent adjectives for (eg: ocean)."
+						"name": "palavra",
+						"description": "O substantivo para buscar adjetivos de relevância para (ex: oceano)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "Eu encontrei `{{found_count}}` adjetivos para descrever `{{word}}`: \n\n{{words}}"
 		},
 		"definition": {
 			"meta": {
-				"name": "definition",
-				"description": "Responds with the definition of your query from Merriam Webster.",
+				"name": "definição",
+				"description": "Responde com a definição de sua consulta no Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search a definition for (eg: ocean)."
+						"name": "palavra",
+						"description": "A palavra para pesquisar uma definição para (ex: oceano)."
 					}
 				}
 			}
 		},
 		"invite": {
 			"meta": {
-				"name": "invite",
-				"description": "Returns an invite link to add Thoth to your server."
+				"name": "convite",
+				"description": "Envia um link de convite para adicionar Thoth ao seu servidor."
 			},
-			"success": "Want to add Thoth to your server? [Click here]({{link}})!"
+			"success": "Quer adicionar Thoth ao seu servidor? [Clique aqui]({{link}})!"
 		},
 		"match-word": {
 			"meta": {
-				"name": "match-word",
-				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+				"name": "palavra-correspondente",
+				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: m??ã -> maçã, d??? -> data).",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to find matches for (example: a??le)."
+						"name": "palavra",
+						"description": "A palavra para encontrar correspondências (exemplo: m??ã)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "Eu encontrei `{{found_count}}` palavrar que se coincidem com `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
 			"meta": {
-				"name": "noun",
-				"description": "Responds with nouns that are often described by your query.",
+				"name": "substantivo",
+				"description": "Responde com substantivos que são frequentemente descritos pela sua pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
+						"name": "palavra",
+						"description": "O adjetivo para procurar substantivos relevantes (ex: amarelo)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "Eu encontrei `{{found_count}}` substantivos para `{{word}}`: \n\n{{words}}"
 		},
 		"ping": {
 			"meta": {
 				"name": "ping",
-				"description": "Ensures the bot is responding to commands."
+				"description": "Garante que o bot está respondendo a comandos."
 			},
 			"pongs": [
-				"Uhh, hello?",
-				"What can I do ya' for?",
-				"Why are you bothering me?",
-				"Mhm?",
-				"Yea?",
-				"What's with you puny humans and the constant desire to bother me?",
-				"Out of everyone here, you chose to bother me?",
-				"So *this* is the meaning of life?",
-				"Can we just get this over with?? I have stuff to do.",
-				"That's all?",
+				"Hmm, olá?",
+				"O que posso fazer por vc?",
+				"Por que você está me incomodando?",
+				"Hmm?",
+				"Sim?",
+				"O que há com vocês humanos insignificantes e o desejo constante de me incomodar?",
+				"De todos aqui, você escolheu me incomodar?",
+				"Então, *este* é o significado da vida?",
+				"A gente pode acabar logo com isso?? Eu tenho coisas pra fazer.",
+				"Isso é tudo?",
 				"Pong!",
-				"Do it again. I dare you."
+				"Faz de novo. Eu te desafio."
 			]
 		},
 		"rhyme": {
 			"meta": {
-				"name": "rhyme",
-				"description": "Responds with words that rhyme with your query.",
+				"name": "rima",
+				"description": "Responde com palavras que me rimam com a sua pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search rhymes for (eg: dime)."
+						"name": "palavra",
+						"description": "A palavra para procurar ritmos (ex: moeda)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
+			"success": "Eu encontrei `{{found_count}}` palavras que rimam com `{{word}}`: \n\n{{words}}"
 		},
 		"similar-meaning": {
 			"meta": {
-				"name": "similar-meaning",
-				"description": "Response with words that have a similar meaning to your query.",
+				"name": "significado-similar",
+				"description": "Responde com palavras que têm um significado semelhante ao da sua pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search similar words for (eg: transgressions)."
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras semelhantes (ex: transgressões)."
 					}
 				}
 			},
-			"generic_success": "I found `{{found_count}}` words that are similar to `{{word}}`{{rest}}: \n\n{{words}}",
-			"starts_with_success": "I found `{{found_count}}` words that are similar to `{{word}}` and start with `{{starts_with}}`: \n\n{{words}}",
-			"ends_with_success": "I found `{{found_count}}` words that are similar to `{{word}}` and end with `{{ends_with}}`: \n\n{{words}}"
+			"generic_success": "Eu encontrei `{{found_count}}` palavras semelhantes a `{{word}}`{{rest}}: \n\n{{words}}",
+			"starts_with_success": "Eu encontrei `{{found_count}}` palavras semelhantes a `{{word}}` e começão com `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "Eu encontrei `{{found_count}}` palavras semelhantes a `{{word}}` e terminam com `{{ends_with}}`: \n\n{{words}}"
 		},
 		"similar-spelling": {
 			"meta": {
-				"name": "similar-spelling",
-				"description": "Responds with words that have a similar spelling to your query.",
+				"name": "ortografia-similar",
+				"description": "Responde com palavras que possuem uma ortografia semelhante à sua pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search similar words for (eg: agile)."
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras semelhantes para (ex: ágil)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that're similarly spelled to `{{word}}`: \n\n{{words}}"
+			"success": "Encontrei `{{found_count}}` palavras que estão ortografadas de forma semelhante em `{{word}}`: \n\n{{words}}"
 		},
 		"sounds-like": {
 			"meta": {
-				"name": "sounds-like",
-				"description": "Responds with words that sound like your query.",
+				"name": "soa-como",
+				"description": "Responde com palavras que soam como a sua pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search similarly sounding words for (eg: agile)."
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: ágil)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that sound like `{{word}}`: \n\n{{words}}"
+			"success": "Eu encontrei `{{found_count}}` palavras que soam como `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
 			"meta": {
