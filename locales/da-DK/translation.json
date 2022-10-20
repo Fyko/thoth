@@ -112,7 +112,7 @@
 				"description": "Svarer med ord, der rimer med din forespørgsel.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "ord",
 						"description": "The word to search rhymes for (eg: dime)."
 					}
 				}
@@ -125,7 +125,7 @@
 				"description": "Response with words that have a similar meaning to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "ord",
 						"description": "The word to search similar words for (eg: transgressions)."
 					}
 				}
@@ -140,7 +140,7 @@
 				"description": "Responds with words that have a similar spelling to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "ord",
 						"description": "The word to search similar words for (eg: agile)."
 					}
 				}
@@ -153,7 +153,7 @@
 				"description": "Responds with words that sound like your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "ord",
 						"description": "The word to search similarly sounding words for (eg: agile)."
 					}
 				}
@@ -166,7 +166,7 @@
 				"description": "Responds with words that could logically follow query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "ord",
 						"description": "The word to search following words for (eg: open)."
 					}
 				}
