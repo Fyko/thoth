@@ -35,7 +35,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "O substantivo para buscar adjetivos de relevância para (ex: oceano)."
+						"description": "O substantivo para buscar adjetivos de relevância para (ex: ocean)."
 					}
 				}
 			},
@@ -48,7 +48,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar uma definição para (ex: oceano)."
+						"description": "A palavra para pesquisar uma definição para (ex: ocean)."
 					}
 				}
 			}
@@ -63,11 +63,11 @@
 		"match-word": {
 			"meta": {
 				"name": "palavra-correspondente",
-				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: m??ã -> maçã, d??? -> data).",
+				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para encontrar correspondências (exemplo: m??ã)."
+						"description": "A palavra para encontrar correspondências (exemplo: a??le)."
 					}
 				}
 			},
@@ -80,7 +80,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "O adjetivo para procurar substantivos relevantes (ex: amarelo)."
+						"description": "O adjetivo para procurar substantivos relevantes (ex: yellow)."
 					}
 				}
 			},
@@ -162,23 +162,23 @@
 		},
 		"that-follow": {
 			"meta": {
-				"name": "that-follow",
-				"description": "Responds with words that could logically follow query.",
+				"name": "que-segue",
+				"description": "Respostas com palavras que poderiam logicamente seguir a pesquisa.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search following words for (eg: open)."
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras que seguem (ex: abra)."
 					}
 				}
 			},
-			"generic_success": "I found `{{found_count}}` words that logically follow `{{word}}`: \n\n{{words}}",
-			"starts_with_success": "I found `{{found_count}}` words that logically follow `{{word}}` that start with `{{starts_with}}`: \n\n{{words}}",
-			"ends_with_success": "I found `{{found_count}}` words that logically follow `{{word}}` that end with `{{ends_with}}`: \n\n{{words}}"
+			"generic_success": "Eu encontrei `{{found_count}}` palavras que logicamente seguem `{{word}}`: \n\n{{words}}",
+			"starts_with_success": "Eu encontrei `{{found_count}}` palavras que logicamente seguem `{{word}}` que começam com `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "Eu encontrei `{{found_count}}` palavras que seguem logicamente `{{word}}` que terminam com `{{ends_with}}`: \n\n{{words}}"
 		},
 		"word-of-the-day": {
 			"meta": {
-				"name": "word-of-the-day",
-				"description": "Responds with the word of the day from Merriam Webster."
+				"name": "palavra-do-dia",
+				"description": "Responde com a palavra do dia do Merriam Webster."
 			}
 		}
 	}
