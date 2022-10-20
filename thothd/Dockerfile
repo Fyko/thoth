@@ -65,6 +65,8 @@ RUN source $HOME/.cargo/env && \
 
 FROM scratch
 
+LABEL name "thothd"
+
 # And now copy the binary over from the build container. The build container is
 # based on a heavy image.
 COPY --from=build /metrics /metrics
