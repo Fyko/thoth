@@ -3,8 +3,8 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "beperkingen",
+					"description": "Het maximum aantal resultaten om terug te keren (max & standaard: 50)."
 				},
 				"starts-with": {
 					"name": "starts-with",
@@ -89,7 +89,7 @@
 		"ping": {
 			"meta": {
 				"name": "ping",
-				"description": "Ensures the bot is responding to commands."
+				"description": "Verzekeren dat de bot reageert op de commando's."
 			},
 			"pongs": [
 				"Uhh, hello?",
