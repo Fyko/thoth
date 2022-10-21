@@ -28,7 +28,7 @@ jobs:
         id: token
         run: |
           TOKEN=$(jq .access_token token.json) \
-          echo "::add-mask::$(TOKEN)" \
+          echo "::add-mask::$TOKEN" \
           echo "::set-output name=token::$TOKEN" \
           echo "::set-output name=prefix::$(jq .token_type token.json)"
 
