@@ -31,13 +31,13 @@ jobs:
           TOKEN=$(jq .access_token token.json) \
           echo "::add-mask::$TOKEN" \
           echo "token=$TOKEN" >> $GITHUB_OUTPUT \
-          echo "prefix=$(jq .token_type token.json)" >> $GITHUB_OUTPUT 
+          echo $TOKEN # should be redacted
 
 
       - name: PUT Global Commands
         run: |
           curl -X PUT https://discord.com/api/applications/${{ secrets.DISCORD_APPLICATION_ID }}/commands \
-            -H "Authorization: ${{ steps.token.outputs.prefix }} ${{ steps.token.outputs.token }}" \
+            -H "Authorization: Bearer ${{ steps.token.outputs.token }}" \
             -H "content-type: application/json" \
             -d @./commands.lock.json
 
