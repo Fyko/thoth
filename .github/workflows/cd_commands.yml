@@ -28,17 +28,10 @@ jobs:
       - name: Set outputs
         id: token
         run: |
-          #!/bin/bash
-          set -euxo pipefail
-
-          TOKEN=$(jq .access_token token.json)
-          echo $TOKEN | cut -c 1-6
-          PREFIX=$(jq .token_type token.json)
-          echo $PREFIX
-
-          echo "::add-mask::$TOKEN"
-          echo "::set-output name=token::$TOKEN"
-          echo "::set-output name=prefix::$TOKEN"
+          TOKEN=$(jq .access_token token.json) \
+          echo "::add-mask::$TOKEN" \
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT \
+          echo "prefix=$(jq .token_type token.json)" >> $GITHUB_OUTPUT 
 
 
       - name: PUT Global Commands
