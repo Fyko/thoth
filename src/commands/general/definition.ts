@@ -21,9 +21,9 @@ const data = {
 	options: [
 		{
 			name: 'word',
-			name_localizations: fetchDataLocalizations('commands.definition.args.word.name'),
-			description: i18n.t('commands.definition.arg.word.description'),
-			description_localizations: fetchDataLocalizations('commands.definition.arg.word.description'),
+			name_localizations: fetchDataLocalizations('commands.definition.meta.args.word.name'),
+			description: i18n.t('commands.definition.meta.args.word.description'),
+			description_localizations: fetchDataLocalizations('commands.definition.meta.args.word.description'),
 			type: ApplicationCommandOptionType.String,
 			required: true,
 		},

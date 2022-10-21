@@ -1,0 +1,45 @@
+name: Continuous Deployment (commands)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'commands.lock.json'
+
+jobs:
+  deploy:
+    name: Deploy Updated Global Commands
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Client Credentials Key
+        run: |
+          curl -X POST https://discord.com/api/oauth2/token \
+            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }}\
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            -d scope=applications.commands.update \
+            -d grant_type=client_credentials \
+            -o token.json
+
+      - name: Set outputs
+        id: token
+        run: |
+          TOKEN=$(jq .access_token token.json) \
+          echo "::add-mask::$(TOKEN)" \
+          echo "::set-output name=token::$TOKEN" \
+          echo "::set-output name=prefix::$(jq .token_type token.json)"
+
+      - name: PUT Global Commands
+        run: |
+          curl -X PUT https://discord.com/api/applications/${{ secrets.DISCORD_APPLICATION_ID }}/commands \
+            -H "Authorization: ${{ steps.token.outputs.prefix }} ${{ steps.token.outputs.token }}" \
+            -H "content-type: application/json" \
+            -d @./commands.lock.json
+
+      - name: Revoke Client Credentials Key
+        run: |
+          curl -X POST https://discord.com/api/oauth2/token/revoke \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            -d token=${{ steps.token.outputs.token }}
