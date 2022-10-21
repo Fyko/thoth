@@ -30,19 +30,19 @@ jobs:
         run: |
           TOKEN=$(jq .access_token token.json) \
           echo "::add-mask::$TOKEN" \
-          echo "token=$TOKEN" >> $GITHUB_OUTPUT \
-          echo $TOKEN # should be redacted
+          echo "access_token=$TOKEN" >> $GITHUB_ENV 
 
 
       - name: PUT Global Commands
         run: |
           curl -X PUT https://discord.com/api/applications/${{ secrets.DISCORD_APPLICATION_ID }}/commands \
-            -H "Authorization: Bearer ${{ steps.token.outputs.token }}" \
+            -H "Authorization: Bearer ${{ env.access_token }}" \
             -H "content-type: application/json" \
             -d @./commands.lock.json
 
       - name: Revoke Client Credentials Key
         run: |
           curl -X POST https://discord.com/api/oauth2/token/revoke \
+            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }} \
             -H 'Content-Type: application/x-www-form-urlencoded' \
-            -d token=${{ steps.token.outputs.token }}
+            -d token=${{ env.access_token }}
