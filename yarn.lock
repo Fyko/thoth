@@ -746,6 +746,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@skyra/i18next-backend@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@skyra/i18next-backend@npm:1.1.0"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 1e89ac67b672e70fc16731da127c46d913222feae12208f621524cff67000c4d530673b11f6797d05f821a0c8705073a3d93eed6ccf865c55235ecbc917b0f1b
+  languageName: node
+  linkType: hard
+
 "@tokenizer/token@npm:^0.3.0":
   version: 0.3.0
   resolution: "@tokenizer/token@npm:0.3.0"
@@ -3653,13 +3662,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next-fs-backend@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "i18next-fs-backend@npm:1.1.5"
-  checksum: 71f6c4b0ff071676d69f1668675a68f2d72e1836dafcc8014123523bb584a78b0e4fccd16f83d7f37755b58d1dfcb4d6ad36c60b261833b509ccf20313419d9e
-  languageName: node
-  linkType: hard
-
 "i18next@npm:^21.10.0":
   version: 21.10.0
   resolution: "i18next@npm:21.10.0"
@@ -6383,6 +6385,7 @@ __metadata:
     "@discordjs/collection": ^1.2.0
     "@discordjs/rest": ^1.3.0
     "@sapphire/utilities": ^3.11.0
+    "@skyra/i18next-backend": ^1.1.0
     "@types/common-tags": ^1.8.1
     "@types/node": ^16
     common-tags: ^1.8.2
@@ -6398,7 +6401,6 @@ __metadata:
     fs-nextra: ^0.5.1
     husky: ^8.0.1
     i18next: ^21.10.0
-    i18next-fs-backend: ^1.1.5
     lint-staged: ^13.0.3
     mw-collegiate: ^1.0.1
     nodemon: ^2.0.20
