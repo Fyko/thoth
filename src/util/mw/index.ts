@@ -11,7 +11,7 @@ function requestFailed(response: Response): boolean {
 	return !response.ok || contentType!.includes('text/html');
 }
 
-export async function fetchDefinition(word: string, apiKey = process.env.MW_API_KEY): Promise<Entry> {
+export async function fetchDefinition(word: string, apiKey = process.env.MW_API_KEY): Promise<Entry[] | string[]> {
 	if (!apiKey) throw new Error('No API key!');
 
 	const base = new URL(baseURL + encodeURIComponent(word));
@@ -24,9 +24,7 @@ export async function fetchDefinition(word: string, apiKey = process.env.MW_API_
 		throw error;
 	}
 
-	const body = (await response.json()) as Entry[];
-
-	return body[0];
+	return (await response.json()) as Entry[] | string[];
 }
 
 export async function fetchSynonyms(word: string, apiKey = process.env.MW_API_KEY): Promise<Record<string, unknown>> {

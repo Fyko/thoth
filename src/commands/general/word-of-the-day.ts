@@ -3,7 +3,7 @@ import { stripIndents } from 'common-tags';
 import type { APIInteraction } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
-import type { Sense, Senses, VerbalIllustration } from 'mw-collegiate';
+import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
 import { fetchWordOfTheDay } from '#mw/wotd.js';
@@ -24,7 +24,13 @@ export default class implements Command {
 
 	public exec = async (res: FastifyReply, _: APIInteraction, lng: string) => {
 		const word = await fetchWordOfTheDay();
-		const { meta, hwi, def, fl } = await fetchDefinition(word);
+
+		const [defRes] = await fetchDefinition(word);
+		if (defRes instanceof String) {
+			return createResponse(res, i18n.t('common.errors.not_found', { lng }), true);
+		}
+
+		const { hwi, def, meta, fl } = defRes as Entry;
 
 		// const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
 

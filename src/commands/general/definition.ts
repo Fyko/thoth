@@ -4,7 +4,7 @@ import type { APIApplicationCommandInteractionData, APIInteraction } from 'disco
 import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
-import type { Sense, Senses, VerbalIllustration } from 'mw-collegiate';
+import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
 import type { Command } from '#structures';
@@ -42,8 +42,12 @@ export default class implements Command {
 			data.options.map(({ name, value }: { name: string; value: any }) => [name, value]),
 		) as Arguments;
 
-		const defRes = await fetchDefinition(word);
-		const { hwi, def, meta, fl } = defRes;
+		const [defRes] = await fetchDefinition(word);
+		if (defRes instanceof String) {
+			return createResponse(res, i18n.t('common.errors.not_found', { lng }), true);
+		}
+
+		const { hwi, def, meta, fl } = defRes as Entry;
 
 		// const attachment = createPronunciationURL(hwi.prs?.[0].sound?.audio);
 
