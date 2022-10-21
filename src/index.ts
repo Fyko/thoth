@@ -95,6 +95,7 @@ async function start() {
 					} catch (error) {
 						logger.error(`Failed to execute ${info}`);
 						logger.error(error);
+						logger.error(message);
 						commandsMetrics.inc({ command: name, success: 'false' });
 					}
 				}
