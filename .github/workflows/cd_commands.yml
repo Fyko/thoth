@@ -16,33 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get Client Credentials Key
-        run: |
-          curl -X POST https://discord.com/api/oauth2/token \
-            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }} \
-            -H 'Content-Type: application/x-www-form-urlencoded' \
-            -d scope=applications.commands.update \
-            -d grant_type=client_credentials \
-            -o token.json
-
-      - name: Set outputs
-        id: token
-        run: |
-          TOKEN=$(jq .access_token token.json) \
-          echo "::add-mask::$TOKEN" \
-          echo "access_token=$TOKEN" >> $GITHUB_ENV 
-
-
       - name: PUT Global Commands
         run: |
           curl -X PUT https://discord.com/api/applications/${{ secrets.DISCORD_APPLICATION_ID }}/commands \
-            -H "Authorization: Bearer ${{ env.access_token }}" \
+            -H "Authorization: Bot ${{ secrets.DISCORD_TOKEN }}" \
             -H "content-type: application/json" \
             -d @./commands.lock.json
-
-      - name: Revoke Client Credentials Key
-        run: |
-          curl -X POST https://discord.com/api/oauth2/token/revoke \
-            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }} \
-            -H 'Content-Type: application/x-www-form-urlencoded' \
-            -d token=${{ env.access_token }}
