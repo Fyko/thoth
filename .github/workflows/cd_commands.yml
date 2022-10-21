@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'commands.lock.json'
+      - '.github/workflows/cd_commands.yml'
   workflow_dispatch:
 
 jobs:
@@ -18,7 +19,7 @@ jobs:
       - name: Get Client Credentials Key
         run: |
           curl -X POST https://discord.com/api/oauth2/token \
-            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }}\
+            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }} \
             -H 'Content-Type: application/x-www-form-urlencoded' \
             -d scope=applications.commands.update \
             -d grant_type=client_credentials \
@@ -27,10 +28,18 @@ jobs:
       - name: Set outputs
         id: token
         run: |
-          TOKEN=$(jq .access_token token.json) \
-          echo "::add-mask::$TOKEN" \
-          echo "::set-output name=token::$TOKEN" \
-          echo "::set-output name=prefix::$(jq .token_type token.json)"
+          #!/bin/bash
+          set -euxo pipefail
+
+          TOKEN=$(jq .access_token token.json)
+          echo $TOKEN | cut -c 1-6
+          PREFIX=$(jq .token_type token.json)
+          echo $PREFIX
+
+          echo "::add-mask::$TOKEN"
+          echo "::set-output name=token::$TOKEN"
+          echo "::set-output name=prefix::$TOKEN"
+
 
       - name: PUT Global Commands
         run: |
