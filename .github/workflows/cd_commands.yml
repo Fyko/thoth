@@ -17,7 +17,7 @@ jobs:
       - name: Get Client Credentials Key
         run: |
           curl -X POST https://discord.com/api/oauth2/token \
-            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATIONS_SECRET }}\
+            -u ${{ secrets.DISCORD_APPLICATION_ID }}:${{ secrets.DISCORD_APPLICATION_SECRET }}\
             -H 'Content-Type: application/x-www-form-urlencoded' \
             -d scope=applications.commands.update \
             -d grant_type=client_credentials \
