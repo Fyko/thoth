@@ -34,6 +34,12 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env.dev
+      
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
 
   prometheus:
     build:

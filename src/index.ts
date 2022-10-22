@@ -15,17 +15,19 @@ import { Counter } from 'prom-client';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { Command } from '#structures';
-import { REST } from '#structures';
+import { REST, RedisManager } from '#structures';
 import { loadCommands, loadTranslations } from '#util/index.js';
-import { kCommands, kREST } from '#util/symbols.js';
+import { kCommands, kRedis, kREST } from '#util/symbols.js';
 
 process.env.NODE_ENV ??= 'development';
 
 const commands = new Collection<string, Command>();
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
+const redis = new RedisManager({ host: process.env.REDIS_HOST, port: Number.parseInt(process.env.REDIS_PORT!, 10) });
 
 container.register(kCommands, { useValue: commands });
 container.register(kREST, { useValue: rest });
+container.register(kRedis, { useValue: redis });
 
 async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void) {
 	const signature = req.headers['x-signature-ed25519'];
