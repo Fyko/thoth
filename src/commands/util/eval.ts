@@ -4,11 +4,12 @@ import type { APIApplicationCommandInteractionData, APIInteraction } from 'disco
 import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
-import type { Command, REST } from '#structures';
-import { sendFollowup, defer, createResponse } from '#util/respond.js';
-import type { ArgumentsOf } from '#util/types/index.js';
 import { inject, injectable } from 'tsyringe';
+import { REST } from '#structures';
+import type { Command } from '#structures';
+import { sendFollowup, defer, createResponse } from '#util/respond.js';
 import { kREST } from '#util/symbols.js';
+import type { ArgumentsOf } from '#util/types/index.js';
 
 const data = {
 	name: 'eval',

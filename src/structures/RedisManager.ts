@@ -1,5 +1,4 @@
-import type { RedisOptions } from 'ioredis';
-import { default as Redis } from 'ioredis';
+import { RedisOptions , default as Redis } from 'ioredis';
 import type { Entry } from 'mw-collegiate';
 import { injectable } from 'tsyringe';
 

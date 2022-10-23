@@ -61,7 +61,7 @@ export default class implements Command {
 		return this.run(res, { word, short }, lng);
 	};
 
-	private run = async (res: FastifyReply, { word, short }: { word: string; short?: boolean; }, lng: string) => {
+	private readonly run = async (res: FastifyReply, { word, short }: { short?: boolean; word: string; }, lng: string) => {
 		const defRes = await fetchDefinition(this.redis, word);
 		if (typeof defRes[0] === 'string') {
 			if (typeof defRes !== 'object') {

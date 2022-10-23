@@ -103,8 +103,7 @@ async function start() {
 				}
 			}
 
-			if (message.type === InteractionType.MessageComponent) {
-				if (message.data.custom_id.startsWith('definition:')) {
+			if (message.type === InteractionType.MessageComponent && message.data.custom_id.startsWith('definition:')) {
 					const word = message.data.custom_id.split(':')[1];
 					const command = commands.get('definition');
 
@@ -125,7 +124,6 @@ async function start() {
 						}
 					}
 				}
-			}
 
 		} catch {}
 	});
