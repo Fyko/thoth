@@ -21,6 +21,7 @@
 		"errors": {
 			"with_clause_exclusivity": "Valgmulighederne `starter-med` og `ender-med` er gensidigt eksklusive -- du kan ikke bruge dem begge på samme tid.",
 			"not_found": "Beklager, jeg kunne ikke finde nogen resultater til din forespørgsel!",
+			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Uautoriseret."
 		},
 		"titles": {
@@ -49,6 +50,10 @@
 					"word": {
 						"name": "ord",
 						"description": "Ordet der skal søges efter (fx: ocean)."
+					},
+					"short": {
+						"name": "short",
+						"description": "Only return the first definition (default: false)."
 					}
 				}
 			}
