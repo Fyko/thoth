@@ -102,6 +102,31 @@ async function start() {
 					}
 				}
 			}
+
+			if (message.type === InteractionType.MessageComponent) {
+				if (message.data.custom_id.startsWith('definition:')) {
+					const word = message.data.custom_id.split(':')[1];
+					const command = commands.get('definition');
+
+					if (command) {
+						const user = message.user ?? message.member?.user;
+						const info = `interaction ${message.data.custom_id}; triggered by ${user?.username}#${user?.discriminator} (${user?.id})`;
+						logger.info(`Executing ${info}`);
+						
+						try {
+							await command!.interaction!(res, message, { word }, message.locale);
+							logger.info(`Successfully executed ${info}`);
+							commandsMetrics.inc({ command: 'definition', success: 'true' });
+						} catch (error) {
+							logger.error(`Failed to execute ${info}`);
+							logger.error(error);
+							logger.error(message);
+							commandsMetrics.inc({ command: 'definition', success: 'false' });
+						}
+					}
+				}
+			}
+
 		} catch {}
 	});
 

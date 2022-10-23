@@ -1,7 +1,9 @@
 import type { RedisOptions } from 'ioredis';
 import { default as Redis } from 'ioredis';
 import type { Entry } from 'mw-collegiate';
+import { injectable } from 'tsyringe';
 
+@injectable()
 export class RedisManager {
 	public readonly client: Redis.Redis;
 

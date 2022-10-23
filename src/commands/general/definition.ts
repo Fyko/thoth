@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
-import type { APIApplicationCommandInteractionData, APIInteraction} from 'discord-api-types/v10';
+import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
 import { ApplicationCommandOptionType, ButtonStyle } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
@@ -11,7 +11,7 @@ import { formatText } from '#mw/format.js';
 import type { Command } from '#structures';
 import { RedisManager } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
-import { fetchDataLocalizations, kRedis, list, trimArray } from '#util/index.js';
+import { fetchDataLocalizations, kRedis, trimArray } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
@@ -47,27 +47,34 @@ export default class implements Command {
 
 	public readonly data = data;
 
+	public interaction = async (res: FastifyReply, _: APIInteraction, { word }: Record<string, string>, lng: string) => {
+		return this.run(res, { word, short: false }, lng);
+	}
+
 	public exec = async (res: FastifyReply, interaction: APIInteraction, lng: string) => {
 		const { data } = interaction as { data: APIApplicationCommandInteractionData };
 		const { word, short } = Object.fromEntries(
 			// @ts-expect-error pain
 			data.options.map(({ name, value }: { name: string; value: any }) => [name, value]),
 		) as Arguments;
+		
+		return this.run(res, { word, short }, lng);
+	};
 
+	private run = async (res: FastifyReply, { word, short }: { word: string; short?: boolean; }, lng: string) => {
 		const defRes = await fetchDefinition(this.redis, word);
 		if (typeof defRes[0] === 'string') {
 			if (typeof defRes !== 'object') {
 				return createResponse(res, i18n.t('common.errors.not_found', { lng }), true);
 			}
 
-			const suggestions = defRes as string[];
+			const suggestions = defRes.slice(0, 5) as string[];
 
 			const component = new ActionRowBuilder().addComponents(
 				suggestions.map(sugg => new ButtonBuilder().setCustomId(`definition:${sugg}`).setLabel(sugg).setStyle(ButtonStyle.Secondary)),
 			);
 
-			const mapped = list(suggestions.slice(0, 5).map(inlineCode));
-			return createResponse(res, i18n.t('common.errors.not_found_w_suggestions', { lng, suggestions: mapped }), true, {
+			return createResponse(res, i18n.t('common.errors.not_found_w_suggestions', { lng }), true, {
 				components: [component.toJSON()],
 			});
 		}
@@ -132,5 +139,5 @@ export default class implements Command {
 			`,
 			false,
 		);
-	};
+	}
 }
