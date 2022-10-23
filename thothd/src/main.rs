@@ -2,7 +2,7 @@
 extern crate lazy_static;
 #[macro_use]
 extern crate prometheus;
-use prometheus::{Encoder, IntCounter, TextEncoder};
+use prometheus::{Encoder, IntCounter, TextEncoder, IntGauge};
 
 use futures::StreamExt;
 use hyper::Uri;
@@ -10,8 +10,8 @@ use std::{env, future::Future, pin::Pin, sync::Arc};
 use twilight_gateway::{queue::Queue, Cluster, Event, EventTypeFlags, Intents};
 
 lazy_static! {
-    static ref GUILD_COUNTER: IntCounter =
-        register_int_counter!("thoth_metrics_guilds", "Number of guilds").unwrap();
+    static ref GUILD_COUNTER: IntGauge =
+        register_int_gauge!("thoth_metrics_guilds", "Number of guilds").unwrap();
     static ref USER_COUNTER: IntCounter =
         register_int_counter!("thoth_metrics_users", "Number of users").unwrap();
 }
@@ -123,6 +123,14 @@ async fn main() -> anyhow::Result<()> {
                 GUILD_COUNTER.inc();
                 USER_COUNTER.inc_by(guild.member_count.unwrap_or(0));
             }
+
+            Event::GuildDelete(guild) => {
+                tracing::info!("[event::guilddelete] shard {id} guild delete {}", guild.id);
+                if !guild.unavailable {
+                    GUILD_COUNTER.dec();
+                }
+            }
+
             _ => tracing::debug!("Shard: {id}, Event: {:?}", event.kind()),
         }
     }
