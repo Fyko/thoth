@@ -24,7 +24,7 @@
 		"lint:fix": "eslint src --fix --ext .ts --debug",
 		"prestart": "yarn run clean && yarn run build",
 		"start": "node .",
-		"dev": "nodemon --exec node --loader ts-node/esm src/index.ts",
+		"dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
 		"copy-locales": "cpy locales/**/*.* dist/ --parents"
 	},
 	"author": "Carter Himmel <me@fyko.net>",
@@ -44,6 +44,7 @@
 		"fastify-metrics": "^10.0.0",
 		"fs-nextra": "^0.5.1",
 		"i18next": "^21.10.0",
+		"ioredis": "^5.2.3",
 		"pino": "^7.11.0",
 		"prom-client": "^14.1.0",
 		"reflect-metadata": "^0.1.13",

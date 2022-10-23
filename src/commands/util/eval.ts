@@ -4,8 +4,11 @@ import type { APIApplicationCommandInteractionData, APIInteraction } from 'disco
 import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
+import { inject, injectable } from 'tsyringe';
+import { REST } from '#structures';
 import type { Command } from '#structures';
 import { sendFollowup, defer, createResponse } from '#util/respond.js';
+import { kREST } from '#util/symbols.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
 const data = {
@@ -43,7 +46,10 @@ const MESSAGES = {
 	},
 };
 
+@injectable()
 export default class implements Command {
+	public constructor(@inject(kREST) public readonly rest: REST) {}
+
 	public readonly data = data;
 
 	private _clean(text: string): any {
