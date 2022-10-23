@@ -7,7 +7,7 @@ services:
       - '2399:2399'
     restart: unless-stopped
     env_file:
-      - ./.env
+      - ./.env.prod
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
@@ -18,7 +18,7 @@ services:
       PORT: '2398'
       DISCORD_TOKEN: ${DISCORD_TOKEN}
     env_file:
-      - ./.env
+      - ./.env.prod
     ports:
       - '2398:2398'
 
@@ -31,7 +31,7 @@ services:
       - '2397:2397'
     restart: unless-stopped
     env_file:
-      - ./.env
+      - ./.env.prod
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
