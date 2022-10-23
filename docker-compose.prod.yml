@@ -35,6 +35,12 @@ services:
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+
   prometheus:
     build:
       context: ./docker/prometheus
