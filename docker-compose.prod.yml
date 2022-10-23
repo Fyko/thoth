@@ -64,7 +64,7 @@ services:
       GF_USERS_ALLOW_SIGN_UP: 'false'
       GF_AUTH_ANONYMOUS_ENABLED: 'false'
     env_file:
-      - ./.env
+      - ./.env.prod
     ports:
       - 3000:3000
     volumes:
