@@ -3,7 +3,7 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
+					"name": "Grenzwert",
 					"description": "The maximum amount of results to return (max & default: 50)."
 				},
 				"starts-with": {
