@@ -25,8 +25,8 @@
 			"#structures": ["src/structures/index.ts"],
 			"#constants": ["src/util/constants.ts"],
 			"#logger": ["src/util/logger.ts"]
-		}
+		},
 	},
 	"exclude": ["node_modules", "tests"],
-	"include": ["src", "typings", "lib"]
+	"include": ["src", "lib"]
 }

@@ -2199,15 +2199,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-interactions@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "discord-interactions@npm:3.2.0"
-  dependencies:
-    tweetnacl: ^1.0.3
-  checksum: 5d06632428c4715335bd8a8b086380ccdbb9d97c1a514040d97c6efeffb49b856da43d39728e1f77addd36b5f84d6928baca34ad36847e724923bacceaca9247
-  languageName: node
-  linkType: hard
-
 "discord-verify@npm:^1.0.0":
   version: 1.0.0
   resolution: "discord-verify@npm:1.0.0"
@@ -6466,7 +6457,6 @@ __metadata:
     common-tags: ^1.8.2
     cpy-cli: ^4.2.0
     discord-api-types: ^0.37.14
-    discord-interactions: ^3.2.0
     discord-verify: ^1.0.0
     dotenv: ^16.0.3
     eslint: ^8.25.0
@@ -6688,13 +6678,6 @@ __metadata:
   dependencies:
     tslib: ^1.9.3
   checksum: 6d84e0767538fabf60eafb926bd285d08d25847875b635f8a3ab8b3093c8814aca4f47072fbb51837bd431259dc2464572e5c28a838b833c9ef097d5b1a895b3
-  languageName: node
-  linkType: hard
-
-"tweetnacl@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "tweetnacl@npm:1.0.3"
-  checksum: e4a57cac188f0c53f24c7a33279e223618a2bfb5fea426231991652a13247bea06b081fd745d71291fcae0f4428d29beba1b984b1f1ce6f66b06a6d1ab90645c
   languageName: node
   linkType: hard
 

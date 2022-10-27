@@ -37,7 +37,6 @@
 		"@skyra/i18next-backend": "^1.1.0",
 		"common-tags": "^1.8.2",
 		"discord-api-types": "^0.37.14",
-		"discord-interactions": "^3.2.0",
 		"discord-verify": "^1.0.0",
 		"dotenv": "^16.0.3",
 		"fastify": "^4.9.1",
