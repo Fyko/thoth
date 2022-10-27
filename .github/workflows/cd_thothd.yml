@@ -8,8 +8,7 @@ on:
 jobs:
   docker:
     name: Deploy Docker Image
-    runs-on: [self-hosted]
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 

@@ -11,7 +11,7 @@ on:
 jobs:
   deploy:
     name: Deploy Updated Global Commands
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
