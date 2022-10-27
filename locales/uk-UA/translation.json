@@ -7,11 +7,11 @@
 					"description": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 				},
 				"starts-with": {
-					"name": "починається з",
+					"name": "starts-with",
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"ends-with": {
-					"name": "закінчується на",
+					"name": "ends-with",
 					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
 				}
 			},
@@ -49,7 +49,7 @@
 				"args": {
 					"word": {
 						"name": "слово",
-						"description": "Слово для пошуку визначення (наприклад: океан)."
+						"description": "Слово для пошуку визначення (наприклад: ocean)."
 					},
 					"short": {
 						"name": "short",
@@ -67,7 +67,7 @@
 		},
 		"match-word": {
 			"meta": {
-				"name": "підходяще слово",
+				"name": "match-word",
 				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
