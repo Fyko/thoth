@@ -52,7 +52,7 @@
 						"description": "A palavra para pesquisar uma definição para (ex: ocean)."
 					},
 					"short": {
-						"name": "curto",
+						"name": "short",
 						"description": "Retornar apenas a primeira definição (padrão: falso)."
 					}
 				}
