@@ -10,12 +10,13 @@ extern crate lazy_static;
 #[macro_use]
 extern crate prometheus;
 
+use crate::context::Context;
+use crate::queue::GatewayQueue;
 use ::config::Config;
 use axum::{routing::get, Router};
-use context::Context;
 use futures::StreamExt;
-use queue::GatewayQueue;
 use std::sync::Arc;
+use tracing_subscriber::EnvFilter;
 use twilight_gateway::{Cluster, EventTypeFlags, Intents};
 
 const BOT_EVENTS: EventTypeFlags = EventTypeFlags::from_bits_truncate(
@@ -28,7 +29,9 @@ const BOT_EVENTS: EventTypeFlags = EventTypeFlags::from_bits_truncate(
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    tracing_subscriber::fmt::init();
+    tracing_subscriber::fmt()
+        .with_env_filter(EnvFilter::from_default_env())
+        .init();
 
     let config: config::Config = Config::builder()
         .add_source(::config::File::with_name("thothd").required(false))
@@ -59,11 +62,10 @@ async fn main() -> anyhow::Result<()> {
 
     let cluster_spawn = Arc::clone(&cluster);
 
+    let context = Arc::new(Context::default());
     tokio::spawn(async move {
         cluster_spawn.up().await;
     });
-
-    let context = Arc::new(Context::default());
 
     let context_clone = Arc::clone(&context);
     let app = Router::new().route(
@@ -79,9 +81,10 @@ async fn main() -> anyhow::Result<()> {
             .unwrap();
     });
 
+    let context_clone = Arc::clone(&context);
     while let Some((id, event)) = events.next().await {
-        let ctx = context.clone();
-        tokio::spawn(gateway::handle_event(id, event, ctx));
+        let ctx = context_clone.clone();
+        tokio::spawn(async move { gateway::handle_event(id, event, ctx) });
     }
 
     Ok(())

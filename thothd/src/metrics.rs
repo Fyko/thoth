@@ -5,15 +5,13 @@ use axum::{
     http::{self, StatusCode},
     response::IntoResponse,
 };
-use prometheus::{Encoder, IntCounter, IntGauge};
+use prometheus::{Encoder, IntGauge};
 
 use crate::context::Context;
 
 lazy_static! {
     pub static ref GUILD_GAUGE: IntGauge =
         register_int_gauge!("thoth_metrics_guilds", "Number of guilds").unwrap();
-    pub static ref USER_COUNTER: IntCounter =
-        register_int_counter!("thoth_metrics_users", "Number of users").unwrap();
 }
 
 pub async fn serve_metrics(context: Arc<Context>) -> (HeaderMap, impl IntoResponse) {
