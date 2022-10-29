@@ -53,14 +53,14 @@ RUN source $HOME/.cargo/env && \
 # would have to be re-downloaded and re-compiled.
 #
 # Also, remove the artifacts of building the binaries.
-RUN rm -f target/$RUST_TARGET/release/deps/metrics*
+RUN rm -f target/$RUST_TARGET/release/deps/thothd*
 COPY ./src ./src
 
 RUN source $HOME/.cargo/env && \
     cargo build --release \
         --target="$RUST_TARGET" && \
-    cp target/$RUST_TARGET/release/metrics /metrics && \
-    actual-strip /metrics
+    cp target/$RUST_TARGET/release/thothd /thothd && \
+    actual-strip /thothd
 
 FROM scratch
 
@@ -68,6 +68,6 @@ LABEL name "thothd"
 
 # And now copy the binary over from the build container. The build container is
 # based on a heavy image.
-COPY --from=build /metrics /metrics
+COPY --from=build /thothd /thothd
 
-CMD ["./metrics"]
+CMD ["./thothd"]
