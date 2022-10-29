@@ -25,7 +25,7 @@ services:
   thothd:
     image: ghcr.io/fyko/thothd:latest
     volumes:
-      - ./thothd/thothd.toml:thothd.toml
+      - ./thothd/thothd.toml:/thothd.toml
     restart: unless-stopped
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
