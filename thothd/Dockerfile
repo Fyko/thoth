@@ -26,7 +26,6 @@ RUN source $HOME/.cargo/env && \
         echo -e "[build]\nrustflags = [\"-L\", \"native=/$MUSL_TARGET-cross/$MUSL_TARGET/lib\", \"-L\", \"native=/$MUSL_TARGET-cross/lib/gcc/$MUSL_TARGET/$GCC_VERSION/\", \"-l\", \"static=gcc\", \"-Z\", \"gcc-ld=lld\"]\n[target.$RUST_TARGET]\nlinker = \"$MUSL_TARGET-gcc\"\n[unstable]\nbuild-std = [\"std\", \"panic_abort\"]\n" > /app/.cargo/config; \
     else \
         echo "skipping toolchain as we are native" && \
-
         echo -e "[build]\nrustflags = [\"-L\", \"native=/usr/lib\"]\n[unstable]\nbuild-std = [\"std\", \"panic_abort\"]\n" > /app/.cargo/config && \
         ln -s /usr/bin/strip /usr/bin/actual-strip; \
     fi
