@@ -1,5 +1,0 @@
-discord_token = 'NTUyNzM0MTczODAzMTg0MTI4.D2D1YQ.wDi5B3SUG7uaV3GbV_-XwaeyKkg'
-
-[gateway]
-host = '0.0.0.0'
-port = 2398

@@ -11,10 +11,7 @@ extern crate lazy_static;
 extern crate prometheus;
 
 use ::config::Config;
-use axum::{
-    routing::get,
-    Router,
-};
+use axum::{routing::get, Router};
 use context::Context;
 use futures::StreamExt;
 use queue::GatewayQueue;
