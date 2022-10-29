@@ -11,3 +11,4 @@ test-ledger
 .pnp.*%
 
 thothd.toml
+create.json
