@@ -9,7 +9,7 @@ axum = { version = "0.5", features = ["headers"] }
 config = "0.13"
 futures = "0.3.24"
 hyper = { version = "^0.14", features = ["client", "http1"] }
-hyper-rustls = { default-features = false, features = ["http1", "http2"] }
+hyper-rustls = { version = "0.23", default-features = false, features = ["http1", "http2"] }
 lazy_static = "^1"
 prometheus = "^0.13"
 serde = "^1"

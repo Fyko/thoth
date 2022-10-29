@@ -24,14 +24,9 @@ services:
 
   thothd:
     image: ghcr.io/fyko/thothd:latest
-    environment:
-      GATEWAY_HOST: 'gateway'
-      GATEWAY_PORT: '2398'
-    ports:
-      - '2397:2397'
+    volumes:
+      - ./thothd/thothd.toml:thothd.toml
     restart: unless-stopped
-    env_file:
-      - ./.env.prod
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 

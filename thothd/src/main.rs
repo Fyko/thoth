@@ -20,11 +20,9 @@ use tracing_subscriber::EnvFilter;
 use twilight_gateway::{Cluster, EventTypeFlags, Intents};
 
 const BOT_EVENTS: EventTypeFlags = EventTypeFlags::from_bits_truncate(
-    EventTypeFlags::READY.bits()
-        | EventTypeFlags::GUILD_CREATE.bits()
-        | EventTypeFlags::GATEWAY_HEARTBEAT.bits()
-        | EventTypeFlags::GATEWAY_HEARTBEAT_ACK.bits()
-        | EventTypeFlags::GATEWAY_RECONNECT.bits(),
+    EventTypeFlags::READY.bits() |
+    EventTypeFlags::GUILD_CREATE.bits() |
+    EventTypeFlags::GUILD_DELETE.bits(),
 );
 
 #[tokio::main]
