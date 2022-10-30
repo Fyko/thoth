@@ -32,7 +32,7 @@ async fn main() -> anyhow::Result<()> {
         .with_env_filter(EnvFilter::from_default_env())
         .init();
 
-    let config: config::Config = Config::builder()
+    let config: crate::config::Config = Config::builder()
         .add_source(::config::File::with_name("thothd").required(false))
         .add_source(
             ::config::Environment::with_prefix("THOTHD")
@@ -44,14 +44,14 @@ async fn main() -> anyhow::Result<()> {
 
     let http_client = Arc::new(
         twilight_http::client::Client::builder()
-            .token(config.discord_token.clone())
+            .token(config.token.clone())
             .build(),
     );
 
     let queue_url = format!("http://{}:{}", config.gateway.host, config.gateway.port);
     let gateway_queue = Arc::new(GatewayQueue(queue_url));
 
-    let builder = Cluster::builder(config.discord_token.clone(), Intents::GUILDS)
+    let builder = Cluster::builder(config.token.clone(), Intents::GUILDS)
         .http_client(http_client.clone())
         .event_types(BOT_EVENTS)
         .queue(gateway_queue);

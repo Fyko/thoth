@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Config {
-    pub discord_token: String,
+    pub token: String,
     pub gateway: Gateway,
 }
 
