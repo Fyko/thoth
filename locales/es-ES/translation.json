@@ -22,7 +22,8 @@
 			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
 			"not_found": "¡Lo sentimos, no podemos encontrar nada por tu consulta!",
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
-			"unauthorized": "Unauthorized."
+			"unauthorized": "Unauthorized.",
+			"no_permissions": "You don't have permission to use this command."
 		},
 		"titles": {
 			"definitions": "Definitions"
@@ -123,6 +124,30 @@
 				}
 			},
 			"success": "Encontré `{{found_count}}` palabras que rima con `{{word}}`: \n\n{{words}}"
+		},
+		"setup": {
+			"meta": {
+				"name": "setup",
+				"description": "An assortment of configuration commands."
+			},
+			"wotd": {
+				"meta": {
+					"name": "wotd",
+					"description": "Configure the Word of the Day channel.",
+					"args": {
+						"channel": {
+							"name": "channel",
+							"description": "The channel to set as the Word of the Day channel."
+						}
+					}
+				},
+				"errors": {
+					"guild_text_only": "The Word of The Day channel must be a text channel!",
+					"no_perms": "I don't have permissions to create a webhook in {{- channel}}."
+				},
+				"success": "The Word of The Day will be posted in {{- channel}} every day at <t:1667538001:t> (12am GMT-5).",
+				"no_channel": "You must provide a channel to set as the Word of the Day channel."
+			}
 		},
 		"similar-meaning": {
 			"meta": {
