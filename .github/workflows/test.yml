@@ -2,7 +2,11 @@ name: Testing
 
 on:
   push:
+    branches-ignore:
+      - feat/translations
   pull_request:
+    branches-ignore:
+      - feat/translations
 
 jobs:
   lint:
