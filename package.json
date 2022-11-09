@@ -25,7 +25,8 @@
 		"prestart": "yarn run clean && yarn run build",
 		"start": "node .",
 		"dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
-		"copy-locales": "cpy locales/**/*.* dist/ --parents"
+		"copy-locales": "cpy locales/**/*.* dist/ --parents",
+		"migrate": "ley --esm"
 	},
 	"author": "Carter Himmel <me@fyko.net>",
 	"license": "MIT",

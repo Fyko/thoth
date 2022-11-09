@@ -1,7 +1,7 @@
 {
 	"extends": ["neon/common", "neon/node", "neon/typescript", "neon/prettier"],
 	"parserOptions": {
-		"project": "./tsconfig.json"
+		"project": "./tsconfig.eslint.json"
 	},
 	"rules": {
 		"comma-dangle": ["error", "always-multiline"],

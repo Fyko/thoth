@@ -18,6 +18,13 @@ COMMENT ON COLUMN wotd.created_at IS 'The date and time this config was created'
 CREATE TABLE IF NOT EXISTS wotd_history (
 	id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	word TEXT NOT NULL,
-	created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+	created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS thoth_bans (
+	id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+	user_id BIGINT NOT NULL,
+	reason TEXT NOT NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );

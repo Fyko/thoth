@@ -30,6 +30,17 @@ services:
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
+  postgres:
+    build:
+      context: ./docker/postgres
+    environment:
+          POSTGRES_USER: 'admin'
+          POSTGRES_PASSWORD: 'doctordoctor'
+          POSTGRES_DB: 'thoth'
+    volumes:
+        - postgres-storage:/var/lib/postgresql/data
+    restart: unless-stopped
+
   redis:
     image: redis:alpine
     restart: unless-stopped
@@ -87,3 +98,4 @@ services:
 volumes:
   prometheus-storage:
   grafana-storage:
+  postgres-storage:

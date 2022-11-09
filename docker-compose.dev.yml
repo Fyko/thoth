@@ -19,7 +19,7 @@ services:
           POSTGRES_PASSWORD: 'doctordoctor'
           POSTGRES_DB: 'thoth'
     volumes:
-        - postgres-data:/var/lib/postgresql/data
+        - postgres-storage:/var/lib/postgresql/data
     ports:
         - '5432:5432'
     restart: unless-stopped
@@ -91,4 +91,4 @@ services:
 volumes:
   prometheus-storage:
   grafana-storage:
-  postgres-data:
+  postgres-storage:
