@@ -3,7 +3,7 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "Grenzwert",
+					"name": "limit",
 					"description": "The maximum amount of results to return (max & default: 50)."
 				},
 				"starts-with": {
@@ -15,18 +15,18 @@
 					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
 				}
 			},
-			"starts_with_blurb": " das mit {{word}} beginnt",
-			"ends_with_blurb": " das auf {{word}} endet"
+			"starts_with_blurb": " that starts with {{word}}",
+			"ends_with_blurb": " that ends with {{word}}"
 		},
 		"errors": {
 			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "Es tut mir leid, ich konnte keine Ergebnisse für deine Suche finden!",
+			"not_found": "I'm sorry, I couldn't find any results for your query!",
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Unauthorized.",
 			"no_permissions": "You don't have permission to use this command."
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Definicja"
 		}
 	},
 	"commands": {
@@ -36,20 +36,20 @@
 				"description": "Responds with adjectives that describe your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The noun to search relavent adjectives for (eg: ocean)."
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Adjektive gefunden, um `{{word}}` zu beschreiben: \n\n{{words}}"
+			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
 		},
 		"definition": {
 			"meta": {
-				"name": "definition",
+				"name": "definicja",
 				"description": "Responds with the definition of your query from Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to search a definition for (eg: ocean)."
 					},
 					"short": {
@@ -72,25 +72,25 @@
 				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to find matches for (example: a??le)."
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter die mit `{{word}}` übereinstimmen: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
 			"meta": {
-				"name": "noun",
+				"name": "rzeczownik",
 				"description": "Responds with nouns that are often described by your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Nennworte für `{{word}}` gefunden: \n\n{{words}}"
+			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
 		},
 		"ping": {
 			"meta": {
@@ -118,12 +118,12 @@
 				"description": "Responds with words that rhyme with your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to search rhymes for (eg: dime)."
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter gefunden, die sich mit `{{word}}` reimen: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
 		},
 		"setup": {
 			"meta": {
@@ -155,7 +155,7 @@
 				"description": "Response with words that have a similar meaning to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to search similar words for (eg: transgressions)."
 					}
 				}
@@ -170,12 +170,12 @@
 				"description": "Responds with words that have a similar spelling to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to search similar words for (eg: agile)."
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter gefunden, die ähnlich geschrieben werden wie `{{word}}`: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that're similarly spelled to `{{word}}`: \n\n{{words}}"
 		},
 		"sounds-like": {
 			"meta": {
@@ -183,12 +183,12 @@
 				"description": "Responds with words that sound like your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to search similarly sounding words for (eg: agile)."
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter gefunden, die klingen wie `{{word}}`: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that sound like `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
 			"meta": {
@@ -196,7 +196,7 @@
 				"description": "Responds with words that could logically follow query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "słowo",
 						"description": "The word to search following words for (eg: open)."
 					}
 				}

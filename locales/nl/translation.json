@@ -3,8 +3,8 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "Grenzwert",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "beperkingen",
+					"description": "Het maximum aantal resultaten om terug te keren (max & standaard: 50)."
 				},
 				"starts-with": {
 					"name": "starts-with",
@@ -15,12 +15,12 @@
 					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
 				}
 			},
-			"starts_with_blurb": " das mit {{word}} beginnt",
-			"ends_with_blurb": " das auf {{word}} endet"
+			"starts_with_blurb": " that starts with {{word}}",
+			"ends_with_blurb": " that ends with {{word}}"
 		},
 		"errors": {
 			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "Es tut mir leid, ich konnte keine Ergebnisse für deine Suche finden!",
+			"not_found": "I'm sorry, I couldn't find any results for your query!",
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Unauthorized.",
 			"no_permissions": "You don't have permission to use this command."
@@ -41,7 +41,7 @@
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Adjektive gefunden, um `{{word}}` zu beschreiben: \n\n{{words}}"
+			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
 		},
 		"definition": {
 			"meta": {
@@ -77,7 +77,7 @@
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter die mit `{{word}}` übereinstimmen: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
 			"meta": {
@@ -90,12 +90,12 @@
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Nennworte für `{{word}}` gefunden: \n\n{{words}}"
+			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
 		},
 		"ping": {
 			"meta": {
 				"name": "ping",
-				"description": "Ensures the bot is responding to commands."
+				"description": "Verzekeren dat de bot reageert op de commando's."
 			},
 			"pongs": [
 				"Uhh, hello?",
@@ -123,7 +123,7 @@
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter gefunden, die sich mit `{{word}}` reimen: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
 		},
 		"setup": {
 			"meta": {
@@ -175,7 +175,7 @@
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter gefunden, die ähnlich geschrieben werden wie `{{word}}`: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that're similarly spelled to `{{word}}`: \n\n{{words}}"
 		},
 		"sounds-like": {
 			"meta": {
@@ -188,7 +188,7 @@
 					}
 				}
 			},
-			"success": "Ich habe `{{found_count}}` Wörter gefunden, die klingen wie `{{word}}`: \n\n{{words}}"
+			"success": "I found `{{found_count}}` words that sound like `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
 			"meta": {

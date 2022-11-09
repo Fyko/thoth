@@ -21,7 +21,9 @@
 		"errors": {
 			"with_clause_exclusivity": "As opções `começa-com` e `termina-com` são mutuamente exclusivas -- você não pode usá-las ao mesmo tempo.",
 			"not_found": "Desculpe, não consegui encontrar resultados para a sua pesquisa!",
-			"unauthorized": "Não autorizado."
+			"not_found_w_suggestions": "Desculpe, não consegui encontrar resultados para a sua pesquisa! Você quis dizer: ",
+			"unauthorized": "Não autorizado.",
+			"no_permissions": "You don't have permission to use this command."
 		},
 		"titles": {
 			"definitions": "Definições"
@@ -49,6 +51,10 @@
 					"word": {
 						"name": "palavra",
 						"description": "A palavra para pesquisar uma definição para (ex: ocean)."
+					},
+					"short": {
+						"name": "short",
+						"description": "Retornar apenas a primeira definição (padrão: falso)."
 					}
 				}
 			}
@@ -63,7 +69,7 @@
 		"match-word": {
 			"meta": {
 				"name": "palavra-correspondente",
-				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple).",
+				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
 						"name": "palavra",
@@ -113,11 +119,35 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para procurar ritmos (ex: moeda)."
+						"description": "A palavra para procurar ritmos (ex: dime)."
 					}
 				}
 			},
 			"success": "Eu encontrei `{{found_count}}` palavras que rimam com `{{word}}`: \n\n{{words}}"
+		},
+		"setup": {
+			"meta": {
+				"name": "setup",
+				"description": "An assortment of configuration commands."
+			},
+			"wotd": {
+				"meta": {
+					"name": "wotd",
+					"description": "Configure the Word of the Day channel.",
+					"args": {
+						"channel": {
+							"name": "channel",
+							"description": "The channel to set as the Word of the Day channel."
+						}
+					}
+				},
+				"errors": {
+					"guild_text_only": "The Word of The Day channel must be a text channel!",
+					"no_perms": "I don't have permissions to create a webhook in {{- channel}}."
+				},
+				"success": "The Word of The Day will be posted in {{- channel}} every day at <t:1667538001:t> (12am GMT-5).",
+				"no_channel": "You must provide a channel to set as the Word of the Day channel."
+			}
 		},
 		"similar-meaning": {
 			"meta": {
@@ -126,7 +156,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras semelhantes (ex: transgressões)."
+						"description": "A palavra para pesquisar palavras semelhantes (ex: transgressions)."
 					}
 				}
 			},
@@ -141,7 +171,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras semelhantes para (ex: ágil)."
+						"description": "A palavra para pesquisar palavras semelhantes para (ex: agile)."
 					}
 				}
 			},
@@ -154,7 +184,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: ágil)."
+						"description": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: agile)."
 					}
 				}
 			},
@@ -167,7 +197,7 @@
 				"args": {
 					"word": {
 						"name": "palavra",
-						"description": "A palavra para pesquisar palavras que seguem (ex: abra)."
+						"description": "A palavra para pesquisar palavras que seguem (ex: open)."
 					}
 				}
 			},
