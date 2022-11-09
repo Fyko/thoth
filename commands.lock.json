@@ -561,6 +561,61 @@
     ]
   },
   {
+    "name": "setup",
+    "name_localizations": {
+      "en-US": "setup",
+      "de": "setup",
+      "pt-BR": "setup",
+      "da": "setup"
+    },
+    "description": "An assortment of configuration commands.",
+    "description_localizations": {
+      "en-US": "An assortment of configuration commands.",
+      "de": "An assortment of configuration commands.",
+      "pt-BR": "An assortment of configuration commands.",
+      "da": "An assortment of configuration commands."
+    },
+    "options": [
+      {
+        "name": "wotd",
+        "name_localizations": {
+          "en-US": "wotd",
+          "de": "wotd",
+          "pt-BR": "wotd",
+          "da": "wotd"
+        },
+        "description": "Configure the Word of the Day channel.",
+        "description_localizations": {
+          "en-US": "Configure the Word of the Day channel.",
+          "de": "Configure the Word of the Day channel.",
+          "pt-BR": "Configure the Word of the Day channel.",
+          "da": "Configure the Word of the Day channel."
+        },
+        "type": 1,
+        "options": [
+          {
+            "name": "channel",
+            "name_localizations": {
+              "en-US": "channel",
+              "de": "channel",
+              "pt-BR": "channel",
+              "da": "channel"
+            },
+            "description": "The channel to set as the Word of the Day channel.",
+            "description_localizations": {
+              "en-US": "The channel to set as the Word of the Day channel.",
+              "de": "The channel to set as the Word of the Day channel.",
+              "pt-BR": "The channel to set as the Word of the Day channel.",
+              "da": "The channel to set as the Word of the Day channel."
+            },
+            "type": 7,
+            "required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "ping",
     "name_localizations": {
       "en-US": "ping",

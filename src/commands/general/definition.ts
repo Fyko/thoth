@@ -63,6 +63,7 @@ export default class implements Command {
 
 	private readonly run = async (res: FastifyReply, { word, short }: { short?: boolean; word: string; }, lng: string) => {
 		const defRes = await fetchDefinition(this.redis, word);
+		if (!defRes.length) return createResponse(res, i18n.t('common.errors.not_found', { lng }), true);
 		if (typeof defRes[0] === 'string') {
 			if (typeof defRes !== 'object') {
 				return createResponse(res, i18n.t('common.errors.not_found', { lng }), true);

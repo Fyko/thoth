@@ -11,23 +11,35 @@ import { verify as verifyKey } from 'discord-verify/node';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import fastifyMetrics, { type IMetricsPluginOptions } from 'fastify-metrics';
+import postgres from 'postgres';
 import { Counter } from 'prom-client';
 import { container } from 'tsyringe';
+import { setupJobs } from './jobs.js';
 import { logger } from '#logger';
-import type { Command } from '#structures';
-import { REST, RedisManager } from '#structures';
+import { type Command, REST, RedisManager } from '#structures';
 import { loadCommands, loadTranslations } from '#util/index.js';
-import { kCommands, kRedis, kREST } from '#util/symbols.js';
+import { kBotUser, kCommands, kRedis, kREST, kSQL } from '#util/symbols.js';
 
 process.env.NODE_ENV ??= 'development';
 
 const commands = new Collection<string, Command>();
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
+const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN!);
+rest.on('restDebug', (message) => logger.debug(message));
+rest.on('response', (req, res) => {
+	logger.info(`received resp to ${req.method} ${req.path} ${res!.statusCode}`)
+});
+
 const redis = new RedisManager({ host: process.env.REDIS_HOST, port: Number.parseInt(process.env.REDIS_PORT!, 10) });
+const sql = postgres(process.env.DATABASE_URL!, {
+	types: {
+		bigint: postgres.BigInt,
+	},
+});
 
 container.register(kCommands, { useValue: commands });
 container.register(kREST, { useValue: rest });
 container.register(kRedis, { useValue: redis });
+container.register(kSQL, { useValue: sql });
 
 async function verify(req: FastifyRequest, reply: FastifyReply, done: () => void) {
 	const signature = req.headers['x-signature-ed25519'];
@@ -117,9 +129,7 @@ async function start() {
 							logger.info(`Successfully executed ${info}`);
 							commandsMetrics.inc({ command: 'definition', success: 'true' });
 						} catch (error) {
-							logger.error(`Failed to execute ${info}`);
-							logger.error(error);
-							logger.error(message);
+							logger.error(`Failed to execute ${info}`, error, message);
 							commandsMetrics.inc({ command: 'definition', success: 'false' });
 						}
 					}
@@ -130,13 +140,15 @@ async function start() {
 
 	const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 2_399;
 
+	const me = (await rest.get('/users/@me')) as RESTGetAPIUserResult;
+	container.register(kBotUser, { useValue: me });
+
 	server.listen({ port, host: '0.0.0.0' }, (err: Error | null, adress) => {
 		if (err) logger.error('An error occurred starting the server: ', err);
 		else logger.info(`Server started at ${adress}`);
 	});
-
-	const me = (await rest.get('/users/@me')) as RESTGetAPIUserResult;
 	logger.info(`token provided for ${me.username}#${me.discriminator} (${me.id})`);
+	await setupJobs();
 }
 
 void start();

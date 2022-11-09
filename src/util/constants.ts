@@ -1,3 +1,8 @@
+import { BitField } from "@sapphire/bitfield";
+import { PermissionFlagsBits } from "discord-api-types/v10";
+
+export const Permissions = new BitField(PermissionFlagsBits);
+
 export enum Colors {
 	Primary = 7_506_394,
 	GiveawayOver = 3_553_599,

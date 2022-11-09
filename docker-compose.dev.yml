@@ -11,6 +11,19 @@ services:
     env_file:
       - ./.env.dev
 
+  postgres:
+    build:
+      context: ./docker/postgres
+    environment:
+          POSTGRES_USER: 'admin'
+          POSTGRES_PASSWORD: 'doctordoctor'
+          POSTGRES_DB: 'thoth'
+    volumes:
+        - postgres-data:/var/lib/postgresql/data
+    ports:
+        - '5432:5432'
+    restart: unless-stopped
+
   gateway:
     image: twilightrs/gateway-queue
     environment:
@@ -78,3 +91,4 @@ services:
 volumes:
   prometheus-storage:
   grafana-storage:
+  postgres-data:

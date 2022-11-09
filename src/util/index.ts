@@ -77,7 +77,7 @@ export function list(arr: string[], conj = 'and'): string {
 async function walk(path: string) {
 	return (
 		await scan(path, {
-			filter: (stats) => stats.isFile() && ['.js', '.ts'].includes(extname(stats.name)),
+			filter: (stats, path) => stats.isFile() && ['.js', '.ts'].includes(extname(stats.name)) && !path.includes('sub'),
 		})
 	).keys();
 }
