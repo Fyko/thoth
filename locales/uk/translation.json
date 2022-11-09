@@ -23,7 +23,8 @@
 			"not_found": "Перепрошую, я не міг знайти жодних результатів за ваш запит!",
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Помилка Авторизації.",
-			"no_permissions": "You don't have permission to use this command."
+			"no_permissions": "You don't have permission to use this command.",
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
 		},
 		"titles": {
 			"definitions": "Визначення"
