@@ -3,7 +3,7 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
+					"name": "обмеження",
 					"description": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 				},
 				"starts-with": {
@@ -21,20 +21,22 @@
 		"errors": {
 			"with_clause_exclusivity": "Опції `починається з` та `закінчується з` є взаємно заперечними - ви не можете використовувати їх обидві одночасно.",
 			"not_found": "Перепрошую, я не міг знайти жодних результатів за ваш запит!",
-			"unauthorized": "Unauthorized."
+			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
+			"unauthorized": "Помилка Авторизації.",
+			"no_permissions": "You don't have permission to use this command."
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Визначення"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"name": "adjective",
+				"name": "прикметник",
 				"description": "Відповідь прикметниками, які описують Ваш запит.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "Іменник для пошуку відповідних прикметників (наприклад: ocean)."
 					}
 				}
@@ -43,19 +45,23 @@
 		},
 		"definition": {
 			"meta": {
-				"name": "definition",
-				"description": "Responds with the definition of your query from Merriam Webster.",
+				"name": "визначення",
+				"description": "Надає відповідь з визначенням вашого запиту від Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search a definition for (eg: ocean)."
+						"name": "слово",
+						"description": "Слово для пошуку визначення (наприклад: ocean)."
+					},
+					"short": {
+						"name": "short",
+						"description": "Only return the first definition (default: false)."
 					}
 				}
 			}
 		},
 		"invite": {
 			"meta": {
-				"name": "invite",
+				"name": "запросити",
 				"description": "Returns an invite link to add Thoth to your server."
 			},
 			"success": "Want to add Thoth to your server? [Click here]({{link}})!"
@@ -66,7 +72,7 @@
 				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to find matches for (example: a??le)."
 					}
 				}
@@ -75,11 +81,11 @@
 		},
 		"noun": {
 			"meta": {
-				"name": "noun",
+				"name": "іменник",
 				"description": "Responds with nouns that are often described by your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
 					}
 				}
@@ -88,20 +94,20 @@
 		},
 		"ping": {
 			"meta": {
-				"name": "ping",
+				"name": "пінг",
 				"description": "Ensures the bot is responding to commands."
 			},
 			"pongs": [
-				"Uhh, hello?",
-				"What can I do ya' for?",
-				"Why are you bothering me?",
+				"Хм, привіт?",
+				"Чим я можу вам допомогти?",
+				"Чому ви мене турбуєте?",
 				"Mhm?",
-				"Yea?",
+				"Ага?",
 				"What's with you puny humans and the constant desire to bother me?",
 				"Out of everyone here, you chose to bother me?",
-				"So *this* is the meaning of life?",
+				"То *це* і є сенс життя?",
 				"Can we just get this over with?? I have stuff to do.",
-				"That's all?",
+				"Це все?",
 				"Pong!",
 				"Do it again. I dare you."
 			]
@@ -112,12 +118,36 @@
 				"description": "Responds with words that rhyme with your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search rhymes for (eg: dime)."
 					}
 				}
 			},
 			"success": "Я знайшов `{{found_count}}` слів, які містять `{{word}}`: \n\n{{words}}"
+		},
+		"setup": {
+			"meta": {
+				"name": "setup",
+				"description": "An assortment of configuration commands."
+			},
+			"wotd": {
+				"meta": {
+					"name": "wotd",
+					"description": "Configure the Word of the Day channel.",
+					"args": {
+						"channel": {
+							"name": "channel",
+							"description": "The channel to set as the Word of the Day channel."
+						}
+					}
+				},
+				"errors": {
+					"guild_text_only": "The Word of The Day channel must be a text channel!",
+					"no_perms": "I don't have permissions to create a webhook in {{- channel}}."
+				},
+				"success": "The Word of The Day will be posted in {{- channel}} every day at <t:1667538001:t> (12am GMT-5).",
+				"no_channel": "You must provide a channel to set as the Word of the Day channel."
+			}
 		},
 		"similar-meaning": {
 			"meta": {
@@ -125,7 +155,7 @@
 				"description": "Response with words that have a similar meaning to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search similar words for (eg: transgressions)."
 					}
 				}
@@ -140,7 +170,7 @@
 				"description": "Responds with words that have a similar spelling to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search similar words for (eg: agile)."
 					}
 				}
@@ -153,7 +183,7 @@
 				"description": "Responds with words that sound like your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search similarly sounding words for (eg: agile)."
 					}
 				}
@@ -166,7 +196,7 @@
 				"description": "Responds with words that could logically follow query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search following words for (eg: open)."
 					}
 				}
