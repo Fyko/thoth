@@ -110,16 +110,16 @@
 				"Can we just get this over with?? I have stuff to do.",
 				"That's all?",
 				"Pong!",
-				"Do it again. I dare you."
+				"Hazlo de nuevo. Te reto."
 			]
 		},
 		"rhyme": {
 			"meta": {
-				"name": "rhyme",
-				"description": "Responds with words that rhyme with your query.",
+				"name": "rima",
+				"description": "Responde con palabras que rimen con su consulta.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "palabra",
 						"description": "The word to search rhymes for (eg: dime)."
 					}
 				}
@@ -134,29 +134,29 @@
 			"wotd": {
 				"meta": {
 					"name": "wotd",
-					"description": "Configure the Word of the Day channel.",
+					"description": "Configura el canal de La Palabra del Día.",
 					"args": {
 						"channel": {
-							"name": "channel",
+							"name": "canal",
 							"description": "The channel to set as the Word of the Day channel."
 						}
 					}
 				},
 				"errors": {
-					"guild_text_only": "The Word of The Day channel must be a text channel!",
+					"guild_text_only": "¡El canal de La Palabra del Día debe ser un canal de texto!",
 					"no_perms": "I don't have permissions to create a webhook in {{- channel}}."
 				},
 				"success": "The Word of The Day will be posted in {{- channel}} every day at <t:1667538001:t> (12am GMT-5).",
-				"no_channel": "You must provide a channel to set as the Word of the Day channel."
+				"no_channel": "Debes proporcionar un canal para establecer como canal de La Palabra del Día."
 			}
 		},
 		"similar-meaning": {
 			"meta": {
-				"name": "similar-meaning",
-				"description": "Response with words that have a similar meaning to your query.",
+				"name": "significado-similar",
+				"description": "Responda con palabras que tengan un significado similar a su consulta.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "palabra",
 						"description": "The word to search similar words for (eg: transgressions)."
 					}
 				}
@@ -184,7 +184,7 @@
 				"description": "Responds with words that sound like your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "palabra",
 						"description": "The word to search similarly sounding words for (eg: agile)."
 					}
 				}
@@ -197,7 +197,7 @@
 				"description": "Responds with words that could logically follow query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "palabra",
 						"description": "The word to search following words for (eg: open)."
 					}
 				}
@@ -208,8 +208,8 @@
 		},
 		"word-of-the-day": {
 			"meta": {
-				"name": "word-of-the-day",
-				"description": "Responds with the word of the day from Merriam Webster."
+				"name": "palabra-del-día",
+				"description": "Responde con la palabra del día de Merriam Webster."
 			}
 		}
 	}
