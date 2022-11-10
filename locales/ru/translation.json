@@ -3,42 +3,42 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "лимит",
+					"description": "Максимальное количество возвращённых результатов (макс. & по умолчанию: 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
-					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
+					"name": "начинается-с",
+					"description": "Возвращать только слова, начинающиеся с этого значения (взаимоисключающий с заканчивается-на)."
 				},
 				"ends-with": {
-					"name": "ends-with",
-					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
+					"name": "заканчивается-на",
+					"description": "Возвращать только слова, заканчивающиеся на это значение (взаимоисключающий с начинается-с)."
 				}
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " которое начинается с {{word}}",
+			"ends_with_blurb": " которое заканчивается на {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!",
-			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
-			"unauthorized": "Unauthorized.",
-			"no_permissions": "You don't have permission to use this command.",
-			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+			"with_clause_exclusivity": "Опции `начинается-с` и `заканчивается-на` взаимоисключающие -- их обоих нельзя использовать одновременно.",
+			"not_found": "К сожалению, я не смог найти никаких результатов по вашему запросу!",
+			"not_found_w_suggestions": "К сожалению, я не смог найти никаких результатов по вашему запросу! Возможно, вы имели в виду: ",
+			"unauthorized": "Недостаточно прав.",
+			"no_permissions": "У вас нет прав на использование этой команды.",
+			"banned": "Боюсь, вас заблокировали от использования Thoth.\nПричина: {{- reason}}"
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Определения"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"name": "adjective",
-				"description": "Responds with adjectives that describe your query.",
+				"name": "прилагательное",
+				"description": "Ответы с прилагательными, описывающими ваш запрос.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The noun to search relavent adjectives for (eg: ocean)."
+						"name": "слово",
+						"description": "Существительное для поиска подходящих для него прилагательных (пример: океан)."
 					}
 				}
 			},
@@ -50,7 +50,7 @@
 				"description": "Responds with the definition of your query from Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search a definition for (eg: ocean)."
 					},
 					"short": {
@@ -73,7 +73,7 @@
 				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to find matches for (example: a??le)."
 					}
 				}
@@ -86,7 +86,7 @@
 				"description": "Responds with nouns that are often described by your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
 					}
 				}
@@ -119,7 +119,7 @@
 				"description": "Responds with words that rhyme with your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search rhymes for (eg: dime)."
 					}
 				}
@@ -156,7 +156,7 @@
 				"description": "Response with words that have a similar meaning to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search similar words for (eg: transgressions)."
 					}
 				}
@@ -171,7 +171,7 @@
 				"description": "Responds with words that have a similar spelling to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search similar words for (eg: agile)."
 					}
 				}
@@ -184,7 +184,7 @@
 				"description": "Responds with words that sound like your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search similarly sounding words for (eg: agile)."
 					}
 				}
@@ -197,7 +197,7 @@
 				"description": "Responds with words that could logically follow query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "слово",
 						"description": "The word to search following words for (eg: open)."
 					}
 				}
