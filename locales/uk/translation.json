@@ -11,7 +11,7 @@
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"ends-with": {
-					"name": "ends-with",
+					"name": "закінчується на",
 					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
 				}
 			},
@@ -54,7 +54,7 @@
 						"description": "Слово для пошуку визначення (наприклад: ocean)."
 					},
 					"short": {
-						"name": "short",
+						"name": "короткий",
 						"description": "Only return the first definition (default: false)."
 					}
 				}
@@ -69,8 +69,8 @@
 		},
 		"match-word": {
 			"meta": {
-				"name": "match-word",
-				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+				"name": "відповідне слово",
+				"description": "Відповідає словами, які збігаються зі словом, яке ви вводите (наприклад: к??ик -> котик, с??? -> сова).",
 				"args": {
 					"word": {
 						"name": "слово",
