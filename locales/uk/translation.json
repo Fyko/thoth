@@ -7,7 +7,7 @@
 					"description": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
+					"name": "починається з",
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"ends-with": {
