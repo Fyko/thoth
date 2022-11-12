@@ -96,14 +96,14 @@
 		"ping": {
 			"meta": {
 				"name": "ping",
-				"description": "Ensures the bot is responding to commands."
+				"description": "S'assurer que le bot répond aux commandes."
 			},
 			"pongs": [
 				"Uhh, hello?",
 				"What can I do ya' for?",
-				"Why are you bothering me?",
-				"Mhm?",
-				"Yea?",
+				"Pourquoi me dérangez-vous ?",
+				"Mhm ?",
+				"Oui ?",
 				"What's with you puny humans and the constant desire to bother me?",
 				"Out of everyone here, you chose to bother me?",
 				"So *this* is the meaning of life?",
