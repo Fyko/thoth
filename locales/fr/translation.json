@@ -3,95 +3,95 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "limite",
+					"description": "Nombre maximum de résultats à retourner (le nombre par défaut et maximum est 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
-					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
+					"name": "commence-par",
+					"description": "Ne retourne que les mots qui commencent par cette valeur (mutuellement exclusif avec le paramètre termine-par)."
 				},
 				"ends-with": {
-					"name": "ends-with",
-					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
+					"name": "termine-par",
+					"description": "Ne retourne que les mots qui se terminent par cette valeur (mutuellement exclusif avec le paramètre commence-par)."
 				}
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " qui commence par {{word}}",
+			"ends_with_blurb": " qui se termine par {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!",
-			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
-			"unauthorized": "Unauthorized.",
-			"no_permissions": "You don't have permission to use this command.",
-			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+			"with_clause_exclusivity": "Les paramètres `commence-par` et `termine-par` sont mutuellement exclusifs -- vous ne pouvez pas les utiliser en même temps.",
+			"not_found": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête !",
+			"not_found_w_suggestions": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête ! Peut-être que vous vouliez dire : ",
+			"unauthorized": "Non autorisé.",
+			"no_permissions": "Vous n'avez pas la permission d'utiliser cette commande.",
+			"banned": "J'ai peur que vous ayez été banni de l'utilisation de Thoth.\nRaison : {{- reason}}"
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Définitions"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"name": "adjective",
-				"description": "Responds with adjectives that describe your query.",
+				"name": "adjectif",
+				"description": "Répond avec des adjectifs qui décrivent votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The noun to search relavent adjectives for (eg: ocean)."
+						"name": "mot",
+						"description": "Le nom pour lequel il faut chercher des adjectifs relatifs (ex : océan)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` adjectifs pour décrire `{{word}}`: \n\n{{words}}"
 		},
 		"definition": {
 			"meta": {
-				"name": "definition",
-				"description": "Responds with the definition of your query from Merriam Webster.",
+				"name": "définition",
+				"description": "Retourne la définition de votre mot à partir de Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search a definition for (eg: ocean)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher une définition (ex : océan)."
 					},
 					"short": {
-						"name": "short",
-						"description": "Only return the first definition (default: false)."
+						"name": "court",
+						"description": "Ne retourne que la première définition (part défaut : faux)."
 					}
 				}
 			}
 		},
 		"invite": {
 			"meta": {
-				"name": "invite",
-				"description": "Returns an invite link to add Thoth to your server."
+				"name": "inviter",
+				"description": "Retourne un lien d'invitation pour ajouter Thoth à votre serveur."
 			},
-			"success": "Want to add Thoth to your server? [Click here]({{link}})!"
+			"success": "Vous souhaitez ajouter Thoth à votre serveur ? [Cliquez ici]({{link}}) !"
 		},
 		"match-word": {
 			"meta": {
-				"name": "match-word",
+				"name": "mot-correspondant",
 				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "mot",
 						"description": "The word to find matches for (example: a??le)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` adjectifs pour décrire `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
 			"meta": {
-				"name": "noun",
-				"description": "Responds with nouns that are often described by your query.",
+				"name": "nom",
+				"description": "Retourne les noms communs qui sont souvent décrits par votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
+						"name": "mot",
+						"description": "L'adjectif pour lequel il faut chercher des noms communs relatifs (ex : jaune)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` souvent décrits par `{{word}}`: \n\n{{words}}"
 		},
 		"ping": {
 			"meta": {
@@ -99,7 +99,7 @@
 				"description": "S'assurer que le bot répond aux commandes."
 			},
 			"pongs": [
-				"Uhh, hello?",
+				"Euhh, bonjour ?",
 				"What can I do ya' for?",
 				"Pourquoi me dérangez-vous ?",
 				"Mhm ?",
@@ -109,7 +109,7 @@
 				"So *this* is the meaning of life?",
 				"Can we just get this over with?? I have stuff to do.",
 				"That's all?",
-				"Pong!",
+				"Pong !",
 				"Do it again. I dare you."
 			]
 		},
@@ -119,7 +119,7 @@
 				"description": "Responds with words that rhyme with your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "mot",
 						"description": "The word to search rhymes for (eg: dime)."
 					}
 				}
@@ -137,7 +137,7 @@
 					"description": "Configure the Word of the Day channel.",
 					"args": {
 						"channel": {
-							"name": "channel",
+							"name": "salon",
 							"description": "The channel to set as the Word of the Day channel."
 						}
 					}
@@ -156,7 +156,7 @@
 				"description": "Response with words that have a similar meaning to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "mot",
 						"description": "The word to search similar words for (eg: transgressions)."
 					}
 				}
@@ -171,7 +171,7 @@
 				"description": "Responds with words that have a similar spelling to your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "mot",
 						"description": "The word to search similar words for (eg: agile)."
 					}
 				}
@@ -184,7 +184,7 @@
 				"description": "Responds with words that sound like your query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "mot",
 						"description": "The word to search similarly sounding words for (eg: agile)."
 					}
 				}
@@ -193,11 +193,11 @@
 		},
 		"that-follow": {
 			"meta": {
-				"name": "that-follow",
+				"name": "qui-suit",
 				"description": "Responds with words that could logically follow query.",
 				"args": {
 					"word": {
-						"name": "word",
+						"name": "mot",
 						"description": "The word to search following words for (eg: open)."
 					}
 				}
@@ -208,7 +208,7 @@
 		},
 		"word-of-the-day": {
 			"meta": {
-				"name": "word-of-the-day",
+				"name": "mot-du-jour",
 				"description": "Responds with the word of the day from Merriam Webster."
 			}
 		}
