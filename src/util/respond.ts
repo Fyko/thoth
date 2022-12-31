@@ -10,6 +10,7 @@ import type {
 import { InteractionResponseType, Routes } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import { container } from 'tsyringe';
+import { fetch, File, FormData } from 'undici';
 import type { REST } from '../structures/REST.js';
 import { kREST } from './symbols.js';
 
@@ -39,6 +40,27 @@ export function createResponse(
 			allowed_mentions: { parse, users },
 		},
 	} as APIInteractionResponseChannelMessageWithSource);
+}
+
+export async function createDefinitionResponse(
+	res: FastifyReply,
+	word: string,
+	pronunciationUrl: string,
+	content: string,
+	
+) {
+	const form = new FormData();
+	form.set('payload_json', JSON.stringify({
+		type: InteractionResponseType.ChannelMessageWithSource,
+		data: {
+			content,
+		},
+	}));
+
+	const pronResponse = await fetch(pronunciationUrl);
+	form.set('files[0]', new File([await pronResponse.blob()], `${word}.mp3`))
+
+	return res.status(200).header('content-type', 'multipart/form-data').send(form);
 }
 
 export async function sendFollowup(

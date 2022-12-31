@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import { channelMention } from '@discordjs/builders';
 import { CDN } from '@discordjs/rest';
 import type { APIChannel, APIInteraction, APIUser, RESTPostAPIChannelWebhookJSONBody, RESTPostAPIChannelWebhookResult} from 'discord-api-types/v10';
@@ -6,6 +7,7 @@ import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
 import type { Sql } from 'postgres';
 import { container } from 'tsyringe';
+import { fetch } from 'undici';
 import type { REST } from '#structures';
 import { Permissions } from '#util/constants.js';
 import { kBotUser, kREST, kSQL, type WOTDConfig } from '#util/index.js';
@@ -31,12 +33,16 @@ export const wotd = async (res: FastifyReply, interaction: APIInteraction, args:
 		return createResponse(res, i18n.t('commands.setup.wotd.errors.guild_text_only', { lng }), true);
 	}
 
+	const avatarUrl = cdn.avatar(bot.id, bot.avatar!, { extension: 'png' });
+	const data = Buffer.from(await (await fetch(avatarUrl)).arrayBuffer());
+	const avatar = `data:image/png;base64,${data.toString('base64')}`;
+
 	// instead of checking if we have perms to create a webhook, we'll just try to create one
 	// if we don't have perms, discord will return an error
 	const webhook = await (rest.post(Routes.channelWebhooks(channel.id), {
 		body: {
 			name: 'Thoth: Word of the Day',
-			avatar: cdn.avatar(bot.id, bot.avatar!),
+			avatar,
 		} as RESTPostAPIChannelWebhookJSONBody,
 	}).catch(() => null)) as RESTPostAPIChannelWebhookResult | null;
 

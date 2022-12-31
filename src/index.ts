@@ -68,6 +68,8 @@ const commandsMetrics = new Counter({
 });
 
 async function start() {
+	logger.debug('Starting Thoth');
+
 	await loadTranslations();
 
 	await loadCommands(commands);

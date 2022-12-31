@@ -1,66 +1,77 @@
 import process from 'node:process';
-import { DiscordAPIError, REST } from '@discordjs/rest';
+import { DiscordAPIError } from '@discordjs/rest';
 import { Queue, Worker, type Job } from "bullmq";
-import type { RESTPostAPIWebhookWithTokenResult } from 'discord-api-types/v10';
 import { Routes } from 'discord-api-types/v10';
 import type { Entry } from 'mw-collegiate';
 import type { Sql } from "postgres";
 import Parser from 'rss-parser';
 import { container } from "tsyringe";
+import { fetch } from 'undici';
+import type { RedisManager } from './structures/RedisManager.js';
 import type { WOTDConfig } from '#util/index.js';
+import { logger } from '#util/logger.js';
 import { fetchDefinition } from '#util/mw/index.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
-import { kSQL } from "#util/symbols.js";
+import { kRedis, kSQL } from "#util/symbols.js";
 
-export async function setupJobs() {
+export async function setupJobs(): Promise<Queue<{}, {}, "wotd">> {
 	const sql = container.resolve<Sql<any>>(kSQL);
+	const redis = container.resolve<RedisManager>(kRedis);
 	const connection = { host: process.env.REDIS_HOST, port: Number.parseInt(process.env.REDIS_PORT!, 10) };
 
 	const queue = new Queue<{}, {}, "wotd">("jobs", { connection });
-	queue.add('wotd', {}, { repeat: { pattern: '*/3 * * * *' } });
+	const pattern = '* * * * *';
+	queue.add('wotd', {}, { repeat: { pattern } });
 	const rssParser = new Parser();
 
 	new Worker(queue.name, async (job: Job) => {
 		switch (job.name) {
 			case "wotd": {
-				const parsed = await rssParser.parseURL('https://www.merriam-webster.com/wotd/feed/rss2');
+				const url = 'https://www.merriam-webster.com/wotd/feed/rss2';
+				const parsed = await rssParser.parseURL(url);
 
 				// determine if any of the words are new
 				const words = parsed.items.map((item) => item.title!);
 				const existing = await sql<{ word: string }[]>`
 					SELECT word FROM wotd_history WHERE word = ANY(${words})
 				`;
-
 				const newWords = words.filter((word) => !existing.some((e) => e.word === word));
-				if (newWords.length === 0) break
+
+				if (newWords.length === 0) break;
+
+				logger.info(`found new words: ${newWords.join(', ')}`);
 
 				// insert the new words
-				await this.sql`
-					INSERT INTO wotd_history (word) VALUES ${newWords.map((word) => [word])}
+				await sql`
+					INSERT INTO wotd_history ${sql(newWords.map(w => ({ word: w })))};
 				`;
 
 				// fetch the definitions for the new words
-				const definitions = await Promise.all(newWords.map(async (word) => (await fetchDefinition(this.redis, word))[0] as Entry));
-				const content = definitions.map((def) => createWOTDContent(def, 'en')).join('\n\n');
+				const definition = await fetchDefinition(redis, newWords[0]);
+				const content = createWOTDContent(definition[0] as Entry, 'en');
 
 				// fetch all the wotd configts
 				const configs = await sql<WOTDConfig[]>`
-					SELECT * FROM wotd_config;
+					SELECT * FROM wotd;
 				`;
 
 				// send the webhook
 				for (const server of configs) {
-					const client = new REST();
 					try {
-						await client.post(Routes.webhookMessage(server.webhook_id.toString(), server.webhook_token), {
-							body: {
-								content,
+						await fetch(`https://discord.com/api/v10${Routes.webhook(server.webhook_id.toString(), server.webhook_token)}`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
 							},
-						}) as RESTPostAPIWebhookWithTokenResult;
+							body: JSON.stringify({
+								content: `Merrium Webster published a new word of the day!\n\n${content}`,
+							}),
+						});
 					} catch (error: unknown) {
+						logger.error(`posting message error: ${error}`);
 						if (error instanceof DiscordAPIError && error.status === 404) {
 							await sql`
-								DELETE FROM wotd_config WHERE id = ${server.id};
+								DELETE FROM wotd WHERE id = ${server.id};
 							`;
 
 							// TODO: send message to created_by to alert failure
@@ -70,4 +81,6 @@ export async function setupJobs() {
 			}
 		}
 	}, { connection });
+
+	return queue;
 }
