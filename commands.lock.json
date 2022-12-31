@@ -21,13 +21,13 @@
           "en-US": "word",
           "de": "word",
           "pt-BR": "palavra",
-          "da": "word"
+          "da": "ord"
         },
         "description": "The word to search similarly sounding words for (eg: agile).",
         "description_localizations": {
           "en-US": "The word to search similarly sounding words for (eg: agile).",
           "de": "The word to search similarly sounding words for (eg: agile).",
-          "pt-BR": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: ágil).",
+          "pt-BR": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: agile).",
           "da": "The word to search similarly sounding words for (eg: agile)."
         },
         "type": 3,
@@ -37,7 +37,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -74,13 +74,13 @@
           "en-US": "word",
           "de": "word",
           "pt-BR": "palavra",
-          "da": "word"
+          "da": "ord"
         },
         "description": "The word to search similar words for (eg: transgressions).",
         "description_localizations": {
           "en-US": "The word to search similar words for (eg: transgressions).",
           "de": "The word to search similar words for (eg: transgressions).",
-          "pt-BR": "A palavra para pesquisar palavras semelhantes (ex: transgressões).",
+          "pt-BR": "A palavra para pesquisar palavras semelhantes (ex: transgressions).",
           "da": "The word to search similar words for (eg: transgressions)."
         },
         "type": 3,
@@ -124,7 +124,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -177,7 +177,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -214,13 +214,13 @@
           "en-US": "word",
           "de": "word",
           "pt-BR": "palavra",
-          "da": "word"
+          "da": "ord"
         },
         "description": "The word to search similar words for (eg: agile).",
         "description_localizations": {
           "en-US": "The word to search similar words for (eg: agile).",
           "de": "The word to search similar words for (eg: agile).",
-          "pt-BR": "A palavra para pesquisar palavras semelhantes para (ex: ágil).",
+          "pt-BR": "A palavra para pesquisar palavras semelhantes para (ex: agile).",
           "da": "The word to search similar words for (eg: agile)."
         },
         "type": 3,
@@ -230,7 +230,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -283,7 +283,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -344,7 +344,7 @@
         "description_localizations": {
           "en-US": "Only return the first definition (default: false).",
           "de": "Only return the first definition (default: false).",
-          "pt-BR": "Only return the first definition (default: false).",
+          "pt-BR": "Retornar apenas a primeira definição (padrão: falso).",
           "da": "Only return the first definition (default: false)."
         },
         "type": 5
@@ -389,13 +389,13 @@
           "en-US": "word",
           "de": "word",
           "pt-BR": "palavra",
-          "da": "word"
+          "da": "ord"
         },
         "description": "The word to search following words for (eg: open).",
         "description_localizations": {
           "en-US": "The word to search following words for (eg: open).",
           "de": "The word to search following words for (eg: open).",
-          "pt-BR": "A palavra para pesquisar palavras que seguem (ex: abra).",
+          "pt-BR": "A palavra para pesquisar palavras que seguem (ex: open).",
           "da": "The word to search following words for (eg: open)."
         },
         "type": 3,
@@ -439,7 +439,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -476,13 +476,13 @@
           "en-US": "word",
           "de": "word",
           "pt-BR": "palavra",
-          "da": "word"
+          "da": "ord"
         },
         "description": "The word to search rhymes for (eg: dime).",
         "description_localizations": {
           "en-US": "The word to search rhymes for (eg: dime).",
           "de": "The word to search rhymes for (eg: dime).",
-          "pt-BR": "A palavra para procurar ritmos (ex: moeda).",
+          "pt-BR": "A palavra para procurar ritmos (ex: dime).",
           "da": "The word to search rhymes for (eg: dime)."
         },
         "type": 3,
@@ -492,7 +492,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
@@ -519,7 +519,7 @@
     "description_localizations": {
       "en-US": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
       "de": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-      "pt-BR": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple).",
+      "pt-BR": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple, d??? -> date).",
       "da": "Svarer med ord, der matcher det ord du angiver (fx: a??le -> apple, d???? -> date)."
     },
     "options": [
@@ -545,7 +545,7 @@
         "name": "limit",
         "name_localizations": {
           "en-US": "limit",
-          "de": "limit",
+          "de": "Grenzwert",
           "pt-BR": "limite",
           "da": "begrænsning"
         },
