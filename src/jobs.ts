@@ -14,18 +14,39 @@ import { fetchDefinition } from '#util/mw/index.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
 import { kRedis, kSQL } from "#util/symbols.js";
 
-export async function setupJobs(): Promise<Queue<{}, {}, "wotd">> {
+export async function setupJobs() {
 	const sql = container.resolve<Sql<any>>(kSQL);
 	const redis = container.resolve<RedisManager>(kRedis);
 	const connection = { host: process.env.REDIS_HOST, port: Number.parseInt(process.env.REDIS_PORT!, 10) };
 
-	const queue = new Queue<{}, {}, "wotd">("jobs", { connection });
+	const queue = new Queue<{}, {}, "ensure_wotd_webhooks" | "wotd">("jobs", { connection });
 	const pattern = '* * * * *';
 	queue.add('wotd', {}, { repeat: { pattern } });
-	const rssParser = new Parser();
+	queue.add('ensure_wotd_webhooks', {}, { repeat: { pattern: '0 */2 * * *' } });
 
+	const rssParser = new Parser();
 	new Worker(queue.name, async (job: Job) => {
 		switch (job.name) {
+			case "ensure_wotd_webhooks": {
+				const cursor = sql`select * from wotd`.cursor();
+				for await (const [row] of cursor) {
+					const config = row as WOTDConfig;
+
+					try {
+						await fetch(`https://discord.com/api/v10${Routes.webhook(config.webhook_id.toString(), config.webhook_token)}`);
+					} catch (error: unknown) {
+						logger.error(`webhook error: ${error}`);
+						if (error instanceof DiscordAPIError && error.status === 404) {
+							await sql`
+								DELETE FROM wotd WHERE id = ${config.id};
+							`;
+						}
+					}
+				}
+
+				break;
+			}
+
 			case "wotd": {
 				const url = 'https://www.merriam-webster.com/wotd/feed/rss2';
 				const parsed = await rssParser.parseURL(url);
