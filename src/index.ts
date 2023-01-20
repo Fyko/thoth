@@ -12,7 +12,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { fastify } from 'fastify';
 import fastifyMetrics, { type IMetricsPluginOptions } from 'fastify-metrics';
 import postgres from 'postgres';
-import { Counter } from 'prom-client';
+import { Counter, Gauge } from 'prom-client';
 import { container } from 'tsyringe';
 import { setupJobs } from './jobs.js';
 import { logger } from '#logger';
@@ -65,6 +65,15 @@ const commandsMetrics = new Counter({
 	name: 'thoth_commands',
 	help: 'Number of commands executed',
 	labelNames: ['command', 'success'],
+});
+
+new Gauge({
+	name: 'thoth_wotd_subscribers',
+	help: 'Number of users subscribed to the Word Of the Day',
+	async collect() {
+		const query = await sql`SELECT COUNT(*) FROM wotd`;
+		this.set(Number.parseInt(query[0].count, 10));
+	},
 });
 
 async function start() {
