@@ -16,7 +16,6 @@
 		"#structures": "./dist/structures/index.js"
 	},
 	"scripts": {
-		"postinstall": "husky install .github/.husky",
 		"clean": "rimraf dist/*",
 		"generate": "node ./dist/scripts/generate.js",
 		"watch": "tsc --watch",
@@ -64,7 +63,6 @@
 		"cpy-cli": "^4.2.0",
 		"eslint": "^8.25.0",
 		"eslint-config-neon": "^0.1.38",
-		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",
 		"mw-collegiate": "^1.0.1",
 		"nodemon": "^2.0.20",

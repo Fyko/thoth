@@ -1,3 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-yarn run build && yarn run generate && git add commands.lock.json && yarn lint-staged
