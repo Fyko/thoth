@@ -5,21 +5,14 @@ import type { APIInteraction } from 'discord-api-types/v10';
 import { PermissionFlagsBits } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
+import InviteCommand from '#interactions/commands/util/invite.js';
 import type { Command } from '#structures';
-import { fetchDataLocalizations } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 
-const data = {
-	name: i18n.t('commands.invite.meta.name'),
-	name_localizations: fetchDataLocalizations('commands.invite.meta.name'),
-	description: i18n.t('commands.invite.meta.description'),
-	description_localizations: fetchDataLocalizations('commands.invite.meta.description'),
-} as const;
-
 export default class implements Command {
-	public readonly data = data;
+	public readonly data = InviteCommand;
 
-	private readonly invitePermissions = 
+	private readonly invitePermissions =
 		PermissionFlagsBits.ManageWebhooks |
 		PermissionFlagsBits.ViewChannel |
 		PermissionFlagsBits.SendMessages |

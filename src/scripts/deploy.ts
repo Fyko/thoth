@@ -6,7 +6,7 @@ import { logger } from '#logger';
 
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
 
-export async function deploy(data: any, dev = false) {
+export async function deploy(data: Record<string, unknown>[], dev = false) {
 	const midRoute = dev ? Routes.guild(process.env.DISCORD_DEVGUILD_ID!) : '';
 	const route = `/applications/${process.env.DISCORD_CLIENT_ID as string}${midRoute}/commands` as `/${string}`;
 

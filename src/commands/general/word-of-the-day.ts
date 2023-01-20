@@ -3,25 +3,19 @@ import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
 import type { Entry } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
+import WordOfTheDayCommand from '#interactions/commands/general/word-of-the-day.js';
 import { fetchDefinition } from '#mw';
 import { createWOTDContent, fetchWordOfTheDay } from '#mw/wotd.js';
 import type { Command } from '#structures';
 import { RedisManager } from '#structures';
-import { fetchDataLocalizations, kRedis } from '#util/index.js';
+import { kRedis } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
-
-const data = {
-	name: i18n.t('commands.word-of-the-day.meta.name'),
-	name_localizations: fetchDataLocalizations('commands.word-of-the-day.meta.name'),
-	description: i18n.t('commands.word-of-the-day.meta.description'),
-	description_localizations: fetchDataLocalizations('commands.word-of-the-day.meta.description'),
-} as const;
 
 @injectable()
 export default class implements Command {
-	public constructor(@inject(kRedis) public readonly redis: RedisManager) { }
+	public constructor(@inject(kRedis) public readonly redis: RedisManager) {}
 
-	public readonly data = data;
+	public readonly data = WordOfTheDayCommand;
 
 	public exec = async (res: FastifyReply, _: APIInteraction, lng: string) => {
 		const word = await fetchWordOfTheDay(this.redis);
@@ -33,10 +27,6 @@ export default class implements Command {
 
 		const content = createWOTDContent(defRes as Entry, lng);
 
-		return createResponse(
-			res,
-			content,
-			false,
-		);
+		return createResponse(res, content, false);
 	};
 }

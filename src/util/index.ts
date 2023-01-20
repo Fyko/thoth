@@ -74,7 +74,7 @@ export function list(arr: string[], conj = 'and'): string {
 	return `${arr.slice(0, -1).join(', ')}${len > 1 ? `${len > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
 }
 
-async function walk(path: string) {
+export async function walk(path: string) {
 	return (
 		await scan(path, {
 			filter: (stats, path) => stats.isFile() && ['.js', '.ts'].includes(extname(stats.name)) && !path.includes('sub'),

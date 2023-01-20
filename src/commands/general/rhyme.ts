@@ -1,10 +1,10 @@
 import { mergeDefault } from '@sapphire/utilities';
 import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
-import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
+import RhymeCommand from '#interactions/commands/general/rhyme.js';
 import type { Command } from '#structures';
-import { datamuse, fetchDataLocalizations, firstUpperCase, trimArray } from '#util/index.js';
+import { datamuse, firstUpperCase, trimArray } from '#util/index.js';
 import { createResponse } from '#util/respond.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
@@ -13,38 +13,14 @@ type SynonymHit = {
 	word: string;
 };
 
-const data = {
-	name: i18n.t('commands.rhyme.meta.name'),
-	name_localizations: fetchDataLocalizations('commands.rhyme.meta.name'),
-	description: i18n.t('commands.rhyme.meta.description'),
-	description_localizations: fetchDataLocalizations('commands.rhyme.meta.description'),
-	options: [
-		{
-			name: 'word',
-			name_localizations: fetchDataLocalizations('commands.rhyme.meta.args.word.name'),
-			description: i18n.t('commands.rhyme.meta.args.word.description'),
-			description_localizations: fetchDataLocalizations('commands.rhyme.meta.args.word.description'),
-			type: ApplicationCommandOptionType.String,
-			required: true,
-		},
-		{
-			name: 'limit',
-			name_localizations: fetchDataLocalizations('common.commands.args.limit.name'),
-			description: i18n.t('common.commands.args.limit.description'),
-			description_localizations: fetchDataLocalizations('common.commands.args.limit.description'),
-			type: ApplicationCommandOptionType.Integer,
-		},
-	],
-} as const;
-
-type Arguments = ArgumentsOf<typeof data>;
+type Arguments = ArgumentsOf<typeof RhymeCommand>;
 
 const argumentDefaults: Partial<Arguments> = {
 	limit: 50,
 };
 
 export default class implements Command {
-	public readonly data = data;
+	public readonly data = RhymeCommand;
 
 	public exec = async (res: FastifyReply, interaction: APIInteraction, lng: string) => {
 		const { data } = interaction as { data: APIApplicationCommandInteractionData };

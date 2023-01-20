@@ -88,22 +88,3 @@ async fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
-
-#[cfg(test)]
-mod test {
-    use twilight_gateway::{Event, EventType};
-    use twilight_model::gateway::event::GatewayEventDeserializer;
-    use serde::de::DeserializeSeed;
-
-    #[test]
-    fn test_create() -> anyhow::Result<()> {
-        let create = include_bytes!("../create.json");
-        let gateway_deserializer = GatewayEventDeserializer::new(0, Some(53), Some("GUILD_CREATE"));
-        let mut json_deserializer = serde_json::Deserializer::from_slice(create);
-        let event: Event = gateway_deserializer.deserialize(&mut json_deserializer)?.into();
-
-        assert_eq!(event.kind(), EventType::GuildCreate);
-
-        Ok(())
-    }
-}

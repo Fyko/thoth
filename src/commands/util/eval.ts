@@ -1,31 +1,17 @@
 import process from 'node:process';
 import { inspect } from 'node:util';
 import type { APIApplicationCommandInteractionData, APIInteraction } from 'discord-api-types/v10';
-import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import type { FastifyReply } from 'fastify';
 import i18n from 'i18next';
 import { inject, injectable } from 'tsyringe';
+import EvalCommand from '#interactions/commands/util/eval.js';
 import { REST } from '#structures';
 import type { Command } from '#structures';
 import { sendFollowup, defer, createResponse } from '#util/respond.js';
 import { kREST } from '#util/symbols.js';
 import type { ArgumentsOf } from '#util/types/index.js';
 
-const data = {
-	name: 'eval',
-	description: 'Evaluate JavaScript code.',
-	dev: true,
-	options: [
-		{
-			name: 'code',
-			description: 'The code to execute',
-			type: ApplicationCommandOptionType.String,
-			required: true,
-		},
-	],
-} as const;
-
-type Arguments = ArgumentsOf<typeof data>;
+type Arguments = ArgumentsOf<typeof EvalCommand>;
 
 export const SENSITIVE_PATTERN_REPLACEMENT = '[REDACTED]';
 
@@ -50,7 +36,7 @@ const MESSAGES = {
 export default class implements Command {
 	public constructor(@inject(kREST) public readonly rest: REST) {}
 
-	public readonly data = data;
+	public readonly data = EvalCommand;
 
 	private _clean(text: string): any {
 		const replacedText = text
