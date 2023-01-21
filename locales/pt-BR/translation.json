@@ -70,7 +70,7 @@
 		"match-word": {
 			"meta": {
 				"name": "palavra-correspondente",
-				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple, d??? -> date).",
+				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple).",
 				"args": {
 					"word": {
 						"name": "palavra",
