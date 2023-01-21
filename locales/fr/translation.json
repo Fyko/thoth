@@ -3,212 +3,213 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"name": "limite",
+					"description": "Nombre maximum de résultats à retourner (le nombre par défaut et maximum est 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
-					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
+					"name": "commence-par",
+					"description": "Ne retourne que les mots qui commencent par cette valeur (mutuellement exclusif avec le paramètre termine-par)."
 				},
 				"ends-with": {
-					"name": "ends-with",
-					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
+					"name": "termine-par",
+					"description": "Ne retourne que les mots qui se terminent par cette valeur (mutuellement exclusif avec le paramètre commence-par)."
 				}
 			},
-			"starts_with_blurb": " that starts with {{word}}",
-			"ends_with_blurb": " that ends with {{word}}"
+			"starts_with_blurb": " qui commence par {{word}}",
+			"ends_with_blurb": " qui se termine par {{word}}"
 		},
 		"errors": {
-			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
-			"not_found": "I'm sorry, I couldn't find any results for your query!",
-			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
-			"unauthorized": "Unauthorized.",
-			"no_permissions": "You don't have permission to use this command."
+			"with_clause_exclusivity": "Les paramètres `commence-par` et `termine-par` sont mutuellement exclusifs -- vous ne pouvez pas les utiliser en même temps.",
+			"not_found": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête !",
+			"not_found_w_suggestions": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête ! Peut-être que vous vouliez dire : ",
+			"unauthorized": "Non autorisé.",
+			"no_permissions": "Vous n'avez pas la permission d'utiliser cette commande.",
+			"banned": "J'ai peur que vous ayez été banni de l'utilisation de Thoth.\nRaison : {{- reason}}"
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Définitions"
 		}
 	},
 	"commands": {
 		"adjective": {
 			"meta": {
-				"name": "adjective",
-				"description": "Responds with adjectives that describe your query.",
+				"name": "adjectif",
+				"description": "Répond avec des adjectifs qui décrivent votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The noun to search relavent adjectives for (eg: ocean)."
+						"name": "mot",
+						"description": "Le nom pour lequel il faut chercher des adjectifs relatifs (ex : ocean)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` adjectives to describe `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` adjectifs pour décrire `{{word}}`: \n\n{{words}}"
 		},
 		"definition": {
 			"meta": {
-				"name": "definition",
-				"description": "Responds with the definition of your query from Merriam Webster.",
+				"name": "définition",
+				"description": "Retourne la définition de votre mot à partir de Merriam Webster.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search a definition for (eg: ocean)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher une définition (ex : ocean)."
 					},
 					"short": {
-						"name": "short",
-						"description": "Only return the first definition (default: false)."
+						"name": "court",
+						"description": "Ne retourne que la première définition (part défaut : faux)."
 					}
 				}
 			}
 		},
 		"invite": {
 			"meta": {
-				"name": "invite",
-				"description": "Returns an invite link to add Thoth to your server."
+				"name": "inviter",
+				"description": "Retourne un lien d'invitation pour ajouter Thoth à votre serveur."
 			},
-			"success": "Want to add Thoth to your server? [Click here]({{link}})!"
+			"success": "Vous souhaitez ajouter Thoth à votre serveur ? [Cliquez ici]({{link}}) !"
 		},
 		"match-word": {
 			"meta": {
-				"name": "match-word",
-				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+				"name": "mot-correspondant",
+				"description": "Retourne des mots qui correspondent au mot que vous avez fourni (ex : a??le -> apple, d??? -> date).",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to find matches for (example: a??le)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut trouver des correspondances (ex : a??le)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that match `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` adjectifs pour décrire `{{word}}`: \n\n{{words}}"
 		},
 		"noun": {
 			"meta": {
-				"name": "noun",
-				"description": "Responds with nouns that are often described by your query.",
+				"name": "nom",
+				"description": "Retourne les noms communs qui sont souvent décrits par votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
+						"name": "mot",
+						"description": "L'adjectif pour lequel il faut chercher des noms communs relatifs (ex : yellow)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` nouns for `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` souvent décrits par `{{word}}`: \n\n{{words}}"
 		},
 		"ping": {
 			"meta": {
 				"name": "ping",
-				"description": "Ensures the bot is responding to commands."
+				"description": "S'assurer que le bot répond aux commandes."
 			},
 			"pongs": [
-				"Uhh, hello?",
-				"What can I do ya' for?",
-				"Why are you bothering me?",
-				"Mhm?",
-				"Yea?",
-				"What's with you puny humans and the constant desire to bother me?",
-				"Out of everyone here, you chose to bother me?",
-				"So *this* is the meaning of life?",
-				"Can we just get this over with?? I have stuff to do.",
-				"That's all?",
-				"Pong!",
-				"Do it again. I dare you."
+				"Euhh, bonjour ?",
+				"Qu'est-ce que je peux faire pour vous ?",
+				"Pourquoi me dérangez-vous ?",
+				"Mhm ?",
+				"Oui ?",
+				"Qu'est-ce qui se passe avec vous, humains chétifs, et votre désir constant de me déranger ?",
+				"De tous ceux qui sont ici, vous avez choisi de me déranger ?",
+				"Alors *ceci* est le sens de la vie ?",
+				"Pouvons-nous juste en finir avec ça ?? J'ai des trucs à faire.",
+				"C'est tout ?",
+				"Pong !",
+				"Refaites-le. Je vous mets au défi."
 			]
 		},
 		"rhyme": {
 			"meta": {
-				"name": "rhyme",
-				"description": "Responds with words that rhyme with your query.",
+				"name": "rime",
+				"description": "Répond avec des mots qui riment avec votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search rhymes for (eg: dime)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher une rime (ex : dime)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` mots qui riment avec `{{word}}`: \n\n{{words}}"
 		},
 		"setup": {
 			"meta": {
-				"name": "setup",
-				"description": "An assortment of configuration commands."
+				"name": "configuration",
+				"description": "Un assortiment de commandes de configuration."
 			},
 			"wotd": {
 				"meta": {
-					"name": "wotd",
-					"description": "Configure the Word of the Day channel.",
+					"name": "mdj",
+					"description": "Configurer le salon du Mot du Jour.",
 					"args": {
 						"channel": {
-							"name": "channel",
-							"description": "The channel to set as the Word of the Day channel."
+							"name": "salon",
+							"description": "Le salon à définir comme le salon Mot du Jour."
 						}
 					}
 				},
 				"errors": {
-					"guild_text_only": "The Word of The Day channel must be a text channel!",
-					"no_perms": "I don't have permissions to create a webhook in {{- channel}}."
+					"guild_text_only": "Le salon du Mot du Jour doit être un salon textuel !",
+					"no_perms": "Je n'ai pas la permission de créer un webhook dans {{- channel}}."
 				},
-				"success": "The Word of The Day will be posted in {{- channel}} every day at <t:1667538001:t> (12am GMT-5).",
-				"no_channel": "You must provide a channel to set as the Word of the Day channel."
+				"success": "Le Mot du Jour sera envoyé dans le salon {{- channel}} tous les jours à <t:1667538001:t> (00 h GMT-5).",
+				"no_channel": "Le salon à définir comme le salon du Mot du Jour."
 			}
 		},
 		"similar-meaning": {
 			"meta": {
-				"name": "similar-meaning",
-				"description": "Response with words that have a similar meaning to your query.",
+				"name": "synonyme",
+				"description": "Retourne des mots qui ont une signification similaire à celle de votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search similar words for (eg: transgressions)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher des synonymes (ex : transgressions)."
 					}
 				}
 			},
-			"generic_success": "I found `{{found_count}}` words that are similar to `{{word}}`{{rest}}: \n\n{{words}}",
-			"starts_with_success": "I found `{{found_count}}` words that are similar to `{{word}}` and start with `{{starts_with}}`: \n\n{{words}}",
-			"ends_with_success": "I found `{{found_count}}` words that are similar to `{{word}}` and end with `{{ends_with}}`: \n\n{{words}}"
+			"generic_success": "J'ai trouvé `{{found_count}}` synonymes de `{{word}}`{{rest}}: \n\n{{words}}",
+			"starts_with_success": "J'ai trouvé `{{found_count}}` synonymes de `{{word}}`et qui commencent par `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "J'ai trouvé `{{found_count}}` synonymes de `{{word}}`et qui se terminent par `{{ends_with}}`: \n\n{{words}}"
 		},
 		"similar-spelling": {
 			"meta": {
-				"name": "similar-spelling",
-				"description": "Responds with words that have a similar spelling to your query.",
+				"name": "paronyme",
+				"description": "Retourne des mots qui ont une orthographe proche de celle de votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search similar words for (eg: agile)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher des mots avec une orthographe proche (par exemple : agile)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that're similarly spelled to `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` paronymes de `{{word}}`: \n\n{{words}}"
 		},
 		"sounds-like": {
 			"meta": {
-				"name": "sounds-like",
-				"description": "Responds with words that sound like your query.",
+				"name": "sonne-comme",
+				"description": "Retourne des mots qui sonnent comme votre requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search similarly sounding words for (eg: agile)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher des mots à consonance similaire (par exemple : agile)."
 					}
 				}
 			},
-			"success": "I found `{{found_count}}` words that sound like `{{word}}`: \n\n{{words}}"
+			"success": "J'ai trouvé `{{found_count}}` mots qui sonnent comme `{{word}}`: \n\n{{words}}"
 		},
 		"that-follow": {
 			"meta": {
-				"name": "that-follow",
-				"description": "Responds with words that could logically follow query.",
+				"name": "qui-suit",
+				"description": "Retourne des mots qui pourraient être à la suite de la requête.",
 				"args": {
 					"word": {
-						"name": "word",
-						"description": "The word to search following words for (eg: open)."
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher les mots qui peuvent le suivre (ex : open)."
 					}
 				}
 			},
-			"generic_success": "I found `{{found_count}}` words that logically follow `{{word}}`: \n\n{{words}}",
-			"starts_with_success": "I found `{{found_count}}` words that logically follow `{{word}}` that start with `{{starts_with}}`: \n\n{{words}}",
-			"ends_with_success": "I found `{{found_count}}` words that logically follow `{{word}}` that end with `{{ends_with}}`: \n\n{{words}}"
+			"generic_success": "J'ai trouvé `{{found_count}}` mots qui peuvent suivre `{{word}}`: \n\n{{words}}",
+			"starts_with_success": "J'ai trouvé `{{found_count}}` mots qui peuvent suivre `{{word}}` et qui commencent par `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "J'ai trouvé `{{found_count}}` mots qui peuvent suivre `{{word}}` et qui se terminent par `{{ends_with}}`: \n\n{{words}}"
 		},
 		"word-of-the-day": {
 			"meta": {
-				"name": "word-of-the-day",
-				"description": "Responds with the word of the day from Merriam Webster."
+				"name": "mot-du-jour",
+				"description": "Retourne le mot du jour d'après Merriam Webster."
 			}
 		}
 	}

@@ -23,7 +23,8 @@
 			"not_found": "Desculpe, não consegui encontrar resultados para a sua pesquisa!",
 			"not_found_w_suggestions": "Desculpe, não consegui encontrar resultados para a sua pesquisa! Você quis dizer: ",
 			"unauthorized": "Não autorizado.",
-			"no_permissions": "You don't have permission to use this command."
+			"no_permissions": "You don't have permission to use this command.",
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
 		},
 		"titles": {
 			"definitions": "Definições"
@@ -69,7 +70,7 @@
 		"match-word": {
 			"meta": {
 				"name": "palavra-correspondente",
-				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple, d??? -> date).",
+				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple).",
 				"args": {
 					"word": {
 						"name": "palavra",

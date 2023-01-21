@@ -3,7 +3,7 @@
 		"commands": {
 			"args": {
 				"limit": {
-					"name": "Grenzwert",
+					"name": "grenzwert",
 					"description": "The maximum amount of results to return (max & default: 50)."
 				},
 				"starts-with": {
@@ -23,7 +23,8 @@
 			"not_found": "Es tut mir leid, ich konnte keine Ergebnisse für deine Suche finden!",
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Unauthorized.",
-			"no_permissions": "You don't have permission to use this command."
+			"no_permissions": "You don't have permission to use this command.",
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
 		},
 		"titles": {
 			"definitions": "Definitions"

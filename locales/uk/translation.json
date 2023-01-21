@@ -7,11 +7,11 @@
 					"description": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
+					"name": "починається з",
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"ends-with": {
-					"name": "ends-with",
+					"name": "закінчується на",
 					"description": "Only return words that end with this value (mutually exclusive with starts-with)."
 				}
 			},
@@ -23,7 +23,8 @@
 			"not_found": "Перепрошую, я не міг знайти жодних результатів за ваш запит!",
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Помилка Авторизації.",
-			"no_permissions": "You don't have permission to use this command."
+			"no_permissions": "You don't have permission to use this command.",
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
 		},
 		"titles": {
 			"definitions": "Визначення"
@@ -53,7 +54,7 @@
 						"description": "Слово для пошуку визначення (наприклад: ocean)."
 					},
 					"short": {
-						"name": "short",
+						"name": "короткий",
 						"description": "Only return the first definition (default: false)."
 					}
 				}
@@ -68,8 +69,8 @@
 		},
 		"match-word": {
 			"meta": {
-				"name": "match-word",
-				"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+				"name": "відповідне слово",
+				"description": "Відповідає словами, які збігаються зі словом, яке ви вводите (наприклад: к??ик -> котик, с??? -> сова).",
 				"args": {
 					"word": {
 						"name": "слово",
