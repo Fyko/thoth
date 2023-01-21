@@ -428,12 +428,12 @@
 					"pt-BR": "word",
 					"da": "word"
 				},
-				"description": "The word to search close rhymes for (eg: forest).",
+				"description": "The word to search triggers for (eg: cow).",
 				"description_localizations": {
-					"en-US": "The word to search close rhymes for (eg: forest).",
-					"de": "The word to search close rhymes for (eg: forest).",
-					"pt-BR": "The word to search close rhymes for (eg: forest).",
-					"da": "The word to search close rhymes for (eg: forest)."
+					"en-US": "The word to search triggers for (eg: cow).",
+					"de": "The word to search triggers for (eg: cow).",
+					"pt-BR": "The word to search triggers for (eg: cow).",
+					"da": "The word to search triggers for (eg: cow)."
 				},
 				"type": 3,
 				"required": true

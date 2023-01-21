@@ -119,7 +119,7 @@
 				"args": {
 					"word": {
 						"name": "word",
-						"description": "The word to search close rhymes for (eg: forest)."
+						"description": "The word to search triggers for (eg: cow)."
 					}
 				}
 			},
