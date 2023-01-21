@@ -60,6 +60,71 @@
 				}
 			}
 		},
+		"homophones": {
+			"meta": {
+				"name": "homophones",
+				"description": "Responds with homophones (sound-alike words) for your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search homophones for (eg: their)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` homophones for `{{word}}`: \n\n{{words}}"
+		},
+		"holonyms": {
+			"meta": {
+				"name": "holonyms",
+				"description": "Responds with holonyms (what comprises) for your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search homophones for (eg: car)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` holonyms for `{{word}}`: \n\n{{words}}"
+		},
+		"hyponyms": {
+			"meta": {
+				"name": "hyponyms",
+				"description": "Responds with hyponyms (more general) for your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search hyponyms for (eg: car)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` hyponyms for `{{word}}`: \n\n{{words}}"
+		},
+		"close-rhyme": {
+			"meta": {
+				"name": "close-rhyme",
+				"description": "Responds with words that closely rhyme with your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search close rhymes for (eg: forest)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` words that closely rhyme with `{{word}}`: \n\n{{words}}"
+		},
+		"triggers": {
+			"meta": {
+				"name": "triggers",
+				"description": "Responds with words that are statistically associated with your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search triggers for (eg: cow)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` words that closely rhyme with `{{word}}`: \n\n{{words}}"
+		},
 		"invite": {
 			"meta": {
 				"name": "inviter",
