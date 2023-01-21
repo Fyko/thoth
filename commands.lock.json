@@ -1,650 +1,915 @@
 [
-  {
-    "name": "sounds-like",
-    "name_localizations": {
-      "en-US": "sounds-like",
-      "de": "sounds-like",
-      "pt-BR": "soa-como",
-      "da": "sounds-like"
-    },
-    "description": "Responds with words that sound like your query.",
-    "description_localizations": {
-      "en-US": "Responds with words that sound like your query.",
-      "de": "Responds with words that sound like your query.",
-      "pt-BR": "Responde com palavras que soam como a sua pesquisa.",
-      "da": "Responds with words that sound like your query."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to search similarly sounding words for (eg: agile).",
-        "description_localizations": {
-          "en-US": "The word to search similarly sounding words for (eg: agile).",
-          "de": "The word to search similarly sounding words for (eg: agile).",
-          "pt-BR": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: agile).",
-          "da": "The word to search similarly sounding words for (eg: agile)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "similar-meaning",
-    "name_localizations": {
-      "en-US": "similar-meaning",
-      "de": "similar-meaning",
-      "pt-BR": "significado-similar",
-      "da": "similar-meaning"
-    },
-    "description": "Response with words that have a similar meaning to your query.",
-    "description_localizations": {
-      "en-US": "Response with words that have a similar meaning to your query.",
-      "de": "Response with words that have a similar meaning to your query.",
-      "pt-BR": "Responde com palavras que têm um significado semelhante ao da sua pesquisa.",
-      "da": "Response with words that have a similar meaning to your query."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to search similar words for (eg: transgressions).",
-        "description_localizations": {
-          "en-US": "The word to search similar words for (eg: transgressions).",
-          "de": "The word to search similar words for (eg: transgressions).",
-          "pt-BR": "A palavra para pesquisar palavras semelhantes (ex: transgressions).",
-          "da": "The word to search similar words for (eg: transgressions)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "starts-with",
-        "name_localizations": {
-          "en-US": "starts-with",
-          "de": "starts-with",
-          "pt-BR": "inicia-com",
-          "da": "starter-med"
-        },
-        "description": "Only return words that start with this value (mutually exclusive with ends-with).",
-        "description_localizations": {
-          "en-US": "Only return words that start with this value (mutually exclusive with ends-with).",
-          "de": "Only return words that start with this value (mutually exclusive with ends-with).",
-          "pt-BR": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com).",
-          "da": "Returnér kun ord, der starter med denne værdi (gensidigt eksklusiv med endelsen)."
-        },
-        "type": 3
-      },
-      {
-        "name": "ends-with",
-        "name_localizations": {
-          "en-US": "ends-with",
-          "de": "ends-with",
-          "pt-BR": "termina-com",
-          "da": "ender-med"
-        },
-        "description": "Only return words that end with this value (mutually exclusive with starts-with).",
-        "description_localizations": {
-          "en-US": "Only return words that end with this value (mutually exclusive with starts-with).",
-          "de": "Only return words that end with this value (mutually exclusive with starts-with).",
-          "pt-BR": "Somente retorne palavras que terminem com esse valor (mutuamente exclusivo com começa-com).",
-          "da": "Returnér kun ord, der slutter med denne værdi (gensidigt eksklusiv med start-with)."
-        },
-        "type": 3
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "adjective",
-    "name_localizations": {
-      "en-US": "adjective",
-      "de": "adjective",
-      "pt-BR": "adjetivo",
-      "da": "tillægsord"
-    },
-    "description": "Responds with adjectives that describe your query.",
-    "description_localizations": {
-      "en-US": "Responds with adjectives that describe your query.",
-      "de": "Responds with adjectives that describe your query.",
-      "pt-BR": "Responde com adjetivos que descrevem sua pesquisa.",
-      "da": "Svar med adjektiver, der beskriver din forespørgsel."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The noun to search relavent adjectives for (eg: ocean).",
-        "description_localizations": {
-          "en-US": "The noun to search relavent adjectives for (eg: ocean).",
-          "de": "The noun to search relavent adjectives for (eg: ocean).",
-          "pt-BR": "O substantivo para buscar adjetivos de relevância para (ex: ocean).",
-          "da": "Det navneord at søge relevante adjektiver for (fx: ocean)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "similar-spelling",
-    "name_localizations": {
-      "en-US": "similar-spelling",
-      "de": "similar-spelling",
-      "pt-BR": "ortografia-similar",
-      "da": "similar-spelling"
-    },
-    "description": "Responds with words that have a similar spelling to your query.",
-    "description_localizations": {
-      "en-US": "Responds with words that have a similar spelling to your query.",
-      "de": "Responds with words that have a similar spelling to your query.",
-      "pt-BR": "Responde com palavras que possuem uma ortografia semelhante à sua pesquisa.",
-      "da": "Responds with words that have a similar spelling to your query."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to search similar words for (eg: agile).",
-        "description_localizations": {
-          "en-US": "The word to search similar words for (eg: agile).",
-          "de": "The word to search similar words for (eg: agile).",
-          "pt-BR": "A palavra para pesquisar palavras semelhantes para (ex: agile).",
-          "da": "The word to search similar words for (eg: agile)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "noun",
-    "name_localizations": {
-      "en-US": "noun",
-      "de": "noun",
-      "pt-BR": "substantivo",
-      "da": "navneord"
-    },
-    "description": "Responds with nouns that are often described by your query.",
-    "description_localizations": {
-      "en-US": "Responds with nouns that are often described by your query.",
-      "de": "Responds with nouns that are often described by your query.",
-      "pt-BR": "Responde com substantivos que são frequentemente descritos pela sua pesquisa.",
-      "da": "Svarer med navneord, der ofte beskrives af din forespørgsel."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "TThe adjective to search relevant nouns for (eg: yellow).",
-        "description_localizations": {
-          "en-US": "TThe adjective to search relevant nouns for (eg: yellow).",
-          "de": "TThe adjective to search relevant nouns for (eg: yellow).",
-          "pt-BR": "O adjetivo para procurar substantivos relevantes (ex: yellow).",
-          "da": "Tillægsordet for at søge relevante navneord for (fx: yellow)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "definition",
-    "name_localizations": {
-      "en-US": "definition",
-      "de": "definition",
-      "pt-BR": "definição",
-      "da": "definition"
-    },
-    "description": "Responds with the definition of your query from Merriam Webster.",
-    "description_localizations": {
-      "en-US": "Responds with the definition of your query from Merriam Webster.",
-      "de": "Responds with the definition of your query from Merriam Webster.",
-      "pt-BR": "Responde com a definição de sua consulta no Merriam Webster.",
-      "da": "Svar med definitionen af din forespørgsel fra Merriam Webster."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to search a definition for (eg: ocean).",
-        "description_localizations": {
-          "en-US": "The word to search a definition for (eg: ocean).",
-          "de": "The word to search a definition for (eg: ocean).",
-          "pt-BR": "A palavra para pesquisar uma definição para (ex: ocean).",
-          "da": "Ordet der skal søges efter (fx: ocean)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "short",
-        "name_localizations": {
-          "en-US": "short",
-          "de": "short",
-          "pt-BR": "short",
-          "da": "short"
-        },
-        "description": "Only return the first definition (default: false).",
-        "description_localizations": {
-          "en-US": "Only return the first definition (default: false).",
-          "de": "Only return the first definition (default: false).",
-          "pt-BR": "Retornar apenas a primeira definição (padrão: falso).",
-          "da": "Only return the first definition (default: false)."
-        },
-        "type": 5
-      }
-    ]
-  },
-  {
-    "name": "word-of-the-day",
-    "name_localizations": {
-      "en-US": "word-of-the-day",
-      "de": "word-of-the-day",
-      "pt-BR": "palavra-do-dia",
-      "da": "word-of-the-day"
-    },
-    "description": "Responds with the word of the day from Merriam Webster.",
-    "description_localizations": {
-      "en-US": "Responds with the word of the day from Merriam Webster.",
-      "de": "Responds with the word of the day from Merriam Webster.",
-      "pt-BR": "Responde com a palavra do dia do Merriam Webster.",
-      "da": "Responds with the word of the day from Merriam Webster."
-    }
-  },
-  {
-    "name": "that-follow",
-    "name_localizations": {
-      "en-US": "that-follow",
-      "de": "that-follow",
-      "pt-BR": "que-segue",
-      "da": "that-follow"
-    },
-    "description": "Responds with words that could logically follow query.",
-    "description_localizations": {
-      "en-US": "Responds with words that could logically follow query.",
-      "de": "Responds with words that could logically follow query.",
-      "pt-BR": "Respostas com palavras que poderiam logicamente seguir a pesquisa.",
-      "da": "Responds with words that could logically follow query."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to search following words for (eg: open).",
-        "description_localizations": {
-          "en-US": "The word to search following words for (eg: open).",
-          "de": "The word to search following words for (eg: open).",
-          "pt-BR": "A palavra para pesquisar palavras que seguem (ex: open).",
-          "da": "The word to search following words for (eg: open)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "starts-with",
-        "name_localizations": {
-          "en-US": "starts-with",
-          "de": "starts-with",
-          "pt-BR": "inicia-com",
-          "da": "starter-med"
-        },
-        "description": "Only return words that start with this value (mutually exclusive with ends-with).",
-        "description_localizations": {
-          "en-US": "Only return words that start with this value (mutually exclusive with ends-with).",
-          "de": "Only return words that start with this value (mutually exclusive with ends-with).",
-          "pt-BR": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com).",
-          "da": "Returnér kun ord, der starter med denne værdi (gensidigt eksklusiv med endelsen)."
-        },
-        "type": 3
-      },
-      {
-        "name": "ends-with",
-        "name_localizations": {
-          "en-US": "ends-with",
-          "de": "ends-with",
-          "pt-BR": "termina-com",
-          "da": "ender-med"
-        },
-        "description": "Only return words that end with this value (mutually exclusive with starts-with).",
-        "description_localizations": {
-          "en-US": "Only return words that end with this value (mutually exclusive with starts-with).",
-          "de": "Only return words that end with this value (mutually exclusive with starts-with).",
-          "pt-BR": "Somente retorne palavras que terminem com esse valor (mutuamente exclusivo com começa-com).",
-          "da": "Returnér kun ord, der slutter med denne værdi (gensidigt eksklusiv med start-with)."
-        },
-        "type": 3
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "rhyme",
-    "name_localizations": {
-      "en-US": "rhyme",
-      "de": "rhyme",
-      "pt-BR": "rima",
-      "da": "rime"
-    },
-    "description": "Responds with words that rhyme with your query.",
-    "description_localizations": {
-      "en-US": "Responds with words that rhyme with your query.",
-      "de": "Responds with words that rhyme with your query.",
-      "pt-BR": "Responde com palavras que me rimam com a sua pesquisa.",
-      "da": "Svarer med ord, der rimer med din forespørgsel."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to search rhymes for (eg: dime).",
-        "description_localizations": {
-          "en-US": "The word to search rhymes for (eg: dime).",
-          "de": "The word to search rhymes for (eg: dime).",
-          "pt-BR": "A palavra para procurar ritmos (ex: dime).",
-          "da": "The word to search rhymes for (eg: dime)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "match-word",
-    "name_localizations": {
-      "en-US": "match-word",
-      "de": "match-word",
-      "pt-BR": "palavra-correspondente",
-      "da": "match-ord"
-    },
-    "description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-    "description_localizations": {
-      "en-US": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-      "de": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-      "pt-BR": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple, d??? -> date).",
-      "da": "Svarer med ord, der matcher det ord du angiver (fx: a??le -> apple, d???? -> date)."
-    },
-    "options": [
-      {
-        "name": "word",
-        "name_localizations": {
-          "en-US": "word",
-          "de": "word",
-          "pt-BR": "palavra",
-          "da": "ord"
-        },
-        "description": "The word to find matches for (example: a??le).",
-        "description_localizations": {
-          "en-US": "The word to find matches for (example: a??le).",
-          "de": "The word to find matches for (example: a??le).",
-          "pt-BR": "A palavra para encontrar correspondências (exemplo: a??le).",
-          "da": "Ordet til at matche (eksempel: a??le)."
-        },
-        "type": 3,
-        "required": true
-      },
-      {
-        "name": "limit",
-        "name_localizations": {
-          "en-US": "limit",
-          "de": "Grenzwert",
-          "pt-BR": "limite",
-          "da": "begrænsning"
-        },
-        "description": "The maximum amount of results to return (max & default: 50).",
-        "description_localizations": {
-          "en-US": "The maximum amount of results to return (max & default: 50).",
-          "de": "The maximum amount of results to return (max & default: 50).",
-          "pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
-          "da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
-        },
-        "type": 4
-      }
-    ]
-  },
-  {
-    "name": "setup",
-    "name_localizations": {
-      "en-US": "setup",
-      "de": "setup",
-      "pt-BR": "setup",
-      "da": "setup"
-    },
-    "description": "An assortment of configuration commands.",
-    "description_localizations": {
-      "en-US": "An assortment of configuration commands.",
-      "de": "An assortment of configuration commands.",
-      "pt-BR": "An assortment of configuration commands.",
-      "da": "An assortment of configuration commands."
-    },
-    "options": [
-      {
-        "name": "wotd",
-        "name_localizations": {
-          "en-US": "wotd",
-          "de": "wotd",
-          "pt-BR": "wotd",
-          "da": "wotd"
-        },
-        "description": "Configure the Word of the Day channel.",
-        "description_localizations": {
-          "en-US": "Configure the Word of the Day channel.",
-          "de": "Configure the Word of the Day channel.",
-          "pt-BR": "Configure the Word of the Day channel.",
-          "da": "Configure the Word of the Day channel."
-        },
-        "type": 1,
-        "options": [
-          {
-            "name": "channel",
-            "name_localizations": {
-              "en-US": "channel",
-              "de": "channel",
-              "pt-BR": "channel",
-              "da": "channel"
-            },
-            "description": "The channel to set as the Word of the Day channel.",
-            "description_localizations": {
-              "en-US": "The channel to set as the Word of the Day channel.",
-              "de": "The channel to set as the Word of the Day channel.",
-              "pt-BR": "The channel to set as the Word of the Day channel.",
-              "da": "The channel to set as the Word of the Day channel."
-            },
-            "type": 7,
-            "required": true
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "ping",
-    "name_localizations": {
-      "en-US": "ping",
-      "de": "ping",
-      "pt-BR": "ping",
-      "da": "ping"
-    },
-    "description": "Ensures the bot is responding to commands.",
-    "description_localizations": {
-      "en-US": "Ensures the bot is responding to commands.",
-      "de": "Ensures the bot is responding to commands.",
-      "pt-BR": "Garante que o bot está respondendo a comandos.",
-      "da": "Sikrer, at botten reagerer på kommandoer."
-    }
-  },
-  {
-    "name": "invite",
-    "name_localizations": {
-      "en-US": "invite",
-      "de": "invite",
-      "pt-BR": "convite",
-      "da": "invitér"
-    },
-    "description": "Returns an invite link to add Thoth to your server.",
-    "description_localizations": {
-      "en-US": "Returns an invite link to add Thoth to your server.",
-      "de": "Returns an invite link to add Thoth to your server.",
-      "pt-BR": "Envia um link de convite para adicionar Thoth ao seu servidor.",
-      "da": "Returnerer et invitationslink til at tilføje Thoth til din server."
-    }
-  }
+	{
+		"name": "sounds-like",
+		"name_localizations": {
+			"en-US": "sounds-like",
+			"de": "sounds-like",
+			"pt-BR": "soa-como",
+			"da": "sounds-like"
+		},
+		"description": "Responds with words that sound like your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that sound like your query.",
+			"de": "Responds with words that sound like your query.",
+			"pt-BR": "Responde com palavras que soam como a sua pesquisa.",
+			"da": "Responds with words that sound like your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to search similarly sounding words for (eg: agile).",
+				"description_localizations": {
+					"en-US": "The word to search similarly sounding words for (eg: agile).",
+					"de": "The word to search similarly sounding words for (eg: agile).",
+					"pt-BR": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: agile).",
+					"da": "The word to search similarly sounding words for (eg: agile)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "holonyms",
+		"name_localizations": {
+			"en-US": "holonyms",
+			"de": "holonyms",
+			"pt-BR": "holonyms",
+			"da": "holonyms"
+		},
+		"description": "Responds with holonyms (what comprises) for your query.",
+		"description_localizations": {
+			"en-US": "Responds with holonyms (what comprises) for your query.",
+			"de": "Responds with holonyms (what comprises) for your query.",
+			"pt-BR": "Responds with holonyms (what comprises) for your query.",
+			"da": "Responds with holonyms (what comprises) for your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "word",
+					"da": "word"
+				},
+				"description": "The word to search homophones for (eg: car).",
+				"description_localizations": {
+					"en-US": "The word to search homophones for (eg: car).",
+					"de": "The word to search homophones for (eg: car).",
+					"pt-BR": "The word to search homophones for (eg: car).",
+					"da": "The word to search homophones for (eg: car)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "homophones",
+		"name_localizations": {
+			"en-US": "homophones",
+			"de": "homophones",
+			"pt-BR": "homophones",
+			"da": "homophones"
+		},
+		"description": "Responds with homophones (sound-alike words) for your query.",
+		"description_localizations": {
+			"en-US": "Responds with homophones (sound-alike words) for your query.",
+			"de": "Responds with homophones (sound-alike words) for your query.",
+			"pt-BR": "Responds with homophones (sound-alike words) for your query.",
+			"da": "Responds with homophones (sound-alike words) for your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "word",
+					"da": "word"
+				},
+				"description": "The word to search homophones for (eg: their).",
+				"description_localizations": {
+					"en-US": "The word to search homophones for (eg: their).",
+					"de": "The word to search homophones for (eg: their).",
+					"pt-BR": "The word to search homophones for (eg: their).",
+					"da": "The word to search homophones for (eg: their)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "close-rhyme",
+		"name_localizations": {
+			"en-US": "close-rhyme",
+			"de": "close-rhyme",
+			"pt-BR": "close-rhyme",
+			"da": "close-rhyme"
+		},
+		"description": "Responds with words that closely rhyme with your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that closely rhyme with your query.",
+			"de": "Responds with words that closely rhyme with your query.",
+			"pt-BR": "Responds with words that closely rhyme with your query.",
+			"da": "Responds with words that closely rhyme with your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "word",
+					"da": "word"
+				},
+				"description": "The word to search close rhymes for (eg: forest).",
+				"description_localizations": {
+					"en-US": "The word to search close rhymes for (eg: forest).",
+					"de": "The word to search close rhymes for (eg: forest).",
+					"pt-BR": "The word to search close rhymes for (eg: forest).",
+					"da": "The word to search close rhymes for (eg: forest)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "similar-meaning",
+		"name_localizations": {
+			"en-US": "similar-meaning",
+			"de": "similar-meaning",
+			"pt-BR": "significado-similar",
+			"da": "similar-meaning"
+		},
+		"description": "Response with words that have a similar meaning to your query.",
+		"description_localizations": {
+			"en-US": "Response with words that have a similar meaning to your query.",
+			"de": "Response with words that have a similar meaning to your query.",
+			"pt-BR": "Responde com palavras que têm um significado semelhante ao da sua pesquisa.",
+			"da": "Response with words that have a similar meaning to your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to search similar words for (eg: transgressions).",
+				"description_localizations": {
+					"en-US": "The word to search similar words for (eg: transgressions).",
+					"de": "The word to search similar words for (eg: transgressions).",
+					"pt-BR": "A palavra para pesquisar palavras semelhantes (ex: transgressions).",
+					"da": "The word to search similar words for (eg: transgressions)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "starts-with",
+				"name_localizations": {
+					"en-US": "starts-with",
+					"de": "starts-with",
+					"pt-BR": "inicia-com",
+					"da": "starter-med"
+				},
+				"description": "Only return words that start with this value (mutually exclusive with ends-with).",
+				"description_localizations": {
+					"en-US": "Only return words that start with this value (mutually exclusive with ends-with).",
+					"de": "Only return words that start with this value (mutually exclusive with ends-with).",
+					"pt-BR": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com).",
+					"da": "Returnér kun ord, der starter med denne værdi (gensidigt eksklusiv med endelsen)."
+				},
+				"type": 3
+			},
+			{
+				"name": "ends-with",
+				"name_localizations": {
+					"en-US": "ends-with",
+					"de": "ends-with",
+					"pt-BR": "termina-com",
+					"da": "ender-med"
+				},
+				"description": "Only return words that end with this value (mutually exclusive with starts-with).",
+				"description_localizations": {
+					"en-US": "Only return words that end with this value (mutually exclusive with starts-with).",
+					"de": "Only return words that end with this value (mutually exclusive with starts-with).",
+					"pt-BR": "Somente retorne palavras que terminem com esse valor (mutuamente exclusivo com começa-com).",
+					"da": "Returnér kun ord, der slutter med denne værdi (gensidigt eksklusiv med start-with)."
+				},
+				"type": 3
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "adjective",
+		"name_localizations": {
+			"en-US": "adjective",
+			"de": "adjective",
+			"pt-BR": "adjetivo",
+			"da": "tillægsord"
+		},
+		"description": "Responds with adjectives that describe your query.",
+		"description_localizations": {
+			"en-US": "Responds with adjectives that describe your query.",
+			"de": "Responds with adjectives that describe your query.",
+			"pt-BR": "Responde com adjetivos que descrevem sua pesquisa.",
+			"da": "Svar med adjektiver, der beskriver din forespørgsel."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The noun to search relavent adjectives for (eg: ocean).",
+				"description_localizations": {
+					"en-US": "The noun to search relavent adjectives for (eg: ocean).",
+					"de": "The noun to search relavent adjectives for (eg: ocean).",
+					"pt-BR": "O substantivo para buscar adjetivos de relevância para (ex: ocean).",
+					"da": "Det navneord at søge relevante adjektiver for (fx: ocean)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "similar-spelling",
+		"name_localizations": {
+			"en-US": "similar-spelling",
+			"de": "similar-spelling",
+			"pt-BR": "ortografia-similar",
+			"da": "similar-spelling"
+		},
+		"description": "Responds with words that have a similar spelling to your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that have a similar spelling to your query.",
+			"de": "Responds with words that have a similar spelling to your query.",
+			"pt-BR": "Responde com palavras que possuem uma ortografia semelhante à sua pesquisa.",
+			"da": "Responds with words that have a similar spelling to your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to search similar words for (eg: agile).",
+				"description_localizations": {
+					"en-US": "The word to search similar words for (eg: agile).",
+					"de": "The word to search similar words for (eg: agile).",
+					"pt-BR": "A palavra para pesquisar palavras semelhantes para (ex: agile).",
+					"da": "The word to search similar words for (eg: agile)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "triggers",
+		"name_localizations": {
+			"en-US": "triggers",
+			"de": "triggers",
+			"pt-BR": "triggers",
+			"da": "triggers"
+		},
+		"description": "Responds with words that are statistically associated with your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that are statistically associated with your query.",
+			"de": "Responds with words that are statistically associated with your query.",
+			"pt-BR": "Responds with words that are statistically associated with your query.",
+			"da": "Responds with words that are statistically associated with your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "word",
+					"da": "word"
+				},
+				"description": "The word to search close rhymes for (eg: forest).",
+				"description_localizations": {
+					"en-US": "The word to search close rhymes for (eg: forest).",
+					"de": "The word to search close rhymes for (eg: forest).",
+					"pt-BR": "The word to search close rhymes for (eg: forest).",
+					"da": "The word to search close rhymes for (eg: forest)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "noun",
+		"name_localizations": {
+			"en-US": "noun",
+			"de": "noun",
+			"pt-BR": "substantivo",
+			"da": "navneord"
+		},
+		"description": "Responds with nouns that are often described by your query.",
+		"description_localizations": {
+			"en-US": "Responds with nouns that are often described by your query.",
+			"de": "Responds with nouns that are often described by your query.",
+			"pt-BR": "Responde com substantivos que são frequentemente descritos pela sua pesquisa.",
+			"da": "Svarer med navneord, der ofte beskrives af din forespørgsel."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "TThe adjective to search relevant nouns for (eg: yellow).",
+				"description_localizations": {
+					"en-US": "TThe adjective to search relevant nouns for (eg: yellow).",
+					"de": "TThe adjective to search relevant nouns for (eg: yellow).",
+					"pt-BR": "O adjetivo para procurar substantivos relevantes (ex: yellow).",
+					"da": "Tillægsordet for at søge relevante navneord for (fx: yellow)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "definition",
+		"name_localizations": {
+			"en-US": "definition",
+			"de": "definition",
+			"pt-BR": "definição",
+			"da": "definition"
+		},
+		"description": "Responds with the definition of your query from Merriam Webster.",
+		"description_localizations": {
+			"en-US": "Responds with the definition of your query from Merriam Webster.",
+			"de": "Responds with the definition of your query from Merriam Webster.",
+			"pt-BR": "Responde com a definição de sua consulta no Merriam Webster.",
+			"da": "Svar med definitionen af din forespørgsel fra Merriam Webster."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to search a definition for (eg: ocean).",
+				"description_localizations": {
+					"en-US": "The word to search a definition for (eg: ocean).",
+					"de": "The word to search a definition for (eg: ocean).",
+					"pt-BR": "A palavra para pesquisar uma definição para (ex: ocean).",
+					"da": "Ordet der skal søges efter (fx: ocean)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "short",
+				"name_localizations": {
+					"en-US": "short",
+					"de": "short",
+					"pt-BR": "short",
+					"da": "short"
+				},
+				"description": "Only return the first definition (default: false).",
+				"description_localizations": {
+					"en-US": "Only return the first definition (default: false).",
+					"de": "Only return the first definition (default: false).",
+					"pt-BR": "Retornar apenas a primeira definição (padrão: falso).",
+					"da": "Only return the first definition (default: false)."
+				},
+				"type": 5
+			}
+		]
+	},
+	{
+		"name": "word-of-the-day",
+		"name_localizations": {
+			"en-US": "word-of-the-day",
+			"de": "word-of-the-day",
+			"pt-BR": "palavra-do-dia",
+			"da": "word-of-the-day"
+		},
+		"description": "Responds with the word of the day from Merriam Webster.",
+		"description_localizations": {
+			"en-US": "Responds with the word of the day from Merriam Webster.",
+			"de": "Responds with the word of the day from Merriam Webster.",
+			"pt-BR": "Responde com a palavra do dia do Merriam Webster.",
+			"da": "Responds with the word of the day from Merriam Webster."
+		}
+	},
+	{
+		"name": "that-follow",
+		"name_localizations": {
+			"en-US": "that-follow",
+			"de": "that-follow",
+			"pt-BR": "que-segue",
+			"da": "that-follow"
+		},
+		"description": "Responds with words that could logically follow query.",
+		"description_localizations": {
+			"en-US": "Responds with words that could logically follow query.",
+			"de": "Responds with words that could logically follow query.",
+			"pt-BR": "Respostas com palavras que poderiam logicamente seguir a pesquisa.",
+			"da": "Responds with words that could logically follow query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to search following words for (eg: open).",
+				"description_localizations": {
+					"en-US": "The word to search following words for (eg: open).",
+					"de": "The word to search following words for (eg: open).",
+					"pt-BR": "A palavra para pesquisar palavras que seguem (ex: open).",
+					"da": "The word to search following words for (eg: open)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "starts-with",
+				"name_localizations": {
+					"en-US": "starts-with",
+					"de": "starts-with",
+					"pt-BR": "inicia-com",
+					"da": "starter-med"
+				},
+				"description": "Only return words that start with this value (mutually exclusive with ends-with).",
+				"description_localizations": {
+					"en-US": "Only return words that start with this value (mutually exclusive with ends-with).",
+					"de": "Only return words that start with this value (mutually exclusive with ends-with).",
+					"pt-BR": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com).",
+					"da": "Returnér kun ord, der starter med denne værdi (gensidigt eksklusiv med endelsen)."
+				},
+				"type": 3
+			},
+			{
+				"name": "ends-with",
+				"name_localizations": {
+					"en-US": "ends-with",
+					"de": "ends-with",
+					"pt-BR": "termina-com",
+					"da": "ender-med"
+				},
+				"description": "Only return words that end with this value (mutually exclusive with starts-with).",
+				"description_localizations": {
+					"en-US": "Only return words that end with this value (mutually exclusive with starts-with).",
+					"de": "Only return words that end with this value (mutually exclusive with starts-with).",
+					"pt-BR": "Somente retorne palavras que terminem com esse valor (mutuamente exclusivo com começa-com).",
+					"da": "Returnér kun ord, der slutter med denne værdi (gensidigt eksklusiv med start-with)."
+				},
+				"type": 3
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "rhyme",
+		"name_localizations": {
+			"en-US": "rhyme",
+			"de": "rhyme",
+			"pt-BR": "rima",
+			"da": "rime"
+		},
+		"description": "Responds with words that rhyme with your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that rhyme with your query.",
+			"de": "Responds with words that rhyme with your query.",
+			"pt-BR": "Responde com palavras que me rimam com a sua pesquisa.",
+			"da": "Svarer med ord, der rimer med din forespørgsel."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to search rhymes for (eg: dime).",
+				"description_localizations": {
+					"en-US": "The word to search rhymes for (eg: dime).",
+					"de": "The word to search rhymes for (eg: dime).",
+					"pt-BR": "A palavra para procurar ritmos (ex: dime).",
+					"da": "The word to search rhymes for (eg: dime)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "match-word",
+		"name_localizations": {
+			"en-US": "match-word",
+			"de": "match-word",
+			"pt-BR": "palavra-correspondente",
+			"da": "match-ord"
+		},
+		"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+		"description_localizations": {
+			"en-US": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"de": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"pt-BR": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple).",
+			"da": "Svarer med ord, der matcher det ord du angiver (fx: a??le -> apple, d???? -> date)."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "palavra",
+					"da": "ord"
+				},
+				"description": "The word to find matches for (example: a??le).",
+				"description_localizations": {
+					"en-US": "The word to find matches for (example: a??le).",
+					"de": "The word to find matches for (example: a??le).",
+					"pt-BR": "A palavra para encontrar correspondências (exemplo: a??le).",
+					"da": "Ordet til at matche (eksempel: a??le)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "hyponyms",
+		"name_localizations": {
+			"en-US": "hyponyms",
+			"de": "hyponyms",
+			"pt-BR": "hyponyms",
+			"da": "hyponyms"
+		},
+		"description": "Responds with hyponyms (more general) for your query.",
+		"description_localizations": {
+			"en-US": "Responds with hyponyms (more general) for your query.",
+			"de": "Responds with hyponyms (more general) for your query.",
+			"pt-BR": "Responds with hyponyms (more general) for your query.",
+			"da": "Responds with hyponyms (more general) for your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"de": "word",
+					"pt-BR": "word",
+					"da": "word"
+				},
+				"description": "The word to search hyponyms for (eg: car).",
+				"description_localizations": {
+					"en-US": "The word to search hyponyms for (eg: car).",
+					"de": "The word to search hyponyms for (eg: car).",
+					"pt-BR": "The word to search hyponyms for (eg: car).",
+					"da": "The word to search hyponyms for (eg: car)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"de": "grenzwert",
+					"pt-BR": "limite",
+					"da": "begrænsning"
+				},
+				"description": "The maximum amount of results to return (max & default: 50).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max & default: 50).",
+					"de": "The maximum amount of results to return (max & default: 50).",
+					"pt-BR": "A quantidade máxima de resultados para retornar (max & padrão: 50).",
+					"da": "Det maksimale antal resultater der skal returneres (maks. & standard: 50)."
+				},
+				"type": 4
+			}
+		]
+	},
+	{
+		"name": "setup",
+		"name_localizations": {
+			"en-US": "setup",
+			"de": "setup",
+			"pt-BR": "setup",
+			"da": "setup"
+		},
+		"description": "An assortment of configuration commands.",
+		"description_localizations": {
+			"en-US": "An assortment of configuration commands.",
+			"de": "An assortment of configuration commands.",
+			"pt-BR": "An assortment of configuration commands.",
+			"da": "An assortment of configuration commands."
+		},
+		"options": [
+			{
+				"name": "wotd",
+				"name_localizations": {
+					"en-US": "wotd",
+					"de": "wotd",
+					"pt-BR": "wotd",
+					"da": "wotd"
+				},
+				"description": "Configure the Word of the Day channel.",
+				"description_localizations": {
+					"en-US": "Configure the Word of the Day channel.",
+					"de": "Configure the Word of the Day channel.",
+					"pt-BR": "Configure the Word of the Day channel.",
+					"da": "Configure the Word of the Day channel."
+				},
+				"type": 1,
+				"options": [
+					{
+						"name": "channel",
+						"name_localizations": {
+							"en-US": "channel",
+							"de": "channel",
+							"pt-BR": "channel",
+							"da": "channel"
+						},
+						"description": "The channel to set as the Word of the Day channel.",
+						"description_localizations": {
+							"en-US": "The channel to set as the Word of the Day channel.",
+							"de": "The channel to set as the Word of the Day channel.",
+							"pt-BR": "The channel to set as the Word of the Day channel.",
+							"da": "The channel to set as the Word of the Day channel."
+						},
+						"type": 7,
+						"required": true
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "ping",
+		"name_localizations": {
+			"en-US": "ping",
+			"de": "ping",
+			"pt-BR": "ping",
+			"da": "ping"
+		},
+		"description": "Ensures the bot is responding to commands.",
+		"description_localizations": {
+			"en-US": "Ensures the bot is responding to commands.",
+			"de": "Ensures the bot is responding to commands.",
+			"pt-BR": "Garante que o bot está respondendo a comandos.",
+			"da": "Sikrer, at botten reagerer på kommandoer."
+		}
+	},
+	{
+		"name": "invite",
+		"name_localizations": {
+			"en-US": "invite",
+			"de": "invite",
+			"pt-BR": "convite",
+			"da": "invitér"
+		},
+		"description": "Returns an invite link to add Thoth to your server.",
+		"description_localizations": {
+			"en-US": "Returns an invite link to add Thoth to your server.",
+			"de": "Returns an invite link to add Thoth to your server.",
+			"pt-BR": "Envia um link de convite para adicionar Thoth ao seu servidor.",
+			"da": "Returnerer et invitationslink til at tilføje Thoth til din server."
+		}
+	}
 ]
