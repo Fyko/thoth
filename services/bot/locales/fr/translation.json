@@ -1,0 +1,281 @@
+{
+	"common": {
+		"commands": {
+			"args": {
+				"limit": {
+					"name": "limite",
+					"description": "Nombre maximum de résultats à retourner (le nombre par défaut et maximum est 50)."
+				},
+				"starts-with": {
+					"name": "commence-par",
+					"description": "Ne retourne que les mots qui commencent par cette valeur (mutuellement exclusif avec le paramètre termine-par)."
+				},
+				"ends-with": {
+					"name": "termine-par",
+					"description": "Ne retourne que les mots qui se terminent par cette valeur (mutuellement exclusif avec le paramètre commence-par)."
+				}
+			},
+			"starts_with_blurb": " qui commence par {{word}}",
+			"ends_with_blurb": " qui se termine par {{word}}"
+		},
+		"errors": {
+			"with_clause_exclusivity": "Les paramètres `commence-par` et `termine-par` sont mutuellement exclusifs -- vous ne pouvez pas les utiliser en même temps.",
+			"not_found": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête !",
+			"not_found_w_suggestions": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête ! Peut-être que vous vouliez dire : ",
+			"unauthorized": "Non autorisé.",
+			"no_permissions": "Vous n'avez pas la permission d'utiliser cette commande.",
+			"banned": "J'ai peur que vous ayez été banni de l'utilisation de Thoth.\nRaison : {{- reason}}"
+		},
+		"titles": {
+			"definitions": "Définitions"
+		}
+	},
+	"commands": {
+		"adjective": {
+			"meta": {
+				"name": "adjectif",
+				"description": "Répond avec des adjectifs qui décrivent votre requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le nom pour lequel il faut chercher des adjectifs relatifs (ex : ocean)."
+					}
+				}
+			},
+			"success": "J'ai trouvé `{{found_count}}` adjectifs pour décrire `{{word}}`: \n\n{{words}}"
+		},
+		"definition": {
+			"meta": {
+				"name": "définition",
+				"description": "Retourne la définition de votre mot à partir de Merriam Webster.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher une définition (ex : ocean)."
+					},
+					"short": {
+						"name": "court",
+						"description": "Ne retourne que la première définition (part défaut : faux)."
+					}
+				}
+			}
+		},
+		"homophones": {
+			"meta": {
+				"name": "homophones",
+				"description": "Responds with homophones (sound-alike words) for your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search homophones for (eg: their)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` homophones for `{{word}}`: \n\n{{words}}"
+		},
+		"holonyms": {
+			"meta": {
+				"name": "holonyms",
+				"description": "Responds with holonyms (what comprises) for your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search homophones for (eg: car)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` holonyms for `{{word}}`: \n\n{{words}}"
+		},
+		"hyponyms": {
+			"meta": {
+				"name": "hyponyms",
+				"description": "Responds with hyponyms (more general) for your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search hyponyms for (eg: car)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` hyponyms for `{{word}}`: \n\n{{words}}"
+		},
+		"close-rhyme": {
+			"meta": {
+				"name": "close-rhyme",
+				"description": "Responds with words that closely rhyme with your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search close rhymes for (eg: forest)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` words that closely rhyme with `{{word}}`: \n\n{{words}}"
+		},
+		"triggers": {
+			"meta": {
+				"name": "triggers",
+				"description": "Responds with words that are statistically associated with your query.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "The word to search triggers for (eg: cow)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` words that closely rhyme with `{{word}}`: \n\n{{words}}"
+		},
+		"invite": {
+			"meta": {
+				"name": "inviter",
+				"description": "Retourne un lien d'invitation pour ajouter Thoth à votre serveur."
+			},
+			"success": "Vous souhaitez ajouter Thoth à votre serveur ? [Cliquez ici]({{link}}) !"
+		},
+		"match-word": {
+			"meta": {
+				"name": "mot-correspondant",
+				"description": "Retourne des mots qui correspondent au mot que vous avez fourni (ex : a??le -> apple, d??? -> date).",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut trouver des correspondances (ex : a??le)."
+					}
+				}
+			},
+			"success": "J'ai trouvé `{{found_count}}` adjectifs pour décrire `{{word}}`: \n\n{{words}}"
+		},
+		"noun": {
+			"meta": {
+				"name": "nom",
+				"description": "Retourne les noms communs qui sont souvent décrits par votre requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "L'adjectif pour lequel il faut chercher des noms communs relatifs (ex : yellow)."
+					}
+				}
+			},
+			"success": "J'ai trouvé `{{found_count}}` souvent décrits par `{{word}}`: \n\n{{words}}"
+		},
+		"ping": {
+			"meta": {
+				"name": "ping",
+				"description": "S'assurer que le bot répond aux commandes."
+			},
+			"pongs": [
+				"Euhh, bonjour ?",
+				"Qu'est-ce que je peux faire pour vous ?",
+				"Pourquoi me dérangez-vous ?",
+				"Mhm ?",
+				"Oui ?",
+				"Qu'est-ce qui se passe avec vous, humains chétifs, et votre désir constant de me déranger ?",
+				"De tous ceux qui sont ici, vous avez choisi de me déranger ?",
+				"Alors *ceci* est le sens de la vie ?",
+				"Pouvons-nous juste en finir avec ça ?? J'ai des trucs à faire.",
+				"C'est tout ?",
+				"Pong !",
+				"Refaites-le. Je vous mets au défi."
+			]
+		},
+		"rhyme": {
+			"meta": {
+				"name": "rime",
+				"description": "Répond avec des mots qui riment avec votre requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher une rime (ex : dime)."
+					}
+				}
+			},
+			"success": "J'ai trouvé `{{found_count}}` mots qui riment avec `{{word}}`: \n\n{{words}}"
+		},
+		"setup": {
+			"meta": {
+				"name": "configuration",
+				"description": "Un assortiment de commandes de configuration."
+			},
+			"wotd": {
+				"meta": {
+					"name": "mdj",
+					"description": "Configurer le salon du Mot du Jour.",
+					"args": {
+						"channel": {
+							"name": "salon",
+							"description": "Le salon à définir comme le salon Mot du Jour."
+						}
+					}
+				},
+				"errors": {
+					"guild_text_only": "Le salon du Mot du Jour doit être un salon textuel !",
+					"no_perms": "Je n'ai pas la permission de créer un webhook dans {{- channel}}."
+				},
+				"success": "Le Mot du Jour sera envoyé dans le salon {{- channel}} tous les jours à <t:1667538001:t> (00 h GMT-5).",
+				"no_channel": "Le salon à définir comme le salon du Mot du Jour."
+			}
+		},
+		"similar-meaning": {
+			"meta": {
+				"name": "synonyme",
+				"description": "Retourne des mots qui ont une signification similaire à celle de votre requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher des synonymes (ex : transgressions)."
+					}
+				}
+			},
+			"generic_success": "J'ai trouvé `{{found_count}}` synonymes de `{{word}}`{{rest}}: \n\n{{words}}",
+			"starts_with_success": "J'ai trouvé `{{found_count}}` synonymes de `{{word}}`et qui commencent par `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "J'ai trouvé `{{found_count}}` synonymes de `{{word}}`et qui se terminent par `{{ends_with}}`: \n\n{{words}}"
+		},
+		"similar-spelling": {
+			"meta": {
+				"name": "paronyme",
+				"description": "Retourne des mots qui ont une orthographe proche de celle de votre requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher des mots avec une orthographe proche (par exemple : agile)."
+					}
+				}
+			},
+			"success": "J'ai trouvé `{{found_count}}` paronymes de `{{word}}`: \n\n{{words}}"
+		},
+		"sounds-like": {
+			"meta": {
+				"name": "sonne-comme",
+				"description": "Retourne des mots qui sonnent comme votre requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher des mots à consonance similaire (par exemple : agile)."
+					}
+				}
+			},
+			"success": "J'ai trouvé `{{found_count}}` mots qui sonnent comme `{{word}}`: \n\n{{words}}"
+		},
+		"that-follow": {
+			"meta": {
+				"name": "qui-suit",
+				"description": "Retourne des mots qui pourraient être à la suite de la requête.",
+				"args": {
+					"word": {
+						"name": "mot",
+						"description": "Le mot pour lequel il faut chercher les mots qui peuvent le suivre (ex : open)."
+					}
+				}
+			},
+			"generic_success": "J'ai trouvé `{{found_count}}` mots qui peuvent suivre `{{word}}`: \n\n{{words}}",
+			"starts_with_success": "J'ai trouvé `{{found_count}}` mots qui peuvent suivre `{{word}}` et qui commencent par `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "J'ai trouvé `{{found_count}}` mots qui peuvent suivre `{{word}}` et qui se terminent par `{{ends_with}}`: \n\n{{words}}"
+		},
+		"word-of-the-day": {
+			"meta": {
+				"name": "mot-du-jour",
+				"description": "Retourne le mot du jour d'après Merriam Webster."
+			}
+		}
+	}
+}
