@@ -3,8 +3,8 @@ version: '3.7'
 services:
   thoth:
     build:
-      context: ./services/bot
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./services/bot/Dockerfile
     ports:
       - '2399:2399'
     restart: unless-stopped

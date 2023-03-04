@@ -1,5 +1,9 @@
 # Packages
 node_modules
+packages/**/node_modules
+packages/**/dist
+services/**/node_modules
+services/**/dist
 
 # Log files
 logs
@@ -39,7 +43,24 @@ LICENSE
 .github
 .git
 .gitattributes
-.gitignore
-
 target
 **/target
+# node mods
+
+
+.yarn/cache
+.yarn/install-state.gz
+
+.github
+.husky
+.vscode
+scripts
+target
+.denolingignore
+.dockerignore
+.eslintrc.json
+.lintstagedrc.json
+.prettierrc.json
+denolint.json
+README.md
+.env
