@@ -7,7 +7,7 @@
 					"description": "Het maximum aantal resultaten om terug te keren (max & standaard: 50)."
 				},
 				"starts-with": {
-					"name": "starts-with",
+					"name": "Beginnende met",
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"ends-with": {
