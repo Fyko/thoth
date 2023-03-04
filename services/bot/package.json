@@ -37,7 +37,7 @@
 		"discord-api-types": "^0.37.14",
 		"discord-verify": "^1.0.0",
 		"dotenv": "^16.0.3",
-		"fastify": "^4.9.2",
+		"fastify": "^4.10.2",
 		"fastify-metrics": "^10.0.0",
 		"fs-nextra": "^0.5.1",
 		"i18next": "^21.10.0",
