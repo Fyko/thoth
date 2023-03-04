@@ -20,7 +20,7 @@ jobs:
           tags: latest ${{ github.sha }} # important!
           context: ./thothd
           dockerfiles: |
-            ./thothd/Dockerfile
+            ./services/thothd/Dockerfile
           build-args: |
             CREATED_AT=${{ env.datetime }}
             GITHUB_SHA=${{ github.sha }}

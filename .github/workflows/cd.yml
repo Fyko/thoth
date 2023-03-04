@@ -25,7 +25,7 @@ jobs:
           image: fyko/thoth
           tags: latest ${{ github.sha }} # important!
           dockerfiles: |
-            ./Dockerfile
+            ./services/bot/Dockerfile
           build-args: |
             CREATED_AT=${{ env.datetime }}
             GITHUB_SHA=${{ github.sha }}

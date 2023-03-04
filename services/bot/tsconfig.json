@@ -1,0 +1,17 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "dist",
+		"paths": {
+			"#util/*": ["src/util/*"],
+			"#mw/*": ["src/util/mw/*"],
+			"#interactions/*": ["src/interactions/*"],
+			"#mw": ["src/util/mw/index.ts"],
+			"#structures": ["src/structures/index.ts"],
+			"#constants": ["src/util/constants.ts"],
+			"#logger": ["src/util/logger.ts"]
+		}
+	},
+	"include": ["src"]
+}

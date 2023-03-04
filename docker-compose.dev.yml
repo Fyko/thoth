@@ -3,7 +3,7 @@ version: '3.7'
 services:
   thoth:
     build:
-      context: .
+      context: ./services/bot
       dockerfile: Dockerfile
     ports:
       - '2399:2399'
@@ -37,7 +37,7 @@ services:
 
   thothd:
     build:
-      context: ./thothd
+      context: ./services/thothd
       dockerfile: Dockerfile
     environment:
       GATEWAY_HOST: 'gateway'

@@ -18,16 +18,6 @@
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"skipLibCheck": true,
-		"paths": {
-			"#util/*": ["src/util/*"],
-			"#mw/*": ["src/util/mw/*"],
-			"#interactions/*": ["src/interactions/*"],
-			"#mw": ["src/util/mw/index.ts"],
-			"#structures": ["src/structures/index.ts"],
-			"#constants": ["src/util/constants.ts"],
-			"#logger": ["src/util/logger.ts"]
-		}
 	},
-	"exclude": ["node_modules", "tests"],
-	"include": ["src", "lib"]
+	"exclude": ["node_modules"],
 }

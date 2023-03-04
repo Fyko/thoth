@@ -1,0 +1,6 @@
+{
+	"extends": ["../../.eslintrc.json", "neon/browser", "neon/react", "neon/next"],
+	"parserOptions": {
+		"project": "./tsconfig.eslint.json"
+	}
+}
