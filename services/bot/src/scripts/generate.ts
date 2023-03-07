@@ -24,7 +24,7 @@ export async function generateCommandsArray(): Promise<Record<string, unknown>[]
 }
 
 async function main() {
-	await loadTranslations();
+	await loadTranslations(fileURLToPath(new URL('../locales', import.meta.url)));
 
 	const commands = (await generateCommandsArray()).filter((cmd) => !cmd.dev);
 	return writeFile(join(process.cwd(), 'commands.lock.json'), JSON.stringify(commands, null, 2));

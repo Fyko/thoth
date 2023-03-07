@@ -103,13 +103,13 @@ export async function loadCommands(commandStore: Collection<string, Command>, ci
 	return commandStore;
 }
 
-export async function loadTranslations() {
+export async function loadTranslations(path: string) {
 	i18next.use(Backend);
 	const langs = ['en-US', 'de', 'pt-BR', 'da'];
 
 	return i18next.init({
 		backend: {
-			paths: [(lng, ns) => `./locales/${lng}/${ns}.json`],
+			paths: [(lng, ns) => `${path}/${lng}/${ns}.json`],
 		},
 		preload: langs,
 		supportedLngs: langs,

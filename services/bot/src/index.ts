@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import * as crypto from 'node:crypto';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import process from 'node:process';
+import { fileURLToPath, URL } from 'node:url';
 import { Collection } from '@discordjs/collection';
 import { InteractionType } from 'discord-api-types/v10';
 import type { APIInteraction, RESTGetAPIUserResult } from 'discord-api-types/v10';
@@ -79,7 +80,8 @@ new Gauge({
 async function start() {
 	logger.debug('Starting Thoth');
 
-	await loadTranslations();
+	const translationsPath = fileURLToPath(new URL('locales', import.meta.url));
+	await loadTranslations(translationsPath);
 
 	await loadCommands(commands);
 
