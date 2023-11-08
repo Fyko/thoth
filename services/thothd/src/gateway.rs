@@ -31,7 +31,10 @@ pub fn handle_event(shard_id: u64, event: Event, ctx: Arc<Context>) {
         }
 
         Event::GuildDelete(guild) => {
-            tracing::info!("[event::guilddelete] shard {shard_id} guild delete {}", guild.id);
+            tracing::info!(
+                "[event::guilddelete] shard {shard_id} guild delete {}",
+                guild.id
+            );
             if !guild.unavailable {
                 ctx.guilds.lock().unwrap().remove(&guild.id.get());
             }

@@ -1,0 +1,216 @@
+{
+	"common": {
+		"commands": {
+			"args": {
+				"limit": {
+					"name": "limite",
+					"description": "A quantidade máxima de resultados para retornar (max & padrão: 50)."
+				},
+				"starts-with": {
+					"name": "inicia-com",
+					"description": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com)."
+				},
+				"ends-with": {
+					"name": "termina-com",
+					"description": "Somente retorne palavras que terminem com esse valor (mutuamente exclusivo com começa-com)."
+				}
+			},
+			"starts_with_blurb": " isso começa com {{word}}",
+			"ends_with_blurb": " isso termina com {{word}}"
+		},
+		"errors": {
+			"with_clause_exclusivity": "As opções `começa-com` e `termina-com` são mutuamente exclusivas -- você não pode usá-las ao mesmo tempo.",
+			"not_found": "Desculpe, não consegui encontrar resultados para a sua pesquisa!",
+			"not_found_w_suggestions": "Desculpe, não consegui encontrar resultados para a sua pesquisa! Você quis dizer: ",
+			"unauthorized": "Não autorizado.",
+			"no_permissions": "You don't have permission to use this command.",
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+		},
+		"titles": {
+			"definitions": "Definições"
+		}
+	},
+	"commands": {
+		"adjective": {
+			"meta": {
+				"name": "adjetivo",
+				"description": "Responde com adjetivos que descrevem sua pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "O substantivo para buscar adjetivos de relevância para (ex: ocean)."
+					}
+				}
+			},
+			"success": "Eu encontrei `{{found_count}}` adjetivos para descrever `{{word}}`: \n\n{{words}}"
+		},
+		"definition": {
+			"meta": {
+				"name": "definição",
+				"description": "Responde com a definição de sua consulta no Merriam Webster.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para pesquisar uma definição para (ex: ocean)."
+					},
+					"short": {
+						"name": "short",
+						"description": "Retornar apenas a primeira definição (padrão: falso)."
+					}
+				}
+			}
+		},
+		"invite": {
+			"meta": {
+				"name": "convite",
+				"description": "Envia um link de convite para adicionar Thoth ao seu servidor."
+			},
+			"success": "Quer adicionar Thoth ao seu servidor? [Clique aqui]({{link}})!"
+		},
+		"match-word": {
+			"meta": {
+				"name": "palavra-correspondente",
+				"description": "Responde com palavras que coincidem com a palavra que você fornecer (ex: a??le -> apple).",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para encontrar correspondências (exemplo: a??le)."
+					}
+				}
+			},
+			"success": "Eu encontrei `{{found_count}}` palavrar que se coincidem com `{{word}}`: \n\n{{words}}"
+		},
+		"noun": {
+			"meta": {
+				"name": "substantivo",
+				"description": "Responde com substantivos que são frequentemente descritos pela sua pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "O adjetivo para procurar substantivos relevantes (ex: yellow)."
+					}
+				}
+			},
+			"success": "Eu encontrei `{{found_count}}` substantivos para `{{word}}`: \n\n{{words}}"
+		},
+		"ping": {
+			"meta": {
+				"name": "ping",
+				"description": "Garante que o bot está respondendo a comandos."
+			},
+			"pongs": [
+				"Hmm, olá?",
+				"O que posso fazer por vc?",
+				"Por que você está me incomodando?",
+				"Hmm?",
+				"Sim?",
+				"O que há com vocês humanos insignificantes e o desejo constante de me incomodar?",
+				"De todos aqui, você escolheu me incomodar?",
+				"Então, *este* é o significado da vida?",
+				"A gente pode acabar logo com isso?? Eu tenho coisas pra fazer.",
+				"Isso é tudo?",
+				"Pong!",
+				"Faz de novo. Eu te desafio."
+			]
+		},
+		"rhyme": {
+			"meta": {
+				"name": "rima",
+				"description": "Responde com palavras que me rimam com a sua pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para procurar ritmos (ex: dime)."
+					}
+				}
+			},
+			"success": "Eu encontrei `{{found_count}}` palavras que rimam com `{{word}}`: \n\n{{words}}"
+		},
+		"setup": {
+			"meta": {
+				"name": "setup",
+				"description": "An assortment of configuration commands."
+			},
+			"wotd": {
+				"meta": {
+					"name": "wotd",
+					"description": "Configure the Word of the Day channel.",
+					"args": {
+						"channel": {
+							"name": "channel",
+							"description": "The channel to set as the Word of the Day channel."
+						}
+					}
+				},
+				"errors": {
+					"guild_text_only": "The Word of The Day channel must be a text channel!",
+					"no_perms": "I don't have permissions to create a webhook in {{- channel}}."
+				},
+				"success": "The Word of The Day will be posted in {{- channel}} every day at <t:1667538001:t> (12am GMT-5).",
+				"no_channel": "You must provide a channel to set as the Word of the Day channel."
+			}
+		},
+		"similar-meaning": {
+			"meta": {
+				"name": "significado-similar",
+				"description": "Responde com palavras que têm um significado semelhante ao da sua pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras semelhantes (ex: transgressions)."
+					}
+				}
+			},
+			"generic_success": "Eu encontrei `{{found_count}}` palavras semelhantes a `{{word}}`{{rest}}: \n\n{{words}}",
+			"starts_with_success": "Eu encontrei `{{found_count}}` palavras semelhantes a `{{word}}` e começão com `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "Eu encontrei `{{found_count}}` palavras semelhantes a `{{word}}` e terminam com `{{ends_with}}`: \n\n{{words}}"
+		},
+		"similar-spelling": {
+			"meta": {
+				"name": "ortografia-similar",
+				"description": "Responde com palavras que possuem uma ortografia semelhante à sua pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras semelhantes para (ex: agile)."
+					}
+				}
+			},
+			"success": "Encontrei `{{found_count}}` palavras que estão ortografadas de forma semelhante em `{{word}}`: \n\n{{words}}"
+		},
+		"sounds-like": {
+			"meta": {
+				"name": "soa-como",
+				"description": "Responde com palavras que soam como a sua pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras sonoramente semelhantes para (ex: agile)."
+					}
+				}
+			},
+			"success": "Eu encontrei `{{found_count}}` palavras que soam como `{{word}}`: \n\n{{words}}"
+		},
+		"that-follow": {
+			"meta": {
+				"name": "que-segue",
+				"description": "Respostas com palavras que poderiam logicamente seguir a pesquisa.",
+				"args": {
+					"word": {
+						"name": "palavra",
+						"description": "A palavra para pesquisar palavras que seguem (ex: open)."
+					}
+				}
+			},
+			"generic_success": "Eu encontrei `{{found_count}}` palavras que logicamente seguem `{{word}}`: \n\n{{words}}",
+			"starts_with_success": "Eu encontrei `{{found_count}}` palavras que logicamente seguem `{{word}}` que começam com `{{starts_with}}`: \n\n{{words}}",
+			"ends_with_success": "Eu encontrei `{{found_count}}` palavras que seguem logicamente `{{word}}` que terminam com `{{ends_with}}`: \n\n{{words}}"
+		},
+		"word-of-the-day": {
+			"meta": {
+				"name": "palavra-do-dia",
+				"description": "Responde com a palavra do dia do Merriam Webster."
+			}
+		}
+	}
+}

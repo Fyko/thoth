@@ -1,0 +1,28 @@
+[package]
+name = "thoth"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+redis = { version = "0.23", features = ["tokio-comp", "connection-manager"] }
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter", "json"] }
+twilight-http = { version = "0.15", default-features = false, features = ["rustls-webpki-roots"] }
+twilight-cache-inmemory = { version = "0.15", features = ["permission-calculator"] }
+twilight-gateway = { version = "0.15", default-features = false, features = ["rustls-webpki-roots", "twilight-http"] }
+twilight-model = "0.15"
+serde = { version = "1.0.192", features = ["derive"] }
+once_cell = "1.18.0"
+envy = "0.4.2"
+sqlx = { version = "0.7.2", features = ["postgres", "runtime-tokio-rustls"] }
+vesper = { version = "0.11.0", features = ["bulk"] }
+rust-i18n = "2.2.1"
+rand = "0.8.5"
+indoc = "2.0.4"
+url = "2.4.1"
+url-search-params = "12.0.0"

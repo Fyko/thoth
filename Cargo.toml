@@ -1,2 +1,3 @@
 [workspace]
-members = ["services/thothd"]
+members = ["services/thothd", "services/thoth"]
+resolver = "2"
