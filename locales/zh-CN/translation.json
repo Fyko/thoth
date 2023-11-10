@@ -6,6 +6,10 @@
 					"name": "limit",
 					"description": "返回结果的最大数量(最大值和默认值：50)。"
 				},
+				"hide": {
+					"name": "hide",
+					"description": "Whether or not to hide the command response from other users (default: True)."
+				},
 				"starts-with": {
 					"name": "开头为",
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
@@ -24,7 +28,9 @@
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Unauthorized.",
 			"no_permissions": "You don't have permission to use this command.",
-			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}",
+			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
 		},
 		"titles": {
 			"definitions": "Definitions"
