@@ -30,6 +30,7 @@ declare global {
 			DISCORD_APPLICATION_ID: string;
 			DISCORD_TOKEN: string;
 			GUILD_LOG_WEBHOOK_URL: string;
+			NODE_ENV: 'development' | 'production';
 			PORT: string;
 			PRIVACY_URL: string;
 			REDIS_HOST: string;
