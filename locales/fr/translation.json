@@ -6,6 +6,10 @@
 					"name": "limite",
 					"description": "Nombre maximum de résultats à retourner (le nombre par défaut et maximum est 50)."
 				},
+				"hide": {
+					"name": "hide",
+					"description": "Whether or not to hide the command response from other users (default: True)."
+				},
 				"starts-with": {
 					"name": "commence-par",
 					"description": "Ne retourne que les mots qui commencent par cette valeur (mutuellement exclusif avec le paramètre termine-par)."
@@ -24,7 +28,9 @@
 			"not_found_w_suggestions": "Je suis désolé, je n'ai trouvé aucun résultat pour votre requête ! Peut-être que vous vouliez dire : ",
 			"unauthorized": "Non autorisé.",
 			"no_permissions": "Vous n'avez pas la permission d'utiliser cette commande.",
-			"banned": "J'ai peur que vous ayez été banni de l'utilisation de Thoth.\nRaison : {{- reason}}"
+			"banned": "J'ai peur que vous ayez été banni de l'utilisation de Thoth.\nRaison : {{- reason}}",
+			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
 		},
 		"titles": {
 			"definitions": "Définitions"
