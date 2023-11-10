@@ -1,17 +1,15 @@
-import { Buffer } from 'node:buffer';
 import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import { Command, createButton, createMessageActionRow } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
 import { ButtonStyle } from 'discord-api-types/v10';
-import { AttachmentBuilder, ComponentType } from 'discord.js';
+import { ComponentType } from 'discord.js';
 import i18n from 'i18next';
 import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
-import { fetch } from 'undici';
 import type DefinitionCommand from '#interactions/commands/general/definition.js';
 import { logger } from '#logger';
-import { createPronunciationURL, fetchDefinition } from '#mw';
+import { fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
 import { RedisManager } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
@@ -90,7 +88,7 @@ export default class extends Command<typeof DefinitionCommand> {
 
 		const { hwi, def, meta, fl } = definition;
 
-		const attachment = createPronunciationURL(hwi.prs?.[0]!.sound?.audio);
+		// const attachment = createPronunciationURL(hwi.prs?.[0]!.sound?.audio);
 
 		const url = `https://www.merriam-webster.com/dictionary/${word}`;
 		const pronunciation = hwi.prs?.[0]?.mw ? `(${hwi.prs[0].mw})` : '';
@@ -135,9 +133,9 @@ export default class extends Command<typeof DefinitionCommand> {
 			);
 		}
 
-		const res = await fetch(attachment);
-		const attachmentBuffer = Buffer.from(await res.arrayBuffer());
-		const files = [new AttachmentBuilder(attachmentBuffer, { description: '', name: '' })];
+		// const res = await fetch(attachment);
+		// const attachmentBuffer = Buffer.from(await res.arrayBuffer());
+		// const files = [new AttachmentBuilder(attachmentBuffer, { description: '', name: '' })];
 
 		await interaction.editReply({
 			content: stripIndents`
@@ -149,7 +147,7 @@ export default class extends Command<typeof DefinitionCommand> {
 				${underscore(i18n.t('common.titles.definitions', { lng }))}
 				${defs.join('\n')}
 			`,
-			files,
+			// files,
 		});
 	}
 }
