@@ -31,6 +31,7 @@ declare global {
 			DISCORD_TOKEN: string;
 			GUILD_LOG_WEBHOOK_URL: string;
 			NODE_ENV: 'development' | 'production';
+			OWNER_ID: string;
 			PORT: string;
 			PRIVACY_URL: string;
 			REDIS_HOST: string;
@@ -63,6 +64,7 @@ const client = createClient({
 	makeCache: Options.cacheWithLimits({
 		MessageManager: 5,
 		PresenceManager: 0,
+		GuildEmojiManager: 0,
 	}),
 });
 

@@ -15,6 +15,7 @@ const DefinitionCommand = {
 			description_localizations: fetchDataLocalizations('commands.definition.meta.args.word.description'),
 			type: ApplicationCommandOptionType.String,
 			required: true,
+			autocomplete: true,
 		},
 		{
 			name: 'short',

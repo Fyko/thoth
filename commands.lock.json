@@ -1201,7 +1201,8 @@
 					"zh-TW": "The word to search a definition for (eg: ocean)."
 				},
 				"type": 3,
-				"required": true
+				"required": true,
+				"autocomplete": true
 			},
 			{
 				"name": "short",

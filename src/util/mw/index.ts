@@ -71,3 +71,59 @@ export function createPronunciationURL(audio?: string): string {
 
 	return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdir}/${audio}.mp3`;
 }
+
+export type TopWordsResult = {
+	data: {
+		timestamp: string;
+		words: string[];
+	};
+	messages: string;
+};
+
+export async function fetchTopWords(redis: RedisManager): Promise<TopWordsResult> {
+	const key = 'mw-top-words';
+
+	const cached = await redis.client.get(key);
+	if (cached) return JSON.parse(cached) as TopWordsResult;
+
+	const res = await fetch('https://www.merriam-webster.com/lapi/v1/mwol-mp/get-lookups-data-homepage', {
+		headers: {
+			'user-agent': 'Thoth (github.com/Fyko/Thoth)',
+			accept: 'application/json',
+		},
+	});
+
+	const data = (await res.json()) as TopWordsResult;
+	await redis.client.set(key, JSON.stringify(data), 'EX', 30); // cache for 30 seconds
+
+	return data;
+}
+
+export type AutocompleteResult = {
+	apiVersion: string;
+	docs: { ref: 'collegiate-thesaurus' | 'owl-combined'; type: 'bold' | 'headword'; word: string }[];
+	hasDirectMatch: boolean;
+	numResults: number;
+};
+
+export async function fetchAutocomplete(redis: RedisManager, input: string): Promise<AutocompleteResult> {
+	const key = `autocomplete:${input}`;
+
+	const cached = await redis.client.get(key);
+	if (cached) return JSON.parse(cached) as AutocompleteResult;
+
+	const res = await fetch(
+		`https://www.merriam-webster.com/lapi/v1/mwol-search/autocomplete?search=${encodeURIComponent(input)}`,
+		{
+			headers: {
+				'user-agent': 'Thoth (github.com/Fyko/Thoth)',
+				accept: 'application/json',
+			},
+		},
+	);
+
+	const data = (await res.json()) as AutocompleteResult;
+	await redis.client.set(key, JSON.stringify(data), 'EX', 60 * 60 * 18); // cache for 18 hours
+
+	return data;
+}
