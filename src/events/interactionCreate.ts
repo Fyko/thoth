@@ -1,7 +1,9 @@
+import process from 'node:process';
 import type { Command } from '@yuudachi/framework';
 import { transformApplicationInteraction, kCommands } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
-import { ApplicationCommandType, Client, Events } from 'discord.js';
+import { stripIndents } from 'common-tags';
+import { ApplicationCommandType, Client, Events, WebhookClient } from 'discord.js';
 import { Counter } from 'prom-client';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
@@ -17,6 +19,8 @@ export default class implements Event {
 	public name = 'Interaction handling';
 
 	public event = Events.InteractionCreate as const;
+
+	public webhook = new WebhookClient({ url: process.env.COMMAND_LOG_WEBHOOK_URL! });
 
 	public constructor(
 		public readonly client: Client<true>,
@@ -36,6 +40,21 @@ export default class implements Event {
 
 			if (command) {
 				try {
+					const args_ = interaction.options.data.map(
+						// @ts-expect-error i know it works
+						({ name, value }: { name: string; value: any }) => `\`${name}\`: \`${value}\``,
+					);
+
+					void this.webhook.send({
+						content: stripIndents`
+							Command \`${interaction.commandName}\` (\`${interaction.commandId}\`) executed by ${interaction.user.tag} (\`${
+								interaction.user.id
+							}\`)
+							
+							Arguments: ${args_.join('; ')}
+						`,
+					});
+
 					if (interaction.commandType === ApplicationCommandType.ChatInput) {
 						logger.info(
 							{ command: { name: interaction.commandName, type: interaction.type }, userId: interaction.user.id },

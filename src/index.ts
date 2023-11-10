@@ -148,6 +148,7 @@ await server.register(fastifyMetrics, {
 } as IMetricsPluginOptions);
 server.get('/terms', (_req, res) => res.redirect(301, process.env.TERMS_URL));
 server.get('/privacy', (_req, res) => res.redirect(301, process.env.PRIVACY_URL));
+server.get('/health', (_req, res) => res.send({ status: 'ok' }));
 
 const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 2_399;
 

@@ -1,6 +1,5 @@
-import process from 'node:process';
 import type { Event } from '@yuudachi/framework/types';
-import { Client, Events, WebhookClient } from 'discord.js';
+import { Client, Events } from 'discord.js';
 import { Gauge } from 'prom-client';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
@@ -16,8 +15,6 @@ export default class implements Event {
 		private readonly client: Client<true>,
 		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>,
 	) {}
-
-	public webhook = new WebhookClient({ url: process.env.WEBHOOK_URL! });
 
 	public execute(): void {
 		this.client.on(this.event, async () => {

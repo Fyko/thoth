@@ -17,12 +17,16 @@ export default class implements Event {
 		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>,
 	) {}
 
-	public webhook = new WebhookClient({ url: process.env.WEBHOOK_URL! });
+	public webhook = new WebhookClient({ url: process.env.GUILD_LOG_WEBHOOK_URL! });
 
 	public execute(): void {
 		this.client.on(this.event, async (guild) => {
 			logger.info({ guildId: guild.id }, `Joined guild ${guild.name}`);
 			this.guildCount.inc();
+
+			this.webhook.send({
+				content: `Joined guild ${guild.name} (${guild.id})`,
+			});
 		});
 	}
 }
