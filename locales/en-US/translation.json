@@ -4,7 +4,11 @@
 			"args": {
 				"limit": {
 					"name": "limit",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"description": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"hide": {
+					"name": "hide",
+					"description": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"starts-with": {
 					"name": "starts-with",
@@ -21,10 +25,12 @@
 		"errors": {
 			"with_clause_exclusivity": "The `starts-with` and `ends-with` options are mutually exclusive -- you can't use them both at the same time.",
 			"not_found": "I'm sorry, I couldn't find any results for your query!",
-			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
+			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant one of these? You have 15 seconds to choose one.",
 			"unauthorized": "Unauthorized.",
 			"no_permissions": "You don't have permission to use this command.",
-			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}",
+			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
 		},
 		"titles": {
 			"definitions": "Definitions"
@@ -152,7 +158,7 @@
 				"args": {
 					"word": {
 						"name": "word",
-						"description": "TThe adjective to search relevant nouns for (eg: yellow)."
+						"description": "The adjective to search relevant nouns for (eg: yellow)."
 					}
 				}
 			},
@@ -226,7 +232,7 @@
 					}
 				}
 			},
-			"generic_success": "I found `{{found_count}}` words that are similar to `{{word}}`{{rest}}: \n\n{{words}}",
+			"generic_success": "I found `{{found_count}}` words that are similar to `{{word}}`: \n\n{{words}}",
 			"starts_with_success": "I found `{{found_count}}` words that are similar to `{{word}}` and start with `{{starts_with}}`: \n\n{{words}}",
 			"ends_with_success": "I found `{{found_count}}` words that are similar to `{{word}}` and end with `{{ends_with}}`: \n\n{{words}}"
 		},
