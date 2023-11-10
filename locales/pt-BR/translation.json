@@ -6,6 +6,10 @@
 					"name": "limite",
 					"description": "A quantidade máxima de resultados para retornar (max & padrão: 50)."
 				},
+				"hide": {
+					"name": "hide",
+					"description": "Whether or not to hide the command response from other users (default: True)."
+				},
 				"starts-with": {
 					"name": "inicia-com",
 					"description": "Somente retorne palavras que comecem com esse valor (mutuamente exclusivo com termina-com)."
@@ -24,7 +28,9 @@
 			"not_found_w_suggestions": "Desculpe, não consegui encontrar resultados para a sua pesquisa! Você quis dizer: ",
 			"unauthorized": "Não autorizado.",
 			"no_permissions": "You don't have permission to use this command.",
-			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}",
+			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
 		},
 		"titles": {
 			"definitions": "Definições"
