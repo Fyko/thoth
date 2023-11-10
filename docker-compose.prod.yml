@@ -83,6 +83,24 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
 
+  loki:
+    image: grafana/loki:latest
+    volumes:
+      - loki-storage:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    mem_limit: 2GB
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - ./docker/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml
+      - /var/log:/var/log
+      # to read container labels and logs
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/dockser/containers
+    command: -config.file=/etc/promtail/promtail-config.yml
+    mem_limit: 2GB
+
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     ports:
@@ -106,3 +124,4 @@ volumes:
   prometheus-storage:
   grafana-storage:
   postgres-storage:
+  loki-storage:
