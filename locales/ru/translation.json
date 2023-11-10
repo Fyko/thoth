@@ -6,6 +6,10 @@
 					"name": "лимит",
 					"description": "Максимальное количество возвращённых результатов (макс. & по умолчанию: 50)."
 				},
+				"hide": {
+					"name": "hide",
+					"description": "Whether or not to hide the command response from other users (default: True)."
+				},
 				"starts-with": {
 					"name": "начинается-с",
 					"description": "Возвращать только слова, начинающиеся с этого значения (взаимоисключающий с заканчивается-на)."
@@ -24,7 +28,9 @@
 			"not_found_w_suggestions": "К сожалению, я не смог найти никаких результатов по вашему запросу! Возможно, вы имели в виду: ",
 			"unauthorized": "Недостаточно прав.",
 			"no_permissions": "У вас нет прав на использование этой команды.",
-			"banned": "Боюсь, вас заблокировали от использования Thoth.\nПричина: {{- reason}}"
+			"banned": "Боюсь, вас заблокировали от использования Thoth.\nПричина: {{- reason}}",
+			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
 		},
 		"titles": {
 			"definitions": "Определения"
