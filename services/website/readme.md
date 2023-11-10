@@ -1,3 +1,0 @@
-# seller-tools
-
-nextjs & chakra

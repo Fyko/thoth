@@ -3,7 +3,7 @@
 	"parserOptions": {
 		"project": "./tsconfig.eslint.json"
 	},
-	"ignorePatterns": ["services/website"],
+	"ignorePatterns": ["**/dist/*"],
 	"rules": {
 		"comma-dangle": ["error", "always-multiline"],
 		"@typescript-eslint/no-base-to-string": 0,

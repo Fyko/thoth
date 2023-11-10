@@ -8,5 +8,5 @@ pull_request_title: 'feat(i18n): new translation updates'
 commit_message: 'chore(i18n): new translations for %original_file_name% (%language%)'
 
 files:
-  - source: /services/bot/locales/en-US/translation.json
-    translation: /services/bot/locales/%locale%/%original_file_name%
+  - source: /locales/en-US/translation.json
+    translation: /locales/%locale%/%original_file_name%

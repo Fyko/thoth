@@ -2,39 +2,25 @@ name: Testing
 
 on:
   push:
-    branches-ignore:
-      - feat/translations
+    branches-ignore: [feat/translations]
   pull_request:
-    branches-ignore:
-      - feat/translations
+    branches-ignore: [feat/translations]
 
 jobs:
-  lint:
+  tests:
+    name: Lint and Build
     runs-on: ubuntu-latest
-    name: Lint
     steps:
-      - uses: actions/checkout@v3
+      - name: Install Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Setup Volta
-        uses: volta-cli/action@v3
+      - name: Install dependencies
+        uses: discordjs/discord.js/packages/actions/src/pnpmCache@e96a8a977fdbd44fb8795fdbbcfb42fb667c4554
 
-      - name: Install Dependencies
-        run: yarn --immutable
+      - name: Lint
+        run: pnpm run lint
 
-      - name: Run ESLint
-        run: yarn lint
-
-  build:
-    runs-on: ubuntu-latest
-    name: Build
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Volta
-        uses: volta-cli/action@v3
-
-      - name: Install Dependencies
-        run: yarn --immutable
-
-      - name: Compile code
-        run: yarn build
+      - name: Build
+        run: pnpm run build

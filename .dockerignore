@@ -37,7 +37,6 @@ Dockerfile
 .tmp
 .github
 .travis.yml
-LICENSE
 
 # Git
 .github
@@ -46,12 +45,6 @@ LICENSE
 target
 **/target
 # node mods
-
-
-.yarn/cache
-.yarn/install-state.gz
-
-.github
 .husky
 .vscode
 scripts
@@ -64,3 +57,4 @@ target
 denolint.json
 README.md
 .env
+pruned

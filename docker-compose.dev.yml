@@ -4,7 +4,7 @@ services:
   thoth:
     build:
       context: .
-      dockerfile: ./services/bot/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - '2399:2399'
     restart: unless-stopped
@@ -15,13 +15,13 @@ services:
     build:
       context: ./docker/postgres
     environment:
-          POSTGRES_USER: 'admin'
-          POSTGRES_PASSWORD: 'doctordoctor'
-          POSTGRES_DB: 'thoth'
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'doctordoctor'
+      POSTGRES_DB: 'thoth'
     volumes:
-        - postgres-storage:/var/lib/postgresql/data
+      - postgres-storage:/var/lib/postgresql/data
     ports:
-        - '5432:5432'
+      - '5432:5432'
     restart: unless-stopped
 
   gateway:
@@ -35,19 +35,6 @@ services:
     ports:
       - '2398:2398'
 
-  thothd:
-    build:
-      context: ./services/thothd
-      dockerfile: Dockerfile
-    environment:
-      GATEWAY_HOST: 'gateway'
-      GATEWAY_PORT: '2398'
-    ports:
-      - '2397:2397'
-    restart: unless-stopped
-    env_file:
-      - ./.env.dev
-      
   redis:
     image: redis:alpine
     restart: unless-stopped
