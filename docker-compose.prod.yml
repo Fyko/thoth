@@ -114,9 +114,12 @@ services:
   watchtower:
     image: containrrr/watchtower
     environment:
-      - WATCHTOWER_POLL_INTERVAL=600 # 10 minutes
       - TZ=America/Denver
       - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=60 # 1 minute
+      - WATCHTOWER_NOTIFICATIONS=slack
+      - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=${WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
