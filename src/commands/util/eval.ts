@@ -27,7 +27,7 @@ const MESSAGES = {
 
 @injectable()
 export default class extends Command<typeof EvalCommand> {
-	public constructor(@inject(Client) _client: Client) {
+	public constructor(@inject(Client) public readonly client: Client) {
 		super();
 	}
 
