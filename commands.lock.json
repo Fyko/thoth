@@ -9,7 +9,7 @@
 			"ja": "ping",
 			"ko": "ping",
 			"pl": "ping",
-			"zh-CH": "ping",
+			"zh-CN": "ping",
 			"zh-TW": "ping"
 		},
 		"description": "Ensures the bot is responding to commands.",
@@ -21,9 +21,48 @@
 			"ja": "Ensures the bot is responding to commands.",
 			"ko": "Ensures the bot is responding to commands.",
 			"pl": "Ensures the bot is responding to commands.",
-			"zh-CH": "Ensures the bot is responding to commands.",
+			"zh-CN": "Ensures the bot is responding to commands.",
 			"zh-TW": "Ensures the bot is responding to commands."
 		}
+	},
+	{
+		"name": "eval",
+		"description": "Evaluate JavaScript code.",
+		"options": [
+			{
+				"name": "code",
+				"description": "The code to execute",
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: True).",
+					"en-GB": "Whether or not to hide the command response from other users (default: True).",
+					"de": "Whether or not to hide the command response from other users (default: True).",
+					"es-ES": "Whether or not to hide the command response from other users (default: True).",
+					"ja": "Whether or not to hide the command response from other users (default: True).",
+					"ko": "Whether or not to hide the command response from other users (default: True).",
+					"pl": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+				},
+				"type": 5
+			}
+		]
 	},
 	{
 		"name": "invite",
@@ -35,7 +74,7 @@
 			"ja": "invite",
 			"ko": "invite",
 			"pl": "invite",
-			"zh-CH": "invite",
+			"zh-CN": "invite",
 			"zh-TW": "invite"
 		},
 		"description": "Returns an invite link to add Thoth to your server.",
@@ -47,7 +86,7 @@
 			"ja": "Returns an invite link to add Thoth to your server.",
 			"ko": "Returns an invite link to add Thoth to your server.",
 			"pl": "Returns an invite link to add Thoth to your server.",
-			"zh-CH": "Returns an invite link to add Thoth to your server.",
+			"zh-CN": "Returns an invite link to add Thoth to your server.",
 			"zh-TW": "Returns an invite link to add Thoth to your server."
 		}
 	},
@@ -61,7 +100,7 @@
 			"ja": "match-word",
 			"ko": "match-word",
 			"pl": "match-word",
-			"zh-CH": "match-word",
+			"zh-CN": "match-word",
 			"zh-TW": "match-word"
 		},
 		"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
@@ -73,7 +112,7 @@
 			"ja": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 			"ko": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 			"pl": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"zh-CH": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"zh-CN": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 			"zh-TW": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date)."
 		},
 		"options": [
@@ -87,7 +126,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to find matches for (example: a??le).",
@@ -99,7 +138,7 @@
 					"ja": "The word to find matches for (example: a??le).",
 					"ko": "The word to find matches for (example: a??le).",
 					"pl": "The word to find matches for (example: a??le).",
-					"zh-CH": "The word to find matches for (example: a??le).",
+					"zh-CN": "The word to find matches for (example: a??le).",
 					"zh-TW": "The word to find matches for (example: a??le)."
 				},
 				"type": 3,
@@ -115,7 +154,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -127,7 +166,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -142,7 +181,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -154,7 +193,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -171,7 +210,7 @@
 			"ja": "that-follow",
 			"ko": "that-follow",
 			"pl": "that-follow",
-			"zh-CH": "that-follow",
+			"zh-CN": "that-follow",
 			"zh-TW": "that-follow"
 		},
 		"description": "Responds with words that could logically follow query.",
@@ -183,7 +222,7 @@
 			"ja": "Responds with words that could logically follow query.",
 			"ko": "Responds with words that could logically follow query.",
 			"pl": "Responds with words that could logically follow query.",
-			"zh-CH": "Responds with words that could logically follow query.",
+			"zh-CN": "Responds with words that could logically follow query.",
 			"zh-TW": "Responds with words that could logically follow query."
 		},
 		"options": [
@@ -197,7 +236,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search following words for (eg: open).",
@@ -209,7 +248,7 @@
 					"ja": "The word to search following words for (eg: open).",
 					"ko": "The word to search following words for (eg: open).",
 					"pl": "The word to search following words for (eg: open).",
-					"zh-CH": "The word to search following words for (eg: open).",
+					"zh-CN": "The word to search following words for (eg: open).",
 					"zh-TW": "The word to search following words for (eg: open)."
 				},
 				"type": 3,
@@ -225,7 +264,7 @@
 					"ja": "starts-with",
 					"ko": "starts-with",
 					"pl": "starts-with",
-					"zh-CH": "starts-with",
+					"zh-CN": "开头为",
 					"zh-TW": "starts-with"
 				},
 				"description": "Only return words that start with this value (mutually exclusive with ends-with).",
@@ -237,7 +276,7 @@
 					"ja": "Only return words that start with this value (mutually exclusive with ends-with).",
 					"ko": "Only return words that start with this value (mutually exclusive with ends-with).",
 					"pl": "Only return words that start with this value (mutually exclusive with ends-with).",
-					"zh-CH": "Only return words that start with this value (mutually exclusive with ends-with).",
+					"zh-CN": "Only return words that start with this value (mutually exclusive with ends-with).",
 					"zh-TW": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"type": 3
@@ -252,7 +291,7 @@
 					"ja": "ends-with",
 					"ko": "ends-with",
 					"pl": "ends-with",
-					"zh-CH": "ends-with",
+					"zh-CN": "ends-with",
 					"zh-TW": "ends-with"
 				},
 				"description": "Only return words that end with this value (mutually exclusive with starts-with).",
@@ -264,7 +303,7 @@
 					"ja": "Only return words that end with this value (mutually exclusive with starts-with).",
 					"ko": "Only return words that end with this value (mutually exclusive with starts-with).",
 					"pl": "Only return words that end with this value (mutually exclusive with starts-with).",
-					"zh-CH": "Only return words that end with this value (mutually exclusive with starts-with).",
+					"zh-CN": "Only return words that end with this value (mutually exclusive with starts-with).",
 					"zh-TW": "Only return words that end with this value (mutually exclusive with starts-with)."
 				},
 				"type": 3
@@ -279,7 +318,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -291,7 +330,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -306,7 +345,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -318,7 +357,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -335,7 +374,7 @@
 			"ja": "holonyms",
 			"ko": "holonyms",
 			"pl": "holonyms",
-			"zh-CH": "holonyms",
+			"zh-CN": "holonyms",
 			"zh-TW": "holonyms"
 		},
 		"description": "Responds with holonyms (what comprises) for your query.",
@@ -347,7 +386,7 @@
 			"ja": "Responds with holonyms (what comprises) for your query.",
 			"ko": "Responds with holonyms (what comprises) for your query.",
 			"pl": "Responds with holonyms (what comprises) for your query.",
-			"zh-CH": "Responds with holonyms (what comprises) for your query.",
+			"zh-CN": "Responds with holonyms (what comprises) for your query.",
 			"zh-TW": "Responds with holonyms (what comprises) for your query."
 		},
 		"options": [
@@ -361,7 +400,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "word",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search homophones for (eg: car).",
@@ -373,7 +412,7 @@
 					"ja": "The word to search homophones for (eg: car).",
 					"ko": "The word to search homophones for (eg: car).",
 					"pl": "The word to search homophones for (eg: car).",
-					"zh-CH": "The word to search homophones for (eg: car).",
+					"zh-CN": "The word to search homophones for (eg: car).",
 					"zh-TW": "The word to search homophones for (eg: car)."
 				},
 				"type": 3,
@@ -389,7 +428,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -401,7 +440,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -416,7 +455,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -428,7 +467,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -445,7 +484,7 @@
 			"ja": "close-rhyme",
 			"ko": "close-rhyme",
 			"pl": "close-rhyme",
-			"zh-CH": "close-rhyme",
+			"zh-CN": "close-rhyme",
 			"zh-TW": "close-rhyme"
 		},
 		"description": "Responds with words that closely rhyme with your query.",
@@ -457,7 +496,7 @@
 			"ja": "Responds with words that closely rhyme with your query.",
 			"ko": "Responds with words that closely rhyme with your query.",
 			"pl": "Responds with words that closely rhyme with your query.",
-			"zh-CH": "Responds with words that closely rhyme with your query.",
+			"zh-CN": "Responds with words that closely rhyme with your query.",
 			"zh-TW": "Responds with words that closely rhyme with your query."
 		},
 		"options": [
@@ -471,7 +510,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "word",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search close rhymes for (eg: forest).",
@@ -483,7 +522,7 @@
 					"ja": "The word to search close rhymes for (eg: forest).",
 					"ko": "The word to search close rhymes for (eg: forest).",
 					"pl": "The word to search close rhymes for (eg: forest).",
-					"zh-CH": "The word to search close rhymes for (eg: forest).",
+					"zh-CN": "The word to search close rhymes for (eg: forest).",
 					"zh-TW": "The word to search close rhymes for (eg: forest)."
 				},
 				"type": 3,
@@ -499,7 +538,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -511,7 +550,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -526,7 +565,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -538,7 +577,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -555,7 +594,7 @@
 			"ja": "similar-meaning",
 			"ko": "similar-meaning",
 			"pl": "similar-meaning",
-			"zh-CH": "similar-meaning",
+			"zh-CN": "similar-meaning",
 			"zh-TW": "similar-meaning"
 		},
 		"description": "Response with words that have a similar meaning to your query.",
@@ -567,7 +606,7 @@
 			"ja": "Response with words that have a similar meaning to your query.",
 			"ko": "Response with words that have a similar meaning to your query.",
 			"pl": "Response with words that have a similar meaning to your query.",
-			"zh-CH": "Response with words that have a similar meaning to your query.",
+			"zh-CN": "Response with words that have a similar meaning to your query.",
 			"zh-TW": "Response with words that have a similar meaning to your query."
 		},
 		"options": [
@@ -581,7 +620,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search similar words for (eg: transgressions).",
@@ -593,7 +632,7 @@
 					"ja": "The word to search similar words for (eg: transgressions).",
 					"ko": "The word to search similar words for (eg: transgressions).",
 					"pl": "The word to search similar words for (eg: transgressions).",
-					"zh-CH": "The word to search similar words for (eg: transgressions).",
+					"zh-CN": "The word to search similar words for (eg: transgressions).",
 					"zh-TW": "The word to search similar words for (eg: transgressions)."
 				},
 				"type": 3,
@@ -609,7 +648,7 @@
 					"ja": "starts-with",
 					"ko": "starts-with",
 					"pl": "starts-with",
-					"zh-CH": "starts-with",
+					"zh-CN": "开头为",
 					"zh-TW": "starts-with"
 				},
 				"description": "Only return words that start with this value (mutually exclusive with ends-with).",
@@ -621,7 +660,7 @@
 					"ja": "Only return words that start with this value (mutually exclusive with ends-with).",
 					"ko": "Only return words that start with this value (mutually exclusive with ends-with).",
 					"pl": "Only return words that start with this value (mutually exclusive with ends-with).",
-					"zh-CH": "Only return words that start with this value (mutually exclusive with ends-with).",
+					"zh-CN": "Only return words that start with this value (mutually exclusive with ends-with).",
 					"zh-TW": "Only return words that start with this value (mutually exclusive with ends-with)."
 				},
 				"type": 3
@@ -636,7 +675,7 @@
 					"ja": "ends-with",
 					"ko": "ends-with",
 					"pl": "ends-with",
-					"zh-CH": "ends-with",
+					"zh-CN": "ends-with",
 					"zh-TW": "ends-with"
 				},
 				"description": "Only return words that end with this value (mutually exclusive with starts-with).",
@@ -648,7 +687,7 @@
 					"ja": "Only return words that end with this value (mutually exclusive with starts-with).",
 					"ko": "Only return words that end with this value (mutually exclusive with starts-with).",
 					"pl": "Only return words that end with this value (mutually exclusive with starts-with).",
-					"zh-CH": "Only return words that end with this value (mutually exclusive with starts-with).",
+					"zh-CN": "Only return words that end with this value (mutually exclusive with starts-with).",
 					"zh-TW": "Only return words that end with this value (mutually exclusive with starts-with)."
 				},
 				"type": 3
@@ -663,7 +702,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -675,7 +714,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -690,7 +729,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -702,7 +741,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -719,7 +758,7 @@
 			"ja": "adjective",
 			"ko": "adjective",
 			"pl": "adjective",
-			"zh-CH": "adjective",
+			"zh-CN": "adjective",
 			"zh-TW": "adjective"
 		},
 		"description": "Responds with adjectives that describe your query.",
@@ -731,7 +770,7 @@
 			"ja": "Responds with adjectives that describe your query.",
 			"ko": "Responds with adjectives that describe your query.",
 			"pl": "Responds with adjectives that describe your query.",
-			"zh-CH": "Responds with adjectives that describe your query.",
+			"zh-CN": "Responds with adjectives that describe your query.",
 			"zh-TW": "Responds with adjectives that describe your query."
 		},
 		"options": [
@@ -745,7 +784,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The noun to search relavent adjectives for (eg: ocean).",
@@ -757,7 +796,7 @@
 					"ja": "The noun to search relavent adjectives for (eg: ocean).",
 					"ko": "The noun to search relavent adjectives for (eg: ocean).",
 					"pl": "The noun to search relavent adjectives for (eg: ocean).",
-					"zh-CH": "The noun to search relavent adjectives for (eg: ocean).",
+					"zh-CN": "The noun to search relavent adjectives for (eg: ocean).",
 					"zh-TW": "The noun to search relavent adjectives for (eg: ocean)."
 				},
 				"type": 3,
@@ -773,7 +812,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -785,7 +824,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -800,7 +839,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -812,7 +851,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -829,7 +868,7 @@
 			"ja": "hyponyms",
 			"ko": "hyponyms",
 			"pl": "hyponyms",
-			"zh-CH": "hyponyms",
+			"zh-CN": "hyponyms",
 			"zh-TW": "hyponyms"
 		},
 		"description": "Responds with hyponyms (more general) for your query.",
@@ -841,7 +880,7 @@
 			"ja": "Responds with hyponyms (more general) for your query.",
 			"ko": "Responds with hyponyms (more general) for your query.",
 			"pl": "Responds with hyponyms (more general) for your query.",
-			"zh-CH": "Responds with hyponyms (more general) for your query.",
+			"zh-CN": "Responds with hyponyms (more general) for your query.",
 			"zh-TW": "Responds with hyponyms (more general) for your query."
 		},
 		"options": [
@@ -855,7 +894,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "word",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search hyponyms for (eg: car).",
@@ -867,7 +906,7 @@
 					"ja": "The word to search hyponyms for (eg: car).",
 					"ko": "The word to search hyponyms for (eg: car).",
 					"pl": "The word to search hyponyms for (eg: car).",
-					"zh-CH": "The word to search hyponyms for (eg: car).",
+					"zh-CN": "The word to search hyponyms for (eg: car).",
 					"zh-TW": "The word to search hyponyms for (eg: car)."
 				},
 				"type": 3,
@@ -883,7 +922,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -895,7 +934,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -910,7 +949,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -922,7 +961,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -939,7 +978,7 @@
 			"ja": "similar-spelling",
 			"ko": "similar-spelling",
 			"pl": "similar-spelling",
-			"zh-CH": "similar-spelling",
+			"zh-CN": "类似拼写",
 			"zh-TW": "similar-spelling"
 		},
 		"description": "Responds with words that have a similar spelling to your query.",
@@ -951,7 +990,7 @@
 			"ja": "Responds with words that have a similar spelling to your query.",
 			"ko": "Responds with words that have a similar spelling to your query.",
 			"pl": "Responds with words that have a similar spelling to your query.",
-			"zh-CH": "Responds with words that have a similar spelling to your query.",
+			"zh-CN": "Responds with words that have a similar spelling to your query.",
 			"zh-TW": "Responds with words that have a similar spelling to your query."
 		},
 		"options": [
@@ -965,7 +1004,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search similar words for (eg: agile).",
@@ -977,7 +1016,7 @@
 					"ja": "The word to search similar words for (eg: agile).",
 					"ko": "The word to search similar words for (eg: agile).",
 					"pl": "The word to search similar words for (eg: agile).",
-					"zh-CH": "The word to search similar words for (eg: agile).",
+					"zh-CN": "The word to search similar words for (eg: agile).",
 					"zh-TW": "The word to search similar words for (eg: agile)."
 				},
 				"type": 3,
@@ -993,7 +1032,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1005,7 +1044,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -1020,7 +1059,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1032,7 +1071,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1049,7 +1088,7 @@
 			"ja": "rhyme",
 			"ko": "rhyme",
 			"pl": "rhyme",
-			"zh-CH": "rhyme",
+			"zh-CN": "rhyme",
 			"zh-TW": "rhyme"
 		},
 		"description": "Responds with words that rhyme with your query.",
@@ -1061,7 +1100,7 @@
 			"ja": "Responds with words that rhyme with your query.",
 			"ko": "Responds with words that rhyme with your query.",
 			"pl": "Responds with words that rhyme with your query.",
-			"zh-CH": "Responds with words that rhyme with your query.",
+			"zh-CN": "Responds with words that rhyme with your query.",
 			"zh-TW": "Responds with words that rhyme with your query."
 		},
 		"options": [
@@ -1075,7 +1114,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search rhymes for (eg: dime).",
@@ -1087,7 +1126,7 @@
 					"ja": "The word to search rhymes for (eg: dime).",
 					"ko": "The word to search rhymes for (eg: dime).",
 					"pl": "The word to search rhymes for (eg: dime).",
-					"zh-CH": "The word to search rhymes for (eg: dime).",
+					"zh-CN": "The word to search rhymes for (eg: dime).",
 					"zh-TW": "The word to search rhymes for (eg: dime)."
 				},
 				"type": 3,
@@ -1103,7 +1142,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1115,7 +1154,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -1130,7 +1169,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1142,7 +1181,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1159,7 +1198,7 @@
 			"ja": "definition",
 			"ko": "definition",
 			"pl": "definicja",
-			"zh-CH": "definition",
+			"zh-CN": "definition",
 			"zh-TW": "definition"
 		},
 		"description": "Responds with the definition of your query from Merriam Webster.",
@@ -1171,7 +1210,7 @@
 			"ja": "Responds with the definition of your query from Merriam Webster.",
 			"ko": "Responds with the definition of your query from Merriam Webster.",
 			"pl": "Responds with the definition of your query from Merriam Webster.",
-			"zh-CH": "Responds with the definition of your query from Merriam Webster.",
+			"zh-CN": "Responds with the definition of your query from Merriam Webster.",
 			"zh-TW": "Responds with the definition of your query from Merriam Webster."
 		},
 		"options": [
@@ -1185,7 +1224,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "字",
 					"zh-TW": "word"
 				},
 				"description": "The word to search a definition for (eg: ocean).",
@@ -1197,7 +1236,7 @@
 					"ja": "The word to search a definition for (eg: ocean).",
 					"ko": "The word to search a definition for (eg: ocean).",
 					"pl": "The word to search a definition for (eg: ocean).",
-					"zh-CH": "The word to search a definition for (eg: ocean).",
+					"zh-CN": "The word to search a definition for (eg: ocean).",
 					"zh-TW": "The word to search a definition for (eg: ocean)."
 				},
 				"type": 3,
@@ -1213,7 +1252,7 @@
 					"ja": "short",
 					"ko": "short",
 					"pl": "short",
-					"zh-CH": "short",
+					"zh-CN": "short",
 					"zh-TW": "short"
 				},
 				"description": "Only return the first definition (default: false).",
@@ -1225,7 +1264,7 @@
 					"ja": "Only return the first definition (default: false).",
 					"ko": "Only return the first definition (default: false).",
 					"pl": "Only return the first definition (default: false).",
-					"zh-CH": "Only return the first definition (default: false).",
+					"zh-CN": "Only return the first definition (default: false).",
 					"zh-TW": "Only return the first definition (default: false)."
 				},
 				"type": 5
@@ -1240,7 +1279,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1252,7 +1291,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1269,7 +1308,7 @@
 			"ja": "noun",
 			"ko": "noun",
 			"pl": "rzeczownik",
-			"zh-CH": "noun",
+			"zh-CN": "noun",
 			"zh-TW": "noun"
 		},
 		"description": "Responds with nouns that are often described by your query.",
@@ -1281,7 +1320,7 @@
 			"ja": "Responds with nouns that are often described by your query.",
 			"ko": "Responds with nouns that are often described by your query.",
 			"pl": "Responds with nouns that are often described by your query.",
-			"zh-CH": "Responds with nouns that are often described by your query.",
+			"zh-CN": "Responds with nouns that are often described by your query.",
 			"zh-TW": "Responds with nouns that are often described by your query."
 		},
 		"options": [
@@ -1295,7 +1334,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The adjective to search relevant nouns for (eg: yellow).",
@@ -1307,7 +1346,7 @@
 					"ja": "TThe adjective to search relevant nouns for (eg: yellow).",
 					"ko": "TThe adjective to search relevant nouns for (eg: yellow).",
 					"pl": "TThe adjective to search relevant nouns for (eg: yellow).",
-					"zh-CH": "The adjective to search relevant nouns for (eg: yellow).",
+					"zh-CN": "TThe adjective to search relevant nouns for (eg: yellow).",
 					"zh-TW": "TThe adjective to search relevant nouns for (eg: yellow)."
 				},
 				"type": 3,
@@ -1323,7 +1362,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1335,7 +1374,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -1350,7 +1389,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1362,7 +1401,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1379,7 +1418,7 @@
 			"ja": "homophones",
 			"ko": "homophones",
 			"pl": "homophones",
-			"zh-CH": "homophones",
+			"zh-CN": "homophones",
 			"zh-TW": "homophones"
 		},
 		"description": "Responds with homophones (sound-alike words) for your query.",
@@ -1391,7 +1430,7 @@
 			"ja": "Responds with homophones (sound-alike words) for your query.",
 			"ko": "Responds with homophones (sound-alike words) for your query.",
 			"pl": "Responds with homophones (sound-alike words) for your query.",
-			"zh-CH": "Responds with homophones (sound-alike words) for your query.",
+			"zh-CN": "Responds with homophones (sound-alike words) for your query.",
 			"zh-TW": "Responds with homophones (sound-alike words) for your query."
 		},
 		"options": [
@@ -1405,7 +1444,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "word",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search homophones for (eg: their).",
@@ -1417,7 +1456,7 @@
 					"ja": "The word to search homophones for (eg: their).",
 					"ko": "The word to search homophones for (eg: their).",
 					"pl": "The word to search homophones for (eg: their).",
-					"zh-CH": "The word to search homophones for (eg: their).",
+					"zh-CN": "The word to search homophones for (eg: their).",
 					"zh-TW": "The word to search homophones for (eg: their)."
 				},
 				"type": 3,
@@ -1433,7 +1472,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1445,7 +1484,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -1460,7 +1499,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1472,7 +1511,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1489,7 +1528,7 @@
 			"ja": "sounds-like",
 			"ko": "sounds-like",
 			"pl": "sounds-like",
-			"zh-CH": "sounds-like",
+			"zh-CN": "听起来像",
 			"zh-TW": "sounds-like"
 		},
 		"description": "Responds with words that sound like your query.",
@@ -1501,7 +1540,7 @@
 			"ja": "Responds with words that sound like your query.",
 			"ko": "Responds with words that sound like your query.",
 			"pl": "Responds with words that sound like your query.",
-			"zh-CH": "Responds with words that sound like your query.",
+			"zh-CN": "Responds with words that sound like your query.",
 			"zh-TW": "Responds with words that sound like your query."
 		},
 		"options": [
@@ -1515,7 +1554,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "słowo",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search similarly sounding words for (eg: agile).",
@@ -1527,7 +1566,7 @@
 					"ja": "The word to search similarly sounding words for (eg: agile).",
 					"ko": "The word to search similarly sounding words for (eg: agile).",
 					"pl": "The word to search similarly sounding words for (eg: agile).",
-					"zh-CH": "The word to search similarly sounding words for (eg: agile).",
+					"zh-CN": "The word to search similarly sounding words for (eg: agile).",
 					"zh-TW": "The word to search similarly sounding words for (eg: agile)."
 				},
 				"type": 3,
@@ -1543,7 +1582,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1555,7 +1594,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -1570,7 +1609,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1582,7 +1621,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1599,7 +1638,7 @@
 			"ja": "triggers",
 			"ko": "triggers",
 			"pl": "triggers",
-			"zh-CH": "triggers",
+			"zh-CN": "triggers",
 			"zh-TW": "triggers"
 		},
 		"description": "Responds with words that are statistically associated with your query.",
@@ -1611,7 +1650,7 @@
 			"ja": "Responds with words that are statistically associated with your query.",
 			"ko": "Responds with words that are statistically associated with your query.",
 			"pl": "Responds with words that are statistically associated with your query.",
-			"zh-CH": "Responds with words that are statistically associated with your query.",
+			"zh-CN": "Responds with words that are statistically associated with your query.",
 			"zh-TW": "Responds with words that are statistically associated with your query."
 		},
 		"options": [
@@ -1625,7 +1664,7 @@
 					"ja": "word",
 					"ko": "word",
 					"pl": "word",
-					"zh-CH": "word",
+					"zh-CN": "word",
 					"zh-TW": "word"
 				},
 				"description": "The word to search triggers for (eg: cow).",
@@ -1637,7 +1676,7 @@
 					"ja": "The word to search triggers for (eg: cow).",
 					"ko": "The word to search triggers for (eg: cow).",
 					"pl": "The word to search triggers for (eg: cow).",
-					"zh-CH": "The word to search triggers for (eg: cow).",
+					"zh-CN": "The word to search triggers for (eg: cow).",
 					"zh-TW": "The word to search triggers for (eg: cow)."
 				},
 				"type": 3,
@@ -1653,7 +1692,7 @@
 					"ja": "limit",
 					"ko": "limit",
 					"pl": "limit",
-					"zh-CH": "limit",
+					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1665,7 +1704,7 @@
 					"ja": "The maximum amount of results to return (max & default: 50).",
 					"ko": "The maximum amount of results to return (max & default: 50).",
 					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CH": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
 					"zh-TW": "The maximum amount of results to return (max & default: 50)."
 				},
 				"type": 4
@@ -1680,7 +1719,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1692,7 +1731,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1709,7 +1748,7 @@
 			"ja": "word-of-the-day",
 			"ko": "word-of-the-day",
 			"pl": "word-of-the-day",
-			"zh-CH": "word-of-the-day",
+			"zh-CN": "word-of-the-day",
 			"zh-TW": "word-of-the-day"
 		},
 		"description": "Responds with the word of the day from Merriam Webster.",
@@ -1721,7 +1760,7 @@
 			"ja": "Responds with the word of the day from Merriam Webster.",
 			"ko": "Responds with the word of the day from Merriam Webster.",
 			"pl": "Responds with the word of the day from Merriam Webster.",
-			"zh-CH": "Responds with the word of the day from Merriam Webster.",
+			"zh-CN": "Responds with the word of the day from Merriam Webster.",
 			"zh-TW": "Responds with the word of the day from Merriam Webster."
 		},
 		"options": [
@@ -1735,7 +1774,7 @@
 					"ja": "hide",
 					"ko": "hide",
 					"pl": "hide",
-					"zh-CH": "hide",
+					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
 				"description": "Whether or not to hide the command response from other users (default: True).",
@@ -1747,7 +1786,7 @@
 					"ja": "Whether or not to hide the command response from other users (default: True).",
 					"ko": "Whether or not to hide the command response from other users (default: True).",
 					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CH": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
 					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
 				},
 				"type": 5
@@ -1764,7 +1803,7 @@
 			"ja": "setup",
 			"ko": "setup",
 			"pl": "setup",
-			"zh-CH": "setup",
+			"zh-CN": "setup",
 			"zh-TW": "setup"
 		},
 		"description": "An assortment of configuration commands.",
@@ -1776,7 +1815,7 @@
 			"ja": "An assortment of configuration commands.",
 			"ko": "An assortment of configuration commands.",
 			"pl": "An assortment of configuration commands.",
-			"zh-CH": "An assortment of configuration commands.",
+			"zh-CN": "An assortment of configuration commands.",
 			"zh-TW": "An assortment of configuration commands."
 		},
 		"options": [
@@ -1790,7 +1829,7 @@
 					"ja": "wotd",
 					"ko": "wotd",
 					"pl": "wotd",
-					"zh-CH": "wotd",
+					"zh-CN": "wotd",
 					"zh-TW": "wotd"
 				},
 				"description": "Configure the Word of the Day channel.",
@@ -1802,7 +1841,7 @@
 					"ja": "Configure the Word of the Day channel.",
 					"ko": "Configure the Word of the Day channel.",
 					"pl": "Configure the Word of the Day channel.",
-					"zh-CH": "Configure the Word of the Day channel.",
+					"zh-CN": "Configure the Word of the Day channel.",
 					"zh-TW": "Configure the Word of the Day channel."
 				},
 				"type": 1,
@@ -1817,7 +1856,7 @@
 							"ja": "channel",
 							"ko": "channel",
 							"pl": "channel",
-							"zh-CH": "channel",
+							"zh-CN": "channel",
 							"zh-TW": "channel"
 						},
 						"description": "The channel to set as the Word of the Day channel.",
@@ -1829,7 +1868,7 @@
 							"ja": "The channel to set as the Word of the Day channel.",
 							"ko": "The channel to set as the Word of the Day channel.",
 							"pl": "The channel to set as the Word of the Day channel.",
-							"zh-CH": "The channel to set as the Word of the Day channel.",
+							"zh-CN": "The channel to set as the Word of the Day channel.",
 							"zh-TW": "The channel to set as the Word of the Day channel."
 						},
 						"type": 7,

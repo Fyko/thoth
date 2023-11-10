@@ -58,7 +58,7 @@ export function fetchDataLocalizations(key: string): Record<string, string> {
 
 export async function loadTranslations(path: string) {
 	i18next.use(Backend);
-	const langs = ['en-US', 'en-GB', 'de', 'es-ES', 'ja', 'ko', 'pl', 'zh-CH', 'zh-TW'];
+	const langs = ['en-US', 'en-GB', 'de', 'es-ES', 'ja', 'ko', 'pl', 'zh-CN', 'zh-TW'];
 
 	return i18next.init({
 		backend: {
