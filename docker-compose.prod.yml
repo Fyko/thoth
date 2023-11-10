@@ -4,29 +4,15 @@ services:
   thoth:
     image: ghcr.io/fyko/thoth:latest
     ports:
-      - '2399:2399'
+      - '21983:21983'
     restart: unless-stopped
     env_file:
       - ./.env.prod
-    labels:
-      - 'com.centurylinklabs.watchtower.enable=true'
-
-  gateway:
-    image: twilightrs/gateway-queue
-    environment:
-      HOST: '0.0.0.0'
-      PORT: '2398'
-      DISCORD_TOKEN: ${DISCORD_TOKEN}
-    env_file:
-      - ./.env.prod
-    ports:
-      - '2398:2398'
-
-  thothd:
-    image: ghcr.io/fyko/thothd:latest
-    volumes:
-      - ./thothd/thothd.toml:/thothd.toml
-    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:21983/health']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
@@ -34,16 +20,28 @@ services:
     build:
       context: ./docker/postgres
     environment:
-          POSTGRES_USER: 'admin'
-          POSTGRES_PASSWORD: 'doctordoctor'
-          POSTGRES_DB: 'thoth'
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'doctordoctor'
+      POSTGRES_DB: 'thoth'
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'admin']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-        - postgres-storage:/var/lib/postgresql/data
+      - postgres-storage:/var/lib/postgresql/data
     restart: unless-stopped
 
   redis:
     image: redis:alpine
     restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - '6379:6379'
 
@@ -52,6 +50,11 @@ services:
       context: ./docker/prometheus
     restart: unless-stopped
     command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9090/-/healthy']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - 9090:9090
     volumes:
@@ -64,11 +67,15 @@ services:
     environment:
       GF_SERVER_DOMAIN: ${GF_SERVER_DOMAIN}
       GF_SERVER_ROOT_URL: ${GF_SERVER_ROOT_URL}
-      GF_SERVE_FROM_SUB_PATH: 'true'
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin
       GF_USERS_ALLOW_SIGN_UP: 'false'
       GF_AUTH_ANONYMOUS_ENABLED: 'false'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     env_file:
       - ./.env.prod
     ports:

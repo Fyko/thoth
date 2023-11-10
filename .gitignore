@@ -93,6 +93,7 @@ out
 .nuxt
 dist
 .vscode
+pruned
 
 # Rust
 target/
