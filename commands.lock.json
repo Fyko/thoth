@@ -26,45 +26,6 @@
 		}
 	},
 	{
-		"name": "eval",
-		"description": "Evaluate JavaScript code.",
-		"options": [
-			{
-				"name": "code",
-				"description": "The code to execute",
-				"type": 3,
-				"required": true
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
-				},
-				"type": 5
-			}
-		]
-	},
-	{
 		"name": "invite",
 		"name_localizations": {
 			"en-US": "invite",

@@ -5,7 +5,7 @@ import { fetchDataLocalizations } from '#util/index.js';
 const EvalCommand = {
 	name: 'eval',
 	description: 'Evaluate JavaScript code.',
-	// dev: true,
+	dev: true,
 	options: [
 		{
 			name: 'code',
