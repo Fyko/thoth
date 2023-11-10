@@ -4,14 +4,16 @@ import { transformApplicationInteraction, kCommands } from '@yuudachi/framework'
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
 import { ApplicationCommandType, Client, Events, WebhookClient } from 'discord.js';
-import { Counter } from 'prom-client';
-import { inject, injectable } from 'tsyringe';
+import { Counter, Registry } from 'prom-client';
+import { container, inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 
+const registry = container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(Registry);
 const commandsMetrics = new Counter({
 	name: 'thoth_commands',
 	help: 'Number of commands executed',
 	labelNames: ['command', 'success'],
+	registers: [registry],
 });
 
 @injectable()

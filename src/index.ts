@@ -1,17 +1,14 @@
 import 'reflect-metadata';
 
-import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import process from 'node:process';
 import { URL, fileURLToPath, pathToFileURL } from 'node:url';
+import { App } from '@tinyhttp/app';
 import type { Command } from '@yuudachi/framework';
 import { commandInfo, createClient, createCommands, dynamicImport, kCommands } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { IntentsBitField, Options } from 'discord.js';
-import type { FastifyInstance } from 'fastify';
-import { fastify } from 'fastify';
-import fastifyMetrics, { type IMetricsPluginOptions } from 'fastify-metrics';
 import postgres from 'postgres';
-import { Gauge } from 'prom-client';
+import { Gauge, Registry, collectDefaultMetrics } from 'prom-client';
 import readdirp from 'readdirp';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
@@ -19,6 +16,9 @@ import { RedisManager } from '#structures';
 import { loadTranslations } from '#util/index.js';
 import { kGuildCountGuage, kRedis, kSQL } from '#util/symbols.js';
 import { setupJobs } from './jobs.js';
+
+const register = new Registry();
+collectDefaultMetrics({ register, prefix: 'thoth_' });
 
 // overwrite the process.env def to include PORT: string
 declare global {
@@ -69,16 +69,19 @@ const client = createClient({
 const guildCount = new Gauge({
 	name: 'thoth_metrics_guilds',
 	help: 'The number of guilds',
+	registers: [register],
 });
 
 createCommands();
 container.register(kRedis, { useValue: redis });
 container.register(kSQL, { useValue: sql });
 container.register(kGuildCountGuage, { useValue: guildCount });
+container.register(Registry, { useValue: register });
 
 new Gauge({
 	name: 'thoth_wotd_subscribers',
 	help: 'Number of users subscribed to the Word Of the Day',
+	registers: [register],
 	async collect() {
 		const query = await sql`SELECT COUNT(*) FROM wotd`;
 		this.set(Number.parseInt(query[0]?.count ?? 0, 10));
@@ -134,27 +137,39 @@ for await (const file of eventFiles) {
 	void event_.execute();
 }
 
-const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
+// const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
 
-// @ts-expect-error ik it works
-await server.register(fastifyMetrics, {
-	endpoint: '/metrics',
-	defaultMetrics: { prefix: 'thoth_' },
-	routeMetrics: {
-		overrides: {
-			histogram: { name: 'thoth_webserver_request_duration_seconds' },
-			summary: { name: 'thoth_webserver_request_summary_seconds' },
-		},
-	},
-} as IMetricsPluginOptions);
-server.get('/terms', (_req, res) => res.redirect(301, process.env.TERMS_URL));
-server.get('/privacy', (_req, res) => res.redirect(301, process.env.PRIVACY_URL));
+// server.get('/metrics', async (_req, res) => {
+// 	const metrics = await register.metrics();
+// 	res.header('Content-Type', register.contentType);
+// 	res.send(metrics);
+// });
+// server.get('/terms', (_req, res) => res.redirect(301, process.env.TERMS_URL));
+// server.get('/privacy', (_req, res) => res.redirect(301, process.env.PRIVACY_URL));
+// server.get('/health', (_req, res) => res.send({ status: 'ok' }));
+// rewrite the above to use the native node http server
+
+const server = new App();
+
+server.get('/metrics', async (_req, res) => {
+	const metrics = await register.metrics();
+	res.setHeader('Content-Type', register.contentType);
+	res.send(metrics);
+});
+
+server.get('/terms', (_req, res) => res.redirect(process.env.TERMS_URL, 301));
+server.get('/privacy', (_req, res) => res.redirect(process.env.PRIVACY_URL, 301));
 server.get('/health', (_req, res) => res.send({ status: 'ok' }));
 
 const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 2_399;
 
-const addr = await server.listen({ port, host: '0.0.0.0' });
-logger.info(`Server started at ${addr}`);
+server.listen(
+	port,
+	() => {
+		logger.info(`Server started at http://localhost:${port}`);
+	},
+	'0.0.0.0',
+);
 
 await client.login();
 
