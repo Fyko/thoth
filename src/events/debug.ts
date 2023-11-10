@@ -9,6 +9,8 @@ export default class implements Event {
 
 	public event = Events.Debug as const;
 
+	public disabled = true;
+
 	public constructor(private readonly client: Client<true>) {}
 
 	public execute(): void {
