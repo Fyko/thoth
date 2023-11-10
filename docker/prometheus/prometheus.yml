@@ -11,11 +11,7 @@ scrape_configs:
 
   - job_name: 'thoth'
     static_configs:
-      - targets: ['thoth:2399']
-
-  - job_name: 'thothd'
-    static_configs:
-      - targets: ['thothd:2397']
+      - targets: ['thoth:21983']
 
   - job_name: 'grafana'
     static_configs:
