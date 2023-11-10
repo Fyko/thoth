@@ -4,7 +4,7 @@
 			"args": {
 				"limit": {
 					"name": "grenzwert",
-					"description": "The maximum amount of results to return (max & default: 50)."
+					"description": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"starts-with": {
 					"name": "starts-with",

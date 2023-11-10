@@ -160,14 +160,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -324,14 +324,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -434,14 +434,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -544,14 +544,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -708,14 +708,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -818,14 +818,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -928,14 +928,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -1038,14 +1038,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -1148,14 +1148,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -1368,14 +1368,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -1478,14 +1478,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -1588,14 +1588,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},
@@ -1698,14 +1698,14 @@
 				"description": "The maximum amount of results to return (max: 25, max: 100).",
 				"description_localizations": {
 					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max & default: 50).",
-					"de": "The maximum amount of results to return (max & default: 50).",
-					"es-ES": "The maximum amount of results to return (max & default: 50).",
-					"ja": "The maximum amount of results to return (max & default: 50).",
-					"ko": "The maximum amount of results to return (max & default: 50).",
-					"pl": "The maximum amount of results to return (max & default: 50).",
-					"zh-CN": "返回结果的最大数量(最大值和默认值：50)。",
-					"zh-TW": "The maximum amount of results to return (max & default: 50)."
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
 			},

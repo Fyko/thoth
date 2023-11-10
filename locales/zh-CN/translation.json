@@ -4,7 +4,7 @@
 			"args": {
 				"limit": {
 					"name": "limit",
-					"description": "返回结果的最大数量(最大值和默认值：50)。"
+					"description": "返回结果的最大数量(默认值：25, 最大值: 100)。"
 				},
 				"starts-with": {
 					"name": "开头为",
