@@ -16,7 +16,7 @@ export default class extends Command<typeof ConfigCommand> {
 		await interaction.deferReply({ ephemeral: true });
 
 		switch (Object.keys(args)[0]) {
-			case 'lookup':
+			case 'wotd':
 				await wotd(interaction, args.wotd, lng);
 				break;
 			default:
