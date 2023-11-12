@@ -136,7 +136,7 @@
 				"name": "invitér",
 				"description": "Returnerer et invitationslink til at tilføje Thoth til din server."
 			},
-			"success": "Vil du tilføje Thoth til din server? [Klik her]({{link}})!"
+			"success": "Want to add Thoth to your server? [Click here]({{- link}})!"
 		},
 		"match-word": {
 			"meta": {
