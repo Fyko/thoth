@@ -27,6 +27,6 @@ export default class extends Command<typeof InviteCommand> {
 		url.searchParams.set('scope', 'bot applications.commands');
 		url.searchParams.set('permissions', this.invitePermissions.toString());
 
-		await interaction.reply(i18n.t('commands.invite.response', { lng, link: hideLinkEmbed(url.toString()) }));
+		await interaction.reply(i18n.t('commands.invite.success', { lng, link: hideLinkEmbed(url.toString()) }));
 	}
 }
