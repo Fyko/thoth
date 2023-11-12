@@ -136,7 +136,7 @@
 				"name": "convite",
 				"description": "Envia um link de convite para adicionar Thoth ao seu servidor."
 			},
-			"success": "Quer adicionar Thoth ao seu servidor? [Clique aqui]({{link}})!"
+			"success": "Want to add Thoth to your server? [Click here]({{- link}})!"
 		},
 		"match-word": {
 			"meta": {
