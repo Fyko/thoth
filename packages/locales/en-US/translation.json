@@ -4,7 +4,7 @@
 			"args": {
 				"limit": {
 					"name": "limit",
-					"description": "The maximum amount of results to return (max: 25, max: 100)."
+					"description": "The maximum amount of results to return (default: 25, max: 100)."
 				},
 				"hide": {
 					"name": "hide",
@@ -61,7 +61,7 @@
 					},
 					"short": {
 						"name": "short",
-						"description": "Only return the first definition (default: false)."
+						"description": "Only return the first definition (default: False)."
 					}
 				}
 			}

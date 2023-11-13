@@ -172,9 +172,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -282,9 +282,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -392,9 +392,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -556,9 +556,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -666,9 +666,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -776,9 +776,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -886,9 +886,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -996,9 +996,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1107,9 +1107,9 @@
 					"zh-CN": "short",
 					"zh-TW": "short"
 				},
-				"description": "Only return the first definition (default: false).",
+				"description": "Only return the first definition (default: False).",
 				"description_localizations": {
-					"en-US": "Only return the first definition (default: false).",
+					"en-US": "Only return the first definition (default: False).",
 					"en-GB": "Only return the first definition (default: false).",
 					"de": "Only return the first definition (default: false).",
 					"es-ES": "Only return the first definition (default: false).",
@@ -1117,7 +1117,7 @@
 					"ko": "Only return the first definition (default: false).",
 					"pl": "Only return the first definition (default: false).",
 					"zh-CN": "Only return the first definition (default: false).",
-					"zh-TW": "Only return the first definition (default: false)."
+					"zh-TW": "Only return the first definition (default: False)."
 				},
 				"type": 5
 			},
@@ -1217,9 +1217,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1327,9 +1327,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1437,9 +1437,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1547,9 +1547,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
@@ -1712,9 +1712,9 @@
 					"zh-CN": "limit",
 					"zh-TW": "limit"
 				},
-				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
 				"description_localizations": {
-					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
 					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
 					"de": "The maximum amount of results to return (max: 25, max: 100).",
 					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
