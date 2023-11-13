@@ -1,0 +1,42 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "copy-locales": "cp -r ../../packages/locales ./public && rm ./dist/locales/package.json",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "i18n:generate": "astro-i18next generate"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^1.1.4",
+    "@astrojs/node": "^6.0.3",
+    "@astrojs/react": "^3.0.4",
+    "@skyra/discord-components-react": "^3.6.1",
+    "@thoth/interactions": "workspace:^",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "astro": "^3.5.3",
+    "astro-i18next": "1.0.0-beta.21",
+    "i18next": "^23.7.3",
+    "i18next-fs-backend": "^2.3.0",
+    "locales": "workspace:^",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-neon": "^0.1.57",
+    "eslint-formatter-pretty": "^5",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.0",
+    "typescript": "^5.2.2"
+  }
+}

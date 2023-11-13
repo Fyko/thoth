@@ -2,8 +2,8 @@
 node_modules
 packages/**/node_modules
 packages/**/dist
-services/**/node_modules
-services/**/dist
+apps/**/node_modules
+apps/**/dist
 
 # Log files
 logs
@@ -42,9 +42,10 @@ Dockerfile
 .github
 .git
 .gitattributes
+
+
 target
 **/target
-# node mods
 .husky
 .vscode
 scripts
@@ -58,3 +59,4 @@ denolint.json
 README.md
 .env
 pruned
+out

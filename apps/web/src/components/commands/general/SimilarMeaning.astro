@@ -1,0 +1,48 @@
+---
+import SimilarMeaningCommand from '@thoth/interactions/commands/general/similar-meaning';
+import { t } from 'i18next';
+import Command from '../Command.astro';
+
+const WORDS = [
+	'evildoing',
+	'abuses',
+	'breaches',
+	'contraventions',
+	'crimes',
+	'excesses',
+	'failings',
+	'faults',
+	'fouls',
+	'infractions',
+	'infringements',
+	'irregularities',
+	'misdeeds',
+	'misdemeanours',
+	'mistakes',
+	'offences',
+	'overruns',
+	'sins',
+	'trespasses',
+	'violations',
+	'wrongs',
+	'transgressing',
+	'transgresses',
+	'transgress',
+	'transgressors',
+	'75 more...',
+];
+---
+
+<Command
+	name={SimilarMeaningCommand.name}
+	description={SimilarMeaningCommand.description}
+	args={Object.values(SimilarMeaningCommand.options)}
+>
+	{
+		t('commands.similar-meaning.generic_success', {
+			found_count: 100,
+			word: 'transgressions',
+			words: WORDS.join(', '),
+		}).replaceAll('`', '')
+	}
+</Command>

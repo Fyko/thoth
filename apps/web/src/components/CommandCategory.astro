@@ -1,0 +1,56 @@
+---
+interface Props {
+	title: string;
+	tagline?: string;
+	align?: 'start' | 'center';
+}
+
+const { align = 'center', tagline, title } = Astro.props;
+---
+
+<div class:list={['command-category stack gap-4', align]}>
+	<div class="stack gap-2">
+		<h2 class="title">{title}</h2>
+		{tagline && <p class="tagline">{tagline}</p>}
+	</div>
+	<slot />
+</div>
+
+<style>
+	.command-category {
+		font-size: var(--text-lg);
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.title,
+	.tagline {
+		max-width: 37ch;
+		margin-inline: auto;
+	}
+
+	.title {
+		font-size: var(--text-3xl);
+		color: var(--gray-0);
+	}
+
+	@media (min-width: 50em) {
+		.command-category {
+			font-size: var(--text-lg);
+		}
+
+		.start {
+			text-align: start;
+		}
+
+		.start .title,
+		.start .tagline {
+			margin-inline: unset;
+		}
+
+		.title {
+			font-size: var(--text-5xl);
+		}
+	}
+</style>

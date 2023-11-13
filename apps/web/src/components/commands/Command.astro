@@ -1,0 +1,133 @@
+---
+interface Props {
+	/**
+	 * the name of the command without the leading slash
+	 */
+	name: string;
+	/**
+	 * the description of the command
+	 */
+	description: string;
+	/**
+	 * if the command is "featured"
+	 */
+	featured?: boolean;
+	/**
+	 * Optional arguments for the command
+	 */
+	args?: { name: string; description: string }[];
+}
+
+const { name, description, featured = false, args } = Astro.props;
+---
+
+<section id={name}>
+	<div class:list={['section-title', { featured }]}>
+		<h2 class:list={['section-title', { featured }]}>/{name}</h2>
+		{featured ? '(✨ featured)' : ''}
+	</div>
+	<div class="content">
+		<p>
+			{description}
+		</p>
+		{
+			args ? (
+				<div class="arguments">
+					<h4>Arguments</h4>
+					<ul>
+						{args.map((arg) => (
+							<li>
+								<code>{arg.name}</code> - {arg.description}
+							</li>
+						))}
+					</ul>
+				</div>
+			) : (
+				''
+			)
+		}
+		<discord-messages no-background style="border: hidden;">
+			<discord-message profile="thoth">
+				<discord-command slot="reply" profile="fyko" command={`/${name}`}></discord-command>
+				<slot />
+			</discord-message>
+		</discord-messages>
+	</div>
+</section>
+
+<script>
+	// initial load
+	const initialIsDark = document.documentElement.classList.contains('theme-dark');
+
+	function setDiscordTheme(dark: boolean) {
+		document.querySelectorAll('discord-messages').forEach((discordMessages) => {
+			discordMessages.setAttribute('light-theme', (!dark).toString());
+		});
+	}
+
+	setDiscordTheme(initialIsDark);
+
+	document.addEventListener('themeSet', (event) =>
+		// @ts-expect-error this is a custom event
+		setDiscordTheme(event.detail.dark),
+	);
+</script>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: var(--gray-200);
+	}
+
+	.arguments {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+
+	.arguments h4 {
+		margin-top: 1rem;
+		font-size: var(--text-lg);
+	}
+
+	section:target div {
+		background: var(--gray-900);
+		border-radius: 0.5rem;
+		padding: 1rem;
+	}
+
+	.section-title {
+		grid-column-start: 1;
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+	}
+
+	.featured {
+		background: linear-gradient(150deg, #ca7879, #7611a6, #1c0056);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.content {
+		grid-column: 2 / 4;
+	}
+
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.content :global(a:hover),
+	.content :global(a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		section {
+			display: contents;
+			font-size: var(--text-lg);
+		}
+	}
+</style>

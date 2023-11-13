@@ -19,10 +19,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        uses: discordjs/discord.js/packages/actions/src/pnpmCache@e96a8a977fdbd44fb8795fdbbcfb42fb667c4554
+        uses: trufflehq/truffle-packages/actions/yarn@99bfffab89199c599f12ace60f9bdd0025824865
 
       - name: Lint
-        run: pnpm run lint
+        run: yarn run lint
 
       - name: Build
-        run: pnpm run build
+        run: yarn run build

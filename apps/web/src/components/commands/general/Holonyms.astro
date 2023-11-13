@@ -1,0 +1,48 @@
+---
+import HolonymsCommand from '@thoth/interactions/commands/general/holonyms';
+import { t } from 'i18next';
+import Command from '../Command.astro';
+
+const WORDS = [
+	'gun',
+	'door',
+	'boot',
+	'high',
+	'gas',
+	'reverse',
+	'first',
+	'low',
+	'second',
+	'wing',
+	'window',
+	'horn',
+	'buffer',
+	'hood',
+	'fin',
+	'roof',
+	'trunk',
+	'throttle',
+	'bonnet',
+	'suspension',
+	'accelerator',
+	'third',
+	'grille',
+	'bumper',
+	'fender',
+	'28 more...',
+];
+---
+
+<Command
+	name={HolonymsCommand.name}
+	description={HolonymsCommand.description}
+	args={Object.values(HolonymsCommand.options)}
+>
+	{
+		t('commands.holonyms.success', {
+			found_count: 53,
+			word: 'Car',
+			words: WORDS.join(', '),
+		}).replaceAll('`', '')
+	}
+</Command>

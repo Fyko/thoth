@@ -1,2 +1,2 @@
 #!/bin/sh
-pnpm run build && pnpm run generate && git add commands.lock.json && pnpm exec lint-staged
+yarn build && yarn workspace bot generate && git add commands.lock.json && yarn lint-staged

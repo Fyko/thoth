@@ -1,0 +1,41 @@
+---
+import ThatFollowCommand from '@thoth/interactions/commands/general/that-follow';
+import { t } from 'i18next';
+import Command from '../Command.astro';
+---
+
+<Command
+	name={ThatFollowCommand.name}
+	description={ThatFollowCommand.description}
+	args={Object.values(ThatFollowCommand.options)}
+>
+	{
+		t('commands.that-follow.starts_with_success', {
+			found_count: 20,
+			word: 'read',
+			words: [
+				'sea',
+				'sleep',
+				'sense',
+				'south',
+				'structure',
+				'sigh',
+				'snow',
+				'space',
+				'silence',
+				'sorrow',
+				'structures',
+				'sympathy',
+				'shadows',
+				'shadow',
+				'shade',
+				'spiritual',
+				'satisfaction',
+				'significance',
+				'surface',
+				'seated',
+			].join(', '),
+			starts_with: 's',
+		}).replaceAll('`', '')
+	}
+</Command>

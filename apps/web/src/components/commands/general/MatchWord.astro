@@ -1,0 +1,48 @@
+---
+import MatchWordCommand from '@thoth/interactions/commands/general/match-word';
+import { t } from 'i18next';
+import Command from '../Command.astro';
+
+const WORDS = [
+	'apple',
+	'angle',
+	'agile',
+	'aisle',
+	'ample',
+	'amble',
+	'addle',
+	'ankle',
+	'anile',
+	'anele',
+	'abele',
+	'adele',
+	'anole',
+	'attle',
+	'axile',
+	'amole',
+	'azole',
+	'ancle',
+	'atole',
+	'avale',
+	'asile',
+	'avile',
+	'argle',
+	'antle',
+	'aigle',
+	'14 more...',
+];
+---
+
+<Command
+	name={MatchWordCommand.name}
+	description={MatchWordCommand.description}
+	args={Object.values(MatchWordCommand.options)}
+>
+	{
+		t('commands.match-word.success', {
+			found_count: 39,
+			word: 'a??le',
+			words: WORDS.join(', '),
+		}).replaceAll('`', '')
+	}
+</Command>

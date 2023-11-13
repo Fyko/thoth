@@ -1,0 +1,48 @@
+---
+import HyponymsCommand from '@thoth/interactions/commands/general/hyponyms';
+import { t } from 'i18next';
+import Command from '../Command.astro';
+
+const WORDS = [
+	'process',
+	'creep',
+	'trot',
+	'turn',
+	'foot',
+	'tap',
+	'trip',
+	'pad',
+	'tread',
+	'tip',
+	'stride',
+	'mouse',
+	'pace',
+	'steal',
+	'reel',
+	'swag',
+	'pound',
+	'sneak',
+	'stamp',
+	'gait',
+	'toe',
+	'exhibit',
+	'hitch',
+	'lurch',
+	'stalk',
+	'75 more...',
+];
+---
+
+<Command
+	name={HyponymsCommand.name}
+	description={HyponymsCommand.description}
+	args={Object.values(HyponymsCommand.options)}
+>
+	{
+		t('commands.hyponyms.success', {
+			found_count: 100,
+			word: 'Walk',
+			words: WORDS.join(', '),
+		}).replaceAll('`', '')
+	}
+</Command>

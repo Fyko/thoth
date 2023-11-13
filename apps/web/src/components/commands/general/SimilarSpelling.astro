@@ -1,0 +1,37 @@
+---
+import SimilarSpellingCommand from '@thoth/interactions/commands/general/similar-spelling';
+import { t } from 'i18next';
+import Command from '../Command.astro';
+
+const WORDS = [
+	'agile',
+	'anile',
+	'gile',
+	'aile',
+	'axile',
+	'vagile',
+	'agil',
+	'asile',
+	'avile',
+	'agila',
+	'argile',
+	'agible',
+	'agie',
+	'agle',
+	'agite',
+];
+---
+
+<Command
+	name={SimilarSpellingCommand.name}
+	description={SimilarSpellingCommand.description}
+	args={Object.values(SimilarSpellingCommand.options)}
+>
+	{
+		t('commands.similar-spelling.success', {
+			found_count: 100,
+			word: 'agile',
+			words: WORDS.join(', '),
+		}).replaceAll('`', '')
+	}
+</Command>

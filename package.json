@@ -1,58 +1,26 @@
 {
 	"name": "thoth",
 	"private": true,
-	"version": "4.0.0",
+	"version": "0.0.0",
 	"description": "the bot for all things ELA",
-	"main": "dist/index.js",
-	"type": "module",
-	"imports": {
-		"#util/*": "./dist/util/*",
-		"#mw/*": "./dist/util/mw/*",
-		"#interactions/*": "./dist/interactions/*",
-		"#mw": "./dist/util/mw/index.js",
-		"#util/types": "./dist/util/types/index.js",
-		"#constants": "./dist/util/constants.js",
-		"#logger": "./dist/util/logger.js",
-		"#structures": "./dist/structures/index.js"
-	},
+	"workspaces": [
+		"apps/**",
+		"packages/**",
+		"!**/dist"
+	],
 	"scripts": {
 		"prepare": "is-ci || git config core.hooksPath .github/hooks",
-		"generate": "node ./dist/scripts/generate.js",
-		"watch": "tsc --watch",
-		"build": "tsc && pnpm run copy-locales",
-		"start": "node .",
-		"dev": "tsc-watch --onSuccess \"node .\"",
-		"copy-locales": "cpy ./locales/**/*.* dist/ --parents",
-		"lint": "prettier --check . && eslint src --ext .mjs,.js,.ts --format=pretty",
-		"format": "prettier --write . && eslint src --ext .mjs,.js,.ts --fix --format=pretty"
+		"build": "turbo run build --cache-dir=.turbo",
+		"dev:bot": "turbo run dev --filter bot --cache-dir=.turbo",
+		"dev:web": "turbo run dev --filter web --cache-dir=.turbo",
+		"lint": "turbo run lint --parallel --cache-dir=.turbo",
+		"format": "turbo run format --parallel --cache-dir=.turbo"
 	},
 	"author": "Carter Himmel <me@fyko.net>",
 	"license": "MIT",
-	"dependencies": {
-		"@discordjs/builders": "^1.6.5",
-		"@discordjs/rest": "^2.0.1",
-		"@skyra/i18next-backend": "^2.0.4",
-		"@tinyhttp/app": "^2.2.1",
-		"@yuudachi/framework": "^0.2.10",
-		"bullmq": "^4.13.2",
-		"common-tags": "^1.8.2",
-		"discord-api-types": "^0.37.63",
-		"discord.js": "^14.13.0",
-		"fs-nextra": "^0.5.1",
-		"i18next": "^23.6.0",
-		"ioredis": "^5.3.2",
-		"pino": "^8.16.1",
-		"postgres": "^3.4.3",
-		"prom-client": "^15.0.0",
-		"readdirp": "^3.6.0",
-		"reflect-metadata": "^0.1.13",
-		"rss-parser": "^3.13.0",
-		"tsyringe": "^4.8.0",
-		"undici": "^5.27.2"
-	},
 	"devDependencies": {
-		"@commitlint/cli": "^18.2.0",
-		"@commitlint/config-angular": "^18.1.0",
+		"@commitlint/cli": "^18.4.1",
+		"@commitlint/config-angular": "^18.4.0",
 		"@types/common-tags": "^1.8.4",
 		"@types/node": "^20.9.0",
 		"cpy-cli": "^5.0.0",
@@ -62,13 +30,11 @@
 		"eslint-formatter-pretty": "^5",
 		"eslint-plugin-prettier": "^5.0.1",
 		"is-ci": "^3.0.1",
-		"lint-staged": "^15.0.2",
-		"mw-collegiate": "^1.0.1",
-		"pino-pretty": "^10.2.3",
-		"prettier": "^3.0.3",
+		"lint-staged": "^15.1.0",
+		"prettier": "^3.1.0",
 		"rimraf": "^5.0.5",
 		"ts-node": "^10.9.1",
-		"tsc-watch": "^6.0.4",
+		"turbo": "1.10.16",
 		"typescript": "^5.2.2"
 	},
 	"lint-staged": {
@@ -103,7 +69,7 @@
 	},
 	"volta": {
 		"node": "20.9.0",
-		"pnpm": "8.10.2"
+		"yarn": "4.0.1"
 	},
-	"packageManager": "pnpm@8.10.2"
+	"packageManager": "yarn@3.6.4"
 }

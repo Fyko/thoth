@@ -1,0 +1,56 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"globalDependencies": ["yarn.lock", "**/tsconfig.json", "**/tsup.config.ts"],
+	"pipeline": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["src/**/*.ts"],
+			"outputs": ["dist/**"],
+			"cache": true,
+			"outputMode": "errors-only"
+		},
+		"dev": {
+			"persistent": true
+		},
+		"lint": {
+			"inputs": [
+				"**/.eslintignore",
+				"**/.eslintrc.json",
+				"**/.prettierignore",
+				"**/.prettierrc.json",
+				"**/tsconfig.eslint.json",
+				"src/**/*.tsx",
+				"src/**/*.ts",
+				"src/**/*.css",
+				"src/**/*.mdx",
+				"scripts/**.js",
+				"scripts/**.mjs",
+				".prettierrc.js",
+				".prettierrc.cjs",
+				"vite.config.ts"
+			],
+			"dependsOn": ["^build"],
+			"outputMode": "errors-only"
+		},
+		"format": {
+			"inputs": [
+				"**/.eslintignore",
+				"**/.eslintrc.json",
+				"**/.prettierignore",
+				"**/.prettierrc.json",
+				"**/tsconfig.eslint.json",
+				"src/**/*.tsx",
+				"src/**/*.ts",
+				"src/**/*.css",
+				"src/**/*.mdx",
+				"scripts/**.js",
+				"scripts/**.mjs",
+				".prettierrc.js",
+				".prettierrc.cjs",
+				"vite.config.ts"
+			],
+			"dependsOn": ["^build"],
+			"outputMode": "errors-only"
+		}
+	}
+}

@@ -1,0 +1,25 @@
+---
+import { DiscordCustomEmoji } from '@skyra/discord-components-react';
+import WordOfTheDayCommand from '@thoth/interactions/commands/general/word-of-the-day';
+import Command from '../Command.astro';
+---
+
+<Command
+	featured
+	name={WordOfTheDayCommand.name}
+	description={WordOfTheDayCommand.description}
+	args={Object.values(WordOfTheDayCommand.options)}
+>
+	<DiscordCustomEmoji name="merriamWebster" />{' '}
+	<a>bugbear</a>
+	{' '}
+	 (noun){' '}•{' '}(bugbear) • (ˈbəg-ˌber)
+	<p>Stems: bugbear, bugbears</p>
+	<br />
+	<u>Definitions</u>
+	<br /><br />
+	<b>:</b> an imaginary goblin or specter used to excite fear
+	<b>:</b> an object or source of dread
+	<b>:</b> a continuing source of irritation <b>:</b>
+	<a>PROBLEM</a>
+</Command>

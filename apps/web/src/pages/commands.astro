@@ -1,0 +1,83 @@
+---
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import Adjective from '../components/commands/general/Adjective.astro';
+import CloseRhyme from '../components/commands/general/CloseRhyme.astro';
+import Definition from '../components/commands/general/Definition.astro';
+import Holonyms from '../components/commands/general/Holonyms.astro';
+import Homophones from '../components/commands/general/Homophones.astro';
+import Hyponyms from '../components/commands/general/Hyponyms.astro';
+import MatchWord from '../components/commands/general/MatchWord.astro';
+import Noun from '../components/commands/general/Noun.astro';
+import Rhyme from '../components/commands/general/Rhyme.astro';
+import SimilarMeaning from '../components/commands/general/SimilarMeaning.astro';
+import SimilarSpelling from '../components/commands/general/SimilarSpelling.astro';
+import SoundsLike from '../components/commands/general/SoundsLike.astro';
+import ThatFollow from '../components/commands/general/ThatFollow.astro';
+import Triggers from '../components/commands/general/Triggers.astro';
+import WordOfTheDay from '../components/commands/general/WordOfTheDay.astro';
+import Invite from '../components/commands/util/Invite.astro';
+import Ping from '../components/commands/util/Ping.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Commands | Thoth" description="Thoth's Commands">
+	<div class="stack gap-20">
+		<main class="wrapper about">
+			<Hero
+				title="Commands"
+				tagline={`This is a list of Thoth's commands along with what a response from Thoth looks like.`}
+			/>
+
+			<!-- Featured commands -->
+			<Definition />
+			<WordOfTheDay />
+
+			<!-- Searching commands -->
+			<Adjective />
+			<CloseRhyme />
+			<Holonyms />
+			<Homophones />
+			<Hyponyms />
+			<MatchWord />
+			<Noun />
+			<Rhyme />
+			<SimilarMeaning />
+			<SimilarSpelling />
+			<SoundsLike />
+			<ThatFollow />
+			<Triggers />
+
+			<!-- Utility commands -->
+			<Invite />
+			<Ping />
+		</main>
+
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+	}
+
+	img {
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	@media (min-width: 50em) {
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 60% 1fr;
+		}
+
+		.about > :global(:first-child) {
+			grid-column-start: 2;
+		}
+	}
+</style>
