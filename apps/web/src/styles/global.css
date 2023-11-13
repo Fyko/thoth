@@ -75,8 +75,6 @@
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --font-body: "Public Sans", var(--font-system);
   --font-brand: Rubik, var(--font-system);
-  /* for i18next */
-  white-space: pre-line;
 
   /* Transitions */
   --theme-transition: 0.2s ease-in-out;
