@@ -3,8 +3,8 @@ name: Deploy Website
 on:
   push:
     paths:
-      - 'sites/truffle.vip/**'
-      - '.github/workflows/pages_truffle.vip.yaml'
+      - 'app/web/**'
+      - '.github/workflows/cd_website.yml'
   workflow_dispatch:
 
 jobs:
