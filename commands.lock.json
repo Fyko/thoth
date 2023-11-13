@@ -1409,17 +1409,17 @@
 					"zh-CN": "word",
 					"zh-TW": "word"
 				},
-				"description": "The word to search homophones for (eg: their).",
+				"description": "The word to search homophones for (eg: cents).",
 				"description_localizations": {
-					"en-US": "The word to search homophones for (eg: their).",
-					"en-GB": "The word to search homophones for (eg: their).",
-					"de": "The word to search homophones for (eg: their).",
-					"es-ES": "The word to search homophones for (eg: their).",
-					"ja": "The word to search homophones for (eg: their).",
-					"ko": "The word to search homophones for (eg: their).",
-					"pl": "The word to search homophones for (eg: their).",
-					"zh-CN": "The word to search homophones for (eg: their).",
-					"zh-TW": "The word to search homophones for (eg: their)."
+					"en-US": "The word to search homophones for (eg: cents).",
+					"en-GB": "The word to search homophones for (eg: cents).",
+					"de": "The word to search homophones for (eg: cents).",
+					"es-ES": "The word to search homophones for (eg: cents).",
+					"ja": "The word to search homophones for (eg: cents).",
+					"ko": "The word to search homophones for (eg: cents).",
+					"pl": "The word to search homophones for (eg: cents).",
+					"zh-CN": "The word to search homophones for (eg: cents).",
+					"zh-TW": "The word to search homophones for (eg: cents)."
 				},
 				"type": 3,
 				"required": true
@@ -1726,6 +1726,116 @@
 			"zh-TW": "Responds with the word of the day from Merriam Webster."
 		},
 		"options": [
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: True).",
+					"en-GB": "Whether or not to hide the command response from other users (default: True).",
+					"de": "Whether or not to hide the command response from other users (default: True).",
+					"es-ES": "Whether or not to hide the command response from other users (default: True).",
+					"ja": "Whether or not to hide the command response from other users (default: True).",
+					"ko": "Whether or not to hide the command response from other users (default: True).",
+					"pl": "Whether or not to hide the command response from other users (default: True).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+				},
+				"type": 5
+			}
+		]
+	},
+	{
+		"name": "match-word",
+		"name_localizations": {
+			"en-US": "match-word",
+			"en-GB": "match-word",
+			"de": "match-word",
+			"es-ES": "match-word",
+			"ja": "match-word",
+			"ko": "match-word",
+			"pl": "match-word",
+			"zh-CN": "match-word",
+			"zh-TW": "match-word"
+		},
+		"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+		"description_localizations": {
+			"en-US": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"en-GB": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"de": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"es-ES": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"ja": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"ko": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"pl": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"zh-CN": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"zh-TW": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date)."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "word",
+					"ja": "word",
+					"ko": "word",
+					"pl": "słowo",
+					"zh-CN": "word",
+					"zh-TW": "word"
+				},
+				"description": "The word to find matches for (example: a??le).",
+				"description_localizations": {
+					"en-US": "The word to find matches for (example: a??le).",
+					"en-GB": "The word to find matches for (example: a??le).",
+					"de": "The word to find matches for (example: a??le).",
+					"es-ES": "The word to find matches for (example: a??le).",
+					"ja": "The word to find matches for (example: a??le).",
+					"ko": "The word to find matches for (example: a??le).",
+					"pl": "The word to find matches for (example: a??le).",
+					"zh-CN": "The word to find matches for (example: a??le).",
+					"zh-TW": "The word to find matches for (example: a??le)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"en-GB": "limit",
+					"de": "grenzwert",
+					"es-ES": "limit",
+					"ja": "limit",
+					"ko": "limit",
+					"pl": "limit",
+					"zh-CN": "limit",
+					"zh-TW": "limit"
+				},
+				"description": "The maximum amount of results to return (max: 25, max: 100).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (max: 25, max: 100).",
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"type": 4
+			},
 			{
 				"name": "hide",
 				"name_localizations": {

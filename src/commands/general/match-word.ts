@@ -1,7 +1,7 @@
 import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
-import type MatchCommand from '#interactions/commands/general/match.js';
+import type MatchCommand from '#interactions/commands/general/match-word.js';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuse } from '#util/datamuse.js';
 import { firstUpperCase, trimArray } from '#util/index.js';
