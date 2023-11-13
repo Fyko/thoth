@@ -73,7 +73,7 @@
 				"args": {
 					"word": {
 						"name": "слово",
-						"description": "The word to search homophones for (eg: their)."
+						"description": "The word to search homophones for (eg: cents)."
 					}
 				}
 			},
