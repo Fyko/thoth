@@ -6,6 +6,10 @@
 					"name": "обмеження",
 					"description": "Максимальна кількість результатів для повернення (максимально і за замовчуванням: 50)."
 				},
+				"hide": {
+					"name": "hide",
+					"description": "Whether or not to hide the command response from other users (default: True)."
+				},
 				"starts-with": {
 					"name": "починається з",
 					"description": "Only return words that start with this value (mutually exclusive with ends-with)."
@@ -24,7 +28,9 @@
 			"not_found_w_suggestions": "I'm sorry, I couldn't find any results for your query! Perhaps you meant: ",
 			"unauthorized": "Помилка Авторизації.",
 			"no_permissions": "You don't have permission to use this command.",
-			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}"
+			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}",
+			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
 		},
 		"titles": {
 			"definitions": "Визначення"
@@ -60,12 +66,77 @@
 				}
 			}
 		},
+		"homophones": {
+			"meta": {
+				"name": "homophones",
+				"description": "Responds with homophones (sound-alike words) for your query.",
+				"args": {
+					"word": {
+						"name": "слово",
+						"description": "The word to search homophones for (eg: cents)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` homophones for `{{word}}`: \n\n{{words}}"
+		},
+		"holonyms": {
+			"meta": {
+				"name": "holonyms",
+				"description": "Responds with holonyms (what comprises) for your query.",
+				"args": {
+					"word": {
+						"name": "слово",
+						"description": "The word to search homophones for (eg: car)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` holonyms for `{{word}}`: \n\n{{words}}"
+		},
+		"hyponyms": {
+			"meta": {
+				"name": "hyponyms",
+				"description": "Responds with hyponyms (more general) for your query.",
+				"args": {
+					"word": {
+						"name": "слово",
+						"description": "The word to search hyponyms for (eg: car)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` hyponyms for `{{word}}`: \n\n{{words}}"
+		},
+		"close-rhyme": {
+			"meta": {
+				"name": "close-rhyme",
+				"description": "Responds with words that closely rhyme with your query.",
+				"args": {
+					"word": {
+						"name": "слово",
+						"description": "The word to search close rhymes for (eg: forest)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` words that closely rhyme with `{{word}}`: \n\n{{words}}"
+		},
+		"triggers": {
+			"meta": {
+				"name": "triggers",
+				"description": "Responds with words that are statistically associated with your query.",
+				"args": {
+					"word": {
+						"name": "слово",
+						"description": "The word to search triggers for (eg: cow)."
+					}
+				}
+			},
+			"success": "I found `{{found_count}}` words that closely rhyme with `{{word}}`: \n\n{{words}}"
+		},
 		"invite": {
 			"meta": {
 				"name": "запросити",
 				"description": "Returns an invite link to add Thoth to your server."
 			},
-			"success": "Want to add Thoth to your server? [Click here]({{link}})!"
+			"success": "Want to add Thoth to your server? [Click here]({{- link}})!"
 		},
 		"match-word": {
 			"meta": {
