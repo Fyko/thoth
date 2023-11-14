@@ -39,8 +39,8 @@ export default function Command({
   children,
 }: CommandProps) {
   return (
-    <section id={name}>
-      <div className={`section-title ${featured ? "featured" : ""}`}>
+    <section>
+      <div id={name} className={`section-title ${featured ? "featured" : ""}`}>
         <h2 className={`section-title ${featured ? "featured" : ""}`}>
           /{name}
         </h2>

@@ -118,6 +118,7 @@
     var(--accent-light)
   );
   --gradient-stroke: linear-gradient(180deg, var(--gray-600), var(--gray-800));
+  --featured-command: linear-gradient(150deg, #ca7879, #7611a6, #1c0056);
 
   --shadow-sm: 0px 6px 3px rgba(255, 255, 255, 0.01),
     0px 4px 2px rgba(255, 255, 255, 0.01), 0px 2px 2px rgba(255, 255, 255, 0.02),

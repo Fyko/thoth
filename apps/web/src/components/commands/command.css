@@ -24,12 +24,6 @@ section {
   font-size: var(--text-lg);
 }
 
-section:target div {
-  background: var(--gray-900);
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
 .section-title {
   grid-column-start: 1;
   font-size: var(--text-xl);

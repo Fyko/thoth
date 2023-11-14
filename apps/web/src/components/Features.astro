@@ -1,65 +1,81 @@
 ---
-import Icon from './Icon.astro';
+import Icon from "./Icon.astro";
 ---
 
 <section class="box skills">
-	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="binoculars" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h3>15+ Data Fetching Commands</h3>
-		<p>
-			Quickly fetch adjectives, homophones, rhyming words, hyponyms, triggers, similarly spelled, and sounding words and
-			more!
-		</p>
-	</div>
-	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="books" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h3>Definition</h3>
-		<p>Query the pronuncation, various definitions, roots, and usages of words with our powerful dictionary command.</p>
-	</div>
-	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="sun-horizon" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h3>Scheduled Word of The Day</h3>
-		<p>Configure our <b>Word of The Day</b> module to post Merriam Webster's new word of the day when it releases.</p>
-	</div>
+  <div class="stack gap-2 lg:gap-4">
+    <Icon icon="books" color="var(--accent-regular)" size="2.5rem" gradient />
+    <h3>Definition Searching</h3>
+    <p>
+      Query the pronuncation, various definitions, roots, and usages of words
+      with our powerful /dictionary command.
+    </p>
+  </div>
+  <div class="stack gap-2 lg:gap-4">
+    <Icon
+      icon="binoculars"
+      color="var(--accent-regular)"
+      size="2.5rem"
+      gradient
+    />
+    <h3>15+ Data Fetching Commands</h3>
+    <p>
+      Quickly fetch adjectives, homophones, rhyming words, hyponyms, triggers,
+      similarly spelled and sounding words, and more!
+    </p>
+  </div>
+  <div class="stack gap-2 lg:gap-4">
+    <Icon
+      icon="sun-horizon"
+      color="var(--accent-regular)"
+      size="2.5rem"
+      gradient
+    />
+    <h3>Scheduled Word of The Day</h3>
+    <p>
+      Configure our <b>Word of The Day</b> module to post Merriam Webster's new
+      word of the day when it releases.
+    </p>
+  </div>
 </section>
 
 <style>
-	.box {
-		border: 1px solid var(--gray-800);
-		border-radius: 0.75rem;
-		padding: 1.5rem;
-		background-color: var(--gray-999_40);
-		box-shadow: var(--shadow-sm);
-	}
+  .box {
+    border: 1px solid var(--gray-800);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    background-color: var(--gray-999_40);
+    box-shadow: var(--shadow-sm);
+  }
 
-	.skills {
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
-	}
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
 
-	.skills h3 {
-		font-size: var(--text-lg);
-	}
+  .skills h3 {
+    font-size: var(--text-lg);
+  }
 
-	.skills p {
-		color: var(--gray-400);
-	}
+  .skills p {
+    color: var(--gray-400);
+  }
 
-	@media (min-width: 50em) {
-		.box {
-			border-radius: 1.5rem;
-			padding: 2.5rem;
-		}
+  @media (min-width: 50em) {
+    .box {
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+    }
 
-		.skills {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 5rem;
-		}
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5rem;
+    }
 
-		.skills h2 {
-			font-size: var(--text-2xl);
-		}
-	}
+    .skills h2 {
+      font-size: var(--text-2xl);
+    }
+  }
 </style>
