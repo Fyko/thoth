@@ -13,7 +13,26 @@ const { title = "Thoth", description = "The site for the Thoth Discord bot." } =
 <meta charset="UTF-8" />
 <meta name="description" property="og:description" content={description} />
 <meta name="viewport" content="width=device-width" />
+
+<!-- opengraph crap -->
+<meta name="og:title" content={title} />
+<meta name="og:type" content="website" />
+<meta name="og:description" content={description} />
+<meta name="og:image" content="/assets/logo.png" />
+<meta name="og:url" content="/" />
+<meta name="og:locale" content="en_US" />
+<meta name="og:locale:alternate" content="en_GB" />
+<meta name="theme-color" content="#77B3D4" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@fykowo" />
+<meta name="twitter:creator" content="@fykowo" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content="/assets/logo.png" />
+<meta name="twitter:url" content="/" />
+
 <meta name="generator" content={Astro.generator} />
+<meta name="darkreader-lock" />
 <title>{title}</title>
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -23,6 +42,7 @@ const { title = "Thoth", description = "The site for the Thoth Discord bot." } =
   href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
   rel="stylesheet"
 />
+
 <script is:inline>
   // This code is inlined in the head to make dark mode instant & blocking.
   const getThemePreference = () => {
