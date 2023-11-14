@@ -6,9 +6,12 @@ section {
 }
 
 .content {
+  border: hidden;
+}
+
+.i18n-newline {
   /* for i18next */
   white-space: pre-line;
-  border: hidden;
 }
 
 .arguments {
@@ -34,7 +37,7 @@ section:target div {
 }
 
 .featured {
-  background: linear-gradient(150deg, #ca7879, #7611a6, #1c0056);
+  background: var(--featured-command);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

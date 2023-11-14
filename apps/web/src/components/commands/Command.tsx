@@ -1,19 +1,16 @@
-import "./command.css";
 import {
   DiscordCommand,
   DiscordMessage,
   DiscordMessages,
 } from "@skyra/discord-components-react";
+import { type PropsWithChildren } from "react";
+import "./command.css";
 
-export type CommandProps = {
+export type CommandProps = PropsWithChildren<{
   /**
    * Optional arguments for the command
    */
   readonly args?: { description: string; name: string }[];
-  /**
-   * Inner content
-   */
-  readonly children?: React.ReactNode;
   /**
    * the description of the command
    */
@@ -24,38 +21,23 @@ export type CommandProps = {
   readonly featured?: boolean;
 
   /**
+   * use 1i8n white-line: pre-space whatever shit
+   */
+  readonly i18n?: boolean;
+  /**
    * the name of the command without the leading slash
    */
   readonly name: string;
-};
+}>;
 
-export const Command = ({
+export default function Command({
   name,
   description,
   featured = false,
   args = [],
+  i18n = true,
   children,
-}: CommandProps) => {
-  function setDiscordTheme(dark: boolean) {
-    for (const discordMessages of document.querySelectorAll(
-      "discord-messages",
-    )) {
-      discordMessages.setAttribute("light-theme", (!dark).toString());
-    }
-  }
-
-  if (typeof document !== "undefined") {
-    const initialIsDark =
-      document.documentElement.classList.contains("theme-dark");
-
-    setDiscordTheme(initialIsDark);
-
-    document.addEventListener("themeSet", (event) =>
-      // @ts-expect-error this is a custom event
-      setDiscordTheme(event.detail.dark),
-    );
-  }
-
+}: CommandProps) {
   return (
     <section id={name}>
       <div className={`section-title ${featured ? "featured" : ""}`}>
@@ -64,7 +46,7 @@ export const Command = ({
         </h2>
         {featured ? "(✨ featured)" : ""}
       </div>
-      <div className="content">
+      <div className={`content ${i18n ? "i18n-newline" : ""}`}>
         <p>{description}</p>
         {args?.length ? (
           <div className="arguments">
@@ -80,7 +62,11 @@ export const Command = ({
         ) : (
           ""
         )}
-        <DiscordMessages className="content" no-background>
+        <DiscordMessages
+          className="content"
+          no-background
+          style={{ border: "none" }}
+        >
           <DiscordMessage profile="thoth">
             <DiscordCommand slot="reply" profile="fyko" command={`/${name}`} />
             {children}
@@ -89,4 +75,4 @@ export const Command = ({
       </div>
     </section>
   );
-};
+}

@@ -46,6 +46,7 @@
     var(--accent-regular),
     var(--accent-dark)
   );
+  --featured-command: linear-gradient(150deg, #ca7879, #7611a6, #1c0056);
   --gradient-stroke: linear-gradient(180deg, var(--gray-900), var(--gray-700));
 
   /* Shadows */

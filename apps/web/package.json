@@ -16,6 +16,7 @@
   "dependencies": {
     "@astrojs/node": "^6.0.3",
     "@astrojs/react": "^3.0.4",
+    "@nanostores/react": "^0.7.1",
     "@skyra/discord-components-react": "^3.6.1",
     "@thoth/interactions": "workspace:^",
     "@types/react": "^18.0.21",
@@ -25,6 +26,7 @@
     "i18next": "^23.7.3",
     "i18next-fs-backend": "^2.3.0",
     "locales": "workspace:^",
+    "nanostores": "^0.9.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
