@@ -1,44 +1,48 @@
 ---
-import RhymeCommand from '@thoth/interactions/commands/general/rhyme';
-import { t } from 'i18next';
-import Command from '../Command.astro';
+import RhymeCommand from "@thoth/interactions/commands/general/rhyme";
+import { t } from "i18next";
+import { Command } from "../Command.tsx";
 
 const WORDS = [
-	'time',
-	'paradigm',
-	'sublime',
-	'rhyme',
-	'prime',
-	'crime',
-	'lime',
-	'anytime',
-	'sometime',
-	'chime',
-	'meantime',
-	'maritime',
-	'nighttime',
-	'climb',
-	'enzyme',
-	'pantomime',
-	'downtime',
-	'longtime',
-	'mime',
-	'pastime',
-	'slime',
-	'lifetime',
-	'thyme',
-	'grime',
-	'overtime',
-	'75 more...',
+  "time",
+  "paradigm",
+  "sublime",
+  "rhyme",
+  "prime",
+  "crime",
+  "lime",
+  "anytime",
+  "sometime",
+  "chime",
+  "meantime",
+  "maritime",
+  "nighttime",
+  "climb",
+  "enzyme",
+  "pantomime",
+  "downtime",
+  "longtime",
+  "mime",
+  "pastime",
+  "slime",
+  "lifetime",
+  "thyme",
+  "grime",
+  "overtime",
+  "75 more...",
 ];
 ---
 
-<Command name={RhymeCommand.name} description={RhymeCommand.description} args={Object.values(RhymeCommand.options)}>
-	{
-		t('commands.rhyme.success', {
-			found_count: 100,
-			word: 'dime',
-			words: WORDS.join(', '),
-		}).replaceAll('`', '')
-	}
+<Command
+  name={RhymeCommand.name}
+  description={RhymeCommand.description}
+  args={Object.values(RhymeCommand.options)}
+>
+  {
+    t("commands.rhyme.success", {
+      found_count: 100,
+      word: "dime",
+      words: WORDS.join(", "),
+    }).replaceAll("`", "")
+  }
 </Command>

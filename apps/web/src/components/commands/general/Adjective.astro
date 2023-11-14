@@ -1,48 +1,48 @@
 ---
-import AdjectiveCommand from '@thoth/interactions/commands/general/adjective';
-import { t } from 'i18next';
-import Command from '../Command.astro';
+import AdjectiveCommand from "@thoth/interactions/commands/general/adjective";
+import { t } from "i18next";
+import { Command } from "../Command.tsx";
 
 const WORDS = [
-	'small',
-	'long',
-	'round',
-	'little',
-	'periodic',
-	'large',
-	'above',
-	'next',
-	'low',
-	'wooden',
-	'accompanying',
-	'big',
-	'routing',
-	'writing',
-	'nearby',
-	'entire',
-	'separate',
-	'inner',
-	'dressing',
-	'empty',
-	'chronological',
-	'topped',
-	'complete',
-	'comparative',
-	'circular',
-	'34 more...',
+  "small",
+  "long",
+  "round",
+  "little",
+  "periodic",
+  "large",
+  "above",
+  "next",
+  "low",
+  "wooden",
+  "accompanying",
+  "big",
+  "routing",
+  "writing",
+  "nearby",
+  "entire",
+  "separate",
+  "inner",
+  "dressing",
+  "empty",
+  "chronological",
+  "topped",
+  "complete",
+  "comparative",
+  "circular",
+  "34 more...",
 ];
 ---
 
 <Command
-	name={AdjectiveCommand.name}
-	description={AdjectiveCommand.description}
-	args={Object.values(AdjectiveCommand.options)}
+  name={AdjectiveCommand.name}
+  description={AdjectiveCommand.description}
+  args={Object.values(AdjectiveCommand.options)}
 >
-	{
-		t('commands.adjective.success', {
-			found_count: 59,
-			word: 'Table',
-			words: WORDS.join(', '),
-		}).replaceAll('`', '')
-	}
+  {
+    t("commands.adjective.success", {
+      found_count: 59,
+      word: "Table",
+      words: WORDS.join(", "),
+    }).replaceAll("`", "")
+  }
 </Command>

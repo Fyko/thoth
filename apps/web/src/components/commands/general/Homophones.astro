@@ -1,21 +1,21 @@
 ---
-import HomophonesCommand from '@thoth/interactions/commands/general/homophones';
-import { t } from 'i18next';
-import Command from '../Command.astro';
+import HomophonesCommand from "@thoth/interactions/commands/general/homophones";
+import { t } from "i18next";
+import { Command } from "../Command.tsx";
 
-const WORDS = ['sense', 'scents', 'sentz'];
+const WORDS = ["sense", "scents", "sentz"];
 ---
 
 <Command
-	name={HomophonesCommand.name}
-	description={HomophonesCommand.description}
-	args={Object.values(HomophonesCommand.options)}
+  name={HomophonesCommand.name}
+  description={HomophonesCommand.description}
+  args={Object.values(HomophonesCommand.options)}
 >
-	{
-		t('commands.homophones.success', {
-			found_count: 3,
-			word: 'Cents',
-			words: WORDS.join(', '),
-		}).replaceAll('`', '')
-	}
+  {
+    t("commands.homophones.success", {
+      found_count: 3,
+      word: "Cents",
+      words: WORDS.join(", "),
+    }).replaceAll("`", "")
+  }
 </Command>

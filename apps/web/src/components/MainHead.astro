@@ -1,12 +1,13 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
-	title?: string | undefined;
-	description?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
 }
 
-const { title = 'Thoth', description = 'The site for the Thoth Discord bot.' } = Astro.props;
+const { title = "Thoth", description = "The site for the Thoth Discord bot." } =
+  Astro.props;
 ---
 
 <meta charset="UTF-8" />
@@ -19,58 +20,69 @@ const { title = 'Thoth', description = 'The site for the Thoth Discord bot.' } =
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
-	rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
+  rel="stylesheet"
 />
 <script is:inline>
-	// This code is inlined in the head to make dark mode instant & blocking.
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
+  // This code is inlined in the head to make dark mode instant & blocking.
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
 
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
 
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('theme-dark');
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("theme-dark");
 
-	if (typeof localStorage !== 'undefined') {
-		// Watch the document element and persist user preference when it changes.
-		const observer = new MutationObserver(() => {
-			const rootIsDark = document.documentElement.classList.contains('theme-dark');
-			localStorage.setItem('theme', rootIsDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-	}
+  if (typeof localStorage !== "undefined") {
+    // Watch the document element and persist user preference when it changes.
+    const observer = new MutationObserver(() => {
+      const rootIsDark =
+        document.documentElement.classList.contains("theme-dark");
+      localStorage.setItem("theme", rootIsDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
 </script>
 
 <script>
-	window.$discordMessage = {
-		defaultTheme: 'dark',
+  window.$discordMessage = {
+    defaultTheme: "dark",
 
-		profiles: {
-			fyko: {
-				author: 'Carter',
-				avatar: 'https://github.com/Fyko.png',
-				roleColor: '#7289da',
-			},
-			thoth: {
-				author: 'Thoth',
-				avatar: '/assets/logo.png',
-				roleColor: '#77b3d4',
-				bot: true,
-				verified: true,
-			},
-		},
+    profiles: {
+      fyko: {
+        author: "Carter",
+        avatar: "https://github.com/Fyko.png",
+        roleColor: "#7289da",
+      },
+      thoth: {
+        author: "Thoth",
+        avatar: "/assets/logo.png",
+        roleColor: "#77b3d4",
+        bot: true,
+        verified: true,
+      },
+    },
 
-		emojis: {
-			merriamWebster: {
-				name: 'merriamWebster',
-				url: '/assets/merriam-webster-icon.png',
-			},
-		},
-	};
+    emojis: {
+      merriamWebster: {
+        name: "merriamWebster",
+        url: "/assets/merriam-webster-icon.png",
+      },
+    },
+  };
 </script>
 
-<script type="module" src="https://unpkg.com/@skyra/discord-components-core"></script>
+<script type="module" src="https://unpkg.com/@skyra/discord-components-core"
+></script>
+<script
+  defer
+  data-domain="trythoth.com"
+  src="https://apples.fyko.net/js/script.outbound-links.js"></script>

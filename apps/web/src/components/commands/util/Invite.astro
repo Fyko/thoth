@@ -1,10 +1,11 @@
 ---
-import InviteCommand from '@thoth/interactions/commands/util/invite';
-import Command from '../Command.astro';
+import InviteCommand from "@thoth/interactions/commands/util/invite";
+import { Command } from "../Command.tsx";
 ---
 
 <Command name={InviteCommand.name} description={InviteCommand.description}>
-	Want to invite Thoth to your server? <a href="/invite?utm_source=thoth&utm_medium=commands_page" target="_blank"
-		>Click here</a
-	>!
+  Want to invite Thoth to your server? <a
+    href="/invite?utm_source=thoth&utm_medium=commands_page"
+    target="_blank">Click here</a
+  >!
 </Command>

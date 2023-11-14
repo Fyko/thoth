@@ -1,48 +1,48 @@
 ---
-import SoundsLikeCommand from '@thoth/interactions/commands/general/sounds-like';
-import { t } from 'i18next';
-import Command from '../Command.astro';
+import SoundsLikeCommand from "@thoth/interactions/commands/general/sounds-like";
+import { t } from "i18next";
+import { Command } from "../Command.tsx";
 
 const WORDS = [
-	'red',
-	'read',
-	'redd',
-	'reade',
-	'raed',
-	'redde',
-	'rid',
-	'rud',
-	'rudd',
-	'ryd',
-	'rrod',
-	'road',
-	'ride',
-	'rude',
-	'rod',
-	'reed',
-	'rad',
-	'raid',
-	'rode',
-	'ret',
-	'roid',
-	'reid',
-	'rade',
-	'rood',
-	'rowed',
-	'75 more...',
+  "red",
+  "read",
+  "redd",
+  "reade",
+  "raed",
+  "redde",
+  "rid",
+  "rud",
+  "rudd",
+  "ryd",
+  "rrod",
+  "road",
+  "ride",
+  "rude",
+  "rod",
+  "reed",
+  "rad",
+  "raid",
+  "rode",
+  "ret",
+  "roid",
+  "reid",
+  "rade",
+  "rood",
+  "rowed",
+  "75 more...",
 ];
 ---
 
 <Command
-	name={SoundsLikeCommand.name}
-	description={SoundsLikeCommand.description}
-	args={Object.values(SoundsLikeCommand.options)}
+  name={SoundsLikeCommand.name}
+  description={SoundsLikeCommand.description}
+  args={Object.values(SoundsLikeCommand.options)}
 >
-	{
-		t('commands.similar-spelling.success', {
-			found_count: 100,
-			word: 'read',
-			words: WORDS.join(', '),
-		}).replaceAll('`', '')
-	}
+  {
+    t("commands.similar-spelling.success", {
+      found_count: 100,
+      word: "read",
+      words: WORDS.join(", "),
+    }).replaceAll("`", "")
+  }
 </Command>
