@@ -4,6 +4,7 @@ import Features from "../components/Features.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
 import InviteButton from "../components/InviteButton.astro";
+import InnerDefinition from "../components/commands/general/InnerDefinition.tsx";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
@@ -24,12 +25,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
         </Hero>
 
-        <img
-          alt="The Thoth logo"
-          width="480"
-          height="480"
-          src="/assets/logo.svg"
-        />
+        <InnerDefinition />
       </header>
 
       <Features />
