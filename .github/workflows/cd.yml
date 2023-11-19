@@ -5,11 +5,10 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**/*.ts'
+      - 'apps/bot'
+      - 'packages'
       - 'package.json'
-      - 'pnpm-lock.yaml'
-      - 'Dockerfile'
-      - 'locales/**'
+      - 'yarn.lock'
 
 env:
   slug: ghcr.io/Fyko/thoth
