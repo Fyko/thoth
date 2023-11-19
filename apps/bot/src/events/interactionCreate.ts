@@ -128,8 +128,9 @@ export default class implements Event {
         } catch (error) {
           const isCommandError = error instanceof CommandError;
           const err = error as Error;
-          const logfn = isCommandError ? logger.warn : logger.info;
-          logfn(err, err.message);
+
+          if (isCommandError) logger.warn(err, err.message);
+          else logger.error(err, err.message);
 
           void this.webhook.send({
             content: isCommandError ? "" : `<@${process.env.OWNER_ID}>`,

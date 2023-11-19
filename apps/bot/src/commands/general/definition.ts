@@ -19,7 +19,7 @@ import type {
 import { stripIndents } from "common-tags";
 import { ButtonStyle } from "discord-api-types/v10";
 import { AttachmentBuilder, ComponentType } from "discord.js";
-import i18n from "i18next";
+import { t } from "i18next";
 import type { Entry, Sense, Senses, VerbalIllustration } from "mw-collegiate";
 import { inject, injectable } from "tsyringe";
 import { logger } from "#logger";
@@ -52,9 +52,9 @@ export default class extends Command<typeof DefinitionCommand> {
       // will be string[] if no defs were found and the api provided suggestions
       // will be Entry[] if defs were found
       if (!defRes.length)
-        throw new CommandError(i18n.t("common.errors.not_found", { lng }));
+        throw new CommandError(t("common.errors.not_found", { lng }));
       if (typeof defRes !== "object") {
-        throw new CommandError(i18n.t("common.errors.not_found", { lng }));
+        throw new CommandError(t("common.errors.not_found", { lng }));
       }
 
       if (typeof defRes[0] === "object") {
@@ -74,7 +74,7 @@ export default class extends Command<typeof DefinitionCommand> {
         );
 
         await interaction.editReply({
-          content: i18n.t("common.errors.not_found_w_suggestions", { lng }),
+          content: t("common.errors.not_found_w_suggestions", { lng }),
           components: [createMessageActionRow(buttons)],
         });
 
@@ -87,10 +87,9 @@ export default class extends Command<typeof DefinitionCommand> {
           .catch(async () => {
             try {
               await interaction.editReply({
-                content: i18n.t(
-                  "common.errors.definition_suggestion_timed_out",
-                  { lng },
-                ),
+                content: t("common.errors.definition_suggestion_timed_out", {
+                  lng,
+                }),
                 components: [],
               });
             } catch (error_) {
@@ -190,7 +189,7 @@ export default class extends Command<typeof DefinitionCommand> {
       15,
     ).join(", ")}
 
-    ${underscore(i18n.t("common.titles.definitions", { lng }))}\n
+    ${underscore(t("common.titles.definitions", { lng }))}
   `;
 
     while (content.length < 2_000 && defs.length) {
@@ -200,12 +199,13 @@ export default class extends Command<typeof DefinitionCommand> {
         break;
       }
 
-      content += `${def}\n`;
+      content += `\n${def}`;
     }
 
     await interaction.editReply({
       content,
       files: soundAttachment ? [soundAttachment] : [],
+      components: [],
     });
   }
 }
