@@ -18,7 +18,7 @@ export default class implements Event {
 
   public execute(): void {
     this.client.on(this.event, async () => {
-      logger.info(`Client is ready! Logged in as ${this.client.user!.tag}}`);
+      logger.info(`Client is ready! Logged in as ${this.client.user!.tag}`);
 
       const guilds = this.client.guilds.cache.size;
       this.guildCount.set(guilds);

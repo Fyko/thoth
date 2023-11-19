@@ -1,6 +1,6 @@
-import { logger } from "@yuudachi/framework";
 import type { AutocompleteInteraction } from "discord.js";
 import { container } from "tsyringe";
+import { logger } from "#logger";
 import type { RedisManager } from "#structures";
 import { fetchAutocomplete, fetchTopWords } from "#util/mw/index.js";
 import { kRedis } from "#util/symbols.js";

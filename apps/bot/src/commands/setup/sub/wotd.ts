@@ -1,7 +1,6 @@
 import { channelMention } from "@discordjs/builders";
 import { CDN } from "@discordjs/rest";
 import type ConfigCommand from "@thoth/interactions/commands/setup/config";
-import { logger } from "@yuudachi/framework";
 import type {
   ArgsParam,
   InteractionParam,
@@ -12,6 +11,7 @@ import { Client, PermissionsBitField } from "discord.js";
 import i18n from "i18next";
 import type { Sql } from "postgres";
 import { container } from "tsyringe";
+import { logger } from "#logger";
 import { kSQL, type WOTDConfig } from "#util/index.js";
 
 const cdn = new CDN();
