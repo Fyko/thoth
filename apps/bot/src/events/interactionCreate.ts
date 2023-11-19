@@ -16,6 +16,7 @@ import { Counter, Registry } from "prom-client";
 import { container, inject, injectable } from "tsyringe";
 import { logger } from "#logger";
 import { RedisManager } from "#structures";
+import { CommandError } from "#util/error.js";
 import { fetchAutocomplete, fetchTopWords } from "#util/mw/index.js";
 import { kRedis } from "#util/symbols.js";
 
@@ -163,11 +164,12 @@ export default class implements Event {
             });
           }
         } catch (error) {
+          const isCommandError = error instanceof CommandError;
           const err = error as Error;
           logger.error(err, err.message);
 
           void this.webhook.send({
-            content: `<@${process.env.OWNER_ID}>`,
+            content: isCommandError ? `<@${process.env.OWNER_ID}>` : "",
             embeds: [
               new EmbedBuilder()
                 .setTitle(interaction.commandName)

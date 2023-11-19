@@ -9,6 +9,7 @@ import i18n from "i18next";
 import { injectable } from "tsyringe";
 import { parseLimit } from "#util/args.js";
 import { DatamuseQuery, fetchDatamuse } from "#util/datamuse.js";
+import { CommandError } from "#util/error.js";
 import { firstUpperCase, trimArray } from "#util/index.js";
 
 @injectable()
@@ -26,7 +27,7 @@ export default class extends Command<typeof AdjectiveCommand> {
       () => null,
     );
     if (!words?.length)
-      throw new Error(i18n.t("common.errors.not_found", { lng }));
+      throw new CommandError(i18n.t("common.errors.not_found", { lng }));
     const mapped = words.map((h) => h.word);
 
     await interaction.editReply(

@@ -8,6 +8,7 @@ import type {
 import i18n from "i18next";
 import { parseLimit } from "#util/args.js";
 import { DatamuseQuery, fetchDatamuse } from "#util/datamuse.js";
+import { CommandError } from "#util/error.js";
 import { firstUpperCase, trimArray } from "#util/index.js";
 
 export default class extends Command<typeof SimilarSpellingCommand> {
@@ -25,7 +26,7 @@ export default class extends Command<typeof SimilarSpellingCommand> {
       args.word,
     ).catch(() => null);
     if (!words?.length)
-      throw new Error(i18n.t("common.errors.not_found", { lng }));
+      throw new CommandError(i18n.t("common.errors.not_found", { lng }));
     const mapped = words.map((h) => h.word);
 
     await interaction.editReply(

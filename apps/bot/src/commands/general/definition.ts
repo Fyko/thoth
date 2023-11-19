@@ -27,6 +27,7 @@ import { createPronunciationURL, fetchDefinition } from "#mw";
 import { formatText } from "#mw/format.js";
 import { RedisManager } from "#structures";
 import { Characters, Emojis } from "#util/constants.js";
+import { CommandError } from "#util/error.js";
 import { kRedis, trimArray } from "#util/index.js";
 
 @injectable()
@@ -51,9 +52,9 @@ export default class extends Command<typeof DefinitionCommand> {
       // will be string[] if no defs were found and the api provided suggestions
       // will be Entry[] if defs were found
       if (!defRes.length)
-        throw new Error(i18n.t("common.errors.not_found", { lng }));
+        throw new CommandError(i18n.t("common.errors.not_found", { lng }));
       if (typeof defRes !== "object") {
-        throw new TypeError(i18n.t("common.errors.not_found", { lng }));
+        throw new CommandError(i18n.t("common.errors.not_found", { lng }));
       }
 
       if (typeof defRes[0] === "object") {
