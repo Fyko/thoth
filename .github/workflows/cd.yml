@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/bot'
-      - 'packages'
+      - 'apps/bot/**'
+      - 'packages/**'
       - 'package.json'
       - 'yarn.lock'
 
