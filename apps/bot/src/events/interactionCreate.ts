@@ -17,8 +17,8 @@ import { container, inject, injectable } from "tsyringe";
 import { logger } from "#logger";
 import { RedisManager } from "#structures";
 import { CommandError } from "#util/error.js";
-import { fetchAutocomplete, fetchTopWords } from "#util/mw/index.js";
 import { kRedis } from "#util/symbols.js";
+import { definitionAutoComplete } from "../autocomplete/definition.js";
 
 const registry =
   container.resolve<Registry<"text/plain; version=0.0.4; charset=utf-8">>(
@@ -82,47 +82,9 @@ export default class implements Event {
             if (autocomplete) {
               try {
                 if (interaction.commandName === "definition") {
-                  const input = interaction.options.getFocused().trim();
+                  await definitionAutoComplete(interaction);
 
-                  if (input) {
-                    const search = await fetchAutocomplete(this.redis, input);
-
-                    await interaction.respond(
-                      search.docs
-                        .filter((r) => r.ref === "owl-combined")
-                        .slice(0, 5)
-                        .map(({ word }) => ({ name: word, value: word })),
-                    );
-
-                    logger.debug(
-                      {
-                        input,
-                        interactionId: interaction.id,
-                        userId: interaction.user.id,
-                      },
-                      "performed autocomplete for definition command",
-                    );
-                  } else {
-                    const top = await fetchTopWords(this.redis);
-
-                    await interaction.respond([
-                      {
-                        name: "What are you looking for? Or select a trending Merriam-Webster query:",
-                        value: "no",
-                      },
-                      ...top.data.words
-                        .slice(0, 16)
-                        .map((word) => ({ name: word, value: word })),
-                    ]);
-
-                    logger.debug(
-                      {
-                        interactionId: interaction.id,
-                        userId: interaction.user.id,
-                      },
-                      "provided top words for definition command",
-                    );
-                  }
+                  return;
                 }
               } catch {}
 
@@ -166,10 +128,11 @@ export default class implements Event {
         } catch (error) {
           const isCommandError = error instanceof CommandError;
           const err = error as Error;
-          logger.error(err, err.message);
+          const logfn = isCommandError ? logger.warn : logger.info;
+          logfn(err, err.message);
 
           void this.webhook.send({
-            content: isCommandError ? `<@${process.env.OWNER_ID}>` : "",
+            content: isCommandError ? "" : `<@${process.env.OWNER_ID}>`,
             embeds: [
               new EmbedBuilder()
                 .setTitle(interaction.commandName)
@@ -191,6 +154,9 @@ export default class implements Event {
                 .setFooter({ text: "Command execution failed" })
                 .setColor("DarkRed"),
             ],
+            // ...(isCommandError
+            //   ? {}
+            //   : { content: `<@${process.env.OWNER_ID}>` }),
           });
 
           commandsMetrics.inc({

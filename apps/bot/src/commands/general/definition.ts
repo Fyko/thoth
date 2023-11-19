@@ -104,6 +104,7 @@ export default class extends Command<typeof DefinitionCommand> {
 
         word = collected.customId.split(":")[1]!;
         defRes = await fetchDefinition(this.redis, word);
+        definition = defRes[0] as Entry;
       }
     }
 
@@ -176,22 +177,34 @@ export default class extends Command<typeof DefinitionCommand> {
         })
       : undefined;
 
-    await interaction.editReply({
-      content: stripIndents`
-				${Emojis.MerriamWebster} ${hyperlink(
-          inlineCode(meta.id),
-          hideLinkEmbed(url),
-        )} (${fl}) ${Characters.Bullet} (${hwi.hw.replaceAll(
-          "*",
-          Characters.Bullet,
-        )}) ${Characters.Bullet} ${pronunciation}
-				${Characters.Bullet} Stems: ${trimArray(meta.stems.map(inlineCode), 15).join(
-          ", ",
-        )}
+    let content = stripIndents`
+    ${Emojis.MerriamWebster} ${hyperlink(
+      inlineCode(meta.id),
+      hideLinkEmbed(url),
+    )} (${fl}) ${Characters.Bullet} (${hwi.hw.replaceAll(
+      "*",
+      Characters.Bullet,
+    )}) ${Characters.Bullet} ${pronunciation}
+    ${Characters.Bullet} Stems: ${trimArray(
+      meta.stems.map(inlineCode),
+      15,
+    ).join(", ")}
 
-				${underscore(i18n.t("common.titles.definitions", { lng }))}
-				${defs.join("\n")}
-			`,
+    ${underscore(i18n.t("common.titles.definitions", { lng }))}\n
+  `;
+
+    while (content.length < 2_000 && defs.length) {
+      const def = defs.shift()!;
+      if (content.length + def.length > 2_000) {
+        defs.unshift(def);
+        break;
+      }
+
+      content += `${def}\n`;
+    }
+
+    await interaction.editReply({
+      content,
       files: soundAttachment ? [soundAttachment] : [],
     });
   }
