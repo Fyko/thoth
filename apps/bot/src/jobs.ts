@@ -1,18 +1,22 @@
 import process from 'node:process';
+import { inlineCode } from '@discordjs/builders';
 import { DiscordAPIError } from '@discordjs/rest';
 import { Queue, Worker, type Job } from 'bullmq';
-import { Routes } from 'discord-api-types/v10';
+import { WebhookClient } from 'discord.js';
 import type { Entry } from 'mw-collegiate';
 import type { Sql } from 'postgres';
 import Parser from 'rss-parser';
 import { container } from 'tsyringe';
-import { fetch } from 'undici';
 import { logger } from '#logger';
 import type { WOTDConfig } from '#util/index.js';
 import { fetchDefinition } from '#util/mw/index.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
 import { kRedis, kSQL } from '#util/symbols.js';
 import type { RedisManager } from './structures/RedisManager.js';
+
+const webhook = new WebhookClient({
+	url: process.env.COMMAND_LOG_WEBHOOK_URL!,
+});
 
 export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 	const sql = container.resolve<Sql<any>>(kSQL);
@@ -60,35 +64,89 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 						SELECT * FROM wotd;
 					`;
 
+					interface Status {
+						deleted?: boolean;
+						error?: DiscordAPIError;
+						guildId: string;
+						webhookId: string;
+					}
+
+					const statuses: Status[] = [];
+
 					// send the webhook
 					for (const server of configs) {
+						const client = new WebhookClient({
+							id: server.webhook_id.toString(),
+							token: server.webhook_token,
+						});
 						try {
-							await fetch(
-								`https://discord.com/api/v10${Routes.webhook(
-									server.webhook_id.toString(),
-									server.webhook_token,
-								)}`,
-								{
-									method: 'POST',
-									headers: {
-										'Content-Type': 'application/json',
-									},
-									body: JSON.stringify({
-										content: `Merrium Webster published a new word of the day!\n\n${content}`,
-									}),
-								},
-							);
-						} catch (error: unknown) {
-							logger.error(`posting message error: ${error}`);
-							if (error instanceof DiscordAPIError && error.status === 404) {
-								await sql`
-									DELETE FROM wotd WHERE id = ${server.id};
-								`;
+							await client.send({
+								content: `Merrium Webster published a new word of the day!\n\n${content}`,
+							});
 
-								// TODO: send message to created_by to alert failure
+							statuses.push({
+								guildId: server.guild_id.toString(),
+								webhookId: server.webhook_id.toString(),
+							});
+						} catch (error: unknown) {
+							logger.error(`posting message error`, error);
+							if (error instanceof DiscordAPIError) {
+								const entry: Status = {
+									error,
+									guildId: server.guild_id.toString(),
+									webhookId: server.webhook_id.toString(),
+								};
+
+								if (error.status === 404) {
+									await sql`
+										DELETE FROM wotd WHERE id = ${server.id};
+									`;
+									entry.deleted = true;
+								}
+
+								statuses.push(entry);
 							}
 						}
 					}
+
+					// send the status webhook
+					const successCount = statuses.filter((status) => !status.error).length;
+					const errors = statuses.filter((status) => status.error);
+					const errorGroups = errors.reduce<Record<string, Status[]>>((acc, curr) => {
+						const name = curr.error!.name;
+						if (!acc[name]) acc[name] = [];
+						acc[name]!.push(curr);
+						return acc;
+					}, {});
+
+					await webhook.send({
+						content: `Merrium Webster published a new word of the day!\n\n${content}`,
+						embeds: [
+							{
+								title: 'Status',
+								fields: [
+									{
+										name: 'Success',
+										value: successCount.toLocaleString('en-US'),
+										inline: true,
+									},
+									{
+										name: 'Errors',
+										value: errors.length.toLocaleString('en-US'),
+										inline: true,
+									},
+								],
+								description: Object.entries(errorGroups)
+									.map(([name, statuses]) => {
+										return `**${name}**: ${inlineCode(statuses[0]!.error!.message!)} (${inlineCode(
+											statuses.length.toLocaleString('en-US'),
+										)})`;
+									})
+									.join('\n')
+									.slice(0, 2_048),
+							},
+						],
+					});
 				}
 			}
 		},

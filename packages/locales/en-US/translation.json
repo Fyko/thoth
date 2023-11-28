@@ -197,9 +197,9 @@
 			},
 			"success": "I found `{{found_count}}` words that rhyme with `{{word}}`: \n\n{{words}}"
 		},
-		"setup": {
+		"config": {
 			"meta": {
-				"name": "setup",
+				"name": "config",
 				"description": "An assortment of configuration commands."
 			},
 			"wotd": {

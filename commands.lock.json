@@ -1756,17 +1756,17 @@
 		]
 	},
 	{
-		"name": "setup",
+		"name": "config",
 		"name_localizations": {
-			"en-US": "setup",
-			"en-GB": "setup",
-			"de": "setup",
-			"es-ES": "setup",
-			"ja": "setup",
-			"ko": "setup",
-			"pl": "setup",
-			"zh-CN": "setup",
-			"zh-TW": "setup"
+			"en-US": "config",
+			"en-GB": "config",
+			"de": "config",
+			"es-ES": "config",
+			"ja": "config",
+			"ko": "config",
+			"pl": "config",
+			"zh-CN": "config",
+			"zh-TW": "config"
 		},
 		"description": "An assortment of configuration commands.",
 		"description_localizations": {
@@ -1799,7 +1799,7 @@
 					"en-US": "Configure the Word of the Day channel.",
 					"en-GB": "Configure the Word of the Day channel.",
 					"de": "Configure the Word of the Day channel.",
-					"es-ES": "Configura el canal de La Palabra del Día.",
+					"es-ES": "Configure the Word of the Day channel.",
 					"ja": "Configure the Word of the Day channel.",
 					"ko": "Configure the Word of the Day channel.",
 					"pl": "Configure the Word of the Day channel.",
@@ -1814,7 +1814,7 @@
 							"en-US": "channel",
 							"en-GB": "channel",
 							"de": "channel",
-							"es-ES": "canal",
+							"es-ES": "channel",
 							"ja": "channel",
 							"ko": "channel",
 							"pl": "channel",
