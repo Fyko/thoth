@@ -5,9 +5,9 @@
  * command execution process.
  */
 export class CommandError extends Error {
-  public constructor(message: string) {
-    super(message);
+	public constructor(message: string) {
+		super(message);
 
-    this.name = "CommandError";
-  }
+		this.name = 'CommandError';
+	}
 }

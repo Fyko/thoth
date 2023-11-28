@@ -1,104 +1,100 @@
 {
-  "name": "bot",
-  "private": true,
-  "version": "4.0.0",
-  "description": "the bot for all things ELA",
-  "main": "dist/index.js",
-  "type": "module",
-  "imports": {
-    "#util/*": "./dist/util/*",
-    "#mw/*": "./dist/util/mw/*",
-    "#mw": "./dist/util/mw/index.js",
-    "#util/types": "./dist/util/types/index.js",
-    "#constants": "./dist/util/constants.js",
-    "#logger": "./dist/util/logger.js",
-    "#structures": "./dist/structures/index.js"
-  },
-  "scripts": {
-    "generate": "node ./dist/scripts/generate.js",
-    "watch": "tsc --watch",
-    "build": "tsc && yarn copy-locales",
-    "start": "node .",
-    "dev": "tsc-watch --onSuccess \"node .\"",
-    "copy-locales": "cp -r ../../packages/locales ./dist && rm ./dist/locales/package.json",
-    "lint": "prettier --check . && eslint src --ext .mjs,.js,.ts --format=pretty",
-    "format": "prettier --write . && eslint src --ext .mjs,.js,.ts --fix --format=pretty"
-  },
-  "author": "Carter Himmel <me@fyko.net>",
-  "license": "MIT",
-  "dependencies": {
-    "@discordjs/builders": "^1.7.0",
-    "@discordjs/rest": "^2.1.0",
-    "@skyra/i18next-backend": "^2.0.4",
-    "@thoth/interactions": "workspace:^",
-    "@tinyhttp/app": "^2.2.1",
-    "@yuudachi/framework": "^0.2.10",
-    "bullmq": "^4.13.2",
-    "common-tags": "^1.8.2",
-    "discord-api-types": "^0.37.63",
-    "discord.js": "^14.14.1",
-    "fs-nextra": "^0.5.1",
-    "i18next": "^23.7.3",
-    "ioredis": "^5.3.2",
-    "locales": "workspace:^",
-    "pino": "^8.16.1",
-    "postgres": "^3.4.3",
-    "prom-client": "^15.0.0",
-    "readdirp": "^3.6.0",
-    "reflect-metadata": "^0.1.13",
-    "rss-parser": "^3.13.0",
-    "tsyringe": "^4.8.0",
-    "undici": "^5.27.2"
-  },
-  "devDependencies": {
-    "@types/common-tags": "^1.8.4",
-    "cpy-cli": "^5.0.0",
-    "dotenv": "^16.3.1",
-    "eslint": "^8.53.0",
-    "eslint-config-neon": "^0.1.57",
-    "eslint-formatter-pretty": "^5",
-    "eslint-plugin-prettier": "^5.0.1",
-    "mw-collegiate": "^1.0.1",
-    "pino-pretty": "^10.2.3",
-    "prettier": "^3.1.0",
-    "rimraf": "^5.0.5",
-    "tsc-watch": "^6.0.4",
-    "tsconfig": "workspace:^",
-    "typescript": "^5.2.2"
-  },
-  "lint-staged": {
-    "*": "prettier --ignore-unknown --write",
-    "*.{mjs,js,ts}": "eslint --fix --ext mjs,js,ts"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-angular"
-    ],
-    "rules": {
-      "type-enum": [
-        2,
-        "always",
-        [
-          "chore",
-          "build",
-          "ci",
-          "docs",
-          "feat",
-          "fix",
-          "perf",
-          "refactor",
-          "revert",
-          "style",
-          "test",
-          "types",
-          "wip"
-        ]
-      ]
-    }
-  },
-  "volta": {
-    "node": "20.9.0",
-    "pnpm": "8.10.2"
-  },
-  "packageManager": "pnpm@8.10.2"
+	"name": "bot",
+	"private": true,
+	"version": "4.0.0",
+	"description": "the bot for all things ELA",
+	"main": "dist/index.js",
+	"type": "module",
+	"imports": {
+		"#util/*": "./dist/util/*",
+		"#mw/*": "./dist/util/mw/*",
+		"#mw": "./dist/util/mw/index.js",
+		"#util/types": "./dist/util/types/index.js",
+		"#constants": "./dist/util/constants.js",
+		"#logger": "./dist/util/logger.js",
+		"#structures": "./dist/structures/index.js"
+	},
+	"scripts": {
+		"generate": "node ./dist/scripts/generate.js",
+		"watch": "tsc --watch",
+		"build": "tsc && yarn copy-locales",
+		"start": "node .",
+		"dev": "tsc-watch --onSuccess \"node .\"",
+		"copy-locales": "cp -r ../../packages/locales ./dist && rm ./dist/locales/package.json",
+		"lint": "prettier --check . && eslint --format=pretty \"src/**\"",
+		"format": "prettier --write . && eslint --fix --format=pretty \"src/**\""
+	},
+	"author": "Carter Himmel <me@fyko.net>",
+	"license": "MIT",
+	"dependencies": {
+		"@discordjs/builders": "^1.7.0",
+		"@discordjs/rest": "^2.2.0",
+		"@skyra/i18next-backend": "^2.0.4",
+		"@thoth/interactions": "workspace:^",
+		"@tinyhttp/app": "^2.2.1",
+		"@yuudachi/framework": "^0.2.10",
+		"bullmq": "^4.14.4",
+		"common-tags": "^1.8.2",
+		"discord-api-types": "^0.37.65",
+		"discord.js": "^14.14.1",
+		"fs-nextra": "^0.5.1",
+		"i18next": "^23.7.3",
+		"ioredis": "^5.3.2",
+		"locales": "workspace:^",
+		"pino": "^8.16.2",
+		"postgres": "^3.4.3",
+		"prom-client": "^15.0.0",
+		"readdirp": "^3.6.0",
+		"reflect-metadata": "^0.1.13",
+		"rss-parser": "^3.13.0",
+		"tsyringe": "^4.8.0",
+		"undici": "^5.28.1"
+	},
+	"devDependencies": {
+		"@types/common-tags": "^1.8.4",
+		"cpy-cli": "^5.0.0",
+		"dotenv": "^16.3.1",
+		"eslint": "^8.54.0",
+		"eslint-config-neon": "^0.1.57",
+		"eslint-formatter-pretty": "^5",
+		"eslint-plugin-prettier": "^5.0.1",
+		"mw-collegiate": "^1.0.1",
+		"pino-pretty": "^10.2.3",
+		"prettier": "^3.1.0",
+		"rimraf": "^5.0.5",
+		"tsc-watch": "^6.0.4",
+		"tsconfig": "workspace:^",
+		"typescript": "^5.3.2"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-angular"
+		],
+		"rules": {
+			"type-enum": [
+				2,
+				"always",
+				[
+					"chore",
+					"build",
+					"ci",
+					"docs",
+					"feat",
+					"fix",
+					"perf",
+					"refactor",
+					"revert",
+					"style",
+					"test",
+					"types",
+					"wip"
+				]
+			]
+		}
+	},
+	"volta": {
+		"node": "20.9.0",
+		"pnpm": "8.10.2"
+	},
+	"packageManager": "pnpm@8.10.2"
 }

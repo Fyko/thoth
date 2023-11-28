@@ -8,13 +8,13 @@ const { href } = Astro.props;
 
 <a id="invite-button"><slot /></a>
 
-<script define:vars={{ href: href }}>
-  const button = document.querySelector("#invite-button");
+<script define:vars={{ href }}>
+  const button = document.querySelector('#invite-button');
 
-  button.addEventListener("click", () => {
+  button.addEventListener('click', () => {
     // @ts-expect-error its set
     // eslint-disable-next-line no-undef
-    twq("event", "tw-ohdwl-ohdwn", {});
+    twq('event', 'tw-ohdwl-ohdwn', {});
 
     window.location = href;
   });
@@ -50,7 +50,7 @@ const { href } = Astro.props;
 
   /* Overlay for hover effects. */
   a::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;

@@ -1,5 +1,5 @@
 ---
-import Icon from "./Icon.astro";
+import Icon from './Icon.astro';
 ---
 
 <theme-toggle>
@@ -33,7 +33,7 @@ import Icon from "./Icon.astro";
   }
 
   .icon.light::before {
-    content: "";
+    content: '';
     z-index: -1;
     position: absolute;
     inset: 0;
@@ -47,7 +47,7 @@ import Icon from "./Icon.astro";
 
   :global(.theme-dark) .icon.dark,
   :global(html:not(.theme-dark)) .icon.light,
-  button[aria-pressed="false"] .icon.light {
+  button[aria-pressed='false'] .icon.light {
     color: var(--accent-text-over);
   }
 
@@ -72,39 +72,35 @@ import Icon from "./Icon.astro";
     constructor() {
       super();
 
-      const button = this.querySelector("button")!;
+      const button = this.querySelector('button')!;
 
       /** Set the theme to dark/light mode. */
       const setTheme = (dark: boolean) => {
-        window.$discordMessage.defaultTheme = dark ? "dark" : "light";
-        document.documentElement.classList[dark ? "add" : "remove"](
-          "theme-dark"
-        );
-        button.setAttribute("aria-pressed", String(dark));
+        window.$discordMessage.defaultTheme = dark ? 'dark' : 'light';
+        document.documentElement.classList[dark ? 'add' : 'remove']('theme-dark');
+        button.setAttribute('aria-pressed', String(dark));
 
-        document
-          .querySelectorAll("discord-messages")
-          .forEach((discordMessages) => {
-            discordMessages.setAttribute("light-theme", (!dark).toString());
-          });
+        document.querySelectorAll('discord-messages').forEach((discordMessages) => {
+          discordMessages.setAttribute('light-theme', (!dark).toString());
+        });
 
-        const themeChangeEvent = new CustomEvent("themeSet", {
+        const themeChangeEvent = new CustomEvent('themeSet', {
           detail: { dark },
         });
         document.dispatchEvent(themeChangeEvent);
       };
 
       // Toggle the theme when a user clicks the button.
-      button.addEventListener("click", () => setTheme(!this.isDark()));
+      button.addEventListener('click', () => setTheme(!this.isDark()));
 
       // Initialize button state to reflect current theme.
       setTheme(this.isDark());
     }
 
     isDark() {
-      return document.documentElement.classList.contains("theme-dark");
+      return document.documentElement.classList.contains('theme-dark');
     }
   }
 
-  customElements.define("theme-toggle", ThemeToggle);
+  customElements.define('theme-toggle', ThemeToggle);
 </script>

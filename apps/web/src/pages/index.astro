@@ -1,11 +1,11 @@
 ---
-import ContactCTA from "../components/ContactCTA.astro";
-import Features from "../components/Features.astro";
-import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
-import InviteButton from "../components/InviteButton.astro";
-import InnerDefinition from "../components/commands/general/InnerDefinition.tsx";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCTA from '../components/ContactCTA.astro';
+import Features from '../components/Features.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import InviteButton from '../components/InviteButton.astro';
+import InnerDefinition from '../components/commands/general/InnerDefinition.tsx';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
@@ -38,7 +38,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <script>
   // @ts-expect-error its defined
   // eslint-disable-next-line no-undef
-  twq("event", "tw-ohdwl-ohdwr", {});
+  twq('event', 'tw-ohdwl-ohdwr', {});
 </script>
 
 <style>
@@ -91,7 +91,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .with-background::before {
     --hero-bg: var(--bg-image-subtle-2);
 
-    content: "";
+    content: '';
     position: absolute;
     pointer-events: none;
     left: 50%;
@@ -100,7 +100,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     top: 0;
     transform: translateY(-75%) translateX(-50%);
     background:
-      url("/assets/backgrounds/noise.png") top center/220px repeat,
+      url('/assets/backgrounds/noise.png') top center/220px repeat,
       var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
       var(--gray-999);
     background-blend-mode: overlay, normal, normal, normal;
@@ -127,12 +127,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   @media (min-width: 50em) {
     .section {
       grid-template-columns: repeat(4, 1fr);
-      grid-template-areas: "header header header header" "gallery gallery gallery gallery";
+      grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
       gap: 5rem;
     }
 
     .section.with-cta {
-      grid-template-areas: "header header header cta" "gallery gallery gallery gallery";
+      grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
     }
 
     .section-header {

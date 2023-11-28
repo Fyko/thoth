@@ -1,48 +1,44 @@
 ---
-import NounCommand from "@thoth/interactions/commands/general/noun";
-import { t } from "i18next";
-import Command from "../Command.tsx";
+import NounCommand from '@thoth/interactions/commands/general/noun';
+import { t } from 'i18next';
+import Command from '../Command.tsx';
 
 const WORDS = [
-  "fever",
-  "color",
-  "flowers",
-  "light",
-  "colour",
-  "hair",
-  "eyes",
-  "pine",
-  "pages",
-  "paper",
-  "precipitate",
-  "spots",
-  "leaves",
-  "sand",
-  "pigment",
-  "powder",
-  "ochre",
-  "teeth",
-  "orange",
-  "liquid",
-  "spot",
-  "line",
-  "clay",
-  "dress",
-  "silk",
-  "69 more...",
+  'fever',
+  'color',
+  'flowers',
+  'light',
+  'colour',
+  'hair',
+  'eyes',
+  'pine',
+  'pages',
+  'paper',
+  'precipitate',
+  'spots',
+  'leaves',
+  'sand',
+  'pigment',
+  'powder',
+  'ochre',
+  'teeth',
+  'orange',
+  'liquid',
+  'spot',
+  'line',
+  'clay',
+  'dress',
+  'silk',
+  '69 more...',
 ];
 
-const content = t("commands.noun.success", {
+const content = t('commands.noun.success', {
   found_count: 94,
-  word: "Yellow",
-  words: WORDS.join(", "),
-}).replaceAll("`", "");
+  word: 'Yellow',
+  words: WORDS.join(', '),
+}).replaceAll('`', '');
 ---
 
-<Command
-  name={NounCommand.name}
-  description={NounCommand.description}
-  args={Object.values(NounCommand.options)}
->
+<Command name={NounCommand.name} description={NounCommand.description} args={Object.values(NounCommand.options)}>
   {content}
 </Command>

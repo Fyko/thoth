@@ -3,43 +3,45 @@
 	"private": true,
 	"version": "0.0.0",
 	"description": "the bot for all things ELA",
+	"type": "module",
 	"workspaces": [
 		"apps/**",
 		"packages/**",
 		"!**/dist"
 	],
 	"scripts": {
-		"prepare": "is-ci || git config core.hooksPath .github/hooks",
 		"build": "turbo run build --cache-dir=.turbo",
+		"build:affected": "turbo run build --filter='...[origin/main]' --concurrency=4",
 		"dev:bot": "turbo run dev --filter bot --cache-dir=.turbo",
 		"dev:web": "turbo run dev --filter web --cache-dir=.turbo",
-		"lint": "turbo run lint --parallel --cache-dir=.turbo",
-		"format": "turbo run format --parallel --cache-dir=.turbo"
+		"lint": "turbo run lint --concurrency=4 --cache-dir=.turbo",
+		"format": "turbo run format --concurrency=4 --cache-dir=.turbo"
 	},
 	"author": "Carter Himmel <me@fyko.net>",
 	"license": "MIT",
 	"devDependencies": {
-		"@commitlint/cli": "^18.4.1",
-		"@commitlint/config-angular": "^18.4.0",
+		"@commitlint/cli": "^18.4.3",
+		"@commitlint/config-angular": "^18.4.3",
 		"@types/common-tags": "^1.8.4",
-		"@types/node": "^20.9.0",
+		"@types/node": "^20.10.0",
+		"@typescript-eslint/parser": "^6.13.1",
+		"astro-eslint-parser": "^0.16.0",
 		"cpy-cli": "^5.0.0",
 		"dotenv": "^16.3.1",
-		"eslint": "^8.53.0",
+		"eslint": "^8.54.0",
 		"eslint-config-neon": "^0.1.57",
-		"eslint-formatter-pretty": "^5",
-		"eslint-plugin-prettier": "^5.0.1",
 		"is-ci": "^3.0.1",
 		"lint-staged": "^15.1.0",
+		"lodash.merge": "^4.6.2",
 		"prettier": "^3.1.0",
 		"rimraf": "^5.0.5",
 		"ts-node": "^10.9.1",
-		"turbo": "1.10.16",
-		"typescript": "^5.2.2"
+		"turbo": "^1.10.17-canary.6",
+		"typescript": "^5.3.2"
 	},
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write",
-		"*.{mjs,js,ts}": "eslint --fix --ext mjs,js,ts"
+		"{src/**,__tests__/**}.{mjs,js,cjs,ts,tsx}": "eslint --fix"
 	},
 	"commitlint": {
 		"extends": [
@@ -71,5 +73,5 @@
 		"node": "20.9.0",
 		"yarn": "4.0.1"
 	},
-	"packageManager": "yarn@3.7.0"
+	"packageManager": "yarn@4.0.2"
 }

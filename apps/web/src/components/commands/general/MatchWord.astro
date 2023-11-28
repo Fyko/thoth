@@ -1,35 +1,35 @@
 ---
-import MatchWordCommand from "@thoth/interactions/commands/general/match-word";
-import { t } from "i18next";
-import Command from "../Command.tsx";
+import MatchWordCommand from '@thoth/interactions/commands/general/match-word';
+import { t } from 'i18next';
+import Command from '../Command.tsx';
 
 const WORDS = [
-  "apple",
-  "angle",
-  "agile",
-  "aisle",
-  "ample",
-  "amble",
-  "addle",
-  "ankle",
-  "anile",
-  "anele",
-  "abele",
-  "adele",
-  "anole",
-  "attle",
-  "axile",
-  "amole",
-  "azole",
-  "ancle",
-  "atole",
-  "avale",
-  "asile",
-  "avile",
-  "argle",
-  "antle",
-  "aigle",
-  "14 more...",
+  'apple',
+  'angle',
+  'agile',
+  'aisle',
+  'ample',
+  'amble',
+  'addle',
+  'ankle',
+  'anile',
+  'anele',
+  'abele',
+  'adele',
+  'anole',
+  'attle',
+  'axile',
+  'amole',
+  'azole',
+  'ancle',
+  'atole',
+  'avale',
+  'asile',
+  'avile',
+  'argle',
+  'antle',
+  'aigle',
+  '14 more...',
 ];
 ---
 
@@ -39,10 +39,10 @@ const WORDS = [
   args={Object.values(MatchWordCommand.options)}
 >
   {
-    t("commands.match-word.success", {
+    t('commands.match-word.success', {
       found_count: 39,
-      word: "a??le",
-      words: WORDS.join(", "),
-    }).replaceAll("`", "")
+      word: 'a??le',
+      words: WORDS.join(', '),
+    }).replaceAll('`', '')
   }
 </Command>

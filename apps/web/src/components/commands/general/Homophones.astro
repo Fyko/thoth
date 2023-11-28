@@ -1,9 +1,9 @@
 ---
-import HomophonesCommand from "@thoth/interactions/commands/general/homophones";
-import { t } from "i18next";
-import Command from "../Command.tsx";
+import HomophonesCommand from '@thoth/interactions/commands/general/homophones';
+import { t } from 'i18next';
+import Command from '../Command.tsx';
 
-const WORDS = ["sense", "scents", "sentz"];
+const WORDS = ['sense', 'scents', 'sentz'];
 ---
 
 <Command
@@ -12,10 +12,10 @@ const WORDS = ["sense", "scents", "sentz"];
   args={Object.values(HomophonesCommand.options)}
 >
   {
-    t("commands.homophones.success", {
+    t('commands.homophones.success', {
       found_count: 3,
-      word: "Cents",
-      words: WORDS.join(", "),
-    }).replaceAll("`", "")
+      word: 'Cents',
+      words: WORDS.join(', '),
+    }).replaceAll('`', '')
   }
 </Command>

@@ -1,35 +1,35 @@
 ---
-import TriggersCommand from "@thoth/interactions/commands/general/triggers";
-import { t } from "i18next";
-import Command from "../Command.tsx";
+import TriggersCommand from '@thoth/interactions/commands/general/triggers';
+import { t } from 'i18next';
+import Command from '../Command.tsx';
 
 const WORDS = [
-  "pandemic",
-  "swine",
-  "influenza",
-  "avian",
-  "epidemic",
-  "vaccine",
-  "subtype",
-  "antiviral",
-  "virus",
-  "viruses",
-  "cdc",
-  "vaccination",
-  "strains",
-  "strain",
-  "cough",
-  "pneumonia",
-  "outbreak",
-  "pigs",
-  "quarantine",
-  "infected",
-  "mirza",
-  "scare",
-  "symptoms",
-  "poultry",
-  "infectious",
-  "55 more...",
+  'pandemic',
+  'swine',
+  'influenza',
+  'avian',
+  'epidemic',
+  'vaccine',
+  'subtype',
+  'antiviral',
+  'virus',
+  'viruses',
+  'cdc',
+  'vaccination',
+  'strains',
+  'strain',
+  'cough',
+  'pneumonia',
+  'outbreak',
+  'pigs',
+  'quarantine',
+  'infected',
+  'mirza',
+  'scare',
+  'symptoms',
+  'poultry',
+  'infectious',
+  '55 more...',
 ];
 ---
 
@@ -39,10 +39,10 @@ const WORDS = [
   args={Object.values(TriggersCommand.options)}
 >
   {
-    t("commands.triggers.success", {
+    t('commands.triggers.success', {
       found_count: 80,
-      word: "flu",
-      words: WORDS.join(", "),
-    }).replaceAll("`", "")
+      word: 'flu',
+      words: WORDS.join(', '),
+    }).replaceAll('`', '')
   }
 </Command>

@@ -1,10 +1,6 @@
-import {
-  DiscordCommand,
-  DiscordMessage,
-  DiscordMessages,
-} from "@skyra/discord-components-react";
-import { type PropsWithChildren } from "react";
-import "./command.css";
+import { DiscordCommand, DiscordMessage, DiscordMessages } from '@skyra/discord-components-react';
+import { type PropsWithChildren } from 'react';
+import './command.css';
 
 export type CommandProps = PropsWithChildren<{
   /**
@@ -40,13 +36,11 @@ export default function Command({
 }: CommandProps) {
   return (
     <section>
-      <div id={name} className={`section-title ${featured ? "featured" : ""}`}>
-        <h2 className={`section-title ${featured ? "featured" : ""}`}>
-          /{name}
-        </h2>
-        {featured ? "(✨ featured)" : ""}
+      <div id={name} className={`section-title ${featured ? 'featured' : ''}`}>
+        <h2 className={`section-title ${featured ? 'featured' : ''}`}>/{name}</h2>
+        {featured ? '(✨ featured)' : ''}
       </div>
-      <div className={`content ${i18n ? "i18n-newline" : ""}`}>
+      <div className={`content ${i18n ? 'i18n-newline' : ''}`}>
         <p>{description}</p>
         {args?.length ? (
           <div className="arguments">
@@ -60,13 +54,9 @@ export default function Command({
             </ul>
           </div>
         ) : (
-          ""
+          ''
         )}
-        <DiscordMessages
-          className="content"
-          no-background
-          style={{ border: "none" }}
-        >
+        <DiscordMessages className="content" no-background style={{ border: 'none' }}>
           <DiscordMessage profile="thoth">
             <DiscordCommand slot="reply" profile="fyko" command={`/${name}`} />
             {children}

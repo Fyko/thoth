@@ -1,48 +1,48 @@
 ---
-import CloseRhymeCommand from "@thoth/interactions/commands/general/close-rhyme";
-import { t } from "i18next";
-import Command from "../Command.tsx";
+import CloseRhymeCommand from '@thoth/interactions/commands/general/close-rhyme';
+import { t } from 'i18next';
+import Command from '../Command.tsx';
 
 const WORDS = [
-  "small",
-  "long",
-  "round",
-  "little",
-  "periodic",
-  "large",
-  "above",
-  "next",
-  "low",
-  "wooden",
-  "accompanying",
-  "big",
-  "routing",
-  "writing",
-  "nearby",
-  "entire",
-  "separate",
-  "inner",
-  "dressing",
-  "empty",
-  "chronological",
-  "topped",
-  "complete",
-  "comparative",
-  "circular",
-  "34 more...",
+  'small',
+  'long',
+  'round',
+  'little',
+  'periodic',
+  'large',
+  'above',
+  'next',
+  'low',
+  'wooden',
+  'accompanying',
+  'big',
+  'routing',
+  'writing',
+  'nearby',
+  'entire',
+  'separate',
+  'inner',
+  'dressing',
+  'empty',
+  'chronological',
+  'topped',
+  'complete',
+  'comparative',
+  'circular',
+  '34 more...',
 ];
 ---
 
 <Command
-  name={t("commands.close-rhyme.meta.name")}
-  description={t("commands.close-rhyme.meta.description")}
+  name={t('commands.close-rhyme.meta.name')}
+  description={t('commands.close-rhyme.meta.description')}
   args={Object.values(CloseRhymeCommand.options)}
 >
   {
-    t("commands.close-rhyme.success", {
+    t('commands.close-rhyme.success', {
       found_count: 59,
-      word: "Table",
-      words: WORDS.join(", "),
-    }).replaceAll("`", "")
+      word: 'Table',
+      words: WORDS.join(', '),
+    }).replaceAll('`', '')
   }
 </Command>
