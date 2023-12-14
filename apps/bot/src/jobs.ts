@@ -66,7 +66,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 
 					interface Status {
 						deleted?: boolean;
-						error?: DiscordAPIError;
+						error?: Error;
 						guildId: string;
 						webhookId: string;
 					}
@@ -89,23 +89,21 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 								webhookId: server.webhook_id.toString(),
 							});
 						} catch (error: unknown) {
-							logger.error(`posting message error`, error);
-							if (error instanceof DiscordAPIError) {
-								const entry: Status = {
-									error,
-									guildId: server.guild_id.toString(),
-									webhookId: server.webhook_id.toString(),
-								};
+							logger.error(error, 'posting message error');
+							const entry: Status = {
+								error: error as Error,
+								guildId: server.guild_id.toString(),
+								webhookId: server.webhook_id.toString(),
+							};
 
-								if (error.status === 404) {
-									await sql`
-										DELETE FROM wotd WHERE id = ${server.id};
-									`;
-									entry.deleted = true;
-								}
-
-								statuses.push(entry);
+							if (error instanceof DiscordAPIError && error.status === 404) {
+								await sql`
+									DELETE FROM wotd WHERE id = ${server.id};
+								`;
+								entry.deleted = true;
 							}
+
+							statuses.push(entry);
 						}
 					}
 
