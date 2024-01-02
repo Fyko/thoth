@@ -25,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </Hero>
 
-        <InnerDefinition />
+        <InnerDefinition client:only="react" />
       </header>
 
       <Features />
