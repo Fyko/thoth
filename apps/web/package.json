@@ -6,7 +6,6 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "copy-locales": "cp -r ../../packages/locales ./public && rm ./dist/locales/package.json",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "prettier --check . && eslint src --format=pretty",
