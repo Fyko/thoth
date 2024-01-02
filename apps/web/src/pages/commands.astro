@@ -33,7 +33,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       />
 
       <!-- Featured commands -->
-      <Definition />
+      <Definition client:only="react" />
       <Command
         featured
         name={`${ConfigCommand.name} ${ConfigCommand.options.find((x) => x.name === 'wotd')?.name}`}
