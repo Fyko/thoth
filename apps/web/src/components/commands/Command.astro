@@ -1,0 +1,61 @@
+---
+import './command.css';
+
+interface Props {
+  /**
+   * Optional arguments for the command
+   */
+  readonly args?: { description: string; name: string }[];
+  /**
+   * the description of the command
+   */
+  readonly description: string;
+  /**
+   * if the command is "featured"
+   */
+  readonly featured?: boolean;
+
+  /**
+   * use 1i8n white-line: pre-space whatever shit
+   */
+  readonly i18n?: boolean;
+  /**
+   * the name of the command without the leading slash
+   */
+  readonly name: string;
+}
+
+const { name, description, featured = false, args = [], i18n = true } = Astro.props;
+---
+
+<section>
+  <div id={name} class={`section-title ${featured ? 'featured' : ''}`}>
+    <h2 class={`section-title ${featured ? 'featured' : ''}`}>/{name}</h2>
+    {featured ? '(✨ featured)' : ''}
+  </div>
+  <div class={`content ${i18n ? 'i18n-newline' : ''}`}>
+    <p>{description}</p>
+    {
+      args?.length ? (
+        <div class="arguments">
+          <h4>Arguments</h4>
+          <ul>
+            {args.map((arg) => (
+              <li>
+                <code>{arg.name}</code> - {arg.description}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        ''
+      )
+    }
+    <discord-messages class="content" no-background style={{ border: 'none' }}>
+      <discord-message profile="thoth">
+        <discord-command slot="reply" profile="fyko" command={`/${name}`}></discord-command>
+        <slot />
+      </discord-message>
+    </discord-messages>
+  </div>
+</section>
