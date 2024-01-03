@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build && cp _redirects ./dist",
-    "copy-locales": "cp -r ../../packages/locales ./public && rm ./dist/locales/package.json",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "prettier --check . && eslint src --format=pretty",
@@ -21,14 +20,17 @@
     "@thoth/interactions": "workspace:^",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
+    "@widgetbot/message-renderer": "^2.1.0",
     "astro": "^3.6.3",
     "astro-i18next": "1.0.0-beta.21",
+    "discord-api-types": "^0.37.67",
     "i18next": "^23.7.3",
     "i18next-fs-backend": "^2.3.0",
     "locales": "workspace:^",
     "nanostores": "^0.9.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "vite-plugin-static-copy": "^1.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.3.1",
