@@ -12,10 +12,6 @@ const { href } = Astro.props;
   const button = document.querySelector('#invite-button');
 
   button.addEventListener('click', () => {
-    // @ts-expect-error its set
-    // eslint-disable-next-line no-undef
-    twq('event', 'tw-ohdwl-ohdwn', {});
-
     window.location = href;
   });
 </script>
