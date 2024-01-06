@@ -30,7 +30,7 @@ export const wotd = async (
 	const channel = await client.channels.fetch(args.channel.id);
 	// const channel = (await rest.get(Routes.channel(args.channel))) as APIChannel;
 	if (channel?.type !== ChannelType.GuildText) {
-		throw new Error(i18n.t('commands.setup.wotd.errors.guild_text_only', { lng }));
+		throw new Error(i18n.t('commands.config.wotd.errors.guild_text_only', { lng }));
 	}
 
 	const avatarUrl = cdn.avatar(client.user!.id, client.user!.avatar!, {
@@ -49,7 +49,7 @@ export const wotd = async (
 
 	if (!webhook) {
 		return void interaction.editReply(
-			i18n.t('commands.setup.wotd.errors.no_perms', {
+			i18n.t('commands.config.wotd.errors.no_perms', {
 				lng,
 				channel: channelMention(channel.id),
 			}),
@@ -65,7 +65,7 @@ export const wotd = async (
 	`;
 
 	await interaction.editReply(
-		i18n.t('commands.setup.wotd.success', {
+		i18n.t('commands.config.wotd.success', {
 			lng,
 			channel: channelMention(channel.id),
 		}),
