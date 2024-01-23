@@ -81,7 +81,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 						});
 						try {
 							await client.send({
-								content: `Merrium Webster published a new word of the day!\n\n${content}`,
+								content: `Merriam Webster published a new word of the day!\n\n${content}`,
 							});
 
 							statuses.push({
@@ -118,7 +118,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 					}, {});
 
 					await webhook.send({
-						content: `Merrium Webster published a new word of the day!\n\n${content}`,
+						content: `Merriam Webster published a new word of the day!\n\n${content}`,
 						embeds: [
 							{
 								title: 'Status',
