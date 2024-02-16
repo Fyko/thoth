@@ -16,6 +16,7 @@ import { RedisManager } from '#structures';
 import { loadTranslations } from '#util/index.js';
 import { kGuildCountGuage, kRedis, kSQL } from '#util/symbols.js';
 import { setupJobs } from './jobs.js';
+import { BlockedWordModule } from './structures/BlockedWord.js';
 
 const register = new Registry();
 collectDefaultMetrics({ register, prefix: 'thoth_' });
@@ -79,6 +80,7 @@ const guildCount = new Gauge({
 createCommands();
 container.register(kRedis, { useValue: redis });
 container.register(kSQL, { useValue: sql });
+container.register(BlockedWordModule, { useValue: new BlockedWordModule(sql) });
 container.register(kGuildCountGuage, { useValue: guildCount });
 container.register(Registry, { useValue: register });
 

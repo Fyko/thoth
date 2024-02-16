@@ -7,6 +7,16 @@ import { fetch } from 'undici';
 export * from './symbols.js';
 export * from './types/index.js';
 
+/**
+ * Picks a random element from an array
+ *
+ * @param arr - The array to pick a random element from
+ * @returns A random element from the array
+ */
+export function pickRandom<Inner>(arr: Inner[]): Inner {
+	return arr[Math.floor(Math.random() * arr.length)]!;
+}
+
 export async function datamuse(url: string) {
 	return fetch(url, {
 		headers: {

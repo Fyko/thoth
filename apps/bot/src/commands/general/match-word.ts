@@ -2,17 +2,30 @@ import type MatchCommand from '@thoth/interactions/commands/general/match-word';
 import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
+import { inject, injectable } from 'tsyringe';
+import { BlockedWordModule } from '#structures';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuse } from '#util/datamuse.js';
 import { CommandError } from '#util/error.js';
-import { firstUpperCase, trimArray } from '#util/index.js';
+import { firstUpperCase, pickRandom, trimArray } from '#util/index.js';
 
+@injectable()
 export default class extends Command<typeof MatchCommand> {
+	public constructor(@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule) {
+		super();
+	}
+
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<typeof MatchCommand>,
 		lng: LocaleParam,
 	): Promise<void> {
+		if (this.blockedWord.check(args.word)) {
+			throw new CommandError(
+				pickRandom(i18n.t('common.errors.blocked_word', { lng, returnObjects: true }) as string[]),
+			);
+		}
+
 		await interaction.deferReply({ ephemeral: args.hide ?? true });
 
 		const limit = parseLimit(args.limit, lng);

@@ -30,7 +30,18 @@
 			"no_permissions": "You don't have permission to use this command.",
 			"banned": "I'm afraid you've been banned from using Thoth.\nReason: {{- reason}}",
 			"limit_outside_range": "The `limit` argument must be between 1 and 100.",
-			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled."
+			"definition_suggestion_timed_out": "You took too long to respond with an alternative word. Command cancelled.",
+			"blocked_word": [
+				"I'm sorry, but I can't search for that blocked word. [More Info](<https://trythoth.com/content-moderation>)",
+				"Unfortunately, I can't search for that blocked word. [More Info](<https://trythoth.com/content-moderation>)",
+				"I regret to inform you that I can't search for that blocked word. [More Info](<https://trythoth.com/content-moderation>)",
+				"Bad news old sport, I can't search for that blocked word. [More Info](<https://trythoth.com/content-moderation>)",
+				"It's your ~~lucky~~ day! I can't search for that blocked word. [More Info](<https://trythoth.com/content-moderation>)",
+				"*movie trailer voice* In a world where Thoth can't search for that blocked word... [More Info](<https://trythoth.com/content-moderation>)",
+				"You're attempting to search a blocked word. Shame on you. [More Info](<https://trythoth.com/content-moderation>)",
+				"no because imagine if i did that and then i got in trouble for it (i can't search for that blocked word) [More Info](<https://trythoth.com/content-moderation>)",
+				"i literally cannot believe you'd ask that of me (i can't search for that blocked word) [More Info](<https://trythoth.com/content-moderation>)"
+			]
 		},
 		"titles": {
 			"definitions": "Definitions"
@@ -170,18 +181,14 @@
 				"description": "Ensures the bot is responding to commands."
 			},
 			"pongs": [
+				"i cannot believe you're bothering me in the middle of my massage",
+				"what do you want",
+				"new phone, who dis?",
+				"oop- hi! just a second here..",
+				"yes! hi! uber for Thoth?",
 				"Uhh, hello?",
-				"What can I do ya' for?",
-				"Why are you bothering me?",
-				"Mhm?",
-				"Yea?",
-				"What's with you puny humans and the constant desire to bother me?",
-				"Out of everyone here, you chose to bother me?",
-				"So *this* is the meaning of life?",
-				"Can we just get this over with?? I have stuff to do.",
-				"That's all?",
 				"Pong!",
-				"Do it again. I dare you."
+				"welcome in! feel free to seat yourself."
 			]
 		},
 		"rhyme": {

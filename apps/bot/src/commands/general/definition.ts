@@ -5,20 +5,23 @@ import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framewo
 import { stripIndents } from 'common-tags';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { AttachmentBuilder, ComponentType } from 'discord.js';
-import { t } from 'i18next';
+import i18n, { t } from 'i18next';
 import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
-import { RedisManager } from '#structures';
+import { BlockedWordModule, RedisManager } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { CommandError } from '#util/error.js';
-import { kRedis, trimArray } from '#util/index.js';
+import { kRedis, pickRandom, trimArray } from '#util/index.js';
 
 @injectable()
 export default class extends Command<typeof DefinitionCommand> {
-	public constructor(@inject(kRedis) public readonly redis: RedisManager) {
+	public constructor(
+		@inject(kRedis) public readonly redis: RedisManager,
+		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
+	) {
 		super();
 	}
 
@@ -27,6 +30,12 @@ export default class extends Command<typeof DefinitionCommand> {
 		args: ArgsParam<typeof DefinitionCommand>,
 		lng: LocaleParam,
 	): Promise<void> {
+		if (this.blockedWord.check(args.word)) {
+			throw new CommandError(
+				pickRandom(i18n.t('common.errors.blocked_word', { lng, returnObjects: true }) as string[]),
+			);
+		}
+
 		const reply = await interaction.deferReply({
 			ephemeral: args.hide ?? true,
 		});

@@ -28,3 +28,8 @@ CREATE TABLE IF NOT EXISTS thoth_bans (
 	reason TEXT NOT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+create table if not exists blocked_words (
+	word text primary key,
+	created_at timestamptz not null default now()
+);

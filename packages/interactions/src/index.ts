@@ -8,7 +8,7 @@ export const LANGUAGES = ['en-US', 'en-GB', 'de', 'es-ES', 'ja', 'ko', 'pl', 'zh
 /**
  * Fetches all localizations for a given key, returning an object with the language as the key and the translation as the value.
  *
- * @param key The key to fetch all localizations for
+ * @param key - The key to fetch all localizations for
  * @returns An object with the language as the key and the translation as the value
  */
 export function fetchDataLocalizations(key: string): Record<string, string> {
