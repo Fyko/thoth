@@ -7,7 +7,7 @@ import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framewo
 import { PermissionFlagsBits } from 'discord-api-types/v10';
 import i18n from 'i18next';
 
-export default class extends Command<typeof InviteCommand> {
+export default class<Cmd extends typeof InviteCommand> extends Command<Cmd> {
 	private readonly invitePermissions =
 		PermissionFlagsBits.ManageWebhooks |
 		PermissionFlagsBits.ViewChannel |
@@ -19,7 +19,7 @@ export default class extends Command<typeof InviteCommand> {
 
 	public override async chatInput(
 		interaction: InteractionParam,
-		_args: ArgsParam<typeof InviteCommand>,
+		_args: ArgsParam<Cmd>,
 		lng: LocaleParam,
 	): Promise<void> {
 		const url = new URL('https://discord.com/oauth2/authorize');

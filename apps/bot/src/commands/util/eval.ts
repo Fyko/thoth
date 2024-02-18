@@ -6,7 +6,10 @@ import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framewo
 import { stripIndents } from 'common-tags';
 import { Client } from 'discord.js';
 import i18n from 'i18next';
+import { type Sql } from 'postgres';
 import { inject, injectable } from 'tsyringe';
+import { BlockedUserModule, BlockedWordModule } from '#structures';
+import { kSQL } from '#util/symbols.js';
 
 export const SENSITIVE_PATTERN_REPLACEMENT = '[REDACTED]';
 
@@ -42,8 +45,13 @@ const MESSAGES = {
 };
 
 @injectable()
-export default class extends Command<typeof EvalCommand> {
-	public constructor(@inject(Client) public readonly client: Client) {
+export default class<Cmd extends typeof EvalCommand> extends Command<Cmd> {
+	public constructor(
+		@inject(Client) public readonly client: Client,
+		@inject(kSQL) public readonly sql: Sql<any>,
+		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
+		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
+	) {
 		super();
 	}
 
@@ -57,7 +65,7 @@ export default class extends Command<typeof EvalCommand> {
 
 	public override async chatInput(
 		interaction: InteractionParam,
-		args: ArgsParam<typeof EvalCommand>,
+		args: ArgsParam<Cmd>,
 		lng: LocaleParam,
 	): Promise<void> {
 		await interaction.deferReply({ ephemeral: true });

@@ -11,30 +11,40 @@ import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
-import { BlockedWordModule, RedisManager } from '#structures';
+import { BlockedUserModule, BlockedWordModule, RedisManager } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { CommandError } from '#util/error.js';
 import { kRedis, pickRandom, trimArray } from '#util/index.js';
 
 @injectable()
-export default class extends Command<typeof DefinitionCommand> {
+export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> {
 	public constructor(
 		@inject(kRedis) public readonly redis: RedisManager,
 		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
+		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
 	) {
 		super();
 	}
 
-	public override async chatInput(
-		interaction: InteractionParam,
-		args: ArgsParam<typeof DefinitionCommand>,
-		lng: LocaleParam,
-	): Promise<void> {
+	private async moderation(interaction: InteractionParam, args: ArgsParam<Cmd>, lng: LocaleParam): Promise<void> {
 		if (this.blockedWord.check(args.word)) {
 			throw new CommandError(
 				pickRandom(i18n.t('common.errors.blocked_word', { lng, returnObjects: true }) as string[]),
 			);
 		}
+
+		const ban = this.blockedUser.check(interaction.user.id);
+		if (ban) {
+			throw new CommandError(i18n.t('common.errors.banned', { lng, reason: ban }));
+		}
+	}
+
+	public override async chatInput(
+		interaction: InteractionParam,
+		args: ArgsParam<Cmd>,
+		lng: LocaleParam,
+	): Promise<void> {
+		await this.moderation(interaction, args, lng);
 
 		const reply = await interaction.deferReply({
 			ephemeral: args.hide ?? true,

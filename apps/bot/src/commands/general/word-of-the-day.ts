@@ -10,14 +10,14 @@ import { RedisManager } from '#structures';
 import { kRedis } from '#util/index.js';
 
 @injectable()
-export default class extends Command<typeof WordOfTheDayCommand> {
+export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd> {
 	public constructor(@inject(kRedis) public readonly redis: RedisManager) {
 		super();
 	}
 
 	public override async chatInput(
 		interaction: InteractionParam,
-		args: ArgsParam<typeof WordOfTheDayCommand>,
+		args: ArgsParam<Cmd>,
 		lng: LocaleParam,
 	): Promise<void> {
 		await interaction.deferReply({ ephemeral: args.hide ?? true });
