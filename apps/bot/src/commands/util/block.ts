@@ -51,9 +51,7 @@ export default class<Cmd extends typeof BlockCommad> extends Command<Cmd> {
 		await this.blockedUser.add(user.user.id, reason);
 
 		await interaction.editReply({
-			content: `Blocked user <@1064660696668844072> (${inlineCode(user.user.id)}) with reason ${inlineCode(
-				reason,
-			)}`,
+			content: `Blocked user <@${user.user.id}> (${inlineCode(user.user.id)}) with reason ${inlineCode(reason)}`,
 		});
 	}
 
