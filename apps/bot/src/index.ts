@@ -62,7 +62,8 @@ const sql = postgres(process.env.DATABASE_URL, {
 });
 
 const client = createClient({
-	shards: 'auto',
+	// shards: 'auto',
+	shardCount: 3,
 	intents: [IntentsBitField.Flags.Guilds],
 	makeCache: Options.cacheWithLimits({
 		MessageManager: 5,

@@ -24,19 +24,20 @@ export default class implements Event {
 
 	public execute(): void {
 		this.client.on(this.event, async (guild) => {
-			logger.info({ guildId: guild.id }, `Left guild ${guild.name}`);
+			const name = guild.name ?? 'Unknown';
+			logger.info({ guildId: guild.id }, `Left guild ${name}`);
 			this.guildCount.dec();
 
 			void this.webhook.send({
 				embeds: [
 					new EmbedBuilder()
-						.setTitle(guild.name)
+						.setTitle(name)
 						.setThumbnail(guild.iconURL({ size: 512, forceStatic: false }) ?? null)
 						.setDescription(
 							stripIndents`
 							**ID**: \`${guild.id}\`
 							**Owner**: ${(await this.client.users.fetch(guild.ownerId)).tag} \`(${guild.ownerId})\`
-							**Members**: \`${guild.memberCount.toLocaleString('en-US')}\`
+							**Members**: \`${guild.memberCount?.toLocaleString('en-US') ?? 'Unknown'}\`
 						`,
 						)
 						.setTimestamp()
