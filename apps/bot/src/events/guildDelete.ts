@@ -26,6 +26,8 @@ export default class implements Event {
 		this.client.on(this.event, async (guild) => {
 			const name = guild.name ?? 'Unknown';
 			logger.info({ guildId: guild.id }, `Left guild ${name}`);
+			if (!guild.available) return; // dear god this is going to be mentioned in my obituary
+
 			this.guildCount.dec();
 
 			void this.webhook.send({
