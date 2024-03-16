@@ -1,8 +1,7 @@
 import process from 'node:process';
 import { inlineCode } from '@discordjs/builders';
-import { DiscordAPIError } from '@discordjs/rest';
 import { Queue, Worker, type Job } from 'bullmq';
-import { WebhookClient } from 'discord.js';
+import { WebhookClient, DiscordAPIError } from 'discord.js';
 import type { Entry } from 'mw-collegiate';
 import type { Sql } from 'postgres';
 import Parser from 'rss-parser';
