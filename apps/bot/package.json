@@ -35,7 +35,7 @@
 		"@yuudachi/framework": "^0.2.10",
 		"bullmq": "^4.17.0",
 		"common-tags": "^1.8.2",
-		"discord-api-types": "^0.37.74",
+		"discord-api-types": "^0.37.75",
 		"discord.js": "^14.14.1",
 		"fs-nextra": "^0.5.1",
 		"i18next": "^23.10.1",

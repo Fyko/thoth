@@ -28,6 +28,8 @@ const ConfigCommand = {
 			],
 		},
 	],
+	contexts: [0],
+	integration_types: [0],
 } as const;
 
 export default ConfigCommand;

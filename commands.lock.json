@@ -82,7 +82,9 @@
 					}
 				]
 			}
-		]
+		],
+		"contexts": [0],
+		"integration_types": [0]
 	},
 	{
 		"name": "invite",
@@ -108,7 +110,9 @@
 			"pl": "Returns an invite link to add Thoth to your server.",
 			"zh-CN": "Returns an invite link to add Thoth to your server.",
 			"zh-TW": "Returns an invite link to add Thoth to your server."
-		}
+		},
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "ping",
@@ -134,7 +138,9 @@
 			"pl": "Ensures the bot is responding to commands.",
 			"zh-CN": "Ensures the bot is responding to commands.",
 			"zh-TW": "Ensures the bot is responding to commands."
-		}
+		},
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "holonyms",
@@ -244,7 +250,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "match-word",
@@ -354,7 +362,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "definition",
@@ -465,7 +475,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "rhyme",
@@ -575,7 +587,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "similar-meaning",
@@ -739,7 +753,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "similar-spelling",
@@ -849,7 +865,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "hyponyms",
@@ -959,7 +977,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "word-of-the-day",
@@ -1014,7 +1034,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "homophones",
@@ -1124,7 +1146,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "that-follow",
@@ -1288,7 +1312,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "noun",
@@ -1398,7 +1424,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "close-rhyme",
@@ -1508,7 +1536,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "triggers",
@@ -1618,7 +1648,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "sounds-like",
@@ -1728,7 +1760,9 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	},
 	{
 		"name": "adjective",
@@ -1838,6 +1872,8 @@
 				},
 				"type": 5
 			}
-		]
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
 	}
 ]

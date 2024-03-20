@@ -3,6 +3,7 @@ import type { Command } from '@yuudachi/framework';
 import { transformApplicationInteraction, kCommands } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
+import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { ApplicationCommandType, Client, EmbedBuilder, Events, WebhookClient } from 'discord.js';
 import { Counter, Registry } from 'prom-client';
 import { container, inject, injectable } from 'tsyringe';
@@ -42,8 +43,6 @@ export default class implements Event {
 				return;
 			}
 
-			if (!interaction.inCachedGuild()) return;
-
 			const command = this.commands.get(interaction.commandName.toLowerCase());
 			const args_ = interaction.options.data.map(
 				// @ts-expect-error i know it works
@@ -70,7 +69,7 @@ export default class implements Event {
 						if (autocomplete) {
 							try {
 								if (interaction.commandName === 'definition') {
-									await definitionAutoComplete(interaction);
+									await definitionAutoComplete(interaction as AutocompleteInteraction<'cached'>);
 
 									return;
 								}
@@ -80,7 +79,7 @@ export default class implements Event {
 						}
 
 						await command.chatInput(
-							interaction,
+							interaction as ChatInputCommandInteraction<'cached'>,
 							transformApplicationInteraction(interaction.options.data),
 							interaction.locale,
 						);

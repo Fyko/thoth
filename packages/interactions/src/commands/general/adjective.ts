@@ -31,6 +31,8 @@ const AdjectiveCommand = {
 			type: ApplicationCommandOptionType.Boolean,
 		},
 	],
+	contexts: [0, 1, 2],
+	integration_types: [0, 1],
 } as const;
 
 export default AdjectiveCommand;
