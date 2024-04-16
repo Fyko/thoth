@@ -67,21 +67,21 @@ export default class<Cmd extends typeof ThatFollowCommand> extends Command<Cmd> 
 					word: firstUpperCase(args.word),
 					words: trimArray(mapped, limit).join(', '),
 					starts_with: startsWith,
-			  })
+				})
 			: endsWith
-			  ? i18n.t('commands.that-follow.ends_with_success', {
+				? i18n.t('commands.that-follow.ends_with_success', {
 						lng,
 						found_count: mapped.length.toString(),
 						word: firstUpperCase(args.word),
 						words: trimArray(mapped, limit).join(', '),
 						ends_with: endsWith,
-			    })
-			  : i18n.t('commands.that-follow.generic_success', {
+					})
+				: i18n.t('commands.that-follow.generic_success', {
 						lng,
 						found_count: mapped.length.toString(),
 						word: firstUpperCase(args.word),
 						words: trimArray(mapped, limit).join(', '),
-			    });
+					});
 
 		await interaction.editReply(content.slice(0, 2_000));
 	}

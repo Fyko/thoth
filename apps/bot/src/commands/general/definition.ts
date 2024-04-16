@@ -166,7 +166,7 @@ export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> 
 			? new AttachmentBuilder(soundUrl, {
 					description: `The pronunciation of the word ${meta.id}`,
 					name: `${meta.id}.mp3`,
-			  })
+				})
 			: undefined;
 
 		let content = stripIndents`

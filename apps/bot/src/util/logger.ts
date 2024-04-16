@@ -5,12 +5,12 @@ const options =
 	process.env.NODE_ENV === 'production'
 		? ({
 				level: 'debug',
-		  } satisfies LoggerOptions)
+			} satisfies LoggerOptions)
 		: ({
 				level: 'debug',
 				transport: {
 					target: 'pino-pretty',
 				},
-		  } satisfies LoggerOptions);
+			} satisfies LoggerOptions);
 
 export const logger = pino(options);
