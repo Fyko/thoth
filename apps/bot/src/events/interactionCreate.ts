@@ -3,8 +3,20 @@ import type { Command } from '@yuudachi/framework';
 import { transformApplicationInteraction, kCommands } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
-import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { ApplicationCommandType, Client, EmbedBuilder, Events, WebhookClient } from 'discord.js';
+import type { AutocompleteInteraction, ChatInputCommandInteraction, Interaction } from 'discord.js';
+import {
+	ApplicationCommandType,
+	bold,
+	channelMention,
+	ChannelType,
+	Client,
+	codeBlock,
+	Colors,
+	CommandInteraction,
+	Events,
+	inlineCode,
+	WebhookClient,
+} from 'discord.js';
 import { Counter, Registry } from 'prom-client';
 import { container, inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
@@ -27,10 +39,6 @@ export default class implements Event {
 
 	public event = Events.InteractionCreate as const;
 
-	public webhook = new WebhookClient({
-		url: process.env.COMMAND_LOG_WEBHOOK_URL!,
-	});
-
 	public constructor(
 		public readonly client: Client<true>,
 		@inject(kCommands) public readonly commands: Map<string, Command>,
@@ -44,10 +52,6 @@ export default class implements Event {
 			}
 
 			const command = this.commands.get(interaction.commandName.toLowerCase());
-			const args_ = interaction.options.data.map(
-				// @ts-expect-error i know it works
-				({ name, value }: { name: string; value: any }) => `\`${name}\`: \`${value}\``,
-			);
 
 			if (command) {
 				try {
@@ -84,26 +88,7 @@ export default class implements Event {
 							interaction.locale,
 						);
 
-						void this.webhook.send({
-							embeds: [
-								new EmbedBuilder()
-									.setTitle(interaction.commandName)
-									.setTimestamp()
-									.setAuthor({
-										name: `${interaction.user.tag} (${interaction.user.id})`,
-										iconURL: interaction.user.displayAvatarURL({
-											size: 128,
-											forceStatic: false,
-										}),
-									})
-									.addFields({
-										name: 'Arguments',
-										value: args_.length ? args_.join('\n') : 'No arguments provided',
-									})
-									.setFooter({ text: 'Command executed successfully' })
-									.setColor('DarkGreen'),
-							],
-						});
+						logInteraction(interaction);
 
 						commandsMetrics.inc({
 							success: 'true',
@@ -117,37 +102,7 @@ export default class implements Event {
 					if (isCommandError) logger.warn(err, err.message);
 					else logger.error(err, err.message);
 
-					void this.webhook.send({
-						content: isCommandError ? '' : `<@${process.env.OWNER_ID}>`,
-						embeds: [
-							new EmbedBuilder()
-								.setTitle(interaction.commandName)
-								.setTimestamp()
-								.setAuthor({
-									name: `${interaction.user.tag} (${interaction.user.id})`,
-									iconURL: interaction.user.displayAvatarURL({
-										size: 128,
-										forceStatic: false,
-									}),
-								})
-								.setDescription(
-									stripIndents`
-									\`\`\`js
-									${err}
-									\`\`\`
-								`,
-								)
-								.addFields({
-									name: 'Arguments',
-									value: args_.length ? args_.join('\n') : 'No arguments provided',
-								})
-								.setFooter({ text: 'Command execution failed' })
-								.setColor('DarkRed'),
-						],
-						// ...(isCommandError
-						//   ? {}
-						//   : { content: `<@${process.env.OWNER_ID}>` }),
-					});
+					logInteraction(interaction, err);
 
 					commandsMetrics.inc({
 						success: 'false',
@@ -183,4 +138,94 @@ export default class implements Event {
 			}
 		});
 	}
+}
+
+const hook = new WebhookClient({
+	url: process.env.COMMAND_LOG_WEBHOOK_URL!,
+});
+
+function logInteraction(interaction: Interaction, error?: Error) {
+	if (hook) {
+		const metaParts = [
+			interaction.inCachedGuild()
+				? `${bold('Guild:')} ${inlineCode(interaction.guild.name)} (${interaction.guild.id})`
+				: interaction.channel?.type === ChannelType.DM
+					? bold('DM')
+					: `Group DM: ${interaction.channel?.name}`,
+		];
+
+		if (interaction.channel && interaction instanceof CommandInteraction) {
+			metaParts.push(
+				interaction.channel.isThread()
+					? `${bold('Thread:')} ${channelMention(interaction.channelId)} ${inlineCode(interaction.channel.name)} (${
+							interaction.channel.id
+						}) ${bold('in channel')}: ${
+							interaction.channel.parent
+								? `${channelMention(interaction.channel.parent.id)} ${inlineCode(interaction.channel.parent.name)} (${
+										interaction.channel.parentId
+									})`
+								: 'unknown'
+						}`
+					: 'name' in interaction.channel
+						? `${bold('Channel:')} ${channelMention(interaction.channelId)} ${inlineCode(interaction.channel.name)} (${
+								interaction.channel.id
+							})`
+						: 'Direct Message',
+			);
+		}
+
+		const description = logDescription(interaction);
+		const isCommandError = error instanceof CommandError;
+		void hook.send({
+			content: isCommandError ? `<@${process.env.OWNER_ID}>` : '',
+			embeds: [
+				{
+					// a command error is not a failure, so we don't need to mark it as such
+					color: error && !isCommandError ? Colors.DarkRed : Colors.DarkGreen,
+					author: {
+						icon_url: interaction.inCachedGuild()
+							? interaction.member.displayAvatarURL()
+							: interaction.user.displayAvatarURL(),
+						name: `${interaction.user.username} (${interaction.user.id})`,
+					},
+					description: error
+						? stripIndents`
+						${description}
+						Error:
+						\`\`\`js
+						${error}
+						\`\`\`
+					`
+						: logDescription(interaction),
+					fields: [
+						{
+							name: 'Metadata',
+							value: metaParts.join('\n'),
+						},
+					],
+					timestamp: new Date().toISOString(),
+				},
+			],
+		});
+	}
+}
+
+function logDescription(interaction: Interaction) {
+	if (interaction.isChatInputCommand()) {
+		return codeBlock(interaction.toString());
+	}
+
+	if (interaction.isUserContextMenuCommand()) {
+		return codeBlock(
+			`(${ApplicationCommandType[interaction.commandType]}Ctx) ${interaction.commandName} on ${interaction.targetUser.username} (${interaction.targetUser.id})`,
+		);
+	}
+
+	if (interaction.isMessageContextMenuCommand()) {
+		return codeBlock(
+			`[${ApplicationCommandType[interaction.commandType]}Ctx] ${interaction.commandName} on ${interaction.targetMessage.id}`,
+		);
+	}
+
+	return 'Unknown interaction type';
 }
