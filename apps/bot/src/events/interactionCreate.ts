@@ -177,7 +177,7 @@ function logInteraction(interaction: Interaction, error?: Error) {
 		const description = logDescription(interaction);
 		const isCommandError = error instanceof CommandError;
 		void hook.send({
-			content: isCommandError ? `<@${process.env.OWNER_ID}>` : '',
+			content: !isCommandError && error !== undefined ? `<@${process.env.OWNER_ID}>` : '',
 			embeds: [
 				{
 					// a command error is not a failure, so we don't need to mark it as such
