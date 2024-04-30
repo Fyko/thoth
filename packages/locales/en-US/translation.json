@@ -8,7 +8,7 @@
 				},
 				"hide": {
 					"name": "hide",
-					"description": "Whether or not to hide the command response from other users (default: True)."
+					"description": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"starts-with": {
 					"name": "starts-with",

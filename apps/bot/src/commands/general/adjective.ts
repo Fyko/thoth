@@ -3,7 +3,7 @@ import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
 import { inject, injectable } from 'tsyringe';
-import { BlockedUserModule, BlockedWordModule } from '#structures';
+import { BlockedUserModule, BlockedWordModule, ShowByDefaultAlerterModule } from '#structures';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuse } from '#util/datamuse.js';
 import { CommandError } from '#util/error.js';
@@ -14,6 +14,7 @@ export default class<Cmd extends typeof AdjectiveCommand> extends Command<Cmd> {
 	public constructor(
 		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
 		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
+		@inject(ShowByDefaultAlerterModule) public readonly showByDefaultAlerter: ShowByDefaultAlerterModule,
 	) {
 		super();
 	}
@@ -38,7 +39,7 @@ export default class<Cmd extends typeof AdjectiveCommand> extends Command<Cmd> {
 	): Promise<void> {
 		await this.moderation(interaction, args, lng);
 
-		await interaction.deferReply({ ephemeral: args.hide ?? true });
+		await interaction.deferReply({ ephemeral: args.hide ?? false });
 
 		const limit = parseLimit(args.limit, lng);
 
@@ -54,5 +55,14 @@ export default class<Cmd extends typeof AdjectiveCommand> extends Command<Cmd> {
 				lng,
 			}),
 		);
+
+		if (!(await this.showByDefaultAlerter.beenAlerted(interaction.user.id))) {
+			await this.showByDefaultAlerter.add(interaction.user.id);
+			await interaction.followUp({
+				content:
+					'As of <t:1714509120:D>, various Thoth commands will no longer automatically hide their response. Set the `hide` option to `True` to hide command responses from other users.',
+				ephemeral: true,
+			});
+		}
 	}
 }

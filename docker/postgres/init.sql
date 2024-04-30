@@ -37,3 +37,8 @@ create table if not exists blocked_words (
 alter table thoth_bans
 alter column user_id type text using user_id::text,
 add constraint unique_user_id unique (user_id);
+
+create table if not exists show_by_default_alert (
+	user_id text primary key not null,
+	created_at timestamptz not null default now()
+);

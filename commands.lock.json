@@ -236,17 +236,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -348,17 +348,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -433,17 +433,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -546,17 +546,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -658,17 +658,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -824,17 +824,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -936,17 +936,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1048,17 +1048,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1105,17 +1105,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1217,17 +1217,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1383,17 +1383,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1495,17 +1495,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1607,17 +1607,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1719,17 +1719,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1831,17 +1831,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
@@ -1943,17 +1943,17 @@
 					"zh-CN": "hide",
 					"zh-TW": "hide"
 				},
-				"description": "Whether or not to hide the command response from other users (default: True).",
+				"description": "Whether or not to hide the command response from other users (default: False).",
 				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: True).",
-					"en-GB": "Whether or not to hide the command response from other users (default: True).",
-					"de": "Whether or not to hide the command response from other users (default: True).",
-					"es-ES": "Whether or not to hide the command response from other users (default: True).",
-					"ja": "Whether or not to hide the command response from other users (default: True).",
-					"ko": "Whether or not to hide the command response from other users (default: True).",
-					"pl": "Whether or not to hide the command response from other users (default: True).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: True).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: True)."
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
 				},
 				"type": 5
 			}
