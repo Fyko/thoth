@@ -39,7 +39,7 @@ export default class<Cmd extends typeof HyponymsCommand> extends Command<Cmd> {
 	): Promise<void> {
 		await this.moderation(interaction, args, lng);
 
-		await interaction.deferReply({ ephemeral: args.hide ?? true });
+		await interaction.deferReply({ ephemeral: args.hide ?? false });
 
 		const limit = parseLimit(args.limit, lng);
 
