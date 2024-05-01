@@ -64,6 +64,9 @@ services:
         build:
             context: ./docker/grafana
         restart: unless-stopped
+        networks:
+            - default
+            - caddy_network
         environment:
             GF_SERVER_DOMAIN: ${GF_SERVER_DOMAIN}
             GF_SERVER_ROOT_URL: ${GF_SERVER_ROOT_URL}
@@ -142,3 +145,8 @@ volumes:
     grafana-storage:
     postgres-storage:
     loki-storage:
+
+networks:
+    default:
+    caddy_network:
+        external: true
