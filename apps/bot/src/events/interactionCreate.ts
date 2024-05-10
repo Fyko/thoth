@@ -51,7 +51,9 @@ export default class implements Event {
 				return;
 			}
 
-			const command = this.commands.get(interaction.commandName.toLowerCase());
+			const commandId = interaction.commandName.toLowerCase();
+			const command = this.commands.get(commandId);
+			logger.debug(`Received interaction ${commandId}`);
 
 			if (command) {
 				try {
