@@ -3,8 +3,8 @@ version: '3.7'
 services:
     thoth:
         image: ghcr.io/fyko/thoth:latest
-        ports:
-            - '21983:21983'
+        expose:
+            - '21983'
         restart: unless-stopped
         env_file:
             - ./.env.prod
@@ -23,8 +23,8 @@ services:
             POSTGRES_USER: 'admin'
             POSTGRES_PASSWORD: 'doctordoctor'
             POSTGRES_DB: 'thoth'
-        ports:
-            - '5432:5432'
+        expose:
+            - '5432'
         healthcheck:
             test: ['CMD', 'pg_isready', '-U', 'admin', '-d', 'thoth']
             interval: 10s
@@ -42,8 +42,8 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-        ports:
-            - '6379:6379'
+        expose:
+            - '6379'
 
     prometheus:
         build:
@@ -55,8 +55,8 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-        ports:
-            - 9090:9090
+        expose:
+            - 9090
         volumes:
             - prometheus-storage:/prometheus
 
@@ -95,8 +95,8 @@ services:
             retries: 5
         env_file:
             - ./.env.prod
-        ports:
-            - 3000:3000
+        expose:
+            - 3000
         volumes:
             - grafana-storage:/var/lib/grafana
 
@@ -120,8 +120,8 @@ services:
 
     cadvisor:
         image: gcr.io/cadvisor/cadvisor:latest
-        ports:
-            - 8080:8080
+        expose:
+            - 8080
         volumes:
             - /:/rootfs:ro
             - /var/run:/var/run:rw
