@@ -79,7 +79,10 @@ export default class implements Event {
 
 									return;
 								}
-							} catch {}
+							} catch (error_: unknown) {
+								const error = error_ as Error;
+								logger.error(error, 'Error while executing autocomplete');
+							}
 
 							return;
 						}
@@ -102,7 +105,7 @@ export default class implements Event {
 					const err = error as Error;
 
 					if (isCommandError) logger.warn(err, err.message);
-					else logger.error(err, err.message);
+					else logger.error(err, 'Error while executing command');
 
 					logInteraction(interaction, err);
 
@@ -134,7 +137,7 @@ export default class implements Event {
 						});
 					} catch (error) {
 						const sub = error as Error;
-						logger.error(sub, sub.message);
+						logger.error(sub, 'Error while sending error message (lol)');
 					}
 				}
 			}
