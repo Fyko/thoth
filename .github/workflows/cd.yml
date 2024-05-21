@@ -9,6 +9,7 @@ on:
             - 'packages/**'
             - 'package.json'
             - 'yarn.lock'
+            - '.github/workflows/cd.yml'
 
 env:
     slug: ghcr.io/Fyko/thoth
