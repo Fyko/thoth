@@ -62,7 +62,7 @@ jobs:
                       latest=auto
                   tags: |
                       type=raw,value=${{ steps.generate-tag.outputs.tag }}
-                      type=ref,event=push
+                      type=ref
 
             - name: Build
               uses: docker/build-push-action@v5
