@@ -3,7 +3,6 @@ name: Continuous Deployment (thoth)
 on:
     workflow_dispatch:
     push:
-        branches: [main]
         paths:
             - 'apps/bot/**'
             - 'packages/**'
@@ -62,7 +61,8 @@ jobs:
                       latest=auto
                   tags: |
                       type=raw,value=${{ steps.generate-tag.outputs.tag }}
-                      type=ref
+                      type=ref,event=branch
+                      type=ref,event=pr
 
             - name: Build
               uses: docker/build-push-action@v5
