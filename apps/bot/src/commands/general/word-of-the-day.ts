@@ -8,7 +8,7 @@ import { fetchDefinition } from '#mw';
 import { createWOTDContent, fetchWordOfTheDay } from '#mw/wotd.js';
 import { RedisManager, DismissableAlertModule } from '#structures';
 import { kRedis } from '#util/index.js';
-import { UseModeration } from '../../hooks/contentModeration.js';
+//import { UseModeration } from '../../hooks/contentModeration.js';
 import { UseFeedbackAlert } from '../../hooks/dismissableAlert.js';
 
 @injectable()
