@@ -262,10 +262,10 @@ export default class implements Event {
 			try {
 				await user.send({
 					content: stripIndents`
-						Your feedback submission titled "${row.subject ?? 'No Subject'}" received a message!
+						Your feedback submission titled "${row.subject?.length ? row.subject : 'No Subject'}" received a message:
 						
 						${content}
-						- ${interaction.user.globalName ?? interaction.user.tag}
+						\- ${interaction.user.globalName ?? interaction.user.tag}
 					`,
 					components: [
 						createMessageActionRow([
