@@ -38,6 +38,7 @@ const typeScriptRuleset = merge(...typescript, {
 				},
 			},
 		],
+		'@typescript-eslint/consistent-type-imports': 0,
 	},
 	settings: {
 		'import/resolver': {

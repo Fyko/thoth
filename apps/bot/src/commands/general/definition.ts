@@ -5,16 +5,18 @@ import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framewo
 import { stripIndents } from 'common-tags';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { AttachmentBuilder, ComponentType } from 'discord.js';
-import i18n, { t } from 'i18next';
+import { t } from 'i18next';
 import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
-import { BlockedUserModule, BlockedWordModule, RedisManager, ShowByDefaultAlerterModule } from '#structures';
+import { BlockedUserModule, BlockedWordModule, RedisManager, DismissableAlertModule } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { CommandError } from '#util/error.js';
-import { kRedis, pickRandom, trimArray } from '#util/index.js';
+import { kRedis, trimArray } from '#util/index.js';
+import { UseModeration } from '../../hooks/contentModeration.js';
+import { UseFeedbackAlert } from '../../hooks/dismissableAlert.js';
 
 @injectable()
 export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> {
@@ -22,31 +24,18 @@ export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> 
 		@inject(kRedis) public readonly redis: RedisManager,
 		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
 		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
-		@inject(ShowByDefaultAlerterModule) public readonly showByDefaultAlerter: ShowByDefaultAlerterModule,
+		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}
 
-	private async moderation(interaction: InteractionParam, args: ArgsParam<Cmd>, lng: LocaleParam): Promise<void> {
-		if (this.blockedWord.check(args.word)) {
-			throw new CommandError(
-				pickRandom(i18n.t('common.errors.blocked_word', { lng, returnObjects: true }) as string[]),
-			);
-		}
-
-		const ban = this.blockedUser.check(interaction.user.id);
-		if (ban) {
-			throw new CommandError(i18n.t('common.errors.banned', { lng, reason: ban }));
-		}
-	}
-
+	@UseModeration<Cmd>()
+	@UseFeedbackAlert()
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
 		lng: LocaleParam,
 	): Promise<void> {
-		await this.moderation(interaction, args, lng);
-
 		const reply = await interaction.deferReply({
 			ephemeral: args.hide ?? false,
 		});
@@ -194,14 +183,5 @@ export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> 
 			files: soundAttachment ? [soundAttachment] : [],
 			components: [],
 		});
-
-		if (!(await this.showByDefaultAlerter.beenAlerted(interaction.user.id))) {
-			await this.showByDefaultAlerter.add(interaction.user.id);
-			await interaction.followUp({
-				content:
-					'As of <t:1714509120:D>, various Thoth commands will no longer automatically hide their response. Set the `hide` option to `True` to hide command responses from other users.',
-				ephemeral: true,
-			});
-		}
 	}
 }

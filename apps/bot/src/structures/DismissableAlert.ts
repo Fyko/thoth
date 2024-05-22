@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { kSQL } from '#util/symbols.js';
 
 @injectable()
-export class ShowByDefaultAlerterModule {
+export class DismissableAlertModule {
 	public constructor(@inject(kSQL) protected readonly sql: Sql<any>) {}
 
 	/**
@@ -12,19 +12,19 @@ export class ShowByDefaultAlerterModule {
 	 * @param userId - The user to check
 	 * @returns boolean
 	 */
-	public async beenAlerted(userId: string): Promise<boolean> {
+	public async beenAlerted(userId: string, campaign: string): Promise<boolean> {
 		const [row] = await this.sql<
 			[
 				{
 					user_id: string;
 				}?,
 			]
-		>`select user_id from public.show_by_default_alert where user_id = ${userId} limit 1`;
+		>`select user_id from public.dismissable_alert where user_id = ${userId} and campaign = ${campaign} limit 1`;
 
 		return Boolean(row);
 	}
 
-	public async add(userId: string) {
-		await this.sql`insert into public.show_by_default_alert (user_id) values (${userId})`;
+	public async add(userId: string, campaign: string): Promise<void> {
+		await this.sql`insert into public.dismissable_alert (user_id, campaign) values (${userId}, ${campaign})`;
 	}
 }

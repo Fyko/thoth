@@ -3,42 +3,31 @@ import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
 import { inject, injectable } from 'tsyringe';
-import { BlockedUserModule, BlockedWordModule, ShowByDefaultAlerterModule } from '#structures';
+import { BlockedUserModule, BlockedWordModule, DismissableAlertModule } from '#structures';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuse } from '#util/datamuse.js';
 import { CommandError } from '#util/error.js';
-import { firstUpperCase, pickRandom, trimArray } from '#util/index.js';
+import { firstUpperCase, trimArray } from '#util/index.js';
+import { UseModeration } from '../../hooks/contentModeration.js';
+import { UseFeedbackAlert } from '../../hooks/dismissableAlert.js';
 
 @injectable()
 export default class<Cmd extends typeof HyponymsCommand> extends Command<Cmd> {
 	public constructor(
 		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
 		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
-		@inject(ShowByDefaultAlerterModule) public readonly showByDefaultAlerter: ShowByDefaultAlerterModule,
+		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}
 
-	private async moderation(interaction: InteractionParam, args: ArgsParam<Cmd>, lng: LocaleParam): Promise<void> {
-		if (this.blockedWord.check(args.word)) {
-			throw new CommandError(
-				pickRandom(i18n.t('common.errors.blocked_word', { lng, returnObjects: true }) as string[]),
-			);
-		}
-
-		const ban = this.blockedUser.check(interaction.user.id);
-		if (ban) {
-			throw new CommandError(i18n.t('common.errors.banned', { lng, reason: ban }));
-		}
-	}
-
+	@UseModeration<Cmd>()
+	@UseFeedbackAlert()
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
 		lng: LocaleParam,
 	): Promise<void> {
-		await this.moderation(interaction, args, lng);
-
 		await interaction.deferReply({ ephemeral: args.hide ?? false });
 
 		const limit = parseLimit(args.limit, lng);
@@ -55,14 +44,5 @@ export default class<Cmd extends typeof HyponymsCommand> extends Command<Cmd> {
 				lng,
 			}),
 		);
-
-		if (!(await this.showByDefaultAlerter.beenAlerted(interaction.user.id))) {
-			await this.showByDefaultAlerter.add(interaction.user.id);
-			await interaction.followUp({
-				content:
-					'As of <t:1714509120:D>, various Thoth commands will no longer automatically hide their response. Set the `hide` option to `True` to hide command responses from other users.',
-				ephemeral: true,
-			});
-		}
 	}
 }

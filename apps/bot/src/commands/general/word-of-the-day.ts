@@ -6,18 +6,22 @@ import type { Entry } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
 import { fetchDefinition } from '#mw';
 import { createWOTDContent, fetchWordOfTheDay } from '#mw/wotd.js';
-import { RedisManager, ShowByDefaultAlerterModule } from '#structures';
+import { RedisManager, DismissableAlertModule } from '#structures';
 import { kRedis } from '#util/index.js';
+import { UseModeration } from '../../hooks/contentModeration.js';
+import { UseFeedbackAlert } from '../../hooks/dismissableAlert.js';
 
 @injectable()
 export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd> {
 	public constructor(
 		@inject(kRedis) public readonly redis: RedisManager,
-		@inject(ShowByDefaultAlerterModule) public readonly showByDefaultAlerter: ShowByDefaultAlerterModule,
+		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}
 
+	@UseModeration<Cmd>()
+	@UseFeedbackAlert()
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
@@ -34,14 +38,5 @@ export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd
 		const content = createWOTDContent(defRes as Entry, lng);
 
 		await interaction.editReply(content);
-
-		if (!(await this.showByDefaultAlerter.beenAlerted(interaction.user.id))) {
-			await this.showByDefaultAlerter.add(interaction.user.id);
-			await interaction.followUp({
-				content:
-					'As of <t:1714509120:D>, various Thoth commands will no longer automatically hide their response. Set the `hide` option to `True` to hide command responses from other users.',
-				ephemeral: true,
-			});
-		}
 	}
 }

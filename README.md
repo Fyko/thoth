@@ -12,10 +12,6 @@
 
 Help us translate Thoth in the top 30 languages over at our [Crowdin Project](https://crowdin.com/project/thoth)
 
-## Terms of Service
+## Self Hosting
 
-Moved to [TERMS_OF_SERVICE.md](./legal/TERMS_OF_SERVICE.md)
-
-## Privacy Policy
-
-Moved to [PRIVACY_POLICY.md](./legal/PRIVACY_POLICY.md)
+Self hosting is currently unsupported.

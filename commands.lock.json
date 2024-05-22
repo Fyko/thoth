@@ -143,6 +143,34 @@
 		"integration_types": [0, 1]
 	},
 	{
+		"name": "feedback",
+		"name_localizations": {
+			"en-US": "feedback",
+			"en-GB": "feedback",
+			"de": "feedback",
+			"es-ES": "feedback",
+			"ja": "feedback",
+			"ko": "feedback",
+			"pl": "feedback",
+			"zh-CN": "feedback",
+			"zh-TW": "feedback"
+		},
+		"description": "Submit feedback for the Thoth developers.",
+		"description_localizations": {
+			"en-US": "Submit feedback for the Thoth developers.",
+			"en-GB": "Submit feedback for the Thoth developers.",
+			"de": "Submit feedback for the Thoth developers.",
+			"es-ES": "Submit feedback for the Thoth developers.",
+			"ja": "Submit feedback for the Thoth developers.",
+			"ko": "Submit feedback for the Thoth developers.",
+			"pl": "Submit feedback for the Thoth developers.",
+			"zh-CN": "Submit feedback for the Thoth developers.",
+			"zh-TW": "Submit feedback for the Thoth developers."
+		},
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
 		"name": "holonyms",
 		"name_localizations": {
 			"en-US": "holonyms",

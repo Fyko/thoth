@@ -44,7 +44,9 @@
 			]
 		},
 		"titles": {
-			"definitions": "Definitions"
+			"definitions": "Definitions",
+			"subject": "Subject",
+			"description": "Description"
 		}
 	},
 	"commands": {
@@ -76,6 +78,28 @@
 					}
 				}
 			}
+		},
+		"feedback": {
+			"meta": {
+				"name": "feedback",
+				"description": "Submit feedback for the Thoth developers.",
+				"args": {
+					"category": {
+						"name": "category",
+						"description": "The subcategory of your feedback.",
+						"choices": {
+							"bug": "Report a bug.",
+							"feature": "Request a feature.",
+							"general": "General feedback."
+						}
+					},
+					"content": {
+						"name": "content",
+						"description": "The content of your feedback."
+					}
+				}
+			},
+			"received": "We've received your feedback! If necessary, we'll reach out. Thank you for helping us improve Thoth. :)"
 		},
 		"homophones": {
 			"meta": {
