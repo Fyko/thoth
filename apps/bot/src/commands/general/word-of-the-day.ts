@@ -20,7 +20,7 @@ export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd
 		super();
 	}
 
-	@UseModeration<Cmd>()
+	//@UseModeration<Cmd>()
 	@UseFeedbackAlert()
 	public override async chatInput(
 		interaction: InteractionParam,
