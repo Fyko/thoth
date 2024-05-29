@@ -10,8 +10,6 @@ import i18n from 'i18next';
 export default class<Cmd extends typeof InviteCommand> extends Command<Cmd> {
 	private readonly invitePermissions =
 		PermissionFlagsBits.ManageWebhooks |
-		PermissionFlagsBits.ViewChannel |
-		PermissionFlagsBits.SendMessages |
 		PermissionFlagsBits.EmbedLinks |
 		PermissionFlagsBits.AttachFiles |
 		PermissionFlagsBits.AddReactions |

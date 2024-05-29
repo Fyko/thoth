@@ -87,450 +87,29 @@
 		"integration_types": [0]
 	},
 	{
-		"name": "invite",
+		"name": "that-follow",
 		"name_localizations": {
-			"en-US": "invite",
-			"en-GB": "invite",
-			"de": "invite",
-			"es-ES": "invite",
-			"ja": "invite",
-			"ko": "invite",
-			"pl": "invite",
-			"zh-CN": "invite",
-			"zh-TW": "invite"
+			"en-US": "that-follow",
+			"en-GB": "that-follow",
+			"de": "that-follow",
+			"es-ES": "that-follow",
+			"ja": "that-follow",
+			"ko": "that-follow",
+			"pl": "that-follow",
+			"zh-CN": "that-follow",
+			"zh-TW": "that-follow"
 		},
-		"description": "Returns an invite link to add Thoth to your server.",
+		"description": "Responds with words that could logically follow query.",
 		"description_localizations": {
-			"en-US": "Returns an invite link to add Thoth to your server.",
-			"en-GB": "Returns an invite link to add Thoth to your server.",
-			"de": "Returns an invite link to add Thoth to your server.",
-			"es-ES": "Returns an invite link to add Thoth to your server.",
-			"ja": "Returns an invite link to add Thoth to your server.",
-			"ko": "Returns an invite link to add Thoth to your server.",
-			"pl": "Returns an invite link to add Thoth to your server.",
-			"zh-CN": "Returns an invite link to add Thoth to your server.",
-			"zh-TW": "Returns an invite link to add Thoth to your server."
-		},
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "ping",
-		"name_localizations": {
-			"en-US": "ping",
-			"en-GB": "ping",
-			"de": "ping",
-			"es-ES": "ping",
-			"ja": "ping",
-			"ko": "ping",
-			"pl": "ping",
-			"zh-CN": "ping",
-			"zh-TW": "ping"
-		},
-		"description": "Ensures the bot is responding to commands.",
-		"description_localizations": {
-			"en-US": "Ensures the bot is responding to commands.",
-			"en-GB": "Ensures the bot is responding to commands.",
-			"de": "Ensures the bot is responding to commands.",
-			"es-ES": "Ensures the bot is responding to commands.",
-			"ja": "Ensures the bot is responding to commands.",
-			"ko": "Ensures the bot is responding to commands.",
-			"pl": "Ensures the bot is responding to commands.",
-			"zh-CN": "Ensures the bot is responding to commands.",
-			"zh-TW": "Ensures the bot is responding to commands."
-		},
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "feedback",
-		"name_localizations": {
-			"en-US": "feedback",
-			"en-GB": "feedback",
-			"de": "feedback",
-			"es-ES": "feedback",
-			"ja": "feedback",
-			"ko": "feedback",
-			"pl": "feedback",
-			"zh-CN": "feedback",
-			"zh-TW": "feedback"
-		},
-		"description": "Submit feedback for the Thoth developers.",
-		"description_localizations": {
-			"en-US": "Submit feedback for the Thoth developers.",
-			"en-GB": "Submit feedback for the Thoth developers.",
-			"de": "Submit feedback for the Thoth developers.",
-			"es-ES": "Submit feedback for the Thoth developers.",
-			"ja": "Submit feedback for the Thoth developers.",
-			"ko": "Submit feedback for the Thoth developers.",
-			"pl": "Submit feedback for the Thoth developers.",
-			"zh-CN": "Submit feedback for the Thoth developers.",
-			"zh-TW": "Submit feedback for the Thoth developers."
-		},
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "holonyms",
-		"name_localizations": {
-			"en-US": "holonyms",
-			"en-GB": "holonyms",
-			"de": "holonyms",
-			"es-ES": "holonyms",
-			"ja": "holonyms",
-			"ko": "holonyms",
-			"pl": "holonyms",
-			"zh-CN": "holonyms",
-			"zh-TW": "holonyms"
-		},
-		"description": "Responds with holonyms (what comprises) for your query.",
-		"description_localizations": {
-			"en-US": "Responds with holonyms (what comprises) for your query.",
-			"en-GB": "Responds with holonyms (what comprises) for your query.",
-			"de": "Responds with holonyms (what comprises) for your query.",
-			"es-ES": "Responds with holonyms (what comprises) for your query.",
-			"ja": "Responds with holonyms (what comprises) for your query.",
-			"ko": "Responds with holonyms (what comprises) for your query.",
-			"pl": "Responds with holonyms (what comprises) for your query.",
-			"zh-CN": "Responds with holonyms (what comprises) for your query.",
-			"zh-TW": "Responds with holonyms (what comprises) for your query."
-		},
-		"options": [
-			{
-				"name": "word",
-				"name_localizations": {
-					"en-US": "word",
-					"en-GB": "word",
-					"de": "word",
-					"es-ES": "word",
-					"ja": "word",
-					"ko": "word",
-					"pl": "word",
-					"zh-CN": "word",
-					"zh-TW": "word"
-				},
-				"description": "The word to search homophones for (eg: car).",
-				"description_localizations": {
-					"en-US": "The word to search homophones for (eg: car).",
-					"en-GB": "The word to search homophones for (eg: car).",
-					"de": "The word to search homophones for (eg: car).",
-					"es-ES": "The word to search homophones for (eg: car).",
-					"ja": "The word to search homophones for (eg: car).",
-					"ko": "The word to search homophones for (eg: car).",
-					"pl": "The word to search homophones for (eg: car).",
-					"zh-CN": "The word to search homophones for (eg: car).",
-					"zh-TW": "The word to search homophones for (eg: car)."
-				},
-				"type": 3,
-				"required": true
-			},
-			{
-				"name": "limit",
-				"name_localizations": {
-					"en-US": "limit",
-					"en-GB": "limit",
-					"de": "grenzwert",
-					"es-ES": "limit",
-					"ja": "limit",
-					"ko": "limit",
-					"pl": "limit",
-					"zh-CN": "limit",
-					"zh-TW": "limit"
-				},
-				"description": "The maximum amount of results to return (default: 25, max: 100).",
-				"description_localizations": {
-					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
-					"de": "The maximum amount of results to return (max: 25, max: 100).",
-					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
-					"ja": "The maximum amount of results to return (max: 25, max: 100).",
-					"ko": "The maximum amount of results to return (max: 25, max: 100).",
-					"pl": "The maximum amount of results to return (max: 25, max: 100).",
-					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
-					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
-				},
-				"type": 4
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "match-word",
-		"name_localizations": {
-			"en-US": "match-word",
-			"en-GB": "match-word",
-			"de": "match-word",
-			"es-ES": "match-word",
-			"ja": "match-word",
-			"ko": "match-word",
-			"pl": "match-word",
-			"zh-CN": "match-word",
-			"zh-TW": "match-word"
-		},
-		"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-		"description_localizations": {
-			"en-US": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"en-GB": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"de": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"es-ES": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"ja": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"ko": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"pl": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"zh-CN": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
-			"zh-TW": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date)."
-		},
-		"options": [
-			{
-				"name": "word",
-				"name_localizations": {
-					"en-US": "word",
-					"en-GB": "word",
-					"de": "word",
-					"es-ES": "word",
-					"ja": "word",
-					"ko": "word",
-					"pl": "słowo",
-					"zh-CN": "word",
-					"zh-TW": "word"
-				},
-				"description": "The word to find matches for (example: a??le).",
-				"description_localizations": {
-					"en-US": "The word to find matches for (example: a??le).",
-					"en-GB": "The word to find matches for (example: a??le).",
-					"de": "The word to find matches for (example: a??le).",
-					"es-ES": "The word to find matches for (example: a??le).",
-					"ja": "The word to find matches for (example: a??le).",
-					"ko": "The word to find matches for (example: a??le).",
-					"pl": "The word to find matches for (example: a??le).",
-					"zh-CN": "The word to find matches for (example: a??le).",
-					"zh-TW": "The word to find matches for (example: a??le)."
-				},
-				"type": 3,
-				"required": true
-			},
-			{
-				"name": "limit",
-				"name_localizations": {
-					"en-US": "limit",
-					"en-GB": "limit",
-					"de": "grenzwert",
-					"es-ES": "limit",
-					"ja": "limit",
-					"ko": "limit",
-					"pl": "limit",
-					"zh-CN": "limit",
-					"zh-TW": "limit"
-				},
-				"description": "The maximum amount of results to return (default: 25, max: 100).",
-				"description_localizations": {
-					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
-					"de": "The maximum amount of results to return (max: 25, max: 100).",
-					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
-					"ja": "The maximum amount of results to return (max: 25, max: 100).",
-					"ko": "The maximum amount of results to return (max: 25, max: 100).",
-					"pl": "The maximum amount of results to return (max: 25, max: 100).",
-					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
-					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
-				},
-				"type": 4
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "definition",
-		"name_localizations": {
-			"en-US": "definition",
-			"en-GB": "definition",
-			"de": "definition",
-			"es-ES": "definition",
-			"ja": "definition",
-			"ko": "definition",
-			"pl": "definicja",
-			"zh-CN": "definition",
-			"zh-TW": "definition"
-		},
-		"description": "Responds with the definition of your query from Merriam Webster.",
-		"description_localizations": {
-			"en-US": "Responds with the definition of your query from Merriam Webster.",
-			"en-GB": "Responds with the definition of your query from Merriam Webster.",
-			"de": "Responds with the definition of your query from Merriam Webster.",
-			"es-ES": "Responds with the definition of your query from Merriam Webster.",
-			"ja": "Responds with the definition of your query from Merriam Webster.",
-			"ko": "Responds with the definition of your query from Merriam Webster.",
-			"pl": "Responds with the definition of your query from Merriam Webster.",
-			"zh-CN": "Responds with the definition of your query from Merriam Webster.",
-			"zh-TW": "Responds with the definition of your query from Merriam Webster."
-		},
-		"options": [
-			{
-				"name": "word",
-				"name_localizations": {
-					"en-US": "word",
-					"en-GB": "word",
-					"de": "word",
-					"es-ES": "word",
-					"ja": "word",
-					"ko": "word",
-					"pl": "słowo",
-					"zh-CN": "字",
-					"zh-TW": "word"
-				},
-				"description": "The word to search a definition for (eg: ocean).",
-				"description_localizations": {
-					"en-US": "The word to search a definition for (eg: ocean).",
-					"en-GB": "The word to search a definition for (eg: ocean).",
-					"de": "The word to search a definition for (eg: ocean).",
-					"es-ES": "The word to search a definition for (eg: ocean).",
-					"ja": "The word to search a definition for (eg: ocean).",
-					"ko": "The word to search a definition for (eg: ocean).",
-					"pl": "The word to search a definition for (eg: ocean).",
-					"zh-CN": "The word to search a definition for (eg: ocean).",
-					"zh-TW": "The word to search a definition for (eg: ocean)."
-				},
-				"type": 3,
-				"required": true,
-				"autocomplete": true
-			},
-			{
-				"name": "short",
-				"name_localizations": {
-					"en-US": "short",
-					"en-GB": "short",
-					"de": "short",
-					"es-ES": "short",
-					"ja": "short",
-					"ko": "short",
-					"pl": "short",
-					"zh-CN": "short",
-					"zh-TW": "short"
-				},
-				"description": "Only return the first definition (default: False).",
-				"description_localizations": {
-					"en-US": "Only return the first definition (default: False).",
-					"en-GB": "Only return the first definition (default: false).",
-					"de": "Only return the first definition (default: false).",
-					"es-ES": "Only return the first definition (default: false).",
-					"ja": "Only return the first definition (default: false).",
-					"ko": "Only return the first definition (default: false).",
-					"pl": "Only return the first definition (default: false).",
-					"zh-CN": "Only return the first definition (default: false).",
-					"zh-TW": "Only return the first definition (default: False)."
-				},
-				"type": 5
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "rhyme",
-		"name_localizations": {
-			"en-US": "rhyme",
-			"en-GB": "rhyme",
-			"de": "rhyme",
-			"es-ES": "rima",
-			"ja": "rhyme",
-			"ko": "rhyme",
-			"pl": "rhyme",
-			"zh-CN": "rhyme",
-			"zh-TW": "rhyme"
-		},
-		"description": "Responds with words that rhyme with your query.",
-		"description_localizations": {
-			"en-US": "Responds with words that rhyme with your query.",
-			"en-GB": "Responds with words that rhyme with your query.",
-			"de": "Responds with words that rhyme with your query.",
-			"es-ES": "Responde con palabras que rimen con su consulta.",
-			"ja": "Responds with words that rhyme with your query.",
-			"ko": "Responds with words that rhyme with your query.",
-			"pl": "Responds with words that rhyme with your query.",
-			"zh-CN": "Responds with words that rhyme with your query.",
-			"zh-TW": "Responds with words that rhyme with your query."
+			"en-US": "Responds with words that could logically follow query.",
+			"en-GB": "Responds with words that could logically follow query.",
+			"de": "Responds with words that could logically follow query.",
+			"es-ES": "Responds with words that could logically follow query.",
+			"ja": "Responds with words that could logically follow query.",
+			"ko": "Responds with words that could logically follow query.",
+			"pl": "Responds with words that could logically follow query.",
+			"zh-CN": "Responds with words that could logically follow query.",
+			"zh-TW": "Responds with words that could logically follow query."
 		},
 		"options": [
 			{
@@ -546,129 +125,17 @@
 					"zh-CN": "word",
 					"zh-TW": "word"
 				},
-				"description": "The word to search rhymes for (eg: dime).",
+				"description": "The word to search following words for (eg: open).",
 				"description_localizations": {
-					"en-US": "The word to search rhymes for (eg: dime).",
-					"en-GB": "The word to search rhymes for (eg: dime).",
-					"de": "The word to search rhymes for (eg: dime).",
-					"es-ES": "The word to search rhymes for (eg: dime).",
-					"ja": "The word to search rhymes for (eg: dime).",
-					"ko": "The word to search rhymes for (eg: dime).",
-					"pl": "The word to search rhymes for (eg: dime).",
-					"zh-CN": "The word to search rhymes for (eg: dime).",
-					"zh-TW": "The word to search rhymes for (eg: dime)."
-				},
-				"type": 3,
-				"required": true
-			},
-			{
-				"name": "limit",
-				"name_localizations": {
-					"en-US": "limit",
-					"en-GB": "limit",
-					"de": "grenzwert",
-					"es-ES": "limit",
-					"ja": "limit",
-					"ko": "limit",
-					"pl": "limit",
-					"zh-CN": "limit",
-					"zh-TW": "limit"
-				},
-				"description": "The maximum amount of results to return (default: 25, max: 100).",
-				"description_localizations": {
-					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
-					"de": "The maximum amount of results to return (max: 25, max: 100).",
-					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
-					"ja": "The maximum amount of results to return (max: 25, max: 100).",
-					"ko": "The maximum amount of results to return (max: 25, max: 100).",
-					"pl": "The maximum amount of results to return (max: 25, max: 100).",
-					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
-					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
-				},
-				"type": 4
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "similar-meaning",
-		"name_localizations": {
-			"en-US": "similar-meaning",
-			"en-GB": "similar-meaning",
-			"de": "similar-meaning",
-			"es-ES": "significado-similar",
-			"ja": "similar-meaning",
-			"ko": "similar-meaning",
-			"pl": "similar-meaning",
-			"zh-CN": "similar-meaning",
-			"zh-TW": "similar-meaning"
-		},
-		"description": "Response with words that have a similar meaning to your query.",
-		"description_localizations": {
-			"en-US": "Response with words that have a similar meaning to your query.",
-			"en-GB": "Response with words that have a similar meaning to your query.",
-			"de": "Response with words that have a similar meaning to your query.",
-			"es-ES": "Responda con palabras que tengan un significado similar a su consulta.",
-			"ja": "Response with words that have a similar meaning to your query.",
-			"ko": "Response with words that have a similar meaning to your query.",
-			"pl": "Response with words that have a similar meaning to your query.",
-			"zh-CN": "Response with words that have a similar meaning to your query.",
-			"zh-TW": "Response with words that have a similar meaning to your query."
-		},
-		"options": [
-			{
-				"name": "word",
-				"name_localizations": {
-					"en-US": "word",
-					"en-GB": "word",
-					"de": "word",
-					"es-ES": "palabra",
-					"ja": "word",
-					"ko": "word",
-					"pl": "słowo",
-					"zh-CN": "word",
-					"zh-TW": "word"
-				},
-				"description": "The word to search similar words for (eg: transgressions).",
-				"description_localizations": {
-					"en-US": "The word to search similar words for (eg: transgressions).",
-					"en-GB": "The word to search similar words for (eg: transgressions).",
-					"de": "The word to search similar words for (eg: transgressions).",
-					"es-ES": "The word to search similar words for (eg: transgressions).",
-					"ja": "The word to search similar words for (eg: transgressions).",
-					"ko": "The word to search similar words for (eg: transgressions).",
-					"pl": "The word to search similar words for (eg: transgressions).",
-					"zh-CN": "The word to search similar words for (eg: transgressions).",
-					"zh-TW": "The word to search similar words for (eg: transgressions)."
+					"en-US": "The word to search following words for (eg: open).",
+					"en-GB": "The word to search following words for (eg: open).",
+					"de": "The word to search following words for (eg: open).",
+					"es-ES": "The word to search following words for (eg: open).",
+					"ja": "The word to search following words for (eg: open).",
+					"ko": "The word to search following words for (eg: open).",
+					"pl": "The word to search following words for (eg: open).",
+					"zh-CN": "The word to search following words for (eg: open).",
+					"zh-TW": "The word to search following words for (eg: open)."
 				},
 				"type": 3,
 				"required": true
@@ -898,310 +365,29 @@
 		"integration_types": [0, 1]
 	},
 	{
-		"name": "hyponyms",
+		"name": "similar-meaning",
 		"name_localizations": {
-			"en-US": "hyponyms",
-			"en-GB": "hyponyms",
-			"de": "hyponyms",
-			"es-ES": "hyponyms",
-			"ja": "hyponyms",
-			"ko": "hyponyms",
-			"pl": "hyponyms",
-			"zh-CN": "hyponyms",
-			"zh-TW": "hyponyms"
+			"en-US": "similar-meaning",
+			"en-GB": "similar-meaning",
+			"de": "similar-meaning",
+			"es-ES": "significado-similar",
+			"ja": "similar-meaning",
+			"ko": "similar-meaning",
+			"pl": "similar-meaning",
+			"zh-CN": "similar-meaning",
+			"zh-TW": "similar-meaning"
 		},
-		"description": "Responds with hyponyms (more general) for your query.",
+		"description": "Response with words that have a similar meaning to your query.",
 		"description_localizations": {
-			"en-US": "Responds with hyponyms (more general) for your query.",
-			"en-GB": "Responds with hyponyms (more general) for your query.",
-			"de": "Responds with hyponyms (more general) for your query.",
-			"es-ES": "Responds with hyponyms (more general) for your query.",
-			"ja": "Responds with hyponyms (more general) for your query.",
-			"ko": "Responds with hyponyms (more general) for your query.",
-			"pl": "Responds with hyponyms (more general) for your query.",
-			"zh-CN": "Responds with hyponyms (more general) for your query.",
-			"zh-TW": "Responds with hyponyms (more general) for your query."
-		},
-		"options": [
-			{
-				"name": "word",
-				"name_localizations": {
-					"en-US": "word",
-					"en-GB": "word",
-					"de": "word",
-					"es-ES": "word",
-					"ja": "word",
-					"ko": "word",
-					"pl": "word",
-					"zh-CN": "word",
-					"zh-TW": "word"
-				},
-				"description": "The word to search hyponyms for (eg: car).",
-				"description_localizations": {
-					"en-US": "The word to search hyponyms for (eg: car).",
-					"en-GB": "The word to search hyponyms for (eg: car).",
-					"de": "The word to search hyponyms for (eg: car).",
-					"es-ES": "The word to search hyponyms for (eg: car).",
-					"ja": "The word to search hyponyms for (eg: car).",
-					"ko": "The word to search hyponyms for (eg: car).",
-					"pl": "The word to search hyponyms for (eg: car).",
-					"zh-CN": "The word to search hyponyms for (eg: car).",
-					"zh-TW": "The word to search hyponyms for (eg: car)."
-				},
-				"type": 3,
-				"required": true
-			},
-			{
-				"name": "limit",
-				"name_localizations": {
-					"en-US": "limit",
-					"en-GB": "limit",
-					"de": "grenzwert",
-					"es-ES": "limit",
-					"ja": "limit",
-					"ko": "limit",
-					"pl": "limit",
-					"zh-CN": "limit",
-					"zh-TW": "limit"
-				},
-				"description": "The maximum amount of results to return (default: 25, max: 100).",
-				"description_localizations": {
-					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
-					"de": "The maximum amount of results to return (max: 25, max: 100).",
-					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
-					"ja": "The maximum amount of results to return (max: 25, max: 100).",
-					"ko": "The maximum amount of results to return (max: 25, max: 100).",
-					"pl": "The maximum amount of results to return (max: 25, max: 100).",
-					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
-					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
-				},
-				"type": 4
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "word-of-the-day",
-		"name_localizations": {
-			"en-US": "word-of-the-day",
-			"en-GB": "word-of-the-day",
-			"de": "word-of-the-day",
-			"es-ES": "palabra-del-día",
-			"ja": "word-of-the-day",
-			"ko": "word-of-the-day",
-			"pl": "word-of-the-day",
-			"zh-CN": "word-of-the-day",
-			"zh-TW": "word-of-the-day"
-		},
-		"description": "Responds with the word of the day from Merriam Webster.",
-		"description_localizations": {
-			"en-US": "Responds with the word of the day from Merriam Webster.",
-			"en-GB": "Responds with the word of the day from Merriam Webster.",
-			"de": "Responds with the word of the day from Merriam Webster.",
-			"es-ES": "Responde con la palabra del día de Merriam Webster.",
-			"ja": "Responds with the word of the day from Merriam Webster.",
-			"ko": "Responds with the word of the day from Merriam Webster.",
-			"pl": "Responds with the word of the day from Merriam Webster.",
-			"zh-CN": "Responds with the word of the day from Merriam Webster.",
-			"zh-TW": "Responds with the word of the day from Merriam Webster."
-		},
-		"options": [
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "homophones",
-		"name_localizations": {
-			"en-US": "homophones",
-			"en-GB": "homophones",
-			"de": "homophones",
-			"es-ES": "homophones",
-			"ja": "homophones",
-			"ko": "homophones",
-			"pl": "homophones",
-			"zh-CN": "homophones",
-			"zh-TW": "homophones"
-		},
-		"description": "Responds with homophones (sound-alike words) for your query.",
-		"description_localizations": {
-			"en-US": "Responds with homophones (sound-alike words) for your query.",
-			"en-GB": "Responds with homophones (sound-alike words) for your query.",
-			"de": "Responds with homophones (sound-alike words) for your query.",
-			"es-ES": "Responds with homophones (sound-alike words) for your query.",
-			"ja": "Responds with homophones (sound-alike words) for your query.",
-			"ko": "Responds with homophones (sound-alike words) for your query.",
-			"pl": "Responds with homophones (sound-alike words) for your query.",
-			"zh-CN": "Responds with homophones (sound-alike words) for your query.",
-			"zh-TW": "Responds with homophones (sound-alike words) for your query."
-		},
-		"options": [
-			{
-				"name": "word",
-				"name_localizations": {
-					"en-US": "word",
-					"en-GB": "word",
-					"de": "word",
-					"es-ES": "word",
-					"ja": "word",
-					"ko": "word",
-					"pl": "word",
-					"zh-CN": "word",
-					"zh-TW": "word"
-				},
-				"description": "The word to search homophones for (eg: cents).",
-				"description_localizations": {
-					"en-US": "The word to search homophones for (eg: cents).",
-					"en-GB": "The word to search homophones for (eg: cents).",
-					"de": "The word to search homophones for (eg: cents).",
-					"es-ES": "The word to search homophones for (eg: cents).",
-					"ja": "The word to search homophones for (eg: cents).",
-					"ko": "The word to search homophones for (eg: cents).",
-					"pl": "The word to search homophones for (eg: cents).",
-					"zh-CN": "The word to search homophones for (eg: cents).",
-					"zh-TW": "The word to search homophones for (eg: cents)."
-				},
-				"type": 3,
-				"required": true
-			},
-			{
-				"name": "limit",
-				"name_localizations": {
-					"en-US": "limit",
-					"en-GB": "limit",
-					"de": "grenzwert",
-					"es-ES": "limit",
-					"ja": "limit",
-					"ko": "limit",
-					"pl": "limit",
-					"zh-CN": "limit",
-					"zh-TW": "limit"
-				},
-				"description": "The maximum amount of results to return (default: 25, max: 100).",
-				"description_localizations": {
-					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
-					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
-					"de": "The maximum amount of results to return (max: 25, max: 100).",
-					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
-					"ja": "The maximum amount of results to return (max: 25, max: 100).",
-					"ko": "The maximum amount of results to return (max: 25, max: 100).",
-					"pl": "The maximum amount of results to return (max: 25, max: 100).",
-					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
-					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
-				},
-				"type": 4
-			},
-			{
-				"name": "hide",
-				"name_localizations": {
-					"en-US": "hide",
-					"en-GB": "hide",
-					"de": "hide",
-					"es-ES": "hide",
-					"ja": "hide",
-					"ko": "hide",
-					"pl": "hide",
-					"zh-CN": "hide",
-					"zh-TW": "hide"
-				},
-				"description": "Whether or not to hide the command response from other users (default: False).",
-				"description_localizations": {
-					"en-US": "Whether or not to hide the command response from other users (default: False).",
-					"en-GB": "Whether or not to hide the command response from other users (default: False).",
-					"de": "Whether or not to hide the command response from other users (default: False).",
-					"es-ES": "Whether or not to hide the command response from other users (default: False).",
-					"ja": "Whether or not to hide the command response from other users (default: False).",
-					"ko": "Whether or not to hide the command response from other users (default: False).",
-					"pl": "Whether or not to hide the command response from other users (default: False).",
-					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
-					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
-				},
-				"type": 5
-			}
-		],
-		"contexts": [0, 1, 2],
-		"integration_types": [0, 1]
-	},
-	{
-		"name": "that-follow",
-		"name_localizations": {
-			"en-US": "that-follow",
-			"en-GB": "that-follow",
-			"de": "that-follow",
-			"es-ES": "that-follow",
-			"ja": "that-follow",
-			"ko": "that-follow",
-			"pl": "that-follow",
-			"zh-CN": "that-follow",
-			"zh-TW": "that-follow"
-		},
-		"description": "Responds with words that could logically follow query.",
-		"description_localizations": {
-			"en-US": "Responds with words that could logically follow query.",
-			"en-GB": "Responds with words that could logically follow query.",
-			"de": "Responds with words that could logically follow query.",
-			"es-ES": "Responds with words that could logically follow query.",
-			"ja": "Responds with words that could logically follow query.",
-			"ko": "Responds with words that could logically follow query.",
-			"pl": "Responds with words that could logically follow query.",
-			"zh-CN": "Responds with words that could logically follow query.",
-			"zh-TW": "Responds with words that could logically follow query."
+			"en-US": "Response with words that have a similar meaning to your query.",
+			"en-GB": "Response with words that have a similar meaning to your query.",
+			"de": "Response with words that have a similar meaning to your query.",
+			"es-ES": "Responda con palabras que tengan un significado similar a su consulta.",
+			"ja": "Response with words that have a similar meaning to your query.",
+			"ko": "Response with words that have a similar meaning to your query.",
+			"pl": "Response with words that have a similar meaning to your query.",
+			"zh-CN": "Response with words that have a similar meaning to your query.",
+			"zh-TW": "Response with words that have a similar meaning to your query."
 		},
 		"options": [
 			{
@@ -1217,17 +403,17 @@
 					"zh-CN": "word",
 					"zh-TW": "word"
 				},
-				"description": "The word to search following words for (eg: open).",
+				"description": "The word to search similar words for (eg: transgressions).",
 				"description_localizations": {
-					"en-US": "The word to search following words for (eg: open).",
-					"en-GB": "The word to search following words for (eg: open).",
-					"de": "The word to search following words for (eg: open).",
-					"es-ES": "The word to search following words for (eg: open).",
-					"ja": "The word to search following words for (eg: open).",
-					"ko": "The word to search following words for (eg: open).",
-					"pl": "The word to search following words for (eg: open).",
-					"zh-CN": "The word to search following words for (eg: open).",
-					"zh-TW": "The word to search following words for (eg: open)."
+					"en-US": "The word to search similar words for (eg: transgressions).",
+					"en-GB": "The word to search similar words for (eg: transgressions).",
+					"de": "The word to search similar words for (eg: transgressions).",
+					"es-ES": "The word to search similar words for (eg: transgressions).",
+					"ja": "The word to search similar words for (eg: transgressions).",
+					"ko": "The word to search similar words for (eg: transgressions).",
+					"pl": "The word to search similar words for (eg: transgressions).",
+					"zh-CN": "The word to search similar words for (eg: transgressions).",
+					"zh-TW": "The word to search similar words for (eg: transgressions)."
 				},
 				"type": 3,
 				"required": true
@@ -1457,6 +643,118 @@
 		"integration_types": [0, 1]
 	},
 	{
+		"name": "sounds-like",
+		"name_localizations": {
+			"en-US": "sounds-like",
+			"en-GB": "sounds-like",
+			"de": "sounds-like",
+			"es-ES": "sounds-like",
+			"ja": "sounds-like",
+			"ko": "sounds-like",
+			"pl": "sounds-like",
+			"zh-CN": "听起来像",
+			"zh-TW": "sounds-like"
+		},
+		"description": "Responds with words that sound like your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that sound like your query.",
+			"en-GB": "Responds with words that sound like your query.",
+			"de": "Responds with words that sound like your query.",
+			"es-ES": "Responds with words that sound like your query.",
+			"ja": "Responds with words that sound like your query.",
+			"ko": "Responds with words that sound like your query.",
+			"pl": "Responds with words that sound like your query.",
+			"zh-CN": "Responds with words that sound like your query.",
+			"zh-TW": "Responds with words that sound like your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "palabra",
+					"ja": "word",
+					"ko": "word",
+					"pl": "słowo",
+					"zh-CN": "word",
+					"zh-TW": "word"
+				},
+				"description": "The word to search similarly sounding words for (eg: agile).",
+				"description_localizations": {
+					"en-US": "The word to search similarly sounding words for (eg: agile).",
+					"en-GB": "The word to search similarly sounding words for (eg: agile).",
+					"de": "The word to search similarly sounding words for (eg: agile).",
+					"es-ES": "The word to search similarly sounding words for (eg: agile).",
+					"ja": "The word to search similarly sounding words for (eg: agile).",
+					"ko": "The word to search similarly sounding words for (eg: agile).",
+					"pl": "The word to search similarly sounding words for (eg: agile).",
+					"zh-CN": "The word to search similarly sounding words for (eg: agile).",
+					"zh-TW": "The word to search similarly sounding words for (eg: agile)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"en-GB": "limit",
+					"de": "grenzwert",
+					"es-ES": "limit",
+					"ja": "limit",
+					"ko": "limit",
+					"pl": "limit",
+					"zh-CN": "limit",
+					"zh-TW": "limit"
+				},
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"type": 4
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
 		"name": "close-rhyme",
 		"name_localizations": {
 			"en-US": "close-rhyme",
@@ -1536,6 +834,343 @@
 					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
 				},
 				"type": 4
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "homophones",
+		"name_localizations": {
+			"en-US": "homophones",
+			"en-GB": "homophones",
+			"de": "homophones",
+			"es-ES": "homophones",
+			"ja": "homophones",
+			"ko": "homophones",
+			"pl": "homophones",
+			"zh-CN": "homophones",
+			"zh-TW": "homophones"
+		},
+		"description": "Responds with homophones (sound-alike words) for your query.",
+		"description_localizations": {
+			"en-US": "Responds with homophones (sound-alike words) for your query.",
+			"en-GB": "Responds with homophones (sound-alike words) for your query.",
+			"de": "Responds with homophones (sound-alike words) for your query.",
+			"es-ES": "Responds with homophones (sound-alike words) for your query.",
+			"ja": "Responds with homophones (sound-alike words) for your query.",
+			"ko": "Responds with homophones (sound-alike words) for your query.",
+			"pl": "Responds with homophones (sound-alike words) for your query.",
+			"zh-CN": "Responds with homophones (sound-alike words) for your query.",
+			"zh-TW": "Responds with homophones (sound-alike words) for your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "word",
+					"ja": "word",
+					"ko": "word",
+					"pl": "word",
+					"zh-CN": "word",
+					"zh-TW": "word"
+				},
+				"description": "The word to search homophones for (eg: cents).",
+				"description_localizations": {
+					"en-US": "The word to search homophones for (eg: cents).",
+					"en-GB": "The word to search homophones for (eg: cents).",
+					"de": "The word to search homophones for (eg: cents).",
+					"es-ES": "The word to search homophones for (eg: cents).",
+					"ja": "The word to search homophones for (eg: cents).",
+					"ko": "The word to search homophones for (eg: cents).",
+					"pl": "The word to search homophones for (eg: cents).",
+					"zh-CN": "The word to search homophones for (eg: cents).",
+					"zh-TW": "The word to search homophones for (eg: cents)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"en-GB": "limit",
+					"de": "grenzwert",
+					"es-ES": "limit",
+					"ja": "limit",
+					"ko": "limit",
+					"pl": "limit",
+					"zh-CN": "limit",
+					"zh-TW": "limit"
+				},
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"type": 4
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "hyponyms",
+		"name_localizations": {
+			"en-US": "hyponyms",
+			"en-GB": "hyponyms",
+			"de": "hyponyms",
+			"es-ES": "hyponyms",
+			"ja": "hyponyms",
+			"ko": "hyponyms",
+			"pl": "hyponyms",
+			"zh-CN": "hyponyms",
+			"zh-TW": "hyponyms"
+		},
+		"description": "Responds with hyponyms (more general) for your query.",
+		"description_localizations": {
+			"en-US": "Responds with hyponyms (more general) for your query.",
+			"en-GB": "Responds with hyponyms (more general) for your query.",
+			"de": "Responds with hyponyms (more general) for your query.",
+			"es-ES": "Responds with hyponyms (more general) for your query.",
+			"ja": "Responds with hyponyms (more general) for your query.",
+			"ko": "Responds with hyponyms (more general) for your query.",
+			"pl": "Responds with hyponyms (more general) for your query.",
+			"zh-CN": "Responds with hyponyms (more general) for your query.",
+			"zh-TW": "Responds with hyponyms (more general) for your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "word",
+					"ja": "word",
+					"ko": "word",
+					"pl": "word",
+					"zh-CN": "word",
+					"zh-TW": "word"
+				},
+				"description": "The word to search hyponyms for (eg: car).",
+				"description_localizations": {
+					"en-US": "The word to search hyponyms for (eg: car).",
+					"en-GB": "The word to search hyponyms for (eg: car).",
+					"de": "The word to search hyponyms for (eg: car).",
+					"es-ES": "The word to search hyponyms for (eg: car).",
+					"ja": "The word to search hyponyms for (eg: car).",
+					"ko": "The word to search hyponyms for (eg: car).",
+					"pl": "The word to search hyponyms for (eg: car).",
+					"zh-CN": "The word to search hyponyms for (eg: car).",
+					"zh-TW": "The word to search hyponyms for (eg: car)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"en-GB": "limit",
+					"de": "grenzwert",
+					"es-ES": "limit",
+					"ja": "limit",
+					"ko": "limit",
+					"pl": "limit",
+					"zh-CN": "limit",
+					"zh-TW": "limit"
+				},
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"type": 4
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "definition",
+		"name_localizations": {
+			"en-US": "definition",
+			"en-GB": "definition",
+			"de": "definition",
+			"es-ES": "definition",
+			"ja": "definition",
+			"ko": "definition",
+			"pl": "definicja",
+			"zh-CN": "definition",
+			"zh-TW": "definition"
+		},
+		"description": "Responds with the definition of your query from Merriam Webster.",
+		"description_localizations": {
+			"en-US": "Responds with the definition of your query from Merriam Webster.",
+			"en-GB": "Responds with the definition of your query from Merriam Webster.",
+			"de": "Responds with the definition of your query from Merriam Webster.",
+			"es-ES": "Responds with the definition of your query from Merriam Webster.",
+			"ja": "Responds with the definition of your query from Merriam Webster.",
+			"ko": "Responds with the definition of your query from Merriam Webster.",
+			"pl": "Responds with the definition of your query from Merriam Webster.",
+			"zh-CN": "Responds with the definition of your query from Merriam Webster.",
+			"zh-TW": "Responds with the definition of your query from Merriam Webster."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "word",
+					"ja": "word",
+					"ko": "word",
+					"pl": "słowo",
+					"zh-CN": "字",
+					"zh-TW": "word"
+				},
+				"description": "The word to search a definition for (eg: ocean).",
+				"description_localizations": {
+					"en-US": "The word to search a definition for (eg: ocean).",
+					"en-GB": "The word to search a definition for (eg: ocean).",
+					"de": "The word to search a definition for (eg: ocean).",
+					"es-ES": "The word to search a definition for (eg: ocean).",
+					"ja": "The word to search a definition for (eg: ocean).",
+					"ko": "The word to search a definition for (eg: ocean).",
+					"pl": "The word to search a definition for (eg: ocean).",
+					"zh-CN": "The word to search a definition for (eg: ocean).",
+					"zh-TW": "The word to search a definition for (eg: ocean)."
+				},
+				"type": 3,
+				"required": true,
+				"autocomplete": true
+			},
+			{
+				"name": "short",
+				"name_localizations": {
+					"en-US": "short",
+					"en-GB": "short",
+					"de": "short",
+					"es-ES": "short",
+					"ja": "short",
+					"ko": "short",
+					"pl": "short",
+					"zh-CN": "short",
+					"zh-TW": "short"
+				},
+				"description": "Only return the first definition (default: False).",
+				"description_localizations": {
+					"en-US": "Only return the first definition (default: False).",
+					"en-GB": "Only return the first definition (default: false).",
+					"de": "Only return the first definition (default: false).",
+					"es-ES": "Only return the first definition (default: false).",
+					"ja": "Only return the first definition (default: false).",
+					"ko": "Only return the first definition (default: false).",
+					"pl": "Only return the first definition (default: false).",
+					"zh-CN": "Only return the first definition (default: false).",
+					"zh-TW": "Only return the first definition (default: False)."
+				},
+				"type": 5
 			},
 			{
 				"name": "hide",
@@ -1681,29 +1316,310 @@
 		"integration_types": [0, 1]
 	},
 	{
-		"name": "sounds-like",
+		"name": "match-word",
 		"name_localizations": {
-			"en-US": "sounds-like",
-			"en-GB": "sounds-like",
-			"de": "sounds-like",
-			"es-ES": "sounds-like",
-			"ja": "sounds-like",
-			"ko": "sounds-like",
-			"pl": "sounds-like",
-			"zh-CN": "听起来像",
-			"zh-TW": "sounds-like"
+			"en-US": "match-word",
+			"en-GB": "match-word",
+			"de": "match-word",
+			"es-ES": "match-word",
+			"ja": "match-word",
+			"ko": "match-word",
+			"pl": "match-word",
+			"zh-CN": "match-word",
+			"zh-TW": "match-word"
 		},
-		"description": "Responds with words that sound like your query.",
+		"description": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
 		"description_localizations": {
-			"en-US": "Responds with words that sound like your query.",
-			"en-GB": "Responds with words that sound like your query.",
-			"de": "Responds with words that sound like your query.",
-			"es-ES": "Responds with words that sound like your query.",
-			"ja": "Responds with words that sound like your query.",
-			"ko": "Responds with words that sound like your query.",
-			"pl": "Responds with words that sound like your query.",
-			"zh-CN": "Responds with words that sound like your query.",
-			"zh-TW": "Responds with words that sound like your query."
+			"en-US": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"en-GB": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"de": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"es-ES": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"ja": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"ko": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"pl": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"zh-CN": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date).",
+			"zh-TW": "Responds with words that match the word you provide (eg: a??le -> apple, d??? -> date)."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "word",
+					"ja": "word",
+					"ko": "word",
+					"pl": "słowo",
+					"zh-CN": "word",
+					"zh-TW": "word"
+				},
+				"description": "The word to find matches for (example: a??le).",
+				"description_localizations": {
+					"en-US": "The word to find matches for (example: a??le).",
+					"en-GB": "The word to find matches for (example: a??le).",
+					"de": "The word to find matches for (example: a??le).",
+					"es-ES": "The word to find matches for (example: a??le).",
+					"ja": "The word to find matches for (example: a??le).",
+					"ko": "The word to find matches for (example: a??le).",
+					"pl": "The word to find matches for (example: a??le).",
+					"zh-CN": "The word to find matches for (example: a??le).",
+					"zh-TW": "The word to find matches for (example: a??le)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"en-GB": "limit",
+					"de": "grenzwert",
+					"es-ES": "limit",
+					"ja": "limit",
+					"ko": "limit",
+					"pl": "limit",
+					"zh-CN": "limit",
+					"zh-TW": "limit"
+				},
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"type": 4
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "holonyms",
+		"name_localizations": {
+			"en-US": "holonyms",
+			"en-GB": "holonyms",
+			"de": "holonyms",
+			"es-ES": "holonyms",
+			"ja": "holonyms",
+			"ko": "holonyms",
+			"pl": "holonyms",
+			"zh-CN": "holonyms",
+			"zh-TW": "holonyms"
+		},
+		"description": "Responds with holonyms (what comprises) for your query.",
+		"description_localizations": {
+			"en-US": "Responds with holonyms (what comprises) for your query.",
+			"en-GB": "Responds with holonyms (what comprises) for your query.",
+			"de": "Responds with holonyms (what comprises) for your query.",
+			"es-ES": "Responds with holonyms (what comprises) for your query.",
+			"ja": "Responds with holonyms (what comprises) for your query.",
+			"ko": "Responds with holonyms (what comprises) for your query.",
+			"pl": "Responds with holonyms (what comprises) for your query.",
+			"zh-CN": "Responds with holonyms (what comprises) for your query.",
+			"zh-TW": "Responds with holonyms (what comprises) for your query."
+		},
+		"options": [
+			{
+				"name": "word",
+				"name_localizations": {
+					"en-US": "word",
+					"en-GB": "word",
+					"de": "word",
+					"es-ES": "word",
+					"ja": "word",
+					"ko": "word",
+					"pl": "word",
+					"zh-CN": "word",
+					"zh-TW": "word"
+				},
+				"description": "The word to search homophones for (eg: car).",
+				"description_localizations": {
+					"en-US": "The word to search homophones for (eg: car).",
+					"en-GB": "The word to search homophones for (eg: car).",
+					"de": "The word to search homophones for (eg: car).",
+					"es-ES": "The word to search homophones for (eg: car).",
+					"ja": "The word to search homophones for (eg: car).",
+					"ko": "The word to search homophones for (eg: car).",
+					"pl": "The word to search homophones for (eg: car).",
+					"zh-CN": "The word to search homophones for (eg: car).",
+					"zh-TW": "The word to search homophones for (eg: car)."
+				},
+				"type": 3,
+				"required": true
+			},
+			{
+				"name": "limit",
+				"name_localizations": {
+					"en-US": "limit",
+					"en-GB": "limit",
+					"de": "grenzwert",
+					"es-ES": "limit",
+					"ja": "limit",
+					"ko": "limit",
+					"pl": "limit",
+					"zh-CN": "limit",
+					"zh-TW": "limit"
+				},
+				"description": "The maximum amount of results to return (default: 25, max: 100).",
+				"description_localizations": {
+					"en-US": "The maximum amount of results to return (default: 25, max: 100).",
+					"en-GB": "The maximum amount of results to return (max: 25, max: 100).",
+					"de": "The maximum amount of results to return (max: 25, max: 100).",
+					"es-ES": "The maximum amount of results to return (max: 25, max: 100).",
+					"ja": "The maximum amount of results to return (max: 25, max: 100).",
+					"ko": "The maximum amount of results to return (max: 25, max: 100).",
+					"pl": "The maximum amount of results to return (max: 25, max: 100).",
+					"zh-CN": "返回结果的最大数量(默认值：25, 最大值: 100)。",
+					"zh-TW": "The maximum amount of results to return (max: 25, max: 100)."
+				},
+				"type": 4
+			},
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "word-of-the-day",
+		"name_localizations": {
+			"en-US": "word-of-the-day",
+			"en-GB": "word-of-the-day",
+			"de": "word-of-the-day",
+			"es-ES": "palabra-del-día",
+			"ja": "word-of-the-day",
+			"ko": "word-of-the-day",
+			"pl": "word-of-the-day",
+			"zh-CN": "word-of-the-day",
+			"zh-TW": "word-of-the-day"
+		},
+		"description": "Responds with the word of the day from Merriam Webster.",
+		"description_localizations": {
+			"en-US": "Responds with the word of the day from Merriam Webster.",
+			"en-GB": "Responds with the word of the day from Merriam Webster.",
+			"de": "Responds with the word of the day from Merriam Webster.",
+			"es-ES": "Responde con la palabra del día de Merriam Webster.",
+			"ja": "Responds with the word of the day from Merriam Webster.",
+			"ko": "Responds with the word of the day from Merriam Webster.",
+			"pl": "Responds with the word of the day from Merriam Webster.",
+			"zh-CN": "Responds with the word of the day from Merriam Webster.",
+			"zh-TW": "Responds with the word of the day from Merriam Webster."
+		},
+		"options": [
+			{
+				"name": "hide",
+				"name_localizations": {
+					"en-US": "hide",
+					"en-GB": "hide",
+					"de": "hide",
+					"es-ES": "hide",
+					"ja": "hide",
+					"ko": "hide",
+					"pl": "hide",
+					"zh-CN": "hide",
+					"zh-TW": "hide"
+				},
+				"description": "Whether or not to hide the command response from other users (default: False).",
+				"description_localizations": {
+					"en-US": "Whether or not to hide the command response from other users (default: False).",
+					"en-GB": "Whether or not to hide the command response from other users (default: False).",
+					"de": "Whether or not to hide the command response from other users (default: False).",
+					"es-ES": "Whether or not to hide the command response from other users (default: False).",
+					"ja": "Whether or not to hide the command response from other users (default: False).",
+					"ko": "Whether or not to hide the command response from other users (default: False).",
+					"pl": "Whether or not to hide the command response from other users (default: False).",
+					"zh-CN": "Whether or not to hide the command response from other users (default: False).",
+					"zh-TW": "Whether or not to hide the command response from other users (default: False)."
+				},
+				"type": 5
+			}
+		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "rhyme",
+		"name_localizations": {
+			"en-US": "rhyme",
+			"en-GB": "rhyme",
+			"de": "rhyme",
+			"es-ES": "rima",
+			"ja": "rhyme",
+			"ko": "rhyme",
+			"pl": "rhyme",
+			"zh-CN": "rhyme",
+			"zh-TW": "rhyme"
+		},
+		"description": "Responds with words that rhyme with your query.",
+		"description_localizations": {
+			"en-US": "Responds with words that rhyme with your query.",
+			"en-GB": "Responds with words that rhyme with your query.",
+			"de": "Responds with words that rhyme with your query.",
+			"es-ES": "Responde con palabras que rimen con su consulta.",
+			"ja": "Responds with words that rhyme with your query.",
+			"ko": "Responds with words that rhyme with your query.",
+			"pl": "Responds with words that rhyme with your query.",
+			"zh-CN": "Responds with words that rhyme with your query.",
+			"zh-TW": "Responds with words that rhyme with your query."
 		},
 		"options": [
 			{
@@ -1719,17 +1635,17 @@
 					"zh-CN": "word",
 					"zh-TW": "word"
 				},
-				"description": "The word to search similarly sounding words for (eg: agile).",
+				"description": "The word to search rhymes for (eg: dime).",
 				"description_localizations": {
-					"en-US": "The word to search similarly sounding words for (eg: agile).",
-					"en-GB": "The word to search similarly sounding words for (eg: agile).",
-					"de": "The word to search similarly sounding words for (eg: agile).",
-					"es-ES": "The word to search similarly sounding words for (eg: agile).",
-					"ja": "The word to search similarly sounding words for (eg: agile).",
-					"ko": "The word to search similarly sounding words for (eg: agile).",
-					"pl": "The word to search similarly sounding words for (eg: agile).",
-					"zh-CN": "The word to search similarly sounding words for (eg: agile).",
-					"zh-TW": "The word to search similarly sounding words for (eg: agile)."
+					"en-US": "The word to search rhymes for (eg: dime).",
+					"en-GB": "The word to search rhymes for (eg: dime).",
+					"de": "The word to search rhymes for (eg: dime).",
+					"es-ES": "The word to search rhymes for (eg: dime).",
+					"ja": "The word to search rhymes for (eg: dime).",
+					"ko": "The word to search rhymes for (eg: dime).",
+					"pl": "The word to search rhymes for (eg: dime).",
+					"zh-CN": "The word to search rhymes for (eg: dime).",
+					"zh-TW": "The word to search rhymes for (eg: dime)."
 				},
 				"type": 3,
 				"required": true
@@ -1901,6 +1817,90 @@
 				"type": 5
 			}
 		],
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "ping",
+		"name_localizations": {
+			"en-US": "ping",
+			"en-GB": "ping",
+			"de": "ping",
+			"es-ES": "ping",
+			"ja": "ping",
+			"ko": "ping",
+			"pl": "ping",
+			"zh-CN": "ping",
+			"zh-TW": "ping"
+		},
+		"description": "Ensures the bot is responding to commands.",
+		"description_localizations": {
+			"en-US": "Ensures the bot is responding to commands.",
+			"en-GB": "Ensures the bot is responding to commands.",
+			"de": "Ensures the bot is responding to commands.",
+			"es-ES": "Ensures the bot is responding to commands.",
+			"ja": "Ensures the bot is responding to commands.",
+			"ko": "Ensures the bot is responding to commands.",
+			"pl": "Ensures the bot is responding to commands.",
+			"zh-CN": "Ensures the bot is responding to commands.",
+			"zh-TW": "Ensures the bot is responding to commands."
+		},
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "feedback",
+		"name_localizations": {
+			"en-US": "feedback",
+			"en-GB": "feedback",
+			"de": "feedback",
+			"es-ES": "feedback",
+			"ja": "feedback",
+			"ko": "feedback",
+			"pl": "feedback",
+			"zh-CN": "feedback",
+			"zh-TW": "feedback"
+		},
+		"description": "Submit feedback for the Thoth developers.",
+		"description_localizations": {
+			"en-US": "Submit feedback for the Thoth developers.",
+			"en-GB": "Submit feedback for the Thoth developers.",
+			"de": "Submit feedback for the Thoth developers.",
+			"es-ES": "Submit feedback for the Thoth developers.",
+			"ja": "Submit feedback for the Thoth developers.",
+			"ko": "Submit feedback for the Thoth developers.",
+			"pl": "Submit feedback for the Thoth developers.",
+			"zh-CN": "Submit feedback for the Thoth developers.",
+			"zh-TW": "Submit feedback for the Thoth developers."
+		},
+		"contexts": [0, 1, 2],
+		"integration_types": [0, 1]
+	},
+	{
+		"name": "invite",
+		"name_localizations": {
+			"en-US": "invite",
+			"en-GB": "invite",
+			"de": "invite",
+			"es-ES": "invite",
+			"ja": "invite",
+			"ko": "invite",
+			"pl": "invite",
+			"zh-CN": "invite",
+			"zh-TW": "invite"
+		},
+		"description": "Returns an invite link to add Thoth to your server.",
+		"description_localizations": {
+			"en-US": "Returns an invite link to add Thoth to your server.",
+			"en-GB": "Returns an invite link to add Thoth to your server.",
+			"de": "Returns an invite link to add Thoth to your server.",
+			"es-ES": "Returns an invite link to add Thoth to your server.",
+			"ja": "Returns an invite link to add Thoth to your server.",
+			"ko": "Returns an invite link to add Thoth to your server.",
+			"pl": "Returns an invite link to add Thoth to your server.",
+			"zh-CN": "Returns an invite link to add Thoth to your server.",
+			"zh-TW": "Returns an invite link to add Thoth to your server."
+		},
 		"contexts": [0, 1, 2],
 		"integration_types": [0, 1]
 	}
