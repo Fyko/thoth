@@ -1,21 +1,14 @@
-FROM node:20-alpine AS base
+FROM node:20.14.0-slim AS base
 
 FROM base AS pruned
 WORKDIR /app
-
-RUN apk add --no-cache libc6-compat
-RUN apk update
 RUN yarn global add turbo
-
 COPY . .
-
 RUN turbo prune --scope bot --docker
 
 FROM base as builder
 ENV CI true
 WORKDIR /app
-RUN apk add --no-cache libc6-compat
-RUN apk update
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
@@ -30,8 +23,8 @@ COPY --from=pruned /app/out/full/ .
 COPY turbo.json turbo.json
 RUN yarn turbo run build --filter bot
 
-FROM node:20-alpine as runner
+FROM node:20.14.0-slim as runner
 WORKDIR /app
 COPY --from=builder /app .
 WORKDIR /app/apps/bot
-CMD ["node", "dist/index.js"]
+CMD ["node", "--enable-source-maps", "dist/index.js"]
