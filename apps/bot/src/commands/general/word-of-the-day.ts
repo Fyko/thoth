@@ -8,7 +8,6 @@ import { fetchDefinition } from '#mw';
 import { createWOTDContent, fetchWordOfTheDay } from '#mw/wotd.js';
 import { RedisManager, DismissableAlertModule } from '#structures';
 import { kRedis } from '#util/index.js';
-//import { UseModeration } from '../../hooks/contentModeration.js';
 import { UseFeedbackAlert } from '../../hooks/dismissableAlert.js';
 
 @injectable()
@@ -20,7 +19,6 @@ export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd
 		super();
 	}
 
-	//@UseModeration<Cmd>()
 	@UseFeedbackAlert()
 	public override async chatInput(
 		interaction: InteractionParam,
