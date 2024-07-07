@@ -8,6 +8,7 @@ import i18n from 'i18next';
 import type { Sql } from 'postgres';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
+import { CommandError } from '#util/error.js';
 import { kSQL, type WOTDConfig } from '#util/index.js';
 
 const cdn = new CDN();
@@ -23,14 +24,14 @@ export const wotd = async (
 	// first, we need to check the user permissions
 	if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageWebhooks)) {
 		logger.error('error when doing ManageWebhooks check');
-		throw new Error(i18n.t('common.errors.no_permissions', { lng }));
+		throw new CommandError(i18n.t('common.errors.no_permissions', { lng }));
 	}
 
 	// now, we need to fetch the channel
 	const channel = await client.channels.fetch(args.channel.id);
 	// const channel = (await rest.get(Routes.channel(args.channel))) as APIChannel;
 	if (channel?.type !== ChannelType.GuildText) {
-		throw new Error(i18n.t('commands.config.wotd.errors.guild_text_only', { lng }));
+		throw new CommandError(i18n.t('commands.config.wotd.errors.guild_text_only', { lng }));
 	}
 
 	const avatarUrl = cdn.avatar(client.user!.id, client.user!.avatar!, {

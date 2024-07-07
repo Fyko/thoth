@@ -16,7 +16,6 @@ import { Characters, Emojis } from '#util/constants.js';
 import { CommandError } from '#util/error.js';
 import { kRedis, trimArray } from '#util/index.js';
 import { UseModeration } from '../../hooks/contentModeration.js';
-import { UseFeedbackAlert } from '../../hooks/dismissableAlert.js';
 
 @injectable()
 export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> {
@@ -30,7 +29,6 @@ export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> 
 	}
 
 	@UseModeration<Cmd>()
-	@UseFeedbackAlert()
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
