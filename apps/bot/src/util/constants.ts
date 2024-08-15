@@ -1,5 +1,5 @@
 export enum Emojis {
-	MerriamWebster = '<:mw:882044142333620235>',
+	MerriamWebster = '<:MerriamWebster:1273688116712046674>',
 }
 
 export const enum Characters {
