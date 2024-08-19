@@ -6,7 +6,7 @@ RUN yarn global add turbo
 COPY . .
 RUN turbo prune --scope bot --docker
 
-FROM base as builder
+FROM base AS builder
 ENV CI true
 WORKDIR /app
 
@@ -23,7 +23,7 @@ COPY --from=pruned /app/out/full/ .
 COPY turbo.json turbo.json
 RUN yarn turbo run build --filter bot
 
-FROM node:20.14.0-slim as runner
+FROM node:20.14.0-slim AS runner
 WORKDIR /app
 COPY --from=builder /app .
 WORKDIR /app/apps/bot

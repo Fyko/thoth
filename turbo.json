@@ -1,13 +1,13 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"globalDependencies": ["yarn.lock", "**/tsconfig.json", "**/tsup.config.ts"],
-	"pipeline": {
+	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["src/**/*.ts"],
 			"outputs": ["dist/**"],
 			"cache": true,
-			"outputMode": "errors-only"
+			"outputLogs": "errors-only"
 		},
 		"dev": {
 			"persistent": true
@@ -30,7 +30,7 @@
 				"vite.config.ts"
 			],
 			"dependsOn": ["^build"],
-			"outputMode": "errors-only"
+			"outputLogs": "errors-only"
 		},
 		"format": {
 			"inputs": [
@@ -50,7 +50,7 @@
 				"vite.config.ts"
 			],
 			"dependsOn": ["^build"],
-			"outputMode": "errors-only"
+			"outputLogs": "errors-only"
 		}
 	}
 }
