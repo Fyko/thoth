@@ -145,8 +145,3 @@ volumes:
     grafana-storage:
     postgres-storage:
     loki-storage:
-
-networks:
-    default:
-    caddy_network:
-        external: true
