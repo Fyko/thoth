@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     thoth:
-        image: ghcr.io/fyko/thoth:latest
+        image: ghcr.io/fyko/thoth:main
         expose:
             - '21983'
         restart: unless-stopped
