@@ -17,7 +17,7 @@ export class BlockedUserModule {
 		@inject(Client) protected readonly client: Client,
 	) {
 		void this.refresh();
-		this._interval = setInterval(this.refresh.bind(this), 0);
+		this._interval = setInterval(this.refresh.bind(this), 60_000);
 	}
 
 	/**
