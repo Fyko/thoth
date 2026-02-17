@@ -23,8 +23,8 @@ COPY --from=pruned /app/out/full/ .
 COPY turbo.json turbo.json
 RUN yarn turbo run build --filter bot
 
-FROM node:20.14.0-slim AS runner
+FROM oven/bun:1-slim AS runner
 WORKDIR /app
 COPY --from=builder /app .
 WORKDIR /app/apps/bot
-CMD ["node", "--enable-source-maps", "dist/index.js"]
+CMD ["bun", "run", "--preload", "reflect-metadata", "--smol", "dist/index.js"]
