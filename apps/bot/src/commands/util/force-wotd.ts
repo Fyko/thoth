@@ -6,9 +6,9 @@ import { type Sql } from 'postgres';
 import { inject, injectable } from 'tsyringe';
 import { BlockedUserModule, BlockedWordModule } from '#structures';
 import { kSQL } from '#util/symbols.js';
-import { triggerWOTD } from 'src/jobs.js';
 import i18n from 'i18next';
 import process from 'node:process';
+import { triggerWOTD } from '../../jobs.js';
 
 @injectable()
 export default class<Cmd extends typeof ForceWotdCommand> extends Command<Cmd> {
