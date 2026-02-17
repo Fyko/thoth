@@ -45,88 +45,88 @@ services:
         expose:
             - '6379'
 
-    prometheus:
-        build:
-            context: ./docker/prometheus
-        restart: unless-stopped
-        command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
-        healthcheck:
-            test: ['CMD', 'curl', '-f', 'http://localhost:9090/-/healthy']
-            interval: 10s
-            timeout: 5s
-            retries: 5
-        expose:
-            - 9090
-        volumes:
-            - prometheus-storage:/prometheus
+    # prometheus:
+    #     build:
+    #         context: ./docker/prometheus
+    #     restart: unless-stopped
+    #     command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
+    #     healthcheck:
+    #         test: ['CMD', 'curl', '-f', 'http://localhost:9090/-/healthy']
+    #         interval: 10s
+    #         timeout: 5s
+    #         retries: 5
+    #     expose:
+    #         - 9090
+    #     volumes:
+    #         - prometheus-storage:/prometheus
 
-    grafana:
-        build:
-            context: ./docker/grafana
-        restart: unless-stopped
-        # networks:
-        #     - default
-        #     - caddy_network
-        environment:
-            GF_SERVER_DOMAIN: ${GF_SERVER_DOMAIN}
-            GF_SERVER_ROOT_URL: ${GF_SERVER_ROOT_URL}
-            GF_SECURITY_ADMIN_USER: admin
-            GF_SECURITY_ADMIN_PASSWORD: admin
-            GF_USERS_ALLOW_SIGN_UP: 'false'
-            GF_AUTH_ANONYMOUS_ENABLED: 'false'
-            GF_AUTH_GENERIC_OAUTH_ENABLED: ${GF_AUTH_GENERIC_OAUTH_ENABLED:-false}
-            GF_AUTH_GENERIC_OAUTH_NAME: ${GF_AUTH_GENERIC_OAUTH_NAME}
-            GF_AUTH_GENERIC_OAUTH_CLIENT_ID: ${GF_AUTH_GENERIC_OAUTH_CLIENT_ID}
-            GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
-            GF_AUTH_GENERIC_OAUTH_SCOPES: 'openid profile email'
-            GF_AUTH_GENERIC_OAUTH_AUTH_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/authorize/'
-            GF_AUTH_GENERIC_OAUTH_TOKEN_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/token/'
-            GF_AUTH_GENERIC_OAUTH_API_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/userinfo/'
-            GF_AUTH_SIGNOUT_REDIRECT_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/${GF_AUTH_GENERIC_OAUTH_CLIENT_SLUG}/end-session/'
-            # Optionally enable auto-login (bypasses Grafana login screen)
-            GF_AUTH_OAUTH_AUTO_LOGIN: 'true'
-            GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP: 'true'
-            # Optionally map user groups to Grafana roles
-            GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: ${GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH}
-        healthcheck:
-            test: ['CMD', 'curl', '-f', 'http://localhost:3000/']
-            interval: 10s
-            timeout: 5s
-            retries: 5
-        env_file:
-            - ./.env.prod
-        expose:
-            - 3000
-        volumes:
-            - grafana-storage:/var/lib/grafana
+    # grafana:
+    #     build:
+    #         context: ./docker/grafana
+    #     restart: unless-stopped
+    #     # networks:
+    #     #     - default
+    #     #     - caddy_network
+    #     environment:
+    #         GF_SERVER_DOMAIN: ${GF_SERVER_DOMAIN}
+    #         GF_SERVER_ROOT_URL: ${GF_SERVER_ROOT_URL}
+    #         GF_SECURITY_ADMIN_USER: admin
+    #         GF_SECURITY_ADMIN_PASSWORD: admin
+    #         GF_USERS_ALLOW_SIGN_UP: 'false'
+    #         GF_AUTH_ANONYMOUS_ENABLED: 'false'
+    #         GF_AUTH_GENERIC_OAUTH_ENABLED: ${GF_AUTH_GENERIC_OAUTH_ENABLED:-false}
+    #         GF_AUTH_GENERIC_OAUTH_NAME: ${GF_AUTH_GENERIC_OAUTH_NAME}
+    #         GF_AUTH_GENERIC_OAUTH_CLIENT_ID: ${GF_AUTH_GENERIC_OAUTH_CLIENT_ID}
+    #         GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
+    #         GF_AUTH_GENERIC_OAUTH_SCOPES: 'openid profile email'
+    #         GF_AUTH_GENERIC_OAUTH_AUTH_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/authorize/'
+    #         GF_AUTH_GENERIC_OAUTH_TOKEN_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/token/'
+    #         GF_AUTH_GENERIC_OAUTH_API_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/userinfo/'
+    #         GF_AUTH_SIGNOUT_REDIRECT_URL: 'https://${GF_AUTH_GENERIC_OAUTH_INSTANCE_FQDN}/application/o/${GF_AUTH_GENERIC_OAUTH_CLIENT_SLUG}/end-session/'
+    #         # Optionally enable auto-login (bypasses Grafana login screen)
+    #         GF_AUTH_OAUTH_AUTO_LOGIN: 'true'
+    #         GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP: 'true'
+    #         # Optionally map user groups to Grafana roles
+    #         GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: ${GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH}
+    #     healthcheck:
+    #         test: ['CMD', 'curl', '-f', 'http://localhost:3000/']
+    #         interval: 10s
+    #         timeout: 5s
+    #         retries: 5
+    #     env_file:
+    #         - ./.env.prod
+    #     expose:
+    #         - 3000
+    #     volumes:
+    #         - grafana-storage:/var/lib/grafana
 
-    loki:
-        image: grafana/loki:latest
-        volumes:
-            - loki-storage:/loki
-        command: -config.file=/etc/loki/local-config.yaml
-        mem_limit: 2GB
+    # loki:
+    #     image: grafana/loki:latest
+    #     volumes:
+    #         - loki-storage:/loki
+    #     command: -config.file=/etc/loki/local-config.yaml
+    #     mem_limit: 2GB
 
-    promtail:
-        image: grafana/promtail:latest
-        volumes:
-            - ./docker/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml
-            - /var/log:/var/log
-            # to read container labels and logs
-            - /var/run/docker.sock:/var/run/docker.sock
-            - /var/lib/docker/containers:/var/lib/dockser/containers
-        command: -config.file=/etc/promtail/promtail-config.yml
-        mem_limit: 2GB
+    # promtail:
+    #     image: grafana/promtail:latest
+    #     volumes:
+    #         - ./docker/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml
+    #         - /var/log:/var/log
+    #         # to read container labels and logs
+    #         - /var/run/docker.sock:/var/run/docker.sock
+    #         - /var/lib/docker/containers:/var/lib/dockser/containers
+    #     command: -config.file=/etc/promtail/promtail-config.yml
+    #     mem_limit: 2GB
 
-    cadvisor:
-        image: gcr.io/cadvisor/cadvisor:latest
-        expose:
-            - 8080
-        volumes:
-            - /:/rootfs:ro
-            - /var/run:/var/run:rw
-            - /sys:/sys:ro
-            - /var/lib/docker/:/var/lib/docker:ro
+    # cadvisor:
+    #     image: gcr.io/cadvisor/cadvisor:latest
+    #     expose:
+    #         - 8080
+    #     volumes:
+    #         - /:/rootfs:ro
+    #         - /var/run:/var/run:rw
+    #         - /sys:/sys:ro
+    #         - /var/lib/docker/:/var/lib/docker:ro
 
     watchtower:
         image: containrrr/watchtower
