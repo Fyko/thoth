@@ -11,7 +11,7 @@ export class BlockedWordModule {
 
 	public constructor(@inject(kSQL) protected readonly sql: Sql<any>) {
 		void this.refresh();
-		this._interval = setInterval(this.refresh.bind(this), 0);
+		this._interval = setInterval(this.refresh.bind(this), 60_000);
 	}
 
 	/**
