@@ -27,9 +27,9 @@ declare global {
 		interface ProcessEnv {
 			ANTHROPIC_API_KEY: string;
 			COMMAND_LOG_WEBHOOK_URL: string;
-			DISCORD_PREMIUM_SKU_ID: string;
 			DATABASE_URL: string;
 			DISCORD_APPLICATION_ID: string;
+			DISCORD_PREMIUM_SKU_ID: string;
 			DISCORD_TOKEN: string;
 			GUILD_LOG_WEBHOOK_URL: string;
 			NODE_ENV: 'development' | 'production';

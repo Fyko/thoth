@@ -3,7 +3,7 @@ import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
 import { inject, injectable } from 'tsyringe';
-import { BlockedUserModule, BlockedWordModule, DismissableAlertModule } from '#structures';
+import { BlockedUserModule, BlockedWordModule } from '#structures';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuse } from '#util/datamuse.js';
 import { CommandError } from '#util/error.js';
@@ -15,9 +15,10 @@ export default class<Cmd extends typeof CloseRhymeCommand> extends Command<Cmd> 
 	public readonly data = CloseRhymeCommand;
 
 	public constructor(
-		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
-		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
-		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
+		@inject(BlockedWordModule)
+		public readonly blockedWord: BlockedWordModule,
+		@inject(BlockedUserModule)
+		public readonly blockedUser: BlockedUserModule,
 	) {
 		super();
 	}
@@ -46,14 +47,5 @@ export default class<Cmd extends typeof CloseRhymeCommand> extends Command<Cmd> 
 				})
 				.slice(0, 2_000),
 		);
-
-		if (!(await this.dismissableAlertService.beenAlerted(interaction.user.id, 'show_by_default_alert'))) {
-			await this.dismissableAlertService.add(interaction.user.id, 'show_by_default_alert');
-			await interaction.followUp({
-				content:
-					'As of <t:1714509120:D>, various Thoth commands will no longer automatically hide their response. Set the `hide` option to `True` to hide command responses from other users.',
-				ephemeral: true,
-			});
-		}
 	}
 }

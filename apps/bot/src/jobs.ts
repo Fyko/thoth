@@ -215,7 +215,7 @@ export async function triggerWOTD(force = false): Promise<void> {
 	await sendStatusReport(statuses, result.content);
 }
 
-export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-ingest' | 'wotd-deliver'>> {
+export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest'>> {
 	const sql = container.resolve<Sql<any>>(kSQL);
 	const redis = container.resolve<RedisManager>(kRedis);
 	const entitlementCache = container.resolve<EntitlementCache>(kEntitlementCache);
@@ -224,7 +224,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-ingest' | 'wotd-d
 		port: Number.parseInt(process.env.REDIS_PORT!, 10),
 	};
 
-	const queue = new Queue<{}, {}, 'wotd-ingest' | 'wotd-deliver'>('jobs', { connection });
+	const queue = new Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest'>('jobs', { connection });
 	const pattern = '* * * * *';
 	await queue.add('wotd-ingest', {}, { repeat: { pattern } });
 	await queue.add('wotd-deliver', {}, { repeat: { pattern } });

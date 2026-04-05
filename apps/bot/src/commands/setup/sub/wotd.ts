@@ -25,7 +25,7 @@ function parseTime(input: string): string | null {
 	const normalized = input.trim().toUpperCase();
 
 	// 12-hour format: "3:00 PM", "3PM", "3:30 PM", "12:00AM"
-	const match12 = /^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i.exec(normalized);
+	const match12 = /^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i.exec(normalized);
 	if (match12) {
 		let hour = Number.parseInt(match12[1]!, 10);
 		const minute = match12[2] ? Number.parseInt(match12[2], 10) : 0;

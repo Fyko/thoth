@@ -10,7 +10,7 @@ import { logger } from '#logger';
 import { fetchDefinition } from '#mw';
 import { fetchQuiz, generateQuiz } from '#mw/quiz.js';
 import { createWOTDContent, fetchWordOfTheDay } from '#mw/wotd.js';
-import { RedisManager, DismissableAlertModule } from '#structures';
+import type { RedisManager } from '#structures';
 import { kRedis, kSQL } from '#util/symbols.js';
 
 @injectable()
@@ -18,7 +18,6 @@ export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd
 	public constructor(
 		@inject(kRedis) public readonly redis: RedisManager,
 		@inject(kSQL) public readonly sql: Sql<any>,
-		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}

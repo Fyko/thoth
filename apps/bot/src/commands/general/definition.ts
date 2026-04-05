@@ -11,7 +11,7 @@ import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
-import { BlockedUserModule, BlockedWordModule, DismissableAlertModule, type RedisManager } from '#structures';
+import { BlockedUserModule, BlockedWordModule, type RedisManager } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { CommandError } from '#util/error.js';
 import { kRedis, trimArray } from '#util/index.js';
@@ -25,8 +25,6 @@ export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> 
 		public readonly blockedWord: BlockedWordModule,
 		@inject(BlockedUserModule)
 		public readonly blockedUser: BlockedUserModule,
-		@inject(DismissableAlertModule)
-		public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}

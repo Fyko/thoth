@@ -3,7 +3,7 @@ import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
 import { inject, injectable } from 'tsyringe';
-import { BlockedUserModule, BlockedWordModule, DismissableAlertModule } from '#structures';
+import { BlockedUserModule, BlockedWordModule } from '#structures';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuse } from '#util/datamuse.js';
 import { CommandError } from '#util/error.js';
@@ -13,9 +13,10 @@ import { UseModeration } from '../../hooks/contentModeration.js';
 @injectable()
 export default class<Cmd extends typeof TriggersCommand> extends Command<Cmd> {
 	public constructor(
-		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
-		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
-		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
+		@inject(BlockedWordModule)
+		public readonly blockedWord: BlockedWordModule,
+		@inject(BlockedUserModule)
+		public readonly blockedUser: BlockedUserModule,
 	) {
 		super();
 	}
