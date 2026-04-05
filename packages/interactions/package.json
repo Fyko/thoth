@@ -49,8 +49,8 @@
 	},
 	"scripts": {
 		"build": "tsc --noEmit --lib ESNext,DOM && tsup",
-		"lint": "biome check --fix",
-		"format": "biome format --write"
+		"lint": "prettier --check . && TIMING=1 eslint --format=pretty src",
+		"format": "prettier --write . && TIMING=1 eslint --fix --format=pretty src"
 	},
 	"author": "Carter Himmel <me@fyko.net>",
 	"license": "MIT",

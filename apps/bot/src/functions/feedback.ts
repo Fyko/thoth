@@ -13,9 +13,7 @@ export interface FeedbackRow {
 	user_id: string;
 }
 
-export async function fetchFeedbackRow(
-	id: string
-): Promise<FeedbackRow | null> {
+export async function fetchFeedbackRow(id: string): Promise<FeedbackRow | null> {
 	const sql = container.resolve<Sql<any>>(kSQL);
 
 	const rows = await sql<[FeedbackRow]>`

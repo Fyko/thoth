@@ -1,5 +1,5 @@
 import { anthropic } from '@ai-sdk/anthropic';
-import { generateText, NoObjectGeneratedError, Output } from 'ai';
+import { generateText, Output, NoObjectGeneratedError } from 'ai';
 import { stripIndents } from 'common-tags';
 import type { Entry, Sense, Senses } from 'mw-collegiate';
 import type { Sql } from 'postgres';
@@ -17,24 +17,14 @@ export interface QuizOption {
 
 const optionSchema = z.object({
 	sentence: z.string().describe('A 10-20 word sentence using the word'),
-	explanation: z
-		.string()
-		.describe(
-			'1-2 sentence explanation of why this is correct or incorrect'
-		),
+	explanation: z.string().describe('1-2 sentence explanation of why this is correct or incorrect'),
 });
 
 const quizSchema = z.object({
 	correct: optionSchema.describe('The sentence that uses the word correctly'),
-	incorrect_one: optionSchema.describe(
-		'A sentence that subtly misuses the word'
-	),
-	incorrect_two: optionSchema.describe(
-		'A sentence that subtly misuses the word'
-	),
-	incorrect_three: optionSchema.describe(
-		'A sentence that subtly misuses the word'
-	),
+	incorrect_one: optionSchema.describe('A sentence that subtly misuses the word'),
+	incorrect_two: optionSchema.describe('A sentence that subtly misuses the word'),
+	incorrect_three: optionSchema.describe('A sentence that subtly misuses the word'),
 });
 
 function extractDefinitionText(entry: Entry): string {
@@ -60,7 +50,7 @@ export async function generateQuiz(
 	sql: Sql<any>,
 	word: string,
 	wotdHistoryId: string,
-	entry: Entry
+	entry: Entry,
 ): Promise<QuizOption[] | null> {
 	const definitionText = extractDefinitionText(entry);
 	const partOfSpeech = entry.fl ?? 'unknown';
@@ -105,16 +95,13 @@ export async function generateQuiz(
 					sentence: o.sentence,
 					correct: o.correct,
 					explanation: o.explanation,
-				}))
+				})),
 			)}
 			RETURNING id, wotd_history_id as "wotdHistoryId", sentence, correct, explanation
 		`;
 	} catch (error) {
 		if (NoObjectGeneratedError.isInstance(error)) {
-			logger.warn(
-				{ word, cause: error.cause },
-				'Failed to generate quiz: bad model output'
-			);
+			logger.warn({ word, cause: error.cause }, 'Failed to generate quiz: bad model output');
 		} else {
 			logger.error(error, 'Failed to generate quiz');
 		}
@@ -123,10 +110,7 @@ export async function generateQuiz(
 	}
 }
 
-export async function fetchQuiz(
-	sql: Sql<any>,
-	wotdHistoryId: string
-): Promise<QuizOption[] | null> {
+export async function fetchQuiz(sql: Sql<any>, wotdHistoryId: string): Promise<QuizOption[] | null> {
 	const rows = await sql<QuizOption[]>`
 		SELECT id, wotd_history_id as "wotdHistoryId", sentence, correct, explanation
 		FROM wotd_quiz_option

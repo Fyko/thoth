@@ -27,19 +27,14 @@ export enum DatamuseQuery {
 
 const redis = container.resolve<RedisManager>(kRedis);
 
-export async function fetchDatamuse(
-	query: DatamuseQuery,
-	word: string
-): Promise<DatamuseResult> {
+export async function fetchDatamuse(query: DatamuseQuery, word: string): Promise<DatamuseResult> {
 	const params = new URLSearchParams();
 	params.append(query, word);
 
 	return fetchDatamuseRaw(params);
 }
 
-export async function fetchDatamuseRaw(
-	query: URLSearchParams
-): Promise<DatamuseResult> {
+export async function fetchDatamuseRaw(query: URLSearchParams): Promise<DatamuseResult> {
 	const qs = query.toString();
 	const key = `datamuse:${qs}`;
 

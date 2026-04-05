@@ -1,50 +1,29 @@
-import {
-	hideLinkEmbed,
-	hyperlink,
-	inlineCode,
-	quote,
-	underscore,
-} from '@discordjs/builders';
+import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import type DefinitionCommand from '@thoth/interactions/commands/general/definition';
-import {
-	Command,
-	createButton,
-	createMessageActionRow,
-} from '@yuudachi/framework';
-import type {
-	ArgsParam,
-	InteractionParam,
-	LocaleParam,
-} from '@yuudachi/framework/types';
+import { Command, createButton, createMessageActionRow } from '@yuudachi/framework';
+import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
-import { AttachmentBuilder, ComponentType } from 'discord.js';
 import { ButtonStyle } from 'discord-api-types/v10';
+import { AttachmentBuilder, ComponentType } from 'discord.js';
 import { t } from 'i18next';
 import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { createPronunciationURL, fetchDefinition } from '#mw';
 import { formatText } from '#mw/format.js';
-import {
-	BlockedUserModule,
-	BlockedWordModule,
-	type RedisManager,
-} from '#structures';
+import { BlockedUserModule, BlockedWordModule, RedisManager, DismissableAlertModule } from '#structures';
 import { Characters, Emojis } from '#util/constants.js';
 import { CommandError } from '#util/error.js';
 import { kRedis, trimArray } from '#util/index.js';
 import { UseModeration } from '../../hooks/contentModeration.js';
 
 @injectable()
-export default class<
-	Cmd extends typeof DefinitionCommand,
-> extends Command<Cmd> {
+export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> {
 	public constructor(
 		@inject(kRedis) public readonly redis: RedisManager,
-		@inject(BlockedWordModule)
-		public readonly blockedWord: BlockedWordModule,
-		@inject(BlockedUserModule)
-		public readonly blockedUser: BlockedUserModule
+		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
+		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
+		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}
@@ -53,7 +32,7 @@ export default class<
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
-		lng: LocaleParam
+		lng: LocaleParam,
 	): Promise<void> {
 		const reply = await interaction.deferReply({
 			ephemeral: args.hide ?? false,
@@ -65,8 +44,7 @@ export default class<
 		while (!definition) {
 			// will be string[] if no defs were found and the api provided suggestions
 			// will be Entry[] if defs were found
-			if (!defRes.length)
-				throw new CommandError(t('common.errors.not_found', { lng }));
+			if (!defRes.length) throw new CommandError(t('common.errors.not_found', { lng }));
 			if (typeof defRes !== 'object') {
 				throw new CommandError(t('common.errors.not_found', { lng }));
 			}
@@ -79,41 +57,31 @@ export default class<
 			if (typeof defRes[0] === 'string') {
 				const suggestions = defRes.slice(0, 5) as string[];
 
-				const buttons = [...suggestions.entries()].map(
-					([index, sugg]) =>
-						createButton({
-							customId: `definition:${sugg}`,
-							label: sugg,
-							style:
-								index === 0
-									? ButtonStyle.Primary
-									: ButtonStyle.Secondary,
-						})
+				const buttons = [...suggestions.entries()].map(([index, sugg]) =>
+					createButton({
+						customId: `definition:${sugg}`,
+						label: sugg,
+						style: index === 0 ? ButtonStyle.Primary : ButtonStyle.Secondary,
+					}),
 				);
 
 				await interaction.editReply({
-					content: t('common.errors.not_found_w_suggestions', {
-						lng,
-					}),
+					content: t('common.errors.not_found_w_suggestions', { lng }),
 					components: [createMessageActionRow(buttons)],
 				});
 
 				const collected = await reply
 					.awaitMessageComponent({
-						filter: (collected) =>
-							collected.user.id === interaction.user.id,
+						filter: (collected) => collected.user.id === interaction.user.id,
 						componentType: ComponentType.Button,
 						time: 15_000,
 					})
 					.catch(async () => {
 						try {
 							await interaction.editReply({
-								content: t(
-									'common.errors.definition_suggestion_timed_out',
-									{
-										lng,
-									}
-								),
+								content: t('common.errors.definition_suggestion_timed_out', {
+									lng,
+								}),
 								components: [],
 							});
 						} catch (error_) {
@@ -133,9 +101,7 @@ export default class<
 
 		const { hwi, def, meta, fl } = definition;
 
-		const soundUrl = hwi.prs?.[0]?.sound
-			? createPronunciationURL(hwi.prs[0].sound!.audio)
-			: undefined;
+		const soundUrl = hwi.prs?.[0]!.sound ? createPronunciationURL(hwi.prs?.[0]!.sound!.audio) : undefined;
 
 		const url = `https://www.merriam-webster.com/dictionary/${encodeURIComponent(word)}`;
 		const pronunciation = hwi.prs?.[0]?.mw
@@ -157,10 +123,7 @@ export default class<
 				if (!def) return false;
 
 				const [, text] = def;
-				const vis = dt.find(([type]) => type === 'vis') as [
-					'vis',
-					VerbalIllustration,
-				];
+				const vis = dt.find(([type]) => type === 'vis') as ['vis', VerbalIllustration];
 
 				if (vis) {
 					const [, [vi]] = vis;
@@ -183,7 +146,7 @@ export default class<
 						Characters.Bullet
 					} (${hwi.hw.replaceAll('*', Characters.Bullet)}) ${Characters.Bullet} ${pronunciation}
 					${defs[0]}
-				`
+				`,
 			);
 		}
 

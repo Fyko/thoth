@@ -1,17 +1,13 @@
 import type PingCommand from '@thoth/interactions/commands/util/ping';
 import { Command } from '@yuudachi/framework';
-import type {
-	ArgsParam,
-	InteractionParam,
-	LocaleParam,
-} from '@yuudachi/framework/types';
+import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
 
 export default class<Cmd extends typeof PingCommand> extends Command<Cmd> {
 	public override async chatInput(
 		interaction: InteractionParam,
 		_args: ArgsParam<Cmd>,
-		lng: LocaleParam
+		lng: LocaleParam,
 	): Promise<void> {
 		const pongs = i18n.t('commands.ping.pongs', {
 			lng,

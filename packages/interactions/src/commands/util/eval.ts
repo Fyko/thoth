@@ -15,13 +15,9 @@ const EvalCommand = {
 		},
 		{
 			name: 'hide',
-			name_localizations: fetchDataLocalizations(
-				'common.commands.args.hide.name'
-			),
+			name_localizations: fetchDataLocalizations('common.commands.args.hide.name'),
 			description: i18n.t('common.commands.args.hide.description'),
-			description_localizations: fetchDataLocalizations(
-				'common.commands.args.hide.description'
-			),
+			description_localizations: fetchDataLocalizations('common.commands.args.hide.description'),
 			type: ApplicationCommandOptionType.Boolean,
 		},
 	],

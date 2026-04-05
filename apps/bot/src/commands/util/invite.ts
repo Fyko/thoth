@@ -3,11 +3,7 @@ import { URL } from 'node:url';
 import { hideLinkEmbed } from '@discordjs/builders';
 import type InviteCommand from '@thoth/interactions/commands/util/invite';
 import { Command } from '@yuudachi/framework';
-import type {
-	ArgsParam,
-	InteractionParam,
-	LocaleParam,
-} from '@yuudachi/framework/types';
+import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { PermissionFlagsBits } from 'discord-api-types/v10';
 import i18n from 'i18next';
 
@@ -22,7 +18,7 @@ export default class<Cmd extends typeof InviteCommand> extends Command<Cmd> {
 	public override async chatInput(
 		interaction: InteractionParam,
 		_args: ArgsParam<Cmd>,
-		lng: LocaleParam
+		lng: LocaleParam,
 	): Promise<void> {
 		const url = new URL('https://discord.com/oauth2/authorize');
 		url.searchParams.set('client_id', process.env.DISCORD_CLIENT_ID!);
@@ -33,7 +29,7 @@ export default class<Cmd extends typeof InviteCommand> extends Command<Cmd> {
 			i18n.t('commands.invite.success', {
 				lng,
 				link: hideLinkEmbed(url.toString()),
-			})
+			}),
 		);
 	}
 }

@@ -135,5 +135,3 @@ target/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-apps/bot/src/locales

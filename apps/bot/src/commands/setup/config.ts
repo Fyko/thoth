@@ -1,10 +1,6 @@
 import ConfigCommand from '@thoth/interactions/commands/setup/config';
 import { Command, logger } from '@yuudachi/framework';
-import type {
-	ArgsParam,
-	InteractionParam,
-	LocaleParam,
-} from '@yuudachi/framework/types';
+import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { injectable } from 'tsyringe';
 import { wotd } from './sub/wotd.js';
 
@@ -15,7 +11,7 @@ export default class<Cmd extends typeof ConfigCommand> extends Command<Cmd> {
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
-		lng: LocaleParam
+		lng: LocaleParam,
 	): Promise<void> {
 		await interaction.deferReply({ ephemeral: true });
 		const key = Object.keys(args)[0];

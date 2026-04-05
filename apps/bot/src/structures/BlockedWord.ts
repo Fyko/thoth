@@ -1,5 +1,5 @@
-import { clearInterval, setInterval } from 'node:timers';
-import type { Sql } from 'postgres';
+import { setInterval, clearInterval } from 'node:timers';
+import { type Sql } from 'postgres';
 import { inject, injectable } from 'tsyringe';
 import { kSQL } from '#util/symbols.js';
 

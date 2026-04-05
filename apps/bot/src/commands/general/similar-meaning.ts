@@ -1,14 +1,10 @@
 import { URLSearchParams } from 'node:url';
 import SimilarMeaningCommand from '@thoth/interactions/commands/general/similar-meaning';
 import { Command } from '@yuudachi/framework';
-import type {
-	ArgsParam,
-	InteractionParam,
-	LocaleParam,
-} from '@yuudachi/framework/types';
+import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import i18n from 'i18next';
 import { inject, injectable } from 'tsyringe';
-import { BlockedUserModule, BlockedWordModule } from '#structures';
+import { BlockedUserModule, BlockedWordModule, DismissableAlertModule } from '#structures';
 import { parseLimit } from '#util/args.js';
 import { DatamuseQuery, fetchDatamuseRaw } from '#util/datamuse.js';
 import { CommandError } from '#util/error.js';
@@ -16,16 +12,13 @@ import { firstUpperCase, trimArray } from '#util/index.js';
 import { UseModeration } from '../../hooks/contentModeration.js';
 
 @injectable()
-export default class<
-	Cmd extends typeof SimilarMeaningCommand,
-> extends Command<Cmd> {
+export default class<Cmd extends typeof SimilarMeaningCommand> extends Command<Cmd> {
 	public readonly data = SimilarMeaningCommand;
 
 	public constructor(
-		@inject(BlockedWordModule)
-		public readonly blockedWord: BlockedWordModule,
-		@inject(BlockedUserModule)
-		public readonly blockedUser: BlockedUserModule
+		@inject(BlockedWordModule) public readonly blockedWord: BlockedWordModule,
+		@inject(BlockedUserModule) public readonly blockedUser: BlockedUserModule,
+		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}
@@ -34,7 +27,7 @@ export default class<
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
-		lng: LocaleParam
+		lng: LocaleParam,
 	): Promise<void> {
 		await interaction.deferReply({ ephemeral: args.hide ?? false });
 		const limit = parseLimit(args.limit, lng);
@@ -42,10 +35,7 @@ export default class<
 		const startsWith = args['starts-with'];
 		const endsWith = args['ends-with'];
 
-		if (startsWith && endsWith)
-			throw new Error(
-				i18n.t('common.errors.with_clause_exclusivity', { lng })
-			);
+		if (startsWith && endsWith) throw new Error(i18n.t('common.errors.with_clause_exclusivity', { lng }));
 
 		const search = new URLSearchParams();
 		search.append(DatamuseQuery.MeansLike, args.word);
@@ -57,8 +47,7 @@ export default class<
 		}
 
 		const words = await fetchDatamuseRaw(search).catch(() => null);
-		if (!words?.length)
-			throw new CommandError(i18n.t('common.errors.not_found', { lng }));
+		if (!words?.length) throw new CommandError(i18n.t('common.errors.not_found', { lng }));
 		const mapped = words.map(({ word }) => word);
 
 		const content = startsWith

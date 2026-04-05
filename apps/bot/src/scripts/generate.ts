@@ -15,9 +15,6 @@ console.log('Generating commands array...');
 await loadTranslations(fileURLToPath(new URL('../locales', import.meta.url)));
 
 const commands = (await generateCommandsArray()).filter((cmd) => !cmd.dev);
-const path = join(
-	fileURLToPath(new URL('../../../../', import.meta.url)),
-	'commands.lock.json'
-);
+const path = join(fileURLToPath(new URL('../../../../', import.meta.url)), 'commands.lock.json');
 console.log(`Writing commands array to ${path}...`);
 await writeFile(path, JSON.stringify(commands, null, 2));

@@ -1,10 +1,6 @@
 import type WordOfTheDayCommand from '@thoth/interactions/commands/general/word-of-the-day';
 import { Command } from '@yuudachi/framework';
-import type {
-	ArgsParam,
-	InteractionParam,
-	LocaleParam,
-} from '@yuudachi/framework/types';
+import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import i18n from 'i18next';
 import type { Entry } from 'mw-collegiate';
@@ -14,16 +10,15 @@ import { logger } from '#logger';
 import { fetchDefinition } from '#mw';
 import { fetchQuiz, generateQuiz } from '#mw/quiz.js';
 import { createWOTDContent, fetchWordOfTheDay } from '#mw/wotd.js';
-import type { RedisManager } from '#structures';
+import { RedisManager, DismissableAlertModule } from '#structures';
 import { kRedis, kSQL } from '#util/symbols.js';
 
 @injectable()
-export default class<
-	Cmd extends typeof WordOfTheDayCommand,
-> extends Command<Cmd> {
+export default class<Cmd extends typeof WordOfTheDayCommand> extends Command<Cmd> {
 	public constructor(
 		@inject(kRedis) public readonly redis: RedisManager,
-		@inject(kSQL) public readonly sql: Sql<any>
+		@inject(kSQL) public readonly sql: Sql<any>,
+		@inject(DismissableAlertModule) public readonly dismissableAlertService: DismissableAlertModule,
 	) {
 		super();
 	}
@@ -31,7 +26,7 @@ export default class<
 	public override async chatInput(
 		interaction: InteractionParam,
 		args: ArgsParam<Cmd>,
-		lng: LocaleParam
+		lng: LocaleParam,
 	): Promise<void> {
 		await interaction.deferReply({ ephemeral: args.hide ?? false });
 		const word = await fetchWordOfTheDay(this.redis);
@@ -55,17 +50,9 @@ export default class<
 			let quiz = await fetchQuiz(this.sql, historyRow.id);
 			if (!quiz) {
 				try {
-					quiz = await generateQuiz(
-						this.sql,
-						word,
-						historyRow.id,
-						defRes as Entry
-					);
+					quiz = await generateQuiz(this.sql, word, historyRow.id, defRes as Entry);
 				} catch (error) {
-					logger.error(
-						error,
-						'Failed to generate quiz from wotd command'
-					);
+					logger.error(error, 'Failed to generate quiz from wotd command');
 				}
 			}
 
@@ -76,7 +63,7 @@ export default class<
 							.setCustomId(`wotd-quiz:${historyRow.id}`)
 							.setLabel('Quiz Me!')
 							.setStyle(ButtonStyle.Primary)
-							.setEmoji('🧠')
+							.setEmoji('🧠'),
 					),
 				];
 			}

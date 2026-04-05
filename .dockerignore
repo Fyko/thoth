@@ -52,8 +52,10 @@ scripts
 target
 .denolingignore
 .dockerignore
-biome.json
+.eslintrc.json
 .lintstagedrc.json
+.prettierrc.json
+denolint.json
 README.md
 .env
 pruned

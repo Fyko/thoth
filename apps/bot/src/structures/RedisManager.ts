@@ -1,4 +1,4 @@
-import { default as Redis, type RedisOptions } from 'ioredis';
+import { type RedisOptions, default as Redis } from 'ioredis';
 import type { Entry } from 'mw-collegiate';
 import { injectable } from 'tsyringe';
 
@@ -14,9 +14,7 @@ export class RedisManager {
 		return `definition:${word}`;
 	}
 
-	public async getDefinition(
-		key: string
-	): Promise<Entry[] | string[] | null> {
+	public async getDefinition(key: string): Promise<Entry[] | string[] | null> {
 		const res = await this.client.get(key);
 		return res ? JSON.parse(res) : null;
 	}

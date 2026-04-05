@@ -1,20 +1,14 @@
 import 'reflect-metadata';
 
 import process from 'node:process';
-import { fileURLToPath, pathToFileURL, URL } from 'node:url';
+import { URL, fileURLToPath, pathToFileURL } from 'node:url';
 import { App } from '@tinyhttp/app';
 import type { Command } from '@yuudachi/framework';
-import {
-	commandInfo,
-	createClient,
-	createCommands,
-	dynamicImport,
-	kCommands,
-} from '@yuudachi/framework';
+import { commandInfo, createClient, createCommands, dynamicImport, kCommands } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { IntentsBitField, Options } from 'discord.js';
 import postgres from 'postgres';
-import { collectDefaultMetrics, Gauge, Registry } from 'prom-client';
+import { Gauge, Registry, collectDefaultMetrics } from 'prom-client';
 import readdirp from 'readdirp';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
@@ -107,27 +101,22 @@ const translationsPath = fileURLToPath(new URL('locales', import.meta.url));
 await loadTranslations(translationsPath);
 
 const commands = container.resolve<Map<string, Command>>(kCommands);
-const commandFiles = readdirp(
-	fileURLToPath(new URL('commands', import.meta.url)),
-	{
-		fileFilter: '*.js',
-		directoryFilter: '!sub',
-	}
-);
+const commandFiles = readdirp(fileURLToPath(new URL('commands', import.meta.url)), {
+	fileFilter: '*.js',
+	directoryFilter: '!sub',
+});
 
 for await (const file of commandFiles) {
 	const cmdInfo = commandInfo(file.path);
 
 	if (!cmdInfo) continue;
 
-	const dynamic = dynamicImport<new () => Command>(
-		async () => import(pathToFileURL(file.fullPath).href)
-	);
+	const dynamic = dynamicImport<new () => Command>(async () => import(pathToFileURL(file.fullPath).href));
 	const command = container.resolve<Command>((await dynamic()).default);
 
 	logger.info(
 		{ command: { name: command.name?.join(', ') ?? cmdInfo.name } },
-		`Registering command: ${command.name?.join(', ') ?? cmdInfo.name}`
+		`Registering command: ${command.name?.join(', ') ?? cmdInfo.name}`,
 	);
 
 	if (command.name) {
@@ -144,14 +133,9 @@ const eventFiles = readdirp(fileURLToPath(new URL('events', import.meta.url)), {
 });
 
 for await (const file of eventFiles) {
-	const dynamic = dynamicImport<new () => Event>(
-		async () => import(pathToFileURL(file.fullPath).href)
-	);
+	const dynamic = dynamicImport<new () => Event>(async () => import(pathToFileURL(file.fullPath).href));
 	const event_ = container.resolve<Event>((await dynamic()).default);
-	logger.info(
-		{ event: { name: event_.name, event: event_.event } },
-		`Registering event: ${event_.name}`
-	);
+	logger.info({ event: { name: event_.name, event: event_.event } }, `Registering event: ${event_.name}`);
 
 	if (event_.disabled) {
 		continue;
@@ -175,7 +159,7 @@ server.listen(
 	() => {
 		logger.info(`Server started at http://localhost:${port}`);
 	},
-	'0.0.0.0'
+	'0.0.0.0',
 );
 
 await client.login();

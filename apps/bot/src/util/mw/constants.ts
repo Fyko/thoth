@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
 
-export enum Characters {
+export const enum Characters {
 	Bullet = '',
 }
 

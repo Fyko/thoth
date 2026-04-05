@@ -2,9 +2,7 @@
 	"extends": "tsconfig/base.json",
 	"compileOnSave": true,
 	"compilerOptions": {
-		"ignoreDeprecations": "6.0",
 		"baseUrl": ".",
-		"rootDir": ".",
 		"lib": ["esnext"],
 		"module": "Node16",
 		"moduleResolution": "Node16",

@@ -1,10 +1,10 @@
-FROM oven/bun:1-slim AS base
+FROM node:20.14.0-slim AS base
 
 FROM base AS pruned
 WORKDIR /app
-RUN bun add -g turbo
+RUN yarn global add turbo
 COPY . .
-RUN turbo prune bot --docker
+RUN turbo prune --scope bot --docker
 
 FROM base AS builder
 ENV CI true
@@ -13,16 +13,18 @@ WORKDIR /app
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 COPY --from=pruned /app/out/json/ .
-COPY --from=pruned /app/out/bun.lock ./bun.lock
-RUN bun install --frozen-lockfile
+COPY --from=pruned /app/out/yarn.lock ./yarn.lock
+COPY .yarn .yarn
+COPY .yarnrc.yml .
+RUN yarn install --inline-builds
 
 # Build the project
 COPY --from=pruned /app/out/full/ .
 COPY turbo.json turbo.json
-RUN bun run turbo run build --filter bot
+RUN yarn turbo run build --filter bot
 
 FROM oven/bun:1-slim AS runner
 WORKDIR /app
 COPY --from=builder /app .
 WORKDIR /app/apps/bot
-CMD ["bun", "run", "--preload", "reflect-metadata", "--smol", "src/index.ts"]
+CMD ["bun", "run", "--preload", "reflect-metadata", "--smol", "dist/index.js"]

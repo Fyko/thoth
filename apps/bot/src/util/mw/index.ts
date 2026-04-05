@@ -4,10 +4,8 @@ import type { Entry } from 'mw-collegiate';
 import { fetch, type Response } from 'undici';
 import { RedisManager } from '#structures';
 
-const baseURL =
-	'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
-const thesaurusBaseURL =
-	'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/';
+const baseURL = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
+const thesaurusBaseURL = 'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/';
 
 function requestFailed(response: Response): boolean {
 	const contentType = response.headers.get('content-type');
@@ -17,7 +15,7 @@ function requestFailed(response: Response): boolean {
 export async function fetchDefinition(
 	redis: RedisManager,
 	word: string,
-	apiKey = process.env.MW_API_KEY
+	apiKey = process.env.MW_API_KEY,
 ): Promise<Entry[] | string[]> {
 	const key = RedisManager.createDefinitionKey(word);
 	const cached = await redis.getDefinition(key);
@@ -41,10 +39,7 @@ export async function fetchDefinition(
 	return data as Entry[] | string[];
 }
 
-export async function fetchSynonyms(
-	word: string,
-	apiKey = process.env.MW_API_KEY
-): Promise<Record<string, unknown>> {
+export async function fetchSynonyms(word: string, apiKey = process.env.MW_API_KEY): Promise<Record<string, unknown>> {
 	if (!apiKey) throw new Error('No API key!');
 
 	const base = new URL(thesaurusBaseURL + encodeURIComponent(word));
@@ -70,10 +65,7 @@ export function createPronunciationURL(audio?: string): string {
 		subdir = 'bix';
 	} else if (audio.startsWith('gg')) {
 		subdir = 'gg';
-	} else if (
-		!Number.isNaN(Number.parseInt(first, 10)) ||
-		audio.startsWith('_')
-	) {
+	} else if (!Number.isNaN(Number.parseInt(first, 10)) || audio.startsWith('_')) {
 		subdir = 'number';
 	}
 
@@ -88,23 +80,18 @@ export interface TopWordsResult {
 	messages: string;
 }
 
-export async function fetchTopWords(
-	redis: RedisManager
-): Promise<TopWordsResult> {
+export async function fetchTopWords(redis: RedisManager): Promise<TopWordsResult> {
 	const key = 'mw-top-words';
 
 	const cached = await redis.client.get(key);
 	if (cached) return JSON.parse(cached) as TopWordsResult;
 
-	const res = await fetch(
-		'https://www.merriam-webster.com/lapi/v1/mwol-mp/get-lookups-data-homepage',
-		{
-			headers: {
-				'user-agent': 'Thoth (github.com/Fyko/Thoth)',
-				accept: 'application/json',
-			},
-		}
-	);
+	const res = await fetch('https://www.merriam-webster.com/lapi/v1/mwol-mp/get-lookups-data-homepage', {
+		headers: {
+			'user-agent': 'Thoth (github.com/Fyko/Thoth)',
+			accept: 'application/json',
+		},
+	});
 
 	const data = (await res.json()) as TopWordsResult;
 	await redis.client.set(key, JSON.stringify(data), 'EX', 30); // cache for 30 seconds
@@ -123,10 +110,7 @@ export interface AutocompleteResult {
 	numResults: number;
 }
 
-export async function fetchAutocomplete(
-	redis: RedisManager,
-	input: string
-): Promise<AutocompleteResult> {
+export async function fetchAutocomplete(redis: RedisManager, input: string): Promise<AutocompleteResult> {
 	const key = `autocomplete:${input}`;
 
 	const cached = await redis.client.get(key);
@@ -139,7 +123,7 @@ export async function fetchAutocomplete(
 				'user-agent': 'Thoth (github.com/Fyko/Thoth)',
 				accept: 'application/json',
 			},
-		}
+		},
 	);
 
 	const data = (await res.json()) as AutocompleteResult;
