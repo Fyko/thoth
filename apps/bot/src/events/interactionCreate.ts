@@ -11,6 +11,7 @@ import {
 } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
+import { ButtonStyle } from 'discord-api-types/v10';
 import type {
 	AutocompleteInteraction,
 	ButtonInteraction,
@@ -21,17 +22,23 @@ import type {
 	ModalSubmitInteraction,
 } from 'discord.js';
 import {
+	ActionRowBuilder,
 	ApplicationCommandType,
 	bold,
-	ButtonStyle,
+	ButtonBuilder,
 	channelMention,
 	ChannelType,
 	Client,
 	codeBlock,
 	Colors,
 	CommandInteraction,
+	ContainerBuilder,
 	Events,
 	inlineCode,
+	MessageFlags,
+	SeparatorBuilder,
+	SeparatorSpacingSize,
+	TextDisplayBuilder,
 	TextInputStyle,
 	WebhookClient,
 } from 'discord.js';
@@ -42,6 +49,7 @@ import { container, inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { RedisManager } from '#structures';
 import { CommandError } from '#util/error.js';
+import { fetchQuiz } from '#util/mw/quiz.js';
 import { kRedis, kSQL } from '#util/symbols.js';
 import { definitionAutoComplete } from '../autocomplete/definition.js';
 import { fetchFeedbackRow } from '../functions/feedback.js';
@@ -296,6 +304,181 @@ export default class implements Event {
 			}
 		}
 
+		// wotd quiz: user clicks "Quiz Me!" button on wotd message
+		const wotdQuizRes = /^wotd-quiz:(?<historyId>[\da-f-]+)$/.exec(interaction.customId);
+		if (wotdQuizRes) {
+			const historyId = wotdQuizRes.groups!.historyId!;
+
+			try {
+				const quiz = await fetchQuiz(this.sql, historyId);
+				if (!quiz) {
+					return void interaction.reply({
+						content: 'Sorry, the quiz for this word is not available.',
+						ephemeral: true,
+					});
+				}
+
+				// fetch the word for display
+				const [historyRow] = await this.sql<[{ word: string }]>`
+					SELECT word FROM wotd_history WHERE id = ${historyId}
+				`;
+				const word = historyRow?.word ?? 'this word';
+
+				const optionIds = quiz.map((o) => o.id);
+
+				// check if user already attempted
+				const existing = await this.sql<{ option_id: string }[]>`
+					SELECT option_id FROM wotd_quiz_attempt
+					WHERE option_id = ANY(${optionIds}) AND user_id = ${interaction.user.id}
+					LIMIT 1
+				`;
+
+				if (existing.length > 0) {
+					const chosenOption = quiz.find((o) => o.id === existing[0]!.option_id)!;
+					const correctOption = quiz.find((o) => o.correct)!;
+					const correctIndex = quiz.indexOf(correctOption) + 1;
+
+					const container = new ContainerBuilder()
+						.setAccentColor(chosenOption.correct ? Colors.Green : Colors.Red)
+						.addTextDisplayComponents(
+							new TextDisplayBuilder().setContent(
+								chosenOption.correct
+									? stripIndents`
+										### Quiz: ${word}
+										You already answered this correctly! The answer was sentence **${correctIndex}**.
+
+										${correctOption.explanation}
+									`
+									: stripIndents`
+										### ❌ Quiz: ${word}
+										You already attempted this quiz. The correct answer was sentence **${correctIndex}**.
+
+										${correctOption.explanation}
+									`,
+							),
+						);
+
+					return void interaction.reply({
+						components: [container],
+						flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
+					});
+				}
+
+				const numbered = quiz.map((o, i) => `**${i + 1}.** ${o.sentence}`).join('\n');
+
+				const container = new ContainerBuilder()
+					.setAccentColor(Colors.Blurple)
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(stripIndents`
+							### Word of the Day Quiz
+							Which sentence uses **${word}** correctly?
+						`),
+					)
+					.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small))
+					.addTextDisplayComponents(new TextDisplayBuilder().setContent(numbered))
+					.addActionRowComponents(
+						new ActionRowBuilder<ButtonBuilder>().addComponents(
+							quiz.map((o, i) =>
+								new ButtonBuilder()
+									.setCustomId(`wotd-answer:${o.id}`)
+									.setLabel(`${i + 1}`)
+									.setStyle(ButtonStyle.Secondary),
+							),
+						),
+					);
+
+				return void interaction.reply({
+					components: [container],
+					flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
+				});
+			} catch (error) {
+				logger.error(error, 'Error handling wotd quiz button');
+				return void interaction.reply({
+					content: 'Something went wrong loading the quiz.',
+					ephemeral: true,
+				});
+			}
+		}
+
+		// wotd quiz: user picks an answer
+		const wotdAnswerRes = /^wotd-answer:(?<optionId>[\da-f-]+)$/.exec(interaction.customId);
+		if (wotdAnswerRes) {
+			const optionId = wotdAnswerRes.groups!.optionId!;
+
+			try {
+				const [chosenOption] = await this.sql<
+					[{ correct: boolean; explanation: string; id: string; sentence: string; wotd_history_id: string }]
+				>`SELECT * FROM wotd_quiz_option WHERE id = ${optionId}`;
+
+				if (!chosenOption) {
+					return void interaction.update({
+						content: 'Quiz data not found.',
+						components: [],
+					});
+				}
+
+				// record the attempt
+				await this.sql`
+					INSERT INTO wotd_quiz_attempt ${this.sql({
+						option_id: optionId,
+						user_id: interaction.user.id,
+						guild_id: interaction.guildId ?? 'dm',
+					})}
+				`;
+
+				if (chosenOption.correct) {
+					const container = new ContainerBuilder().setAccentColor(Colors.Green).addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(stripIndents`
+								### Correct!
+								${chosenOption.sentence}
+
+								${chosenOption.explanation}
+							`),
+					);
+
+					return void interaction.update({
+						components: [container],
+						flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
+					});
+				}
+
+				// fetch the correct answer for feedback
+				const [correctOption] = await this.sql<[{ explanation: string; sentence: string }]>`
+					SELECT sentence, explanation FROM wotd_quiz_option
+					WHERE wotd_history_id = ${chosenOption.wotd_history_id} AND correct = true
+				`;
+
+				const container = new ContainerBuilder()
+					.setAccentColor(Colors.Red)
+					.addTextDisplayComponents(new TextDisplayBuilder().setContent('### Not quite'))
+					.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small))
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(stripIndents`
+							**Your pick:** ${chosenOption.sentence}
+							${chosenOption.explanation}
+						`),
+					)
+					.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small))
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(stripIndents`
+							**Correct answer:** ${correctOption.sentence}
+							${correctOption.explanation}
+						`),
+					);
+
+				return void interaction.update({
+					components: [container],
+					flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
+				});
+			} catch (error) {
+				logger.error(error, 'Error handling wotd answer button');
+				return void interaction.update({
+					content: 'Something went wrong recording your answer.',
+					components: [],
+				});
+			}
+		}
+
 		// `feedback:dm:reply:${submissionId}`,
 		const feedbackDmReplyRes = /^feedback:dm:reply:(?<submissionId>.+)$/.exec(interaction.customId);
 		if (feedbackDmReplyRes) {
@@ -467,7 +650,7 @@ function logInteraction(interaction: Interaction, error?: Error) {
 								: 'unknown'
 						}`
 					: 'name' in interaction.channel
-						? `${bold('Channel:')} ${channelMention(interaction.channelId)} ${inlineCode(interaction.channel.name)} (${
+						? `${bold('Channel:')} ${channelMention(interaction.channelId)} ${inlineCode(interaction.channel.name!)} (${
 								interaction.channel.id
 							})`
 						: 'Direct Message',

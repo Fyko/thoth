@@ -1,7 +1,7 @@
 import process from 'node:process';
 import { inlineCode } from '@discordjs/builders';
 import { Queue, Worker, type Job } from 'bullmq';
-import { WebhookClient, DiscordAPIError } from 'discord.js';
+import { WebhookClient, DiscordAPIError, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import type { Entry } from 'mw-collegiate';
 import type { Sql } from 'postgres';
 import Parser from 'rss-parser';
@@ -9,6 +9,7 @@ import { container } from 'tsyringe';
 import { logger } from '#logger';
 import type { WOTDConfig } from '#util/index.js';
 import { fetchDefinition } from '#util/mw/index.js';
+import { generateQuiz, type QuizOption } from '#util/mw/quiz.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
 import { kRedis, kSQL } from '#util/symbols.js';
 import type { RedisManager } from './structures/RedisManager.js';
@@ -16,6 +17,18 @@ import type { RedisManager } from './structures/RedisManager.js';
 const webhook = new WebhookClient({
 	url: process.env.COMMAND_LOG_WEBHOOK_URL!,
 });
+
+function buildQuizComponents(wotdHistoryId: string): ActionRowBuilder<ButtonBuilder>[] {
+	return [
+		new ActionRowBuilder<ButtonBuilder>().addComponents(
+			new ButtonBuilder()
+				.setCustomId(`wotd-quiz:${wotdHistoryId}`)
+				.setLabel('Quiz Me!')
+				.setStyle(ButtonStyle.Primary)
+				.setEmoji('🧠'),
+		),
+	];
+}
 
 export async function triggerWOTD(force = false): Promise<void> {
 	const sql = container.resolve<Sql<any>>(kSQL);
@@ -55,6 +68,19 @@ export async function triggerWOTD(force = false): Promise<void> {
 	const definition = await fetchDefinition(redis, newWord);
 	const content = createWOTDContent(definition[0] as Entry, 'en');
 
+	// get the wotd_history row id for quiz generation
+	const [historyRow] = await sql<[{ id: string }]>`SELECT id FROM wotd_history WHERE word = ${newWord}`;
+
+	// generate quiz (graceful degradation — wotd posts without button on failure)
+	let quiz: QuizOption[] | null = null;
+	try {
+		quiz = await generateQuiz(sql, newWord, historyRow.id, definition[0] as Entry);
+	} catch (error) {
+		logger.error(error, 'Failed to generate WOTD quiz');
+	}
+
+	const components = quiz ? buildQuizComponents(historyRow.id) : [];
+
 	// fetch all the wotd configts
 	const configs = await sql<WOTDConfig[]>`
 		SELECT * FROM wotd;
@@ -78,6 +104,7 @@ export async function triggerWOTD(force = false): Promise<void> {
 		try {
 			await client.send({
 				content: `Merriam Webster published a new word of the day!\n\n${content}`,
+				components,
 			});
 
 			statuses.push({
@@ -184,6 +211,21 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 					const definition = await fetchDefinition(redis, newWords[0]!);
 					const content = createWOTDContent(definition[0] as Entry, 'en');
 
+					// get the wotd_history row id for quiz generation
+					const [historyRow] = await sql<
+						[{ id: string }]
+					>`SELECT id FROM wotd_history WHERE word = ${newWords[0]!}`;
+
+					// generate quiz (graceful degradation — wotd posts without button on failure)
+					let quiz: QuizOption[] | null = null;
+					try {
+						quiz = await generateQuiz(sql, newWords[0]!, historyRow.id, definition[0] as Entry);
+					} catch (error) {
+						logger.error(error, 'Failed to generate WOTD quiz');
+					}
+
+					const components = quiz ? buildQuizComponents(historyRow.id) : [];
+
 					// fetch all the wotd configts
 					const configs = await sql<WOTDConfig[]>`
 						SELECT * FROM wotd;
@@ -207,6 +249,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd'>> {
 						try {
 							await client.send({
 								content: `Merriam Webster published a new word of the day!\n\n${content}`,
+								components,
 							});
 
 							statuses.push({

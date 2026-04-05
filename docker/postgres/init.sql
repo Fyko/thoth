@@ -51,7 +51,7 @@ create table if not exists dismissable_alert (
 );
 create index campaign on dismissable_alert (user_id, campaign);
 
-insert into dismissable_alert (user_id, campaign, created_at) select user_id, 'show_by_default_alert', created_at from show_by_default_alert; 
+insert into dismissable_alert (user_id, campaign, created_at) select user_id, 'show_by_default_alert', created_at from show_by_default_alert;
 
 create table if not exists feedback_submission (
 	id uuid primary key default gen_random_uuid(),
@@ -63,3 +63,22 @@ create table if not exists feedback_submission (
 	thread_id text,
 	created_at timestamptz not null default now()
 );
+
+create table if not exists wotd_quiz_option (
+	id uuid primary key default gen_random_uuid(),
+	wotd_history_id uuid not null references wotd_history(id) on delete cascade,
+	sentence text not null,
+	correct boolean not null default false,
+	explanation text not null,
+	created_at timestamptz not null default now()
+);
+create index idx_wotd_quiz_option_history on wotd_quiz_option (wotd_history_id);
+
+create table if not exists wotd_quiz_attempt (
+	id uuid primary key default gen_random_uuid(),
+	option_id uuid not null references wotd_quiz_option(id) on delete cascade,
+	user_id text not null,
+	guild_id text not null,
+	created_at timestamptz not null default now()
+);
+create index idx_wotd_quiz_attempt_user on wotd_quiz_attempt (user_id);

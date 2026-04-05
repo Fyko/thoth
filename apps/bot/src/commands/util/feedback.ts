@@ -1,7 +1,8 @@
 import type FeedbackCommand from '@thoth/interactions/commands/util/feedback';
 import { Command, createButton, createMessageActionRow } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
-import { ButtonStyle, Client } from 'discord.js';
+import { ButtonStyle } from 'discord-api-types/v10';
+import { Client } from 'discord.js';
 import { t } from 'i18next';
 import { type Sql } from 'postgres';
 import { inject, injectable } from 'tsyringe';

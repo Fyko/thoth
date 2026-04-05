@@ -2,7 +2,7 @@
 import { createButton, createMessageActionRow } from '@yuudachi/framework';
 import type { InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
-import { ButtonStyle } from 'discord.js';
+import { ButtonStyle } from 'discord-api-types/v10';
 import { t } from 'i18next';
 import type { DismissableAlertModule } from '#structures';
 

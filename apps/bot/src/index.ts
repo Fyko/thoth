@@ -25,6 +25,7 @@ collectDefaultMetrics({ register, prefix: 'thoth_' });
 declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
+			ANTHROPIC_API_KEY: string;
 			COMMAND_LOG_WEBHOOK_URL: string;
 			DATABASE_URL: string;
 			DISCORD_APPLICATION_ID: string;

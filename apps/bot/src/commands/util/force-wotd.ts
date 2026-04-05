@@ -1,13 +1,13 @@
+import process from 'node:process';
 import type ForceWotdCommand from '@thoth/interactions/commands/util/force-wotd';
 import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { Client } from 'discord.js';
+import i18n from 'i18next';
 import { type Sql } from 'postgres';
 import { inject, injectable } from 'tsyringe';
 import { BlockedUserModule, BlockedWordModule } from '#structures';
 import { kSQL } from '#util/symbols.js';
-import i18n from 'i18next';
-import process from 'node:process';
 import { triggerWOTD } from '../../jobs.js';
 
 @injectable()
