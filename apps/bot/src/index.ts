@@ -57,7 +57,7 @@ const sql = postgres(process.env.DATABASE_URL, {
 		date: {
 			to: 1_184,
 			from: [1_082, 1_083, 1_114, 1_184],
-			serialize: (date: Date) => date.toISOString(),
+			serialize: (date: Date | string) => (typeof date === 'string' ? date : date.toISOString()),
 			parse: (isoString: string) => isoString,
 		},
 	},
