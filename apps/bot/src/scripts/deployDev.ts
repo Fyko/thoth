@@ -11,7 +11,9 @@ process.env.NODE_ENV ??= 'development';
 config({ path: fileURLToPath(new URL('../../.env', import.meta.url)) });
 
 async function main() {
-	await loadTranslations(fileURLToPath(new URL('../locales', import.meta.url)));
+	await loadTranslations(
+		fileURLToPath(new URL('../locales', import.meta.url))
+	);
 	const commands = await generateCommandsArray();
 
 	void deploy(commands, true);

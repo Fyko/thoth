@@ -1,2 +1,2 @@
 #!/bin/sh
-yarn run build:affected && yarn workspace bot generate && git add commands.lock.json && yarn lint-staged
+bun run build:affected && bun run apps/bot/src/scripts/generate.ts && git add commands.lock.json && bun run lint-staged

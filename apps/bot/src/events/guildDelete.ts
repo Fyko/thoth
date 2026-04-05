@@ -1,8 +1,8 @@
 import process from 'node:process';
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
-import { Client, EmbedBuilder, Events, WebhookClient } from 'discord.js';
-import { Gauge } from 'prom-client';
+import { type Client, EmbedBuilder, Events, WebhookClient } from 'discord.js';
+import type { Gauge } from 'prom-client';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { kGuildCountGuage } from '#util/symbols.js';
@@ -15,7 +15,7 @@ export default class implements Event {
 
 	public constructor(
 		private readonly client: Client<true>,
-		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>,
+		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>
 	) {}
 
 	public webhook = new WebhookClient({
@@ -34,13 +34,16 @@ export default class implements Event {
 				embeds: [
 					new EmbedBuilder()
 						.setTitle(name)
-						.setThumbnail(guild.iconURL({ size: 512, forceStatic: false }) ?? null)
+						.setThumbnail(
+							guild.iconURL({ size: 512, forceStatic: false }) ??
+								null
+						)
 						.setDescription(
 							stripIndents`
 							**ID**: \`${guild.id}\`
 							**Owner**: ${(await this.client.users.fetch(guild.ownerId)).tag} \`(${guild.ownerId})\`
 							**Members**: \`${guild.memberCount?.toLocaleString('en-US') ?? 'Unknown'}\`
-						`,
+						`
 						)
 						.setTimestamp()
 						.setFooter({ text: 'Left a server' })

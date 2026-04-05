@@ -54,18 +54,30 @@ export async function walk(path: string) {
 	return (
 		await scan(path, {
 			filter: (stats, path) =>
-				stats.isFile() && ['.js', '.js'].includes(extname(stats.name)) && !path.includes('sub'),
+				stats.isFile() &&
+				['.js', '.js'].includes(extname(stats.name)) &&
+				!path.includes('sub'),
 		})
 	).keys();
 }
 
 export async function loadTranslations(path: string) {
 	i18next.use(Backend);
-	const langs = ['en-US', 'en-GB', 'de', 'es-ES', 'ja', 'ko', 'pl', 'zh-CN', 'zh-TW'];
+	const langs = [
+		'en-US',
+		'en-GB',
+		'de',
+		'es-ES',
+		'ja',
+		'ko',
+		'pl',
+		'zh-CN',
+		'zh-TW',
+	];
 
 	return i18next.init({
 		backend: {
-			paths: [(lng, ns) => `${path}/${lng}/${ns}.json`],
+			paths: [(lng: string, ns: string) => `${path}/${lng}/${ns}.json`],
 		},
 		preload: langs,
 		supportedLngs: langs,

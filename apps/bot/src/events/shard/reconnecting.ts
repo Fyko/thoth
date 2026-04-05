@@ -1,5 +1,5 @@
 import type { Event } from '@yuudachi/framework/types';
-import { Client, Events } from 'discord.js';
+import { type Client, Events } from 'discord.js';
 import { injectable } from 'tsyringe';
 import { logger } from '#logger';
 

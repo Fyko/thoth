@@ -1,6 +1,6 @@
 {
 	"$schema": "https://turbo.build/schema.json",
-	"globalDependencies": ["yarn.lock", "**/tsconfig.json", "**/tsup.config.ts"],
+	"globalDependencies": ["bun.lock", "**/tsconfig.json", "**/tsup.config.ts"],
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
@@ -14,40 +14,22 @@
 		},
 		"lint": {
 			"inputs": [
-				"**/.eslintignore",
-				"**/.eslintrc.json",
-				"**/.prettierignore",
-				"**/.prettierrc.json",
-				"**/tsconfig.eslint.json",
+				"biome.json",
 				"src/**/*.tsx",
 				"src/**/*.ts",
 				"src/**/*.css",
-				"src/**/*.mdx",
-				"scripts/**.js",
-				"scripts/**.mjs",
-				".prettierrc.js",
-				".prettierrc.cjs",
-				"vite.config.ts"
+				"src/**/*.mdx"
 			],
 			"dependsOn": ["^build"],
 			"outputLogs": "errors-only"
 		},
 		"format": {
 			"inputs": [
-				"**/.eslintignore",
-				"**/.eslintrc.json",
-				"**/.prettierignore",
-				"**/.prettierrc.json",
-				"**/tsconfig.eslint.json",
+				"biome.json",
 				"src/**/*.tsx",
 				"src/**/*.ts",
 				"src/**/*.css",
-				"src/**/*.mdx",
-				"scripts/**.js",
-				"scripts/**.mjs",
-				".prettierrc.js",
-				".prettierrc.cjs",
-				"vite.config.ts"
+				"src/**/*.mdx"
 			],
 			"dependsOn": ["^build"],
 			"outputLogs": "errors-only"

@@ -2,11 +2,11 @@ export enum Emojis {
 	MerriamWebster = '<:MerriamWebster:1273688116712046674>',
 }
 
-export const enum Characters {
+export enum Characters {
 	Bullet = '•',
 }
 
-export const enum SuperscriptNumbers {
+export enum SuperscriptNumbers {
 	Eight = '\u2078',
 	Five = '\u2075',
 	Four = '\u2074',

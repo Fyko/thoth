@@ -1,4 +1,7 @@
-import { ApplicationCommandOptionType, type RESTPatchAPIApplicationCommandJSONBody } from 'discord-api-types/v10';
+import {
+	ApplicationCommandOptionType,
+	type RESTPatchAPIApplicationCommandJSONBody,
+} from 'discord-api-types/v10';
 
 const BlockCommand = {
 	name: 'block',

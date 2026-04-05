@@ -1,4 +1,10 @@
-import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
+import {
+	hideLinkEmbed,
+	hyperlink,
+	inlineCode,
+	quote,
+	underscore,
+} from '@discordjs/builders';
 import { stripIndents } from 'common-tags';
 import i18n from 'i18next';
 import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
@@ -30,8 +36,12 @@ export async function fetchWordOfTheDay(redis: RedisManager): Promise<string> {
 	const cached = await redis.client.get(key);
 	if (cached) return cached;
 
-	const parsed = await parser.parseURL('https://www.merriam-webster.com/wotd/feed/rss2');
-	const today = parsed.items.find((item) => item.isoDate?.startsWith(partialISO));
+	const parsed = await parser.parseURL(
+		'https://www.merriam-webster.com/wotd/feed/rss2'
+	);
+	const today = parsed.items.find((item) =>
+		item.isoDate?.startsWith(partialISO)
+	);
 
 	await redis.client.set(key, today!.title!, 'EX', 60 * 60 * 4);
 
@@ -64,7 +74,10 @@ export const createWOTDContent = (entry: Entry, lng: string) => {
 			if (!def) return false;
 
 			const [, text] = def;
-			const vis = dt.find(([type]) => type === 'vis') as ['vis', VerbalIllustration];
+			const vis = dt.find(([type]) => type === 'vis') as [
+				'vis',
+				VerbalIllustration,
+			];
 
 			if (vis) {
 				const [, [vi]] = vis;

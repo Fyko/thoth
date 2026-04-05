@@ -1,9 +1,13 @@
 import { channelMention } from '@discordjs/builders';
 import { CDN } from '@discordjs/rest';
 import type ConfigCommand from '@thoth/interactions/commands/setup/config';
-import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
-import { ChannelType } from 'discord-api-types/v10';
+import type {
+	ArgsParam,
+	InteractionParam,
+	LocaleParam,
+} from '@yuudachi/framework/types';
 import { Client, PermissionsBitField } from 'discord.js';
+import { ChannelType } from 'discord-api-types/v10';
 import i18n from 'i18next';
 import type { Sql } from 'postgres';
 import { container } from 'tsyringe';
@@ -16,13 +20,17 @@ const cdn = new CDN();
 export const wotd = async (
 	interaction: InteractionParam,
 	args: ArgsParam<typeof ConfigCommand>['wotd'],
-	lng: LocaleParam,
+	lng: LocaleParam
 ): Promise<void> => {
 	const client = container.resolve<Client>(Client);
 	const sql = container.resolve<Sql<any>>(kSQL);
 
 	// first, we need to check the user permissions
-	if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageWebhooks)) {
+	if (
+		!interaction.member.permissions.has(
+			PermissionsBitField.Flags.ManageWebhooks
+		)
+	) {
 		logger.error('error when doing ManageWebhooks check');
 		throw new CommandError(i18n.t('common.errors.no_permissions', { lng }));
 	}
@@ -31,7 +39,9 @@ export const wotd = async (
 	const channel = await client.channels.fetch(args.channel.id);
 	// const channel = (await rest.get(Routes.channel(args.channel))) as APIChannel;
 	if (channel?.type !== ChannelType.GuildText) {
-		throw new CommandError(i18n.t('commands.config.wotd.errors.guild_text_only', { lng }));
+		throw new CommandError(
+			i18n.t('commands.config.wotd.errors.guild_text_only', { lng })
+		);
 	}
 
 	const avatarUrl = cdn.avatar(client.user!.id, client.user!.avatar!, {
@@ -53,7 +63,7 @@ export const wotd = async (
 			i18n.t('commands.config.wotd.errors.no_perms', {
 				lng,
 				channel: channelMention(channel.id),
-			}),
+			})
 		);
 	}
 
@@ -69,6 +79,6 @@ export const wotd = async (
 		i18n.t('commands.config.wotd.success', {
 			lng,
 			channel: channelMention(channel.id),
-		}),
+		})
 	);
 };

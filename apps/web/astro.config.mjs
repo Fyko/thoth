@@ -6,20 +6,20 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), astroI18next()],
-  prefetch: true,
-  output: 'hybrid',
-  adapter: cloudflare(),
-  vite: {
-    plugins: [
-      viteStaticCopy({
-        targets: [
-          {
-            src: '_redirects',
-            dest: '',
-          },
-        ],
-      }),
-    ],
-  },
+	integrations: [react(), astroI18next()],
+	prefetch: true,
+	output: 'hybrid',
+	adapter: cloudflare(),
+	vite: {
+		plugins: [
+			viteStaticCopy({
+				targets: [
+					{
+						src: '_redirects',
+						dest: '',
+					},
+				],
+			}),
+		],
+	},
 });

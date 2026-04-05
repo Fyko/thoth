@@ -2,16 +2,15 @@ import { randomBytes } from 'node:crypto';
 import process from 'node:process';
 import type { Command } from '@yuudachi/framework';
 import {
-	transformApplicationInteraction,
-	kCommands,
-	createModalActionRow,
-	createTextComponent,
 	createButton,
 	createMessageActionRow,
+	createModalActionRow,
+	createTextComponent,
+	kCommands,
+	transformApplicationInteraction,
 } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
-import { ButtonStyle } from 'discord-api-types/v10';
 import type {
 	AutocompleteInteraction,
 	ButtonInteraction,
@@ -24,15 +23,15 @@ import type {
 import {
 	ActionRowBuilder,
 	ApplicationCommandType,
-	bold,
 	ButtonBuilder,
-	channelMention,
+	bold,
 	ChannelType,
-	Client,
-	codeBlock,
+	type Client,
 	Colors,
 	CommandInteraction,
 	ContainerBuilder,
+	channelMention,
+	codeBlock,
 	Events,
 	inlineCode,
 	MessageFlags,
@@ -42,19 +41,23 @@ import {
 	TextInputStyle,
 	WebhookClient,
 } from 'discord.js';
+import { ButtonStyle } from 'discord-api-types/v10';
 import { t } from 'i18next';
 import type { Sql } from 'postgres';
 import { Counter, Registry } from 'prom-client';
 import { container, inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
-import { RedisManager } from '#structures';
+import type { RedisManager } from '#structures';
 import { CommandError } from '#util/error.js';
 import { fetchQuiz } from '#util/mw/quiz.js';
 import { kRedis, kSQL } from '#util/symbols.js';
 import { definitionAutoComplete } from '../autocomplete/definition.js';
 import { fetchFeedbackRow } from '../functions/feedback.js';
 
-const registry = container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(Registry);
+const registry =
+	container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(
+		Registry
+	);
 const commandsMetrics = new Counter({
 	name: 'thoth_commands',
 	help: 'Number of commands executed',
@@ -72,17 +75,21 @@ export default class implements Event {
 		public readonly client: Client<true>,
 		@inject(kSQL) public readonly sql: Sql<any>,
 		@inject(kCommands) public readonly commands: Map<string, Command>,
-		@inject(kRedis) public readonly redis: RedisManager,
+		@inject(kRedis) public readonly redis: RedisManager
 	) {}
 
 	public execute(): void {
 		this.client.on(this.event, async (interaction) => {
 			if (interaction.isButton()) {
-				return void this.handleButton(interaction as ButtonInteraction<'cached'>);
+				return void this.handleButton(
+					interaction as ButtonInteraction<'cached'>
+				);
 			}
 
 			if (interaction.isModalSubmit()) {
-				return void this.handleModalSubmit(interaction as ModalSubmitInteraction<'cached'>);
+				return void this.handleModalSubmit(
+					interaction as ModalSubmitInteraction<'cached'>
+				);
 			}
 
 			if (!interaction.isCommand() && !interaction.isAutocomplete()) {
@@ -95,7 +102,10 @@ export default class implements Event {
 
 			if (command) {
 				try {
-					if (interaction.commandType === ApplicationCommandType.ChatInput) {
+					if (
+						interaction.commandType ===
+						ApplicationCommandType.ChatInput
+					) {
 						const autocomplete = interaction.isAutocomplete();
 						logger.info(
 							{
@@ -107,19 +117,24 @@ export default class implements Event {
 							},
 							`Executing ${autocomplete ? 'autocomplete for' : 'chat input'} command ${
 								interaction.commandName
-							}`,
+							}`
 						);
 
 						if (autocomplete) {
 							try {
 								if (interaction.commandName === 'definition') {
-									await definitionAutoComplete(interaction as AutocompleteInteraction<'cached'>);
+									await definitionAutoComplete(
+										interaction as AutocompleteInteraction<'cached'>
+									);
 
 									return;
 								}
 							} catch (error_: unknown) {
 								const error = error_ as Error;
-								logger.error(error, 'Error while executing autocomplete');
+								logger.error(
+									error,
+									'Error while executing autocomplete'
+								);
 							}
 
 							return;
@@ -127,8 +142,10 @@ export default class implements Event {
 
 						await command.chatInput(
 							interaction as ChatInputCommandInteraction<'cached'>,
-							transformApplicationInteraction(interaction.options.data),
-							interaction.locale,
+							transformApplicationInteraction(
+								interaction.options.data
+							),
+							interaction.locale
 						);
 
 						logInteraction(interaction);
@@ -164,7 +181,7 @@ export default class implements Event {
 									},
 									userId: interaction.user.id,
 								},
-								'Command interaction has not been deferred before throwing',
+								'Command interaction has not been deferred before throwing'
 							);
 							await interaction.deferReply({ ephemeral: true });
 						}
@@ -175,23 +192,34 @@ export default class implements Event {
 						});
 					} catch (error) {
 						const sub = error as Error;
-						logger.error(sub, 'Error while sending error message (lol)');
+						logger.error(
+							sub,
+							'Error while sending error message (lol)'
+						);
 					}
 				}
 			}
 		});
 	}
 
-	private async handleButton(interaction: ButtonInteraction<'cached'>): Promise<void> {
+	private async handleButton(
+		interaction: ButtonInteraction<'cached'>
+	): Promise<void> {
 		const lng = interaction.locale;
 
 		// match to the regex feedback:bug | feedback:feature | feedback:general
-		const feedbackSubmitRes = /^feedback:(?<type>bug|feature|general)$/.exec(interaction.customId);
+		const feedbackSubmitRes =
+			/^feedback:(?<type>bug|feature|general)$/.exec(
+				interaction.customId
+			);
 		if (feedbackSubmitRes) {
 			const type = feedbackSubmitRes.groups!.type!;
 
 			return interaction.showModal({
-				title: t(`commands.feedback.meta.args.category.choices.${type}`, { lng }),
+				title: t(
+					`commands.feedback.meta.args.category.choices.${type}`,
+					{ lng }
+				),
 				custom_id: `feedback:${type}:submit`,
 				components: [
 					createModalActionRow([
@@ -215,7 +243,9 @@ export default class implements Event {
 		}
 
 		// initial dm from owner to user
-		const feedbackDmRes = /^feedback:dm:(?<submissionId>[^:]+)$/.exec(interaction.customId);
+		const feedbackDmRes = /^feedback:dm:(?<submissionId>[^:]+)$/.exec(
+			interaction.customId
+		);
 		if (feedbackDmRes) {
 			const submissionId = feedbackDmRes.groups!.submissionId!;
 			const row = await fetchFeedbackRow(submissionId);
@@ -245,7 +275,9 @@ export default class implements Event {
 
 			const collected = await interaction
 				.awaitModalSubmit({
-					filter: (collected) => collected.user.id === interaction.user.id && collected.customId === randomId,
+					filter: (collected) =>
+						collected.user.id === interaction.user.id &&
+						collected.customId === randomId,
 					time: 120_000, // 2 minutes
 				})
 				.catch(async () => {
@@ -266,7 +298,10 @@ export default class implements Event {
 
 			const content = collected.fields.getTextInputValue('content');
 			if (!content.length)
-				return void collected.editReply({ content: 'Content cannot be empty', components: [] });
+				return void collected.editReply({
+					content: 'Content cannot be empty',
+					components: [],
+				});
 			try {
 				await user.send({
 					content: stripIndents`
@@ -305,7 +340,9 @@ export default class implements Event {
 		}
 
 		// wotd quiz: user clicks "Quiz Me!" button on wotd message
-		const wotdQuizRes = /^wotd-quiz:(?<historyId>[\da-f-]+)$/.exec(interaction.customId);
+		const wotdQuizRes = /^wotd-quiz:(?<historyId>[\da-f-]+)$/.exec(
+			interaction.customId
+		);
 		if (wotdQuizRes) {
 			const historyId = wotdQuizRes.groups!.historyId!;
 
@@ -313,7 +350,8 @@ export default class implements Event {
 				const quiz = await fetchQuiz(this.sql, historyId);
 				if (!quiz) {
 					return void interaction.reply({
-						content: 'Sorry, the quiz for this word is not available.',
+						content:
+							'Sorry, the quiz for this word is not available.',
 						ephemeral: true,
 					});
 				}
@@ -334,12 +372,16 @@ export default class implements Event {
 				`;
 
 				if (existing.length > 0) {
-					const chosenOption = quiz.find((o) => o.id === existing[0]!.option_id)!;
+					const chosenOption = quiz.find(
+						(o) => o.id === existing[0]!.option_id
+					)!;
 					const correctOption = quiz.find((o) => o.correct)!;
 					const correctIndex = quiz.indexOf(correctOption) + 1;
 
 					const container = new ContainerBuilder()
-						.setAccentColor(chosenOption.correct ? Colors.Green : Colors.Red)
+						.setAccentColor(
+							chosenOption.correct ? Colors.Green : Colors.Red
+						)
 						.addTextDisplayComponents(
 							new TextDisplayBuilder().setContent(
 								chosenOption.correct
@@ -354,17 +396,21 @@ export default class implements Event {
 										You already attempted this quiz. The correct answer was sentence **${correctIndex}**.
 
 										${correctOption.explanation}
-									`,
-							),
+									`
+							)
 						);
 
 					return void interaction.reply({
 						components: [container],
-						flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
+						flags:
+							MessageFlags.IsComponentsV2 |
+							MessageFlags.Ephemeral,
 					});
 				}
 
-				const numbered = quiz.map((o, i) => `**${i + 1}.** ${o.sentence}`).join('\n');
+				const numbered = quiz
+					.map((o, i) => `**${i + 1}.** ${o.sentence}`)
+					.join('\n');
 
 				const container = new ContainerBuilder()
 					.setAccentColor(Colors.Blurple)
@@ -372,19 +418,25 @@ export default class implements Event {
 						new TextDisplayBuilder().setContent(stripIndents`
 							### Word of the Day Quiz
 							Which sentence uses **${word}** correctly?
-						`),
+						`)
 					)
-					.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small))
-					.addTextDisplayComponents(new TextDisplayBuilder().setContent(numbered))
+					.addSeparatorComponents(
+						new SeparatorBuilder().setSpacing(
+							SeparatorSpacingSize.Small
+						)
+					)
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(numbered)
+					)
 					.addActionRowComponents(
 						new ActionRowBuilder<ButtonBuilder>().addComponents(
 							quiz.map((o, i) =>
 								new ButtonBuilder()
 									.setCustomId(`wotd-answer:${o.id}`)
 									.setLabel(`${i + 1}`)
-									.setStyle(ButtonStyle.Secondary),
-							),
-						),
+									.setStyle(ButtonStyle.Secondary)
+							)
+						)
 					);
 
 				return void interaction.reply({
@@ -401,13 +453,23 @@ export default class implements Event {
 		}
 
 		// wotd quiz: user picks an answer
-		const wotdAnswerRes = /^wotd-answer:(?<optionId>[\da-f-]+)$/.exec(interaction.customId);
+		const wotdAnswerRes = /^wotd-answer:(?<optionId>[\da-f-]+)$/.exec(
+			interaction.customId
+		);
 		if (wotdAnswerRes) {
 			const optionId = wotdAnswerRes.groups!.optionId!;
 
 			try {
 				const [chosenOption] = await this.sql<
-					[{ correct: boolean; explanation: string; id: string; sentence: string; wotd_history_id: string }]
+					[
+						{
+							correct: boolean;
+							explanation: string;
+							id: string;
+							sentence: string;
+							wotd_history_id: string;
+						},
+					]
 				>`SELECT * FROM wotd_quiz_option WHERE id = ${optionId}`;
 
 				if (!chosenOption) {
@@ -427,43 +489,59 @@ export default class implements Event {
 				`;
 
 				if (chosenOption.correct) {
-					const container = new ContainerBuilder().setAccentColor(Colors.Green).addTextDisplayComponents(
-						new TextDisplayBuilder().setContent(stripIndents`
+					const container = new ContainerBuilder()
+						.setAccentColor(Colors.Green)
+						.addTextDisplayComponents(
+							new TextDisplayBuilder().setContent(stripIndents`
 								### Correct!
 								${chosenOption.sentence}
 
 								${chosenOption.explanation}
-							`),
-					);
+							`)
+						);
 
 					return void interaction.update({
 						components: [container],
-						flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
+						flags:
+							MessageFlags.IsComponentsV2 |
+							MessageFlags.Ephemeral,
 					});
 				}
 
 				// fetch the correct answer for feedback
-				const [correctOption] = await this.sql<[{ explanation: string; sentence: string }]>`
+				const [correctOption] = await this.sql<
+					[{ explanation: string; sentence: string }]
+				>`
 					SELECT sentence, explanation FROM wotd_quiz_option
 					WHERE wotd_history_id = ${chosenOption.wotd_history_id} AND correct = true
 				`;
 
 				const container = new ContainerBuilder()
 					.setAccentColor(Colors.Red)
-					.addTextDisplayComponents(new TextDisplayBuilder().setContent('### Not quite'))
-					.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small))
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent('### Not quite')
+					)
+					.addSeparatorComponents(
+						new SeparatorBuilder().setSpacing(
+							SeparatorSpacingSize.Small
+						)
+					)
 					.addTextDisplayComponents(
 						new TextDisplayBuilder().setContent(stripIndents`
 							**Your pick:** ${chosenOption.sentence}
 							${chosenOption.explanation}
-						`),
+						`)
 					)
-					.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small))
+					.addSeparatorComponents(
+						new SeparatorBuilder().setSpacing(
+							SeparatorSpacingSize.Small
+						)
+					)
 					.addTextDisplayComponents(
 						new TextDisplayBuilder().setContent(stripIndents`
 							**Correct answer:** ${correctOption.sentence}
 							${correctOption.explanation}
-						`),
+						`)
 					);
 
 				return void interaction.update({
@@ -480,7 +558,10 @@ export default class implements Event {
 		}
 
 		// `feedback:dm:reply:${submissionId}`,
-		const feedbackDmReplyRes = /^feedback:dm:reply:(?<submissionId>.+)$/.exec(interaction.customId);
+		const feedbackDmReplyRes =
+			/^feedback:dm:reply:(?<submissionId>.+)$/.exec(
+				interaction.customId
+			);
 		if (feedbackDmReplyRes) {
 			const submissionId = feedbackDmReplyRes.groups!.submissionId!;
 			const row = await fetchFeedbackRow(submissionId);
@@ -509,7 +590,9 @@ export default class implements Event {
 
 			const collected = await interaction
 				.awaitModalSubmit({
-					filter: (collected) => collected.user.id === interaction.user.id && collected.customId === randomId,
+					filter: (collected) =>
+						collected.user.id === interaction.user.id &&
+						collected.customId === randomId,
 					time: 120_000, // 2 minutes
 				})
 				.catch(async () => {
@@ -530,11 +613,16 @@ export default class implements Event {
 
 			const content = collected.fields.getTextInputValue('content');
 			if (!content.length)
-				return void collected.editReply({ content: 'Content cannot be empty', components: [] });
+				return void collected.editReply({
+					content: 'Content cannot be empty',
+					components: [],
+				});
 			try {
-				const post = await ((await this.client.channels.fetch(row.channel_id!)!) as ForumChannel).threads.fetch(
-					row.thread_id!,
-				);
+				const post = await (
+					(await this.client.channels.fetch(
+						row.channel_id!
+					)!) as ForumChannel
+				).threads.fetch(row.thread_id!);
 
 				await post?.send({
 					content: `📥 ${content}`,
@@ -555,18 +643,24 @@ export default class implements Event {
 		}
 	}
 
-	private async handleModalSubmit(interaction: ModalSubmitInteraction<'cached'>): Promise<void> {
+	private async handleModalSubmit(
+		interaction: ModalSubmitInteraction<'cached'>
+	): Promise<void> {
 		const lng = interaction.locale;
 		await interaction.deferReply({ ephemeral: true });
 
-		const feedbackSubmitRes = /^feedback:(?<type>bug|feature|general):submit$/.exec(interaction.customId);
+		const feedbackSubmitRes =
+			/^feedback:(?<type>bug|feature|general):submit$/.exec(
+				interaction.customId
+			);
 		if (feedbackSubmitRes) {
 			const type = feedbackSubmitRes.groups!.type!;
 			const subject = interaction.fields.getTextInputValue('subject');
-			const description = interaction.fields.getTextInputValue('description');
+			const description =
+				interaction.fields.getTextInputValue('description');
 
 			const feedbackForumChannel = (await this.client.channels.fetch(
-				process.env.FEEDBACK_FORUM_CHANNEL_ID!,
+				process.env.FEEDBACK_FORUM_CHANNEL_ID!
 			))! as ForumChannel;
 
 			// create table if not exists feedback_submission (
@@ -587,7 +681,9 @@ export default class implements Event {
 
 			const post = await feedbackForumChannel.threads.create({
 				name: `${interaction.user.tag}: ${subject ?? `${type} Feedback (No Subject)`}`,
-				appliedTags: feedbackForumChannel.availableTags.filter((tag) => tag.name === type).map((tag) => tag.id),
+				appliedTags: feedbackForumChannel.availableTags
+					.filter((tag) => tag.name === type)
+					.map((tag) => tag.id),
 				message: {
 					content: stripIndents`
 						Id: ${inlineCode(id)}
@@ -653,18 +749,24 @@ function logInteraction(interaction: Interaction, error?: Error) {
 						? `${bold('Channel:')} ${channelMention(interaction.channelId)} ${inlineCode(interaction.channel.name!)} (${
 								interaction.channel.id
 							})`
-						: 'Direct Message',
+						: 'Direct Message'
 			);
 		}
 
 		const description = logDescription(interaction);
 		const isCommandError = error instanceof CommandError;
 		void hook.send({
-			content: !isCommandError && error !== undefined ? `<@${process.env.OWNER_ID}>` : '',
+			content:
+				!isCommandError && error !== undefined
+					? `<@${process.env.OWNER_ID}>`
+					: '',
 			embeds: [
 				{
 					// a command error is not a failure, so we don't need to mark it as such
-					color: error && !isCommandError ? Colors.DarkRed : Colors.DarkGreen,
+					color:
+						error && !isCommandError
+							? Colors.DarkRed
+							: Colors.DarkGreen,
 					author: {
 						icon_url: interaction.inCachedGuild()
 							? interaction.member.displayAvatarURL()
@@ -700,13 +802,13 @@ function logDescription(interaction: Interaction) {
 
 	if (interaction.isUserContextMenuCommand()) {
 		return codeBlock(
-			`(${ApplicationCommandType[interaction.commandType]}Ctx) ${interaction.commandName} on ${interaction.targetUser.username} (${interaction.targetUser.id})`,
+			`(${ApplicationCommandType[interaction.commandType]}Ctx) ${interaction.commandName} on ${interaction.targetUser.username} (${interaction.targetUser.id})`
 		);
 	}
 
 	if (interaction.isMessageContextMenuCommand()) {
 		return codeBlock(
-			`[${ApplicationCommandType[interaction.commandType]}Ctx] ${interaction.commandName} on ${interaction.targetMessage.id}`,
+			`[${ApplicationCommandType[interaction.commandType]}Ctx] ${interaction.commandName} on ${interaction.targetMessage.id}`
 		);
 	}
 

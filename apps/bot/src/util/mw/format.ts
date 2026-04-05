@@ -1,11 +1,16 @@
 /* eslint-disable prefer-named-capture-group */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import { bold, hyperlink, italic, hideLinkEmbed } from '@discordjs/builders';
+import { bold, hideLinkEmbed, hyperlink, italic } from '@discordjs/builders';
 import { smallCapitals, subscript, superscript } from './builders.js';
 
 const directionalCrossReferenceTarget = {
 	regex: /{dxt\|(.*?)\|(.*?)\|(.*?)}/g,
-	format: (_: unknown, text: string, id?: string, sense?: number | string) => {
+	format: (
+		_: unknown,
+		text: string,
+		id?: string,
+		sense?: number | string
+	) => {
 		let url = '';
 		if (sense === 'illustration') {
 			url = `https://www.merriam-webster.com/assets/mw/static/art/dict/${encodeURIComponent(id as string)}.gif`;
@@ -32,14 +37,21 @@ const crossReferenceTokenRegexes = {
 	alink: {
 		regex: /{a_link\|(.*?)}/g,
 		format: (_: unknown, id: string) =>
-			hyperlink(id, hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id)}`)),
+			hyperlink(
+				id,
+				hideLinkEmbed(
+					`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id)}`
+				)
+			),
 	},
 	dlink: {
 		regex: /{d_link\|(.*?)\|(.*?)}/g,
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				text,
-				hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`),
+				hideLinkEmbed(
+					`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`
+				)
 			),
 	},
 	ilink: {
@@ -47,7 +59,9 @@ const crossReferenceTokenRegexes = {
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				italic(text),
-				hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`),
+				hideLinkEmbed(
+					`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`
+				)
 			),
 	},
 	etlink: {
@@ -55,7 +69,9 @@ const crossReferenceTokenRegexes = {
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				text,
-				hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`),
+				hideLinkEmbed(
+					`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`
+				)
 			),
 	},
 	mat: {
@@ -63,7 +79,9 @@ const crossReferenceTokenRegexes = {
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				text.toUpperCase(),
-				hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`),
+				hideLinkEmbed(
+					`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`
+				)
 			),
 	},
 	sx: {
@@ -71,7 +89,9 @@ const crossReferenceTokenRegexes = {
 		format: (_: unknown, text: string, id?: string) =>
 			hyperlink(
 				text.toUpperCase(),
-				hideLinkEmbed(`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`),
+				hideLinkEmbed(
+					`https://www.merriam-webster.com/dictionary/${encodeURIComponent(id || text)}`
+				)
 			),
 	},
 	dxdef: {
@@ -130,7 +150,9 @@ const formatTokenRegexes = {
 export function formatText(_text: string): string {
 	let text = _text;
 	// run on tokens that encase text
-	for (const { regex, format } of Object.values(formatTokenOpenCloseRegexes)) {
+	for (const { regex, format } of Object.values(
+		formatTokenOpenCloseRegexes
+	)) {
 		text = text.replace(regex, format);
 	}
 

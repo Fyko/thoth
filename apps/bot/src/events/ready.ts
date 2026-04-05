@@ -1,7 +1,7 @@
 import { setInterval } from 'node:timers/promises';
 import type { Event } from '@yuudachi/framework/types';
-import { ActivityType, Client, Events } from 'discord.js';
-import { Gauge } from 'prom-client';
+import { ActivityType, type Client, Events } from 'discord.js';
+import type { Gauge } from 'prom-client';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { kGuildCountGuage } from '#util/symbols.js';
@@ -25,19 +25,24 @@ export default class implements Event {
 
 	public constructor(
 		private readonly client: Client<true>,
-		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>,
+		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>
 	) {}
 
 	public execute(): void {
 		this.client.on(this.event, async () => {
-			logger.info(`Client is ready! Logged in as ${this.client.user!.tag}`);
+			logger.info(
+				`Client is ready! Logged in as ${this.client.user!.tag}`
+			);
 			await this.client.application.commands.fetch();
 
 			const guilds = this.client.guilds.cache.size;
 			this.guildCount.set(guilds);
 
 			for await (const _ of setInterval(60_000, Date.now())) {
-				this.statusIndex = this.statusIndex + 1 >= this.statuses.length ? 0 : this.statusIndex + 1;
+				this.statusIndex =
+					this.statusIndex + 1 >= this.statuses.length
+						? 0
+						: this.statusIndex + 1;
 
 				const name = this.statuses[this.statusIndex]!;
 

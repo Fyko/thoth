@@ -1,0 +1,5 @@
+[tools]
+bun = "latest"
+fzf = "latest"
+just = "latest"
+node = "22.22.2"

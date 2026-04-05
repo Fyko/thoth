@@ -1,7 +1,6 @@
 {
 	"compileOnSave": true,
 	"compilerOptions": {
-		"baseUrl": ".",
 		"lib": ["esnext"],
 		"module": "Node16",
 		"moduleResolution": "Node16",
