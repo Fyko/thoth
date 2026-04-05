@@ -15,24 +15,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy
-        uses: trufflehq/truffle-packages/actions/pages@2ae2865c1a7e691693fac612a756359213ea91ca
+      - uses: oven-sh/setup-bun@v2
         with:
-          # The script to build your site (default: `build`) (joins with `yarn workspace $workspace_name`)
-          build_script: build
-          # Cloudflare Account ID
-          cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Cloudflare API Token
-          cloudflare_api_token: ${{ secrets.CLOUDFLARE_PAGES_API_KEY }}
-          # The directory of static assets to upload (default: `dist`)
-          directory: dist
-          # GitHub Token
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Optional: The script to run before building your site
-          prebuild_script: yarn build
-          # Optional: The branch to deploy to production
-          production_branch: main
-          # The name of the Cloudflare Pages project
-          project_name: trythoth
-          # The name of the yarn workspace being deployed
-          workspace_name: web
+          bun-version: 1.3.11
+
+      - run: bun install
+
+      - run: bun run --filter web build
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_KEY }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/web/dist --project-name=trythoth --branch=${{ github.ref_name }}

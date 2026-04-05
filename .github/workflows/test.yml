@@ -13,16 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Node.js v20
-        uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
+          bun-version: 1.3.11
 
-      - name: Install dependencies
-        uses: trufflehq/truffle-packages/actions/yarn@99bfffab89199c599f12ace60f9bdd0025824865
+      - uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
-      - name: Lint
-        run: yarn run lint
+      - run: bun install
 
-      - name: Build
-        run: yarn run build
+      - run: bunx turbo run lint --concurrency=4 --cache-dir=.turbo
+
+      - run: bunx turbo run build --concurrency=4 --cache-dir=.turbo
