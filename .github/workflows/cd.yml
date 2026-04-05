@@ -7,7 +7,7 @@ on:
             - 'apps/bot/**'
             - 'packages/**'
             - 'package.json'
-            - 'bun.lock'
+            - 'yarn.lock'
             - '.github/workflows/cd.yml'
 
 env:
