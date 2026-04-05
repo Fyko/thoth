@@ -6,8 +6,6 @@ import {
 	kCommands,
 	createModalActionRow,
 	createTextComponent,
-	createButton,
-	createMessageActionRow,
 } from '@yuudachi/framework';
 import type { Event } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
@@ -52,6 +50,7 @@ import { CommandError } from '#util/error.js';
 import { fetchQuiz } from '#util/mw/quiz.js';
 import { kRedis, kSQL } from '#util/symbols.js';
 import { definitionAutoComplete } from '../autocomplete/definition.js';
+import { timezoneAutoComplete } from '../autocomplete/timezone.js';
 import { fetchFeedbackRow } from '../functions/feedback.js';
 
 const registry = container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(Registry);
@@ -114,7 +113,11 @@ export default class implements Event {
 							try {
 								if (interaction.commandName === 'definition') {
 									await definitionAutoComplete(interaction as AutocompleteInteraction<'cached'>);
+									return;
+								}
 
+								if (interaction.commandName === 'config') {
+									await timezoneAutoComplete(interaction as AutocompleteInteraction<'cached'>);
 									return;
 								}
 							} catch (error_: unknown) {
@@ -276,13 +279,12 @@ export default class implements Event {
 						\- ${interaction.user.globalName ?? interaction.user.tag}
 					`,
 					components: [
-						createMessageActionRow([
-							createButton({
-								label: 'Reply',
-								style: ButtonStyle.Secondary,
-								customId: `feedback:dm:reply:${submissionId}`,
-							}),
-						]),
+						new ActionRowBuilder<ButtonBuilder>().addComponents(
+							new ButtonBuilder()
+								.setCustomId(`feedback:dm:reply:${submissionId}`)
+								.setLabel('Reply')
+								.setStyle(ButtonStyle.Secondary),
+						),
 					],
 				});
 
@@ -597,13 +599,12 @@ export default class implements Event {
 						${description}
 					`,
 					components: [
-						createMessageActionRow([
-							createButton({
-								label: 'Send DM to User',
-								style: ButtonStyle.Primary,
-								customId: `feedback:dm:${id}`,
-							}),
-						]),
+						new ActionRowBuilder<ButtonBuilder>().addComponents(
+							new ButtonBuilder()
+								.setCustomId(`feedback:dm:${id}`)
+								.setLabel('Send DM to User')
+								.setStyle(ButtonStyle.Primary),
+						),
 					],
 				},
 			});

@@ -1,8 +1,8 @@
 /* eslint-disable func-names */
-import { createButton, createMessageActionRow } from '@yuudachi/framework';
 import type { InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
 import { ButtonStyle } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder } from 'discord.js';
 import { t } from 'i18next';
 import type { DismissableAlertModule } from '#structures';
 
@@ -70,23 +70,20 @@ export function UseFeedbackAlert() {
 					`,
 					ephemeral: true,
 					components: [
-						createMessageActionRow([
-							createButton({
-								label: t('commands.feedback.meta.args.category.choices.bug', { lng }),
-								style: ButtonStyle.Danger,
-								customId: 'feedback:bug',
-							}),
-							createButton({
-								label: t('commands.feedback.meta.args.category.choices.feature', { lng }),
-								style: ButtonStyle.Success,
-								customId: 'feedback:feature',
-							}),
-							createButton({
-								label: t('commands.feedback.meta.args.category.choices.general', { lng }),
-								style: ButtonStyle.Secondary,
-								customId: 'feedback:general',
-							}),
-						]),
+						new ActionRowBuilder<ButtonBuilder>().addComponents(
+							new ButtonBuilder()
+								.setCustomId('feedback:bug')
+								.setLabel(t('commands.feedback.meta.args.category.choices.bug', { lng }))
+								.setStyle(ButtonStyle.Danger),
+							new ButtonBuilder()
+								.setCustomId('feedback:feature')
+								.setLabel(t('commands.feedback.meta.args.category.choices.feature', { lng }))
+								.setStyle(ButtonStyle.Success),
+							new ButtonBuilder()
+								.setCustomId('feedback:general')
+								.setLabel(t('commands.feedback.meta.args.category.choices.general', { lng }))
+								.setStyle(ButtonStyle.Secondary),
+						),
 					],
 				});
 			}

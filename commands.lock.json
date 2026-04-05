@@ -1897,6 +1897,19 @@
 						},
 						"type": 7,
 						"required": true
+					},
+					{
+						"name": "time",
+						"description": "When to post the WOTD (e.g. \"9:00 AM\", \"14:00\"). Premium only.",
+						"type": 3,
+						"required": false
+					},
+					{
+						"name": "timezone",
+						"description": "Your IANA timezone (e.g. America/New_York). Required with time.",
+						"type": 3,
+						"required": false,
+						"autocomplete": true
 					}
 				]
 			}

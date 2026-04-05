@@ -2327,7 +2327,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@thoth/interactions@workspace:packages/interactions"
   dependencies:
-    discord-api-types: "npm:^0.37.75"
+    discord-api-types: "npm:^0.38.44"
     eslint: "npm:^8.57.0"
     eslint-config-neon: "npm:^0.1.59"
     eslint-formatter-pretty: "npm:^5.0.0"
@@ -4132,7 +4132,7 @@ __metadata:
     bullmq: "npm:^4.17.0"
     common-tags: "npm:^1.8.2"
     cpy-cli: "npm:^5.0.0"
-    discord-api-types: "npm:^0.37.75"
+    discord-api-types: "npm:^0.38.44"
     discord.js: "npm:^14.26.2"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^8.57.0"
@@ -5335,7 +5335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.38.1, discord-api-types@npm:^0.38.33, discord-api-types@npm:^0.38.40":
+"discord-api-types@npm:^0.38.1, discord-api-types@npm:^0.38.33, discord-api-types@npm:^0.38.40, discord-api-types@npm:^0.38.44":
   version: 0.38.44
   resolution: "discord-api-types@npm:0.38.44"
   checksum: 10/c3a0aab16d52ba45c26d4aa5510b8e23760467c42f2685b25d7f38c3ab021d02132fc2197b959c5fb7ad88e6654275b4b81b90b759ac4eea81931e9c6974f002

@@ -13,7 +13,6 @@ export default class<Cmd extends typeof ConfigCommand> extends Command<Cmd> {
 		args: ArgsParam<Cmd>,
 		lng: LocaleParam,
 	): Promise<void> {
-		await interaction.deferReply({ ephemeral: true });
 		const key = Object.keys(args)[0];
 		logger.debug(key);
 

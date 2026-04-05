@@ -1,8 +1,8 @@
 import type FeedbackCommand from '@thoth/interactions/commands/util/feedback';
-import { Command, createButton, createMessageActionRow } from '@yuudachi/framework';
+import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { ButtonStyle } from 'discord-api-types/v10';
-import { Client } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, Client } from 'discord.js';
 import { t } from 'i18next';
 import { type Sql } from 'postgres';
 import { inject, injectable } from 'tsyringe';
@@ -29,23 +29,20 @@ export default class<Cmd extends typeof FeedbackCommand> extends Command<Cmd> {
 			content: 'What type of feedback would you like to provide?',
 			ephemeral: true,
 			components: [
-				createMessageActionRow([
-					createButton({
-						label: t('commands.feedback.meta.args.category.choices.bug', { lng }),
-						style: ButtonStyle.Danger,
-						customId: 'feedback:bug',
-					}),
-					createButton({
-						label: t('commands.feedback.meta.args.category.choices.feature', { lng }),
-						style: ButtonStyle.Success,
-						customId: 'feedback:feature',
-					}),
-					createButton({
-						label: t('commands.feedback.meta.args.category.choices.general', { lng }),
-						style: ButtonStyle.Secondary,
-						customId: 'feedback:general',
-					}),
-				]),
+				new ActionRowBuilder<ButtonBuilder>().addComponents(
+					new ButtonBuilder()
+						.setCustomId('feedback:bug')
+						.setLabel(t('commands.feedback.meta.args.category.choices.bug', { lng }))
+						.setStyle(ButtonStyle.Danger),
+					new ButtonBuilder()
+						.setCustomId('feedback:feature')
+						.setLabel(t('commands.feedback.meta.args.category.choices.feature', { lng }))
+						.setStyle(ButtonStyle.Success),
+					new ButtonBuilder()
+						.setCustomId('feedback:general')
+						.setLabel(t('commands.feedback.meta.args.category.choices.general', { lng }))
+						.setStyle(ButtonStyle.Secondary),
+				),
 			],
 		});
 	}

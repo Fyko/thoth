@@ -12,9 +12,9 @@ import { Gauge, Registry, collectDefaultMetrics } from 'prom-client';
 import readdirp from 'readdirp';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
-import { RedisManager } from '#structures';
+import { EntitlementCache, RedisManager } from '#structures';
 import { loadTranslations } from '#util/index.js';
-import { kGuildCountGuage, kRedis, kSQL } from '#util/symbols.js';
+import { kEntitlementCache, kGuildCountGuage, kRedis, kSQL } from '#util/symbols.js';
 import { setupJobs } from './jobs.js';
 import { BlockedWordModule } from './structures/BlockedWord.js';
 
@@ -27,6 +27,7 @@ declare global {
 		interface ProcessEnv {
 			ANTHROPIC_API_KEY: string;
 			COMMAND_LOG_WEBHOOK_URL: string;
+			DISCORD_PREMIUM_SKU_ID: string;
 			DATABASE_URL: string;
 			DISCORD_APPLICATION_ID: string;
 			DISCORD_TOKEN: string;
@@ -81,6 +82,7 @@ const guildCount = new Gauge({
 createCommands();
 container.register(kRedis, { useValue: redis });
 container.register(kSQL, { useValue: sql });
+container.register(kEntitlementCache, { useValue: new EntitlementCache(redis) });
 container.register(BlockedWordModule, { useValue: new BlockedWordModule(sql) });
 container.register(kGuildCountGuage, { useValue: guildCount });
 container.register(Registry, { useValue: register });

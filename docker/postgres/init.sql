@@ -82,3 +82,30 @@ create table if not exists wotd_quiz_attempt (
 	created_at timestamptz not null default now()
 );
 create index idx_wotd_quiz_attempt_user on wotd_quiz_attempt (user_id);
+
+-- premium scheduling columns (NULL = free tier / immediate delivery)
+alter table wotd add column if not exists post_time time;
+alter table wotd add column if not exists timezone text;
+
+COMMENT ON COLUMN wotd.post_time IS 'Premium: time of day to deliver WOTD, NULL = immediate';
+COMMENT ON COLUMN wotd.timezone IS 'Premium: IANA timezone for post_time, NULL = immediate';
+
+-- stores rendered wotd content for scheduled delivery
+create table if not exists wotd_pending (
+	id uuid primary key default gen_random_uuid(),
+	wotd_history_id uuid not null references wotd_history(id) on delete cascade,
+	content text not null,
+	components jsonb not null default '[]',
+	created_at timestamptz not null default now()
+);
+create index idx_wotd_pending_created on wotd_pending (created_at desc);
+
+-- tracks which guilds received which pending word (prevents double-delivery)
+create table if not exists wotd_delivery_log (
+	id uuid primary key default gen_random_uuid(),
+	wotd_pending_id uuid not null references wotd_pending(id) on delete cascade,
+	wotd_config_id uuid not null references wotd(id) on delete cascade,
+	delivered_at timestamptz not null default now(),
+	unique (wotd_pending_id, wotd_config_id)
+);
+create index idx_wotd_delivery_log_pending on wotd_delivery_log (wotd_pending_id);

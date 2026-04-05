@@ -37,7 +37,7 @@
 		"ai": "^6.0.146",
 		"bullmq": "^4.17.0",
 		"common-tags": "^1.8.2",
-		"discord-api-types": "^0.37.75",
+		"discord-api-types": "^0.38.44",
 		"discord.js": "^14.26.2",
 		"fs-nextra": "^0.5.1",
 		"i18next": "^23.10.1",

@@ -1,8 +1,9 @@
 export interface WOTDConfig {
-	channel_id: bigint;
 	created_at: Date;
 	guild_id: bigint;
 	id: string;
+	post_time: string | null;
+	timezone: string | null;
 	webhook_id: bigint;
 	webhook_token: string;
 }

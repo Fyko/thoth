@@ -1,10 +1,10 @@
 import { hideLinkEmbed, hyperlink, inlineCode, quote, underscore } from '@discordjs/builders';
 import type DefinitionCommand from '@thoth/interactions/commands/general/definition';
-import { Command, createButton, createMessageActionRow } from '@yuudachi/framework';
+import { Command } from '@yuudachi/framework';
 import type { ArgsParam, InteractionParam, LocaleParam } from '@yuudachi/framework/types';
 import { stripIndents } from 'common-tags';
 import { ButtonStyle } from 'discord-api-types/v10';
-import { AttachmentBuilder, ComponentType } from 'discord.js';
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ComponentType } from 'discord.js';
 import { t } from 'i18next';
 import type { Entry, Sense, Senses, VerbalIllustration } from 'mw-collegiate';
 import { inject, injectable } from 'tsyringe';
@@ -58,16 +58,15 @@ export default class<Cmd extends typeof DefinitionCommand> extends Command<Cmd> 
 				const suggestions = defRes.slice(0, 5) as string[];
 
 				const buttons = [...suggestions.entries()].map(([index, sugg]) =>
-					createButton({
-						customId: `definition:${sugg}`,
-						label: sugg,
-						style: index === 0 ? ButtonStyle.Primary : ButtonStyle.Secondary,
-					}),
+					new ButtonBuilder()
+						.setCustomId(`definition:${sugg}`)
+						.setLabel(sugg)
+						.setStyle(index === 0 ? ButtonStyle.Primary : ButtonStyle.Secondary),
 				);
 
 				await interaction.editReply({
 					content: t('common.errors.not_found_w_suggestions', { lng }),
-					components: [createMessageActionRow(buttons)],
+					components: [new ActionRowBuilder<ButtonBuilder>().addComponents(buttons)],
 				});
 
 				const collected = await reply
