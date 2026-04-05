@@ -21,7 +21,7 @@ jobs:
 
       - run: bun install
 
-      - run: bun run --filter web build
+      - run: bunx turbo run build --filter=web --cache-dir=.turbo
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
