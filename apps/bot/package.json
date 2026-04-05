@@ -16,7 +16,7 @@
 	},
 	"scripts": {
 		"generate": "node ./dist/scripts/generate.js",
-		"build": "bun run copy-locales",
+		"build": "bun copy-locales",
 		"start": "node .",
 		"dev": "bun run --watch src/index.ts",
 		"copy-locales": "cp -r ../../packages/locales ./src && rm -f ./src/locales/package.json",

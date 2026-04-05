@@ -25,4 +25,4 @@ FROM oven/bun:1-slim AS runner
 WORKDIR /app
 COPY --from=builder /app .
 WORKDIR /app/apps/bot
-CMD ["bun", "run", "--smol", "src/index.ts"]
+CMD ["bun", "run", "--preload", "reflect-metadata", "--smol", "src/index.ts"]
