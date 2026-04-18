@@ -62,17 +62,19 @@ Central file `apps/bot/src/metrics/events.ts`:
 
 Initial event catalog:
 
-| Name                  | Props                                                       | Notes                                                      |
-| --------------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
-| `command.invoked`     | `{ command: string, success: boolean, durationMs: number }` | Replaces `thoth_commands` counter.                         |
-| `button.clicked`      | `{ customId: string }`                                      | New. Closes a gap.                                         |
-| `modal.submitted`     | `{ customId: string }`                                      | New. Closes a gap.                                         |
-| `guild.joined`        | `{ memberCount: number }`                                   | Replaces gauge inc.                                        |
-| `guild.left`          | `{}`                                                        | Replaces gauge dec.                                        |
-| `wotd.delivered`      | `{ word: string, tier: 'free' \| 'premium' }`               | Emitted from jobs.ts per successful delivery.              |
-| `wotd.quiz_attempted` | `{ word: string, correct: boolean }`                        | Double-written alongside `wotd_quiz_attempt` table insert. |
-| `entitlement.checked` | `{ kind: 'premium', granted: boolean }`                     | New. Enables conversion-funnel queries.                    |
-| `feedback.submitted`  | `{ type: 'bug' \| 'feature' \| 'general' }`                 | New.                                                       |
+| Name                  | Props                                                                          | Notes                                                           |
+| --------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| `command.invoked`     | `{ command: string, success: boolean, durationMs: number }`                    | Replaces `thoth_commands` counter.                              |
+| `button.clicked`      | `{ customId: string }`                                                         | New. Closes a gap.                                              |
+| `modal.submitted`     | `{ customId: string }`                                                         | New. Closes a gap.                                              |
+| `guild.joined`        | `{ memberCount: number }`                                                      | Replaces gauge inc.                                             |
+| `guild.left`          | `{}`                                                                           | Replaces gauge dec.                                             |
+| `wotd.delivered`      | `{ word: string, tier: 'free' \| 'premium' }`                                  | Emitted from jobs.ts per successful delivery.                   |
+| `wotd.quiz_attempted` | `{ word: string, correct: boolean }`                                           | Double-written alongside `wotd_quiz_attempt` table insert.      |
+| `entitlement.checked` | `{ kind: 'premium', granted: boolean, site: 'wotd_setup' \| 'wotd_delivery' }` | New. `site` distinguishes user-facing gate vs background check. |
+| `entitlement.granted` | `{ skuId: string }`                                                            | New. Emitted from `entitlementCreate` / `entitlementUpdate`.    |
+| `entitlement.revoked` | `{ skuId: string }`                                                            | New. Emitted from `entitlementDelete`.                          |
+| `feedback.submitted`  | `{ type: 'bug' \| 'feature' \| 'general' }`                                    | New.                                                            |
 
 ### Typed Wrapper
 
@@ -150,15 +152,18 @@ Boundaries:
 
 ## Call-Site Changes
 
-| Site                                                                           | Change                                                                                                                                                                                                                                      |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apps/bot/src/events/interactionCreate.ts`                                     | Replace `commandsMetrics.inc(...)` with `track.commandInvoked(...)`. Add `track.buttonClicked` in `handleButton`, `track.modalSubmitted` in `handleModalSubmit`. Add `track.wotdQuizAttempted` next to the `INSERT INTO wotd_quiz_attempt`. |
-| `apps/bot/src/events/guildCreate.ts`                                           | Replace `guildCount.inc()` with `track.guildJoined`.                                                                                                                                                                                        |
-| `apps/bot/src/events/guildDelete.ts`                                           | Replace `guildCount.dec()` with `track.guildLeft`.                                                                                                                                                                                          |
-| `apps/bot/src/events/ready.ts`                                                 | Remove `guildCount.set(...)` gauge initialization. Metabase computes current guild count from `guild.joined` − `guild.left` or from the live discord.js cache via a small endpoint if needed.                                               |
-| `apps/bot/src/jobs.ts`                                                         | After each successful `deliverToGuild`, emit `track.wotdDelivered` with tier derived from whether `post_time` was set.                                                                                                                      |
-| `apps/bot/src/structures/EntitlementCache.ts` (call sites of `isGuildPremium`) | Emit `track.entitlementChecked` with `granted` reflecting the return value.                                                                                                                                                                 |
-| `apps/bot/src/events/interactionCreate.ts` (feedback flow)                     | After the feedback row is inserted, emit `track.feedbackSubmitted`.                                                                                                                                                                         |
+| Site                                                               | Change                                                                                                                                                                                                                                      |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apps/bot/src/events/interactionCreate.ts`                         | Replace `commandsMetrics.inc(...)` with `track.commandInvoked(...)`. Add `track.buttonClicked` in `handleButton`, `track.modalSubmitted` in `handleModalSubmit`. Add `track.wotdQuizAttempted` next to the `INSERT INTO wotd_quiz_attempt`. |
+| `apps/bot/src/events/guildCreate.ts`                               | Replace `guildCount.inc()` with `track.guildJoined`.                                                                                                                                                                                        |
+| `apps/bot/src/events/guildDelete.ts`                               | Replace `guildCount.dec()` with `track.guildLeft`.                                                                                                                                                                                          |
+| `apps/bot/src/events/ready.ts`                                     | Remove `guildCount.set(...)` gauge initialization. Metabase computes current guild count from `guild.joined` − `guild.left` or from the live discord.js cache via a small endpoint if needed.                                               |
+| `apps/bot/src/jobs.ts`                                             | After each successful `deliverToGuild`, emit `track.wotdDelivered` with tier derived from whether `post_time` was set.                                                                                                                      |
+| `apps/bot/src/jobs.ts` (after `isGuildPremium`)                    | Emit `track.entitlementChecked` with `site: 'wotd_delivery'` and `granted` reflecting the return value.                                                                                                                                     |
+| `apps/bot/src/commands/setup/sub/wotd.ts` (premium gate ~line 64)  | Emit `track.entitlementChecked` with `site: 'wotd_setup'` and `granted` reflecting the `interaction.entitlements.some(...)` result. This is the user-facing gate and is load-bearing for conversion analysis.                               |
+| `apps/bot/src/events/entitlementCreate.ts`, `entitlementUpdate.ts` | Emit `track.entitlementGranted` with the sku id from the entitlement payload.                                                                                                                                                               |
+| `apps/bot/src/events/entitlementDelete.ts`                         | Emit `track.entitlementRevoked` with the sku id.                                                                                                                                                                                            |
+| `apps/bot/src/events/interactionCreate.ts` (feedback flow)         | After the feedback row is inserted, emit `track.feedbackSubmitted`.                                                                                                                                                                         |
 
 ## Prometheus Teardown
 
