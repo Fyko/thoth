@@ -62,9 +62,17 @@
 - Create: `docker/postgres/02-metabase-roles.sh`
 - Modify: `docker/postgres/Dockerfile`
 
-- [ ] **Step 1: Append events table, indexes, metabase schema, and grants to `docker/postgres/init.sql`**
+Postgres runs files in `/docker-entrypoint-initdb.d/` in sorted filename order. We need the schema to be created BEFORE the metabase role script grants `select on all tables in schema public`, so rename `init.sql` → `01-init.sql` and name the roles script `02-metabase-roles.sh`.
 
-Append this to the end of the file:
+- [ ] **Step 1: Rename `docker/postgres/init.sql` → `docker/postgres/01-init.sql`**
+
+```bash
+git mv docker/postgres/init.sql docker/postgres/01-init.sql
+```
+
+- [ ] **Step 2: Append the events table + indexes to `docker/postgres/01-init.sql`**
+
+Append to the end of the file:
 
 ```sql
 -- product analytics / ops events
@@ -79,19 +87,9 @@ create table if not exists events (
 create index if not exists idx_events_name_time on events (name, occurred_at desc);
 create index if not exists idx_events_user_time on events (user_id, occurred_at desc) where user_id is not null;
 create index if not exists idx_events_guild_time on events (guild_id, occurred_at desc) where guild_id is not null;
-
--- metabase metadata schema (role is created in 02-metabase-roles.sh before this runs? no — scripts run alphabetically; create schema in the role script instead)
 ```
 
-Note: `01-init.sql` would run before `02-metabase-roles.sh` alphabetically, so the schema creation goes in the role script (which runs with postgres superuser).
-
-Actually — rename `init.sql` to `01-init.sql` to make ordering explicit. Skip that to avoid churn; `init.sql` sorts before `02-metabase-roles.sh` anyway because `0` < `i` is false — `i` (0x69) > `0` (0x30). So `init.sql` sorts AFTER `02-metabase-roles.sh`. We need to rename so ordering is correct.
-
-- [ ] **Step 2: Rename `docker/postgres/init.sql` → `docker/postgres/01-init.sql`**
-
-```bash
-git mv docker/postgres/init.sql docker/postgres/01-init.sql
-```
+The `metabase` schema and roles are created separately in Step 3 so grants can run against the fully-populated `public` schema.
 
 - [ ] **Step 3: Create `docker/postgres/02-metabase-roles.sh`**
 
@@ -1068,29 +1066,13 @@ to:
 const queue = new Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest' | 'events-retention'>('jobs', { connection });
 ```
 
-Add `events-retention` as a new `case` inside the Worker switch statement (keep the existing ones intact):
-
-```ts
-case 'events-retention': {
-  const { runRetention } = await import('./metrics/retention.js');
-  await runRetention(sql, logger);
-  break;
-}
-```
-
-Add this import at the top of the file:
-
-```ts
-// (dynamic import inside the case avoids a startup-time cycle)
-```
-
-Actually, use a direct import at the top instead:
+Add this import at the top of `apps/bot/src/jobs.ts` alongside the other local imports:
 
 ```ts
 import { runRetention } from './metrics/retention.js';
 ```
 
-And simplify the case to:
+Add a new `case` inside the Worker switch statement (keep the existing cases intact):
 
 ```ts
 case 'events-retention': {
@@ -1286,18 +1268,14 @@ mise exec -- git commit -m "feat(metrics): emit guild.joined / guild.left, drop 
 - Modify: `apps/bot/src/events/entitlementUpdate.ts`
 - Modify: `apps/bot/src/events/entitlementDelete.ts`
 
-- [ ] **Step 1: Read the three files to see their current shape**
+The discord.js `Entitlement` type exposes `skuId: Snowflake`, `userId: Snowflake`, `guildId: Snowflake | null` — these are directly available on the `entitlement` arg each handler already receives in its `this.client.on(this.event, async (entitlement) => { ... })` callback.
 
-Run: `mise exec -- bash -c 'cd apps/bot && head -60 src/events/entitlementCreate.ts src/events/entitlementUpdate.ts src/events/entitlementDelete.ts'`
+- [ ] **Step 1: In `entitlementCreate.ts`, emit `track().entitlementGranted`**
 
-Confirm that each handler receives an `entitlement` object with fields including `skuId`, `userId`, `guildId`. (If the shape differs, adapt the code below.)
-
-- [ ] **Step 2: In `entitlementCreate.ts`, emit `track().entitlementGranted`**
-
-Inside the handler body, after any existing logic, add:
+Inside the `this.client.on` handler body, after the existing cache logic, add:
 
 ```ts
-track().entitlementGranted(entitlement.userId, entitlement.guildId ?? null, {
+track().entitlementGranted(entitlement.userId, entitlement.guildId, {
 	skuId: entitlement.skuId,
 });
 ```
@@ -1308,14 +1286,14 @@ Add import:
 import { track } from '../metrics/index.js';
 ```
 
-- [ ] **Step 3: In `entitlementUpdate.ts`, emit `track().entitlementGranted`**
+- [ ] **Step 2: In `entitlementUpdate.ts`, emit `track().entitlementGranted`**
 
-Same treatment — a discord `ENTITLEMENT_UPDATE` typically signals activation/renewal. Use identical payload to Step 2.
+Same treatment — a discord `ENTITLEMENT_UPDATE` signals activation/renewal. Use identical payload to Step 1. Add the import.
 
-- [ ] **Step 4: In `entitlementDelete.ts`, emit `track().entitlementRevoked`**
+- [ ] **Step 3: In `entitlementDelete.ts`, emit `track().entitlementRevoked`**
 
 ```ts
-track().entitlementRevoked(entitlement.userId, entitlement.guildId ?? null, {
+track().entitlementRevoked(entitlement.userId, entitlement.guildId, {
 	skuId: entitlement.skuId,
 });
 ```
