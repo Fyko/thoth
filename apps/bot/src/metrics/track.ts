@@ -53,7 +53,7 @@ export function createTrack(deps: TrackDeps): Track {
 			if (deps.isDev) {
 				throw new Error(`[metrics] invalid props for ${name}: ${result.error}`);
 			}
-			deps.logger.warn(`[metrics] invalid props for ${name}: ${result.error}`);
+			deps.logger.warn({ name, error: result.error }, `[metrics] invalid props for ${name}`);
 			return;
 		}
 

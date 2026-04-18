@@ -33,7 +33,11 @@ describe('track', () => {
 		track = createTrack({
 			queue: mockQueue as any,
 			buffer,
-			logger: { warn: (msg: unknown) => warnings.push(String(msg)) } as any,
+			logger: {
+				warn: (...args: unknown[]) => {
+					warnings.push(args.map((a) => (typeof a === 'string' ? a : JSON.stringify(a))).join(' '));
+				},
+			} as any,
 			isDev: false,
 		});
 	});
