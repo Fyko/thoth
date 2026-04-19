@@ -17,6 +17,7 @@ psql -v ON_ERROR_STOP=1 \
   \gexec
 
   CREATE SCHEMA IF NOT EXISTS metabase AUTHORIZATION metabase_app;
+  ALTER ROLE metabase_app SET search_path = metabase;
 
   GRANT CONNECT ON DATABASE :"DBNAME" TO metabase_reader;
   GRANT USAGE ON SCHEMA public TO metabase_reader;
