@@ -31,21 +31,21 @@ export const EventSchemas = {
 } as const satisfies Record<string, z.ZodType>;
 
 export type EventName = keyof typeof EventSchemas;
-export type EventProps<N extends EventName> = z.infer<(typeof EventSchemas)[N]>;
+export type EventProps<Name extends EventName> = z.infer<(typeof EventSchemas)[Name]>;
 
-export interface EventEnvelope<N extends EventName = EventName> {
-	name: N;
-	userId: string | null;
+export interface EventEnvelope<Name extends EventName = EventName> {
 	guildId: string | null;
-	props: EventProps<N>;
-	occurredAt: string; // ISO
+	name: Name;
+	occurredAt: string;
+	props: EventProps<Name>;
+	userId: string | null; // ISO
 }
 
-export type ValidateResult<N extends EventName = EventName> =
-	| { success: true; data: EventProps<N> }
-	| { success: false; error: string };
+export type ValidateResult<Name extends EventName = EventName> =
+	| { data: EventProps<Name>; success: true }
+	| { error: string; success: false };
 
-export function validateEvent<N extends EventName>(name: N, props: unknown): ValidateResult<N>;
+export function validateEvent<Name extends EventName>(name: Name, props: unknown): ValidateResult<Name>;
 export function validateEvent(name: string, props: unknown): ValidateResult;
 export function validateEvent(name: string, props: unknown): ValidateResult {
 	const schema = (EventSchemas as Record<string, z.ZodType>)[name];

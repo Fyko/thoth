@@ -21,9 +21,9 @@ export function track(): Track {
 }
 
 export interface SetupMetricsDeps {
-	sql: Sql<any>;
 	connection: { host: string; port: number };
 	logger?: Logger;
+	sql: Sql<any>;
 }
 
 export function setupMetrics(deps: SetupMetricsDeps): { queue: EventsQueue } {

@@ -64,7 +64,7 @@ export const wotd = async (
 
 	// premium gate — respond with upsell button before deferring
 	if (timeArg || timezoneArg) {
-		const hasEntitlement = interaction.entitlements.some((e) => e.isActive());
+		const hasEntitlement = interaction.entitlements.some((entitlement) => entitlement.isActive());
 		track().entitlementChecked(interaction.user.id, interaction.guildId, {
 			kind: 'premium',
 			granted: hasEntitlement,

@@ -8,7 +8,7 @@ export function createEventsQueue(connection: { host: string; port: number }): E
 		connection,
 		defaultJobOptions: {
 			removeOnComplete: { count: 100 },
-			removeOnFail: { count: 1000 },
+			removeOnFail: { count: 1_000 },
 			attempts: 5,
 			backoff: { type: 'exponential', delay: 1_000 },
 		},

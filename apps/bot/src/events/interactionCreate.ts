@@ -325,7 +325,7 @@ export default class implements Event {
 				`;
 				const word = historyRow?.word ?? 'this word';
 
-				const optionIds = quiz.map((o) => o.id);
+				const optionIds = quiz.map((option) => option.id);
 
 				// check if user already attempted
 				const existing = await this.sql<{ option_id: string }[]>`
@@ -335,8 +335,8 @@ export default class implements Event {
 				`;
 
 				if (existing.length > 0) {
-					const chosenOption = quiz.find((o) => o.id === existing[0]!.option_id)!;
-					const correctOption = quiz.find((o) => o.correct)!;
+					const chosenOption = quiz.find((option) => option.id === existing[0]!.option_id)!;
+					const correctOption = quiz.find((option) => option.correct)!;
 					const correctIndex = quiz.indexOf(correctOption) + 1;
 
 					const container = new ContainerBuilder()
@@ -365,7 +365,7 @@ export default class implements Event {
 					});
 				}
 
-				const numbered = quiz.map((o, i) => `**${i + 1}.** ${o.sentence}`).join('\n');
+				const numbered = quiz.map((option, idx) => `**${idx + 1}.** ${option.sentence}`).join('\n');
 
 				const container = new ContainerBuilder()
 					.setAccentColor(Colors.Blurple)
@@ -379,10 +379,10 @@ export default class implements Event {
 					.addTextDisplayComponents(new TextDisplayBuilder().setContent(numbered))
 					.addActionRowComponents(
 						new ActionRowBuilder<ButtonBuilder>().addComponents(
-							quiz.map((o, i) =>
+							quiz.map((option, idx) =>
 								new ButtonBuilder()
-									.setCustomId(`wotd-answer:${o.id}`)
-									.setLabel(`${i + 1}`)
+									.setCustomId(`wotd-answer:${option.id}`)
+									.setLabel(`${idx + 1}`)
 									.setStyle(ButtonStyle.Secondary),
 							),
 						),

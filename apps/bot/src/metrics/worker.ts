@@ -1,47 +1,57 @@
+import { setTimeout as nodeSetTimeout, clearTimeout as nodeClearTimeout } from 'node:timers';
 import type { Job } from 'bullmq';
 import { Worker } from 'bullmq';
-import type { Sql } from 'postgres';
 import type { Logger } from 'pino';
+import type { Sql } from 'postgres';
 import type { EventEnvelope } from './events.js';
 
 export interface BatcherOptions {
+	flush(batch: EventEnvelope[]): Promise<void>;
 	maxBatch: number;
 	maxWaitMs: number;
-	flush: (batch: EventEnvelope[]) => Promise<void>;
 }
 
 export class Batcher {
 	private buf: EventEnvelope[] = [];
+
 	private timer: NodeJS.Timeout | null = null;
+
 	private flushing: Promise<void> = Promise.resolve();
 
-	constructor(private readonly opts: BatcherOptions) {}
+	public constructor(private readonly opts: BatcherOptions) {}
 
-	add(e: EventEnvelope): void {
-		this.buf.push(e);
+	public add(envelope: EventEnvelope): void {
+		this.buf.push(envelope);
 		if (this.buf.length >= this.opts.maxBatch) {
-			this.flushing = this.flushing.then(() => this.flushNow());
+			this.flushing = this.chainFlush();
 		} else if (!this.timer) {
-			this.timer = setTimeout(() => {
-				this.flushing = this.flushing.then(() => this.flushNow());
+			this.timer = nodeSetTimeout(() => {
+				this.flushing = this.chainFlush();
 			}, this.opts.maxWaitMs);
 		}
 	}
 
-	async stop(): Promise<void> {
+	public async stop(): Promise<void> {
 		if (this.timer) {
-			clearTimeout(this.timer);
+			nodeClearTimeout(this.timer);
 			this.timer = null;
 		}
-		this.flushing = this.flushing.then(() => this.flushNow());
+
+		this.flushing = this.chainFlush();
 		await this.flushing;
+	}
+
+	private async chainFlush(): Promise<void> {
+		await this.flushing;
+		await this.flushNow();
 	}
 
 	private async flushNow(): Promise<void> {
 		if (this.timer) {
-			clearTimeout(this.timer);
+			nodeClearTimeout(this.timer);
 			this.timer = null;
 		}
+
 		if (this.buf.length === 0) return;
 		const batch = this.buf;
 		this.buf = [];
@@ -51,8 +61,8 @@ export class Batcher {
 
 export interface EventsWorkerDeps {
 	connection: { host: string; port: number };
-	sql: Sql<any>;
 	logger: Logger;
+	sql: Sql<any>;
 }
 
 export function startEventsWorker(deps: EventsWorkerDeps): Worker<EventEnvelope, void, 'event'> {
@@ -63,18 +73,18 @@ export function startEventsWorker(deps: EventsWorkerDeps): Worker<EventEnvelope,
 			try {
 				await deps.sql`
           insert into events ${deps.sql(
-				batch.map((e) => ({
-					name: e.name,
-					user_id: e.userId,
-					guild_id: e.guildId,
-					props: e.props,
-					occurred_at: e.occurredAt,
+				batch.map((envelope) => ({
+					name: envelope.name,
+					user_id: envelope.userId,
+					guild_id: envelope.guildId,
+					props: envelope.props,
+					occurred_at: envelope.occurredAt,
 				})),
 			)}
         `;
-			} catch (err) {
-				deps.logger.error({ err, batchSize: batch.length }, '[metrics] batch insert failed');
-				throw err;
+			} catch (error) {
+				deps.logger.error({ err: error, batchSize: batch.length }, '[metrics] batch insert failed');
+				throw error;
 			}
 		},
 	});

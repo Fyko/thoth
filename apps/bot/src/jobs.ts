@@ -14,9 +14,9 @@ import { fetchDefinition } from '#util/mw/index.js';
 import { generateQuiz, type QuizOption } from '#util/mw/quiz.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
 import { kEntitlementCache, kRedis, kSQL } from '#util/symbols.js';
-import type { RedisManager } from './structures/RedisManager.js';
-import { runRetention } from './metrics/retention.js';
 import { track } from './metrics/index.js';
+import { runRetention } from './metrics/retention.js';
+import type { RedisManager } from './structures/RedisManager.js';
 
 const statusWebhook = new WebhookClient({
 	url: process.env.COMMAND_LOG_WEBHOOK_URL!,
@@ -84,8 +84,8 @@ async function deliverToGuild(
 }
 
 async function sendStatusReport(statuses: Status[], content: string): Promise<void> {
-	const successCount = statuses.filter((s) => !s.error).length;
-	const errors = statuses.filter((s) => s.error);
+	const successCount = statuses.filter((status) => !status.error).length;
+	const errors = statuses.filter((status) => status.error);
 	const errorGroups = errors.reduce<Record<string, Status[]>>((acc, curr) => {
 		const name = curr.error!.name;
 		if (!acc[name]) acc[name] = [];
@@ -131,7 +131,7 @@ async function ingestNewWord(sql: Sql<any>, redis: RedisManager, force: boolean)
 	const existing = await sql<{ word: string }[]>`
 		SELECT word FROM wotd_history WHERE word = ANY(${words})
 	`;
-	const newWords = words.filter((word) => !existing.some((e) => e.word === word));
+	const newWords = words.filter((word) => !existing.some((row) => row.word === word));
 
 	if (newWords.length === 0 && !force) {
 		logger.info('no new words found, skipping');
@@ -189,7 +189,7 @@ async function ingestNewWord(sql: Sql<any>, redis: RedisManager, force: boolean)
 
 	const [pending] = await sql<[{ id: string }]>`
 		INSERT INTO wotd_pending (wotd_history_id, content, components)
-		VALUES (${historyRow.id}, ${fullContent}, ${JSON.stringify(components.map((r) => r.toJSON()))})
+		VALUES (${historyRow.id}, ${fullContent}, ${JSON.stringify(components.map((row) => row.toJSON()))})
 		RETURNING id
 	`;
 
@@ -229,7 +229,7 @@ export async function triggerWOTD(force = false): Promise<void> {
 	await sendStatusReport(statuses, result.content);
 }
 
-export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest' | 'events-retention'>> {
+export async function setupJobs(): Promise<Queue<{}, {}, 'events-retention' | 'wotd-deliver' | 'wotd-ingest'>> {
 	const sql = container.resolve<Sql<any>>(kSQL);
 	const redis = container.resolve<RedisManager>(kRedis);
 	const entitlementCache = container.resolve<EntitlementCache>(kEntitlementCache);
@@ -238,7 +238,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 		port: Number.parseInt(process.env.REDIS_PORT!, 10),
 	};
 
-	const queue = new Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest' | 'events-retention'>('jobs', { connection });
+	const queue = new Queue<{}, {}, 'events-retention' | 'wotd-deliver' | 'wotd-ingest'>('jobs', { connection });
 	const pattern = '* * * * *';
 	await queue.add('wotd-ingest', {}, { repeat: { pattern } });
 	await queue.add('wotd-deliver', {}, { repeat: { pattern } });
@@ -326,7 +326,9 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 
 						// deliver regardless (lapsed guilds get it now as a one-time catch-up)
 						const components = JSON.parse(row.components as string);
-						const rebuilt = components.map((c: any) => ActionRowBuilder.from<ButtonBuilder>(c));
+						const rebuilt = components.map((component: any) =>
+							ActionRowBuilder.from<ButtonBuilder>(component),
+						);
 
 						await deliverToGuild(sql, row, row.pending_content, rebuilt, row.pending_id, row.pending_word);
 					}

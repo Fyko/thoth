@@ -1,14 +1,16 @@
-export class RingBuffer<T> {
-	private readonly buf: (T | undefined)[];
+export class RingBuffer<Item> {
+	private readonly buf: (Item | undefined)[];
+
 	private head = 0;
+
 	private count = 0;
 
-	constructor(private readonly capacity: number) {
+	public constructor(private readonly capacity: number) {
 		if (capacity <= 0) throw new Error('capacity must be positive');
-		this.buf = new Array(capacity);
+		this.buf = Array.from({ length: capacity });
 	}
 
-	push(item: T): void {
+	public push(item: Item): void {
 		const tail = (this.head + this.count) % this.capacity;
 		this.buf[tail] = item;
 		if (this.count < this.capacity) {
@@ -18,18 +20,19 @@ export class RingBuffer<T> {
 		}
 	}
 
-	drain(): T[] {
-		const out: T[] = new Array(this.count);
-		for (let i = 0; i < this.count; i++) {
-			out[i] = this.buf[(this.head + i) % this.capacity] as T;
-			this.buf[(this.head + i) % this.capacity] = undefined;
+	public drain(): Item[] {
+		const out: Item[] = Array.from({ length: this.count });
+		for (let idx = 0; idx < this.count; idx++) {
+			out[idx] = this.buf[(this.head + idx) % this.capacity] as Item;
+			this.buf[(this.head + idx) % this.capacity] = undefined;
 		}
+
 		this.head = 0;
 		this.count = 0;
 		return out;
 	}
 
-	size(): number {
+	public size(): number {
 		return this.count;
 	}
 }
