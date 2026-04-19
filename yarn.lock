@@ -1987,13 +1987,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.4.0":
-  version: 1.7.0
-  resolution: "@opentelemetry/api@npm:1.7.0"
-  checksum: 10/bcf7afa7051dcd4583898a68f8a57fb4c85b5cedddf7b6eb3616595c0b3bcd7f5448143b8355b00935a755de004d6285489f8e132f34127efe7b1be404622a3e
-  languageName: node
-  linkType: hard
-
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -4080,13 +4073,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bintrees@npm:1.0.2":
-  version: 1.0.2
-  resolution: "bintrees@npm:1.0.2"
-  checksum: 10/071896cea5ea5413316c8436e95799444c208630d5c539edd8a7089fc272fc5d3634aa4a2e4847b28350dda1796162e14a34a0eda53108cc5b3c2ff6a036c1fa
-  languageName: node
-  linkType: hard
-
 "bl@npm:^4.0.3":
   version: 4.1.0
   resolution: "bl@npm:4.1.0"
@@ -4148,7 +4134,6 @@ __metadata:
     pino-pretty: "npm:^10.3.1"
     postgres: "npm:^3.4.8"
     prettier: "npm:^3.8.1"
-    prom-client: "npm:^15.1.3"
     readdirp: "npm:^3.6.0"
     reflect-metadata: "npm:^0.2.2"
     rimraf: "npm:^6.1.3"
@@ -12056,16 +12041,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prom-client@npm:^15.1.3":
-  version: 15.1.3
-  resolution: "prom-client@npm:15.1.3"
-  dependencies:
-    "@opentelemetry/api": "npm:^1.4.0"
-    tdigest: "npm:^0.1.1"
-  checksum: 10/eba75e15ab896845d39359e3a4d6f7913ea05339b3122d8dde8c8c374669ad1a1d1ab2694ab2101c420bd98086a564e4f2a18aa29018fc14a4732e57c1c19aec
-  languageName: node
-  linkType: hard
-
 "promise-retry@npm:^2.0.1":
   version: 2.0.1
   resolution: "promise-retry@npm:2.0.1"
@@ -14011,15 +13986,6 @@ __metadata:
     mkdirp: "npm:^1.0.3"
     yallist: "npm:^4.0.0"
   checksum: 10/2042bbb14830b5cd0d584007db0eb0a7e933e66d1397e72a4293768d2332449bc3e312c266a0887ec20156dea388d8965e53b4fc5097f42d78593549016da089
-  languageName: node
-  linkType: hard
-
-"tdigest@npm:^0.1.1":
-  version: 0.1.2
-  resolution: "tdigest@npm:0.1.2"
-  dependencies:
-    bintrees: "npm:1.0.2"
-  checksum: 10/45be99fa52dab74b8edafe150e473cdc45aa1352c75ed516a39905f350a08c3175f6555598111042c3677ba042d7e3cae6b5ce4c663fe609bc634f326aabc9d6
   languageName: node
   linkType: hard
 

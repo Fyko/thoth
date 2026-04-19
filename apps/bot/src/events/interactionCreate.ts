@@ -43,8 +43,7 @@ import {
 } from 'discord.js';
 import { t } from 'i18next';
 import type { Sql } from 'postgres';
-import { Counter, Registry } from 'prom-client';
-import { container, inject, injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { RedisManager } from '#structures';
 import { CommandError } from '#util/error.js';
@@ -54,14 +53,6 @@ import { definitionAutoComplete } from '../autocomplete/definition.js';
 import { timezoneAutoComplete } from '../autocomplete/timezone.js';
 import { fetchFeedbackRow } from '../functions/feedback.js';
 import { track } from '../metrics/index.js';
-
-const registry = container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(Registry);
-const commandsMetrics = new Counter({
-	name: 'thoth_commands',
-	help: 'Number of commands executed',
-	labelNames: ['command', 'success'],
-	registers: [registry],
-});
 
 @injectable()
 export default class implements Event {
@@ -139,10 +130,6 @@ export default class implements Event {
 
 						logInteraction(interaction);
 
-						commandsMetrics.inc({
-							success: 'true',
-							command: interaction.commandName,
-						});
 						track().commandInvoked(interaction.user.id, interaction.guildId, {
 							command: interaction.commandName,
 							success: true,
@@ -158,10 +145,6 @@ export default class implements Event {
 
 					logInteraction(interaction, err);
 
-					commandsMetrics.inc({
-						success: 'false',
-						command: interaction.commandName,
-					});
 					track().commandInvoked(interaction.user.id, interaction.guildId, {
 						command: interaction.commandName,
 						success: false,
