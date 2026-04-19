@@ -15,6 +15,7 @@ import { generateQuiz, type QuizOption } from '#util/mw/quiz.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
 import { kEntitlementCache, kRedis, kSQL } from '#util/symbols.js';
 import type { RedisManager } from './structures/RedisManager.js';
+import { runRetention } from './metrics/retention.js';
 
 const statusWebhook = new WebhookClient({
 	url: process.env.COMMAND_LOG_WEBHOOK_URL!,
@@ -215,7 +216,7 @@ export async function triggerWOTD(force = false): Promise<void> {
 	await sendStatusReport(statuses, result.content);
 }
 
-export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest'>> {
+export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest' | 'events-retention'>> {
 	const sql = container.resolve<Sql<any>>(kSQL);
 	const redis = container.resolve<RedisManager>(kRedis);
 	const entitlementCache = container.resolve<EntitlementCache>(kEntitlementCache);
@@ -224,10 +225,11 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 		port: Number.parseInt(process.env.REDIS_PORT!, 10),
 	};
 
-	const queue = new Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest'>('jobs', { connection });
+	const queue = new Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest' | 'events-retention'>('jobs', { connection });
 	const pattern = '* * * * *';
 	await queue.add('wotd-ingest', {}, { repeat: { pattern } });
 	await queue.add('wotd-deliver', {}, { repeat: { pattern } });
+	await queue.add('events-retention', {}, { repeat: { pattern: '0 3 * * *' } });
 
 	new Worker(
 		queue.name,
@@ -305,6 +307,11 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 
 					// cleanup old pending rows
 					await sql`DELETE FROM wotd_pending WHERE created_at < NOW() - INTERVAL '48 hours'`;
+					break;
+				}
+
+				case 'events-retention': {
+					await runRetention(sql, logger);
 					break;
 				}
 			}

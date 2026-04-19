@@ -16,6 +16,7 @@ import { EntitlementCache, RedisManager } from '#structures';
 import { loadTranslations } from '#util/index.js';
 import { kEntitlementCache, kGuildCountGuage, kRedis, kSQL } from '#util/symbols.js';
 import { setupJobs } from './jobs.js';
+import { setupMetrics } from './metrics/index.js';
 import { BlockedWordModule } from './structures/BlockedWord.js';
 
 const register = new Registry();
@@ -82,6 +83,13 @@ const guildCount = new Gauge({
 createCommands();
 container.register(kRedis, { useValue: redis });
 container.register(kSQL, { useValue: sql });
+setupMetrics({
+	sql,
+	connection: {
+		host: process.env.REDIS_HOST,
+		port: Number.parseInt(process.env.REDIS_PORT, 10),
+	},
+});
 container.register(kEntitlementCache, { useValue: new EntitlementCache(redis) });
 container.register(BlockedWordModule, { useValue: new BlockedWordModule(sql) });
 container.register(kGuildCountGuage, { useValue: guildCount });
