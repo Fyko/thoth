@@ -6,6 +6,7 @@ import { Gauge } from 'prom-client';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { kGuildCountGuage } from '#util/symbols.js';
+import { track } from '../metrics/index.js';
 
 @injectable()
 export default class implements Event {
@@ -26,6 +27,7 @@ export default class implements Event {
 		this.client.on(this.event, async (guild) => {
 			logger.info({ guildId: guild.id }, `Joined guild ${guild.name}`);
 			this.guildCount.inc();
+			track().guildJoined(null, guild.id, { memberCount: guild.memberCount });
 
 			void this.webhook.send({
 				embeds: [

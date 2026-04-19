@@ -6,6 +6,7 @@ import { Gauge } from 'prom-client';
 import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { kGuildCountGuage } from '#util/symbols.js';
+import { track } from '../metrics/index.js';
 
 @injectable()
 export default class implements Event {
@@ -29,6 +30,7 @@ export default class implements Event {
 			if (!guild.available) return; // dear god this is going to be mentioned in my obituary
 
 			this.guildCount.dec();
+			track().guildLeft(null, guild.id, {});
 
 			void this.webhook.send({
 				embeds: [

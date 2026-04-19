@@ -1,10 +1,8 @@
 import { setInterval } from 'node:timers/promises';
 import type { Event } from '@yuudachi/framework/types';
 import { ActivityType, Client, Events } from 'discord.js';
-import { Gauge } from 'prom-client';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { logger } from '#logger';
-import { kGuildCountGuage } from '#util/symbols.js';
 
 @injectable()
 export default class implements Event {
@@ -23,18 +21,12 @@ export default class implements Event {
 		'trythoth.com',
 	];
 
-	public constructor(
-		private readonly client: Client<true>,
-		@inject(kGuildCountGuage) private readonly guildCount: Gauge<string>,
-	) {}
+	public constructor(private readonly client: Client<true>) {}
 
 	public execute(): void {
 		this.client.on(this.event, async () => {
 			logger.info(`Client is ready! Logged in as ${this.client.user!.tag}`);
 			await this.client.application.commands.fetch();
-
-			const guilds = this.client.guilds.cache.size;
-			this.guildCount.set(guilds);
 
 			for await (const _ of setInterval(60_000, Date.now())) {
 				this.statusIndex = this.statusIndex + 1 >= this.statuses.length ? 0 : this.statusIndex + 1;
