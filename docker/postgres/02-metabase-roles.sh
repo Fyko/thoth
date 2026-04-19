@@ -16,11 +16,19 @@ psql -v ON_ERROR_STOP=1 \
   WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'metabase_reader')
   \gexec
 
-  CREATE SCHEMA IF NOT EXISTS metabase AUTHORIZATION metabase_app;
-  ALTER ROLE metabase_app SET search_path = metabase;
+  SELECT 'CREATE DATABASE metabase OWNER metabase_app'
+  WHERE NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = 'metabase')
+  \gexec
 
   GRANT CONNECT ON DATABASE :"DBNAME" TO metabase_reader;
   GRANT USAGE ON SCHEMA public TO metabase_reader;
   GRANT SELECT ON ALL TABLES IN SCHEMA public TO metabase_reader;
   ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO metabase_reader;
+EOSQL
+
+psql -v ON_ERROR_STOP=1 \
+  --username "$POSTGRES_USER" --dbname metabase <<-'EOSQL'
+  CREATE EXTENSION IF NOT EXISTS citext;
+  CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+  CREATE EXTENSION IF NOT EXISTS pg_trgm;
 EOSQL
