@@ -4,6 +4,7 @@ import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import type { EntitlementCache } from '#structures';
 import { kEntitlementCache } from '#util/symbols.js';
+import { track } from '../metrics/index.js';
 
 @injectable()
 export default class implements Event {
@@ -21,6 +22,9 @@ export default class implements Event {
 			if (newEntitlement.guildId) {
 				await this.cache.invalidate(newEntitlement.guildId);
 				logger.info({ guildId: newEntitlement.guildId }, 'Guild entitlement updated, cache invalidated');
+				track().entitlementGranted(newEntitlement.userId, newEntitlement.guildId, {
+					skuId: newEntitlement.skuId,
+				});
 			}
 		});
 	}
