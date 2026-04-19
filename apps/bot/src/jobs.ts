@@ -14,6 +14,8 @@ import { fetchDefinition } from '#util/mw/index.js';
 import { generateQuiz, type QuizOption } from '#util/mw/quiz.js';
 import { createWOTDContent } from '#util/mw/wotd.js';
 import { kEntitlementCache, kRedis, kSQL } from '#util/symbols.js';
+import { track } from './metrics/index.js';
+import { runRetention } from './metrics/retention.js';
 import type { RedisManager } from './structures/RedisManager.js';
 
 const statusWebhook = new WebhookClient({
@@ -45,6 +47,7 @@ async function deliverToGuild(
 	content: string,
 	components: ActionRowBuilder<ButtonBuilder>[],
 	pendingId: string,
+	pendingWord: string,
 ): Promise<Status> {
 	const client = new WebhookClient({
 		id: server.webhook_id.toString(),
@@ -58,6 +61,10 @@ async function deliverToGuild(
 			VALUES (${pendingId}, ${server.id})
 			ON CONFLICT (wotd_pending_id, wotd_config_id) DO NOTHING
 		`;
+		track().wotdDelivered(null, server.guild_id.toString(), {
+			word: pendingWord ?? 'unknown',
+			tier: server.post_time ? 'premium' : 'free',
+		});
 		return { guildId: server.guild_id.toString(), webhookId: server.webhook_id.toString() };
 	} catch (error: unknown) {
 		logger.error(error, 'posting message error');
@@ -77,8 +84,8 @@ async function deliverToGuild(
 }
 
 async function sendStatusReport(statuses: Status[], content: string): Promise<void> {
-	const successCount = statuses.filter((s) => !s.error).length;
-	const errors = statuses.filter((s) => s.error);
+	const successCount = statuses.filter((status) => !status.error).length;
+	const errors = statuses.filter((status) => status.error);
 	const errorGroups = errors.reduce<Record<string, Status[]>>((acc, curr) => {
 		const name = curr.error!.name;
 		if (!acc[name]) acc[name] = [];
@@ -124,7 +131,7 @@ async function ingestNewWord(sql: Sql<any>, redis: RedisManager, force: boolean)
 	const existing = await sql<{ word: string }[]>`
 		SELECT word FROM wotd_history WHERE word = ANY(${words})
 	`;
-	const newWords = words.filter((word) => !existing.some((e) => e.word === word));
+	const newWords = words.filter((word) => !existing.some((row) => row.word === word));
 
 	if (newWords.length === 0 && !force) {
 		logger.info('no new words found, skipping');
@@ -182,7 +189,7 @@ async function ingestNewWord(sql: Sql<any>, redis: RedisManager, force: boolean)
 
 	const [pending] = await sql<[{ id: string }]>`
 		INSERT INTO wotd_pending (wotd_history_id, content, components)
-		VALUES (${historyRow.id}, ${fullContent}, ${JSON.stringify(components.map((r) => r.toJSON()))})
+		VALUES (${historyRow.id}, ${fullContent}, ${JSON.stringify(components.map((row) => row.toJSON()))})
 		RETURNING id
 	`;
 
@@ -208,14 +215,21 @@ export async function triggerWOTD(force = false): Promise<void> {
 
 	const statuses: Status[] = [];
 	for (const server of configs) {
-		const status = await deliverToGuild(sql, server, result.content, result.components, result.pendingId);
+		const status = await deliverToGuild(
+			sql,
+			server,
+			result.content,
+			result.components,
+			result.pendingId,
+			result.word,
+		);
 		statuses.push(status);
 	}
 
 	await sendStatusReport(statuses, result.content);
 }
 
-export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest'>> {
+export async function setupJobs(): Promise<Queue<{}, {}, 'events-retention' | 'wotd-deliver' | 'wotd-ingest'>> {
 	const sql = container.resolve<Sql<any>>(kSQL);
 	const redis = container.resolve<RedisManager>(kRedis);
 	const entitlementCache = container.resolve<EntitlementCache>(kEntitlementCache);
@@ -224,10 +238,11 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 		port: Number.parseInt(process.env.REDIS_PORT!, 10),
 	};
 
-	const queue = new Queue<{}, {}, 'wotd-deliver' | 'wotd-ingest'>('jobs', { connection });
+	const queue = new Queue<{}, {}, 'events-retention' | 'wotd-deliver' | 'wotd-ingest'>('jobs', { connection });
 	const pattern = '* * * * *';
 	await queue.add('wotd-ingest', {}, { repeat: { pattern } });
 	await queue.add('wotd-deliver', {}, { repeat: { pattern } });
+	await queue.add('events-retention', {}, { repeat: { pattern: '0 3 * * *' } });
 
 	new Worker(
 		queue.name,
@@ -250,6 +265,7 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 							result.content,
 							result.components,
 							result.pendingId,
+							result.word,
 						);
 						statuses.push(status);
 					}
@@ -261,11 +277,18 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 				case 'wotd-deliver': {
 					// find scheduled guilds that are due for delivery
 					const due = await sql<
-						(WOTDConfig & { components: string; pending_content: string; pending_id: string })[]
+						(WOTDConfig & {
+							components: string;
+							pending_content: string;
+							pending_id: string;
+							pending_word: string;
+						})[]
 					>`
-						SELECT w.*, p.id as pending_id, p.content as pending_content, p.components
+						SELECT w.*, p.id as pending_id, p.content as pending_content, p.components,
+						       wh.word as pending_word
 						FROM wotd w
 						CROSS JOIN wotd_pending p
+						JOIN wotd_history wh ON wh.id = p.wotd_history_id
 						WHERE w.post_time IS NOT NULL
 							AND w.timezone IS NOT NULL
 							AND p.created_at > NOW() - INTERVAL '36 hours'
@@ -283,6 +306,11 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 
 					for (const row of due) {
 						const isPremium = await entitlementCache.isGuildPremium(row.guild_id.toString(), discordClient);
+						track().entitlementChecked(null, row.guild_id.toString(), {
+							kind: 'premium',
+							granted: isPremium,
+							site: 'wotd_delivery',
+						});
 
 						if (!isPremium) {
 							// subscription lapsed — reset to free tier and deliver immediately
@@ -298,13 +326,20 @@ export async function setupJobs(): Promise<Queue<{}, {}, 'wotd-deliver' | 'wotd-
 
 						// deliver regardless (lapsed guilds get it now as a one-time catch-up)
 						const components = JSON.parse(row.components as string);
-						const rebuilt = components.map((c: any) => ActionRowBuilder.from<ButtonBuilder>(c));
+						const rebuilt = components.map((component: any) =>
+							ActionRowBuilder.from<ButtonBuilder>(component),
+						);
 
-						await deliverToGuild(sql, row, row.pending_content, rebuilt, row.pending_id);
+						await deliverToGuild(sql, row, row.pending_content, rebuilt, row.pending_id, row.pending_word);
 					}
 
 					// cleanup old pending rows
 					await sql`DELETE FROM wotd_pending WHERE created_at < NOW() - INTERVAL '48 hours'`;
+					break;
+				}
+
+				case 'events-retention': {
+					await runRetention(sql, logger);
 					break;
 				}
 			}

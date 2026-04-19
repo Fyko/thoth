@@ -1,4 +1,5 @@
 import { randomBytes } from 'node:crypto';
+import { performance } from 'node:perf_hooks';
 import process from 'node:process';
 import type { Command } from '@yuudachi/framework';
 import {
@@ -42,8 +43,7 @@ import {
 } from 'discord.js';
 import { t } from 'i18next';
 import type { Sql } from 'postgres';
-import { Counter, Registry } from 'prom-client';
-import { container, inject, injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import { RedisManager } from '#structures';
 import { CommandError } from '#util/error.js';
@@ -52,14 +52,7 @@ import { kRedis, kSQL } from '#util/symbols.js';
 import { definitionAutoComplete } from '../autocomplete/definition.js';
 import { timezoneAutoComplete } from '../autocomplete/timezone.js';
 import { fetchFeedbackRow } from '../functions/feedback.js';
-
-const registry = container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(Registry);
-const commandsMetrics = new Counter({
-	name: 'thoth_commands',
-	help: 'Number of commands executed',
-	labelNames: ['command', 'success'],
-	registers: [registry],
-});
+import { track } from '../metrics/index.js';
 
 @injectable()
 export default class implements Event {
@@ -93,6 +86,7 @@ export default class implements Event {
 			logger.debug(`Received interaction ${commandId}`);
 
 			if (command) {
+				const startedAt = performance.now();
 				try {
 					if (interaction.commandType === ApplicationCommandType.ChatInput) {
 						const autocomplete = interaction.isAutocomplete();
@@ -136,9 +130,10 @@ export default class implements Event {
 
 						logInteraction(interaction);
 
-						commandsMetrics.inc({
-							success: 'true',
+						track().commandInvoked(interaction.user.id, interaction.guildId, {
 							command: interaction.commandName,
+							success: true,
+							durationMs: Math.round(performance.now() - startedAt),
 						});
 					}
 				} catch (error) {
@@ -150,9 +145,10 @@ export default class implements Event {
 
 					logInteraction(interaction, err);
 
-					commandsMetrics.inc({
-						success: 'false',
+					track().commandInvoked(interaction.user.id, interaction.guildId, {
 						command: interaction.commandName,
+						success: false,
+						durationMs: Math.round(performance.now() - startedAt),
 					});
 
 					if (interaction.isAutocomplete()) return;
@@ -186,6 +182,9 @@ export default class implements Event {
 	}
 
 	private async handleButton(interaction: ButtonInteraction<'cached'>): Promise<void> {
+		track().buttonClicked(interaction.user.id, interaction.guildId, {
+			customId: interaction.customId,
+		});
 		const lng = interaction.locale;
 
 		// match to the regex feedback:bug | feedback:feature | feedback:general
@@ -326,7 +325,7 @@ export default class implements Event {
 				`;
 				const word = historyRow?.word ?? 'this word';
 
-				const optionIds = quiz.map((o) => o.id);
+				const optionIds = quiz.map((option) => option.id);
 
 				// check if user already attempted
 				const existing = await this.sql<{ option_id: string }[]>`
@@ -336,8 +335,8 @@ export default class implements Event {
 				`;
 
 				if (existing.length > 0) {
-					const chosenOption = quiz.find((o) => o.id === existing[0]!.option_id)!;
-					const correctOption = quiz.find((o) => o.correct)!;
+					const chosenOption = quiz.find((option) => option.id === existing[0]!.option_id)!;
+					const correctOption = quiz.find((option) => option.correct)!;
 					const correctIndex = quiz.indexOf(correctOption) + 1;
 
 					const container = new ContainerBuilder()
@@ -366,7 +365,7 @@ export default class implements Event {
 					});
 				}
 
-				const numbered = quiz.map((o, i) => `**${i + 1}.** ${o.sentence}`).join('\n');
+				const numbered = quiz.map((option, idx) => `**${idx + 1}.** ${option.sentence}`).join('\n');
 
 				const container = new ContainerBuilder()
 					.setAccentColor(Colors.Blurple)
@@ -380,10 +379,10 @@ export default class implements Event {
 					.addTextDisplayComponents(new TextDisplayBuilder().setContent(numbered))
 					.addActionRowComponents(
 						new ActionRowBuilder<ButtonBuilder>().addComponents(
-							quiz.map((o, i) =>
+							quiz.map((option, idx) =>
 								new ButtonBuilder()
-									.setCustomId(`wotd-answer:${o.id}`)
-									.setLabel(`${i + 1}`)
+									.setCustomId(`wotd-answer:${option.id}`)
+									.setLabel(`${idx + 1}`)
 									.setStyle(ButtonStyle.Secondary),
 							),
 						),
@@ -409,8 +408,22 @@ export default class implements Event {
 
 			try {
 				const [chosenOption] = await this.sql<
-					[{ correct: boolean; explanation: string; id: string; sentence: string; wotd_history_id: string }]
-				>`SELECT * FROM wotd_quiz_option WHERE id = ${optionId}`;
+					[
+						{
+							correct: boolean;
+							explanation: string;
+							id: string;
+							sentence: string;
+							word: string;
+							wotd_history_id: string;
+						},
+					]
+				>`
+					SELECT qo.*, wh.word
+					FROM wotd_quiz_option qo
+					JOIN wotd_history wh ON wh.id = qo.wotd_history_id
+					WHERE qo.id = ${optionId}
+				`;
 
 				if (!chosenOption) {
 					return void interaction.update({
@@ -427,6 +440,11 @@ export default class implements Event {
 						guild_id: interaction.guildId ?? 'dm',
 					})}
 				`;
+
+				track().wotdQuizAttempted(interaction.user.id, interaction.guildId, {
+					word: chosenOption.word,
+					correct: chosenOption.correct,
+				});
 
 				if (chosenOption.correct) {
 					const container = new ContainerBuilder().setAccentColor(Colors.Green).addTextDisplayComponents(
@@ -560,6 +578,9 @@ export default class implements Event {
 	private async handleModalSubmit(interaction: ModalSubmitInteraction<'cached'>): Promise<void> {
 		const lng = interaction.locale;
 		await interaction.deferReply({ ephemeral: true });
+		track().modalSubmitted(interaction.user.id, interaction.guildId, {
+			customId: interaction.customId,
+		});
 
 		const feedbackSubmitRes = /^feedback:(?<type>bug|feature|general):submit$/.exec(interaction.customId);
 		if (feedbackSubmitRes) {
@@ -586,6 +607,9 @@ export default class implements Event {
 				values (${type}, ${interaction.user.id}, ${subject ?? null}, ${description})
 				returning id;
 			`;
+			track().feedbackSubmitted(interaction.user.id, interaction.guildId, {
+				type: type as 'bug' | 'feature' | 'general',
+			});
 
 			const post = await feedbackForumChannel.threads.create({
 				name: `${interaction.user.tag}: ${subject ?? `${type} Feedback (No Subject)`}`,

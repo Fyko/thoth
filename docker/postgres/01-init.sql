@@ -109,3 +109,16 @@ create table if not exists wotd_delivery_log (
 	unique (wotd_pending_id, wotd_config_id)
 );
 create index idx_wotd_delivery_log_pending on wotd_delivery_log (wotd_pending_id);
+
+-- product analytics / ops events
+create table if not exists events (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  user_id text,
+  guild_id text,
+  props jsonb not null default '{}',
+  occurred_at timestamptz not null default now()
+);
+create index if not exists idx_events_name_time on events (name, occurred_at desc);
+create index if not exists idx_events_user_time on events (user_id, occurred_at desc) where user_id is not null;
+create index if not exists idx_events_guild_time on events (guild_id, occurred_at desc) where guild_id is not null;

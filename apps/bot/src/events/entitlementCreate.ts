@@ -4,6 +4,7 @@ import { inject, injectable } from 'tsyringe';
 import { logger } from '#logger';
 import type { EntitlementCache } from '#structures';
 import { kEntitlementCache } from '#util/symbols.js';
+import { track } from '../metrics/index.js';
 
 @injectable()
 export default class implements Event {
@@ -21,6 +22,9 @@ export default class implements Event {
 			if (entitlement.isGuildSubscription() && entitlement.guildId) {
 				await this.cache.setGuildPremium(entitlement.guildId, true);
 				logger.info({ guildId: entitlement.guildId }, 'Guild subscription created');
+				track().entitlementGranted(entitlement.userId, entitlement.guildId, {
+					skuId: entitlement.skuId,
+				});
 			}
 		});
 	}

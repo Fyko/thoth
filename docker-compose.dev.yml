@@ -18,13 +18,18 @@ services:
             POSTGRES_USER: 'admin'
             POSTGRES_PASSWORD: 'doctordoctor'
             POSTGRES_DB: 'thoth'
+            METABASE_APP_PASSWORD: 'metabase_app_dev'
+            METABASE_READER_PASSWORD: 'metabase_reader_dev'
         volumes:
             - postgres-storage:/var/lib/postgresql/data
-            - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-
         ports:
             - '5432:5432'
         restart: unless-stopped
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U admin -d thoth']
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
     redis:
         image: redis:alpine
@@ -32,41 +37,22 @@ services:
         ports:
             - '6379:6379'
 
-    prometheus:
-        build:
-            context: ./docker/prometheus
-        restart: unless-stopped
-        command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
-        ports:
-            - 9090:9090
-        volumes:
-            - prometheus-storage:/prometheus
-
-    grafana:
-        build:
-            context: ./docker/grafana
+    metabase:
+        image: metabase/metabase:latest
         restart: unless-stopped
         environment:
-            GF_SECURITY_ADMIN_USER: admin
-            GF_SECURITY_ADMIN_PASSWORD: admin
-            GF_USERS_ALLOW_SIGN_UP: 'false'
-            GF_AUTH_ANONYMOUS_ENABLED: true
+            MB_DB_TYPE: postgres
+            MB_DB_DBNAME: metabase
+            MB_DB_PORT: 5432
+            MB_DB_USER: metabase_app
+            MB_DB_PASS: metabase_app_dev
+            MB_DB_HOST: postgres
+            MB_SITE_URL: http://localhost:3000
         ports:
-            - 3000:3000
-        volumes:
-            - grafana-storage:/var/lib/grafana
-
-    cadvisor:
-        image: gcr.io/cadvisor/cadvisor:latest
-        ports:
-            - 8080:8080
-        volumes:
-            - /:/rootfs:ro
-            - /var/run:/var/run:rw
-            - /sys:/sys:ro
-            - /var/lib/docker/:/var/lib/docker:ro
+            - '3000:3000'
+        depends_on:
+            postgres:
+                condition: service_healthy
 
 volumes:
-    prometheus-storage:
-    grafana-storage:
     postgres-storage:

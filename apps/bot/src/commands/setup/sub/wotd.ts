@@ -12,6 +12,7 @@ import { container } from 'tsyringe';
 import { logger } from '#logger';
 import { CommandError } from '#util/error.js';
 import { kSQL, type WOTDConfig } from '#util/index.js';
+import { track } from '../../../metrics/index.js';
 
 const cdn = new CDN();
 
@@ -63,7 +64,12 @@ export const wotd = async (
 
 	// premium gate — respond with upsell button before deferring
 	if (timeArg || timezoneArg) {
-		const hasEntitlement = interaction.entitlements.some((e) => e.isActive());
+		const hasEntitlement = interaction.entitlements.some((entitlement) => entitlement.isActive());
+		track().entitlementChecked(interaction.user.id, interaction.guildId, {
+			kind: 'premium',
+			granted: hasEntitlement,
+			site: 'wotd_setup',
+		});
 		if (!hasEntitlement) {
 			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 				new ButtonBuilder().setSKUId(process.env.DISCORD_PREMIUM_SKU_ID).setStyle(ButtonStyle.Premium),

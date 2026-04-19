@@ -90,11 +90,11 @@ export async function generateQuiz(
 
 		return await sql<QuizOption[]>`
 			INSERT INTO wotd_quiz_option ${sql(
-				options.map((o) => ({
+				options.map((option) => ({
 					wotd_history_id: wotdHistoryId,
-					sentence: o.sentence,
-					correct: o.correct,
-					explanation: o.explanation,
+					sentence: option.sentence,
+					correct: option.correct,
+					explanation: option.explanation,
 				})),
 			)}
 			RETURNING id, wotd_history_id as "wotdHistoryId", sentence, correct, explanation

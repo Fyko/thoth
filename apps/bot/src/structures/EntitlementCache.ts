@@ -21,7 +21,9 @@ export class EntitlementCache {
 				guild: guildId,
 				excludeEnded: true,
 			});
-			const isPremium = entitlements.some((e) => e.isActive() && e.isGuildSubscription());
+			const isPremium = entitlements.some(
+				(entitlement) => entitlement.isActive() && entitlement.isGuildSubscription(),
+			);
 			await this.redis.client.set(this.redisKey(guildId), isPremium ? '1' : '0', 'EX', 3_600);
 			return isPremium;
 		} catch (error) {

@@ -8,18 +8,15 @@ import { commandInfo, createClient, createCommands, dynamicImport, kCommands } f
 import type { Event } from '@yuudachi/framework/types';
 import { IntentsBitField, Options } from 'discord.js';
 import postgres from 'postgres';
-import { Gauge, Registry, collectDefaultMetrics } from 'prom-client';
 import readdirp from 'readdirp';
 import { container } from 'tsyringe';
 import { logger } from '#logger';
 import { EntitlementCache, RedisManager } from '#structures';
 import { loadTranslations } from '#util/index.js';
-import { kEntitlementCache, kGuildCountGuage, kRedis, kSQL } from '#util/symbols.js';
+import { kEntitlementCache, kRedis, kSQL } from '#util/symbols.js';
 import { setupJobs } from './jobs.js';
+import { setupMetrics } from './metrics/index.js';
 import { BlockedWordModule } from './structures/BlockedWord.js';
-
-const register = new Registry();
-collectDefaultMetrics({ register, prefix: 'thoth_' });
 
 // overwrite the process.env def to include PORT: string
 declare global {
@@ -73,29 +70,18 @@ const client = createClient({
 	}),
 });
 
-const guildCount = new Gauge({
-	name: 'thoth_metrics_guilds',
-	help: 'The number of guilds',
-	registers: [register],
-});
-
 createCommands();
 container.register(kRedis, { useValue: redis });
 container.register(kSQL, { useValue: sql });
-container.register(kEntitlementCache, { useValue: new EntitlementCache(redis) });
-container.register(BlockedWordModule, { useValue: new BlockedWordModule(sql) });
-container.register(kGuildCountGuage, { useValue: guildCount });
-container.register(Registry, { useValue: register });
-
-new Gauge({
-	name: 'thoth_wotd_subscribers',
-	help: 'Number of users subscribed to the Word Of the Day',
-	registers: [register],
-	async collect() {
-		const query = await sql`SELECT COUNT(*) FROM wotd`;
-		this.set(Number.parseInt(query[0]?.count ?? 0, 10));
+setupMetrics({
+	sql,
+	connection: {
+		host: process.env.REDIS_HOST,
+		port: Number.parseInt(process.env.REDIS_PORT, 10),
 	},
 });
+container.register(kEntitlementCache, { useValue: new EntitlementCache(redis) });
+container.register(BlockedWordModule, { useValue: new BlockedWordModule(sql) });
 
 logger.debug('Starting Thoth');
 
@@ -147,11 +133,6 @@ for await (const file of eventFiles) {
 }
 
 const server = new App();
-server.get('/metrics', async (_req, res) => {
-	const metrics = await register.metrics();
-	res.setHeader('Content-Type', register.contentType);
-	res.send(metrics);
-});
 server.get('/health', (_req, res) => res.send({ status: 'ok' }));
 
 const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 2_399;
