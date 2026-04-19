@@ -425,8 +425,22 @@ export default class implements Event {
 
 			try {
 				const [chosenOption] = await this.sql<
-					[{ correct: boolean; explanation: string; id: string; sentence: string; wotd_history_id: string }]
-				>`SELECT * FROM wotd_quiz_option WHERE id = ${optionId}`;
+					[
+						{
+							correct: boolean;
+							explanation: string;
+							id: string;
+							sentence: string;
+							word: string;
+							wotd_history_id: string;
+						},
+					]
+				>`
+					SELECT qo.*, wh.word
+					FROM wotd_quiz_option qo
+					JOIN wotd_history wh ON wh.id = qo.wotd_history_id
+					WHERE qo.id = ${optionId}
+				`;
 
 				if (!chosenOption) {
 					return void interaction.update({
@@ -444,13 +458,8 @@ export default class implements Event {
 					})}
 				`;
 
-				const [hist] = await this.sql<[{ word: string }]>`
-					SELECT wh.word FROM wotd_quiz_option qo
-					JOIN wotd_history wh ON wh.id = qo.wotd_history_id
-					WHERE qo.id = ${optionId}
-				`;
 				track().wotdQuizAttempted(interaction.user.id, interaction.guildId, {
-					word: hist?.word ?? 'unknown',
+					word: chosenOption.word,
 					correct: chosenOption.correct,
 				});
 
