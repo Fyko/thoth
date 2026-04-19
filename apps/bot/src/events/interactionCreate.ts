@@ -1,4 +1,5 @@
 import { randomBytes } from 'node:crypto';
+import { performance } from 'node:perf_hooks';
 import process from 'node:process';
 import type { Command } from '@yuudachi/framework';
 import {
@@ -52,6 +53,7 @@ import { kRedis, kSQL } from '#util/symbols.js';
 import { definitionAutoComplete } from '../autocomplete/definition.js';
 import { timezoneAutoComplete } from '../autocomplete/timezone.js';
 import { fetchFeedbackRow } from '../functions/feedback.js';
+import { track } from '../metrics/index.js';
 
 const registry = container.resolve<Registry<'text/plain; version=0.0.4; charset=utf-8'>>(Registry);
 const commandsMetrics = new Counter({
@@ -93,6 +95,7 @@ export default class implements Event {
 			logger.debug(`Received interaction ${commandId}`);
 
 			if (command) {
+				const startedAt = performance.now();
 				try {
 					if (interaction.commandType === ApplicationCommandType.ChatInput) {
 						const autocomplete = interaction.isAutocomplete();
@@ -140,6 +143,11 @@ export default class implements Event {
 							success: 'true',
 							command: interaction.commandName,
 						});
+						track().commandInvoked(interaction.user.id, interaction.guildId, {
+							command: interaction.commandName,
+							success: true,
+							durationMs: Math.round(performance.now() - startedAt),
+						});
 					}
 				} catch (error) {
 					const isCommandError = error instanceof CommandError;
@@ -153,6 +161,11 @@ export default class implements Event {
 					commandsMetrics.inc({
 						success: 'false',
 						command: interaction.commandName,
+					});
+					track().commandInvoked(interaction.user.id, interaction.guildId, {
+						command: interaction.commandName,
+						success: false,
+						durationMs: Math.round(performance.now() - startedAt),
 					});
 
 					if (interaction.isAutocomplete()) return;
@@ -186,6 +199,9 @@ export default class implements Event {
 	}
 
 	private async handleButton(interaction: ButtonInteraction<'cached'>): Promise<void> {
+		track().buttonClicked(interaction.user.id, interaction.guildId, {
+			customId: interaction.customId,
+		});
 		const lng = interaction.locale;
 
 		// match to the regex feedback:bug | feedback:feature | feedback:general
@@ -428,6 +444,16 @@ export default class implements Event {
 					})}
 				`;
 
+				const [hist] = await this.sql<[{ word: string }]>`
+					SELECT wh.word FROM wotd_quiz_option qo
+					JOIN wotd_history wh ON wh.id = qo.wotd_history_id
+					WHERE qo.id = ${optionId}
+				`;
+				track().wotdQuizAttempted(interaction.user.id, interaction.guildId, {
+					word: hist?.word ?? 'unknown',
+					correct: chosenOption.correct,
+				});
+
 				if (chosenOption.correct) {
 					const container = new ContainerBuilder().setAccentColor(Colors.Green).addTextDisplayComponents(
 						new TextDisplayBuilder().setContent(stripIndents`
@@ -560,6 +586,9 @@ export default class implements Event {
 	private async handleModalSubmit(interaction: ModalSubmitInteraction<'cached'>): Promise<void> {
 		const lng = interaction.locale;
 		await interaction.deferReply({ ephemeral: true });
+		track().modalSubmitted(interaction.user.id, interaction.guildId, {
+			customId: interaction.customId,
+		});
 
 		const feedbackSubmitRes = /^feedback:(?<type>bug|feature|general):submit$/.exec(interaction.customId);
 		if (feedbackSubmitRes) {
@@ -586,6 +615,9 @@ export default class implements Event {
 				values (${type}, ${interaction.user.id}, ${subject ?? null}, ${description})
 				returning id;
 			`;
+			track().feedbackSubmitted(interaction.user.id, interaction.guildId, {
+				type: type as 'bug' | 'feature' | 'general',
+			});
 
 			const post = await feedbackForumChannel.threads.create({
 				name: `${interaction.user.tag}: ${subject ?? `${type} Feedback (No Subject)`}`,
