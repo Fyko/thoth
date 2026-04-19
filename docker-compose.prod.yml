@@ -23,6 +23,8 @@ services:
             POSTGRES_USER: 'admin'
             POSTGRES_PASSWORD: 'doctordoctor'
             POSTGRES_DB: 'thoth'
+            METABASE_APP_PASSWORD: ${METABASE_APP_PASSWORD}
+            METABASE_READER_PASSWORD: ${METABASE_READER_PASSWORD}
         expose:
             - '5432'
         healthcheck:
@@ -44,6 +46,29 @@ services:
             retries: 5
         expose:
             - '6379'
+
+    metabase:
+        image: metabase/metabase:latest
+        restart: unless-stopped
+        environment:
+            MB_DB_TYPE: postgres
+            MB_DB_DBNAME: thoth
+            MB_DB_PORT: 5432
+            MB_DB_USER: metabase_app
+            MB_DB_PASS: ${METABASE_APP_PASSWORD}
+            MB_DB_HOST: postgres
+            MB_SITE_URL: ${METABASE_SITE_URL:-http://localhost:3000}
+        expose:
+            - '3000'
+        depends_on:
+            postgres:
+                condition: service_healthy
+        healthcheck:
+            test: ['CMD-SHELL', 'curl -f http://localhost:3000/api/health || exit 1']
+            interval: 30s
+            timeout: 10s
+            retries: 5
+            start_period: 60s
 
     watchtower:
         image: containrrr/watchtower
