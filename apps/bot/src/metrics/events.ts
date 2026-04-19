@@ -41,12 +41,16 @@ export interface EventEnvelope<N extends EventName = EventName> {
 	occurredAt: string; // ISO
 }
 
-export type ValidateResult = { success: true; data: unknown } | { success: false; error: string };
+export type ValidateResult<N extends EventName = EventName> =
+	| { success: true; data: EventProps<N> }
+	| { success: false; error: string };
 
+export function validateEvent<N extends EventName>(name: N, props: unknown): ValidateResult<N>;
+export function validateEvent(name: string, props: unknown): ValidateResult;
 export function validateEvent(name: string, props: unknown): ValidateResult {
 	const schema = (EventSchemas as Record<string, z.ZodType>)[name];
 	if (!schema) return { success: false, error: `unknown event name: ${name}` };
 	const parsed = schema.safeParse(props);
-	if (parsed.success) return { success: true, data: parsed.data };
+	if (parsed.success) return { success: true, data: parsed.data as EventProps<EventName> };
 	return { success: false, error: parsed.error.message };
 }

@@ -61,7 +61,7 @@ export function createTrack(deps: TrackDeps): Track {
 			name,
 			userId,
 			guildId,
-			props,
+			props: result.data,
 			occurredAt: new Date().toISOString(),
 		};
 
